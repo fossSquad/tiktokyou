@@ -24,16 +24,20 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.ss.android.ugc.aweme.app.host.AwemeHostApplication;
 import com.ss.android.ugc.aweme.base.model.UrlModel;
+import com.ss.android.ugc.aweme.feed.model.ACLCommonShare;
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.FeedItemList;
 import com.ss.android.ugc.aweme.feed.model.PhotoModeImageUrlModel;
 import com.ss.android.ugc.aweme.feed.model.Video;
+import com.ss.android.ugc.aweme.feed.model.VideoUrlModel;
 import com.ss.android.ugc.aweme.setting.ui.SettingContainerActivity;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -264,30 +268,102 @@ public class Main {
                     }
                 }
             }), XposedBridge.hookAllMethods(FeedItemList.class, "getItems", new AnonymousClass16())});
-            addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllMethods(Video.class, "getDownloadAddr", new XC_MethodHook() {
+            XC_MethodHook downloadHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) {
                     Video video = (Video) param.thisObject;
-                    UrlModel noWatermark = video.getDownloadNoWatermarkAddr();
-                    if (noWatermark != null) {
-                        param.setResult(noWatermark);
+                    VideoUrlModel playAddr = video.getPlayAddr();
+                    if (playAddr != null && playAddr.getUrlList() != null && !playAddr.getUrlList().isEmpty()) {
+                        param.setResult(playAddr);
                     }
                 }
-            })});
+            };
+            addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllMethods(Video.class, "getDownloadAddr", downloadHook), XposedBridge.hookAllMethods(Video.class, "getNewDownloadAddr", downloadHook), XposedBridge.hookAllMethods(Video.class, "getDownloadNoWatermarkAddr", downloadHook), XposedBridge.hookAllMethods(Video.class, "getPlayAddrH264", downloadHook)});
+            try {
+                Class<?> downloadProtocolClass = Class.forName("com.ss.android.ugc.trill.download.protocol.download.AwemeVideoDownloadAbilityProtocol");
+                final Class<?> qfhClass = Class.forName("X.0qFH");
+                final Class<?> qepClass = Class.forName("X.0qEP");
+                addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllConstructors(downloadProtocolClass, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(XC_MethodHook.MethodHookParam param) {
+                        VideoUrlModel playAddr;
+                        try {
+                            Object qfh = param.args[0];
+                            Field ljiilField = qfhClass.getField("LJIIL");
+                            Object qep = ljiilField.get(qfh);
+                            if (qep == null) {
+                                return;
+                            }
+                            Class<?> qhiClass = Class.forName("X.0qHI");
+                            Field awemeField = qhiClass.getField("LJFF");
+                            Object awemeObj = awemeField.get(qfh);
+                            if (awemeObj instanceof Aweme) {
+                                Aweme aweme = (Aweme) awemeObj;
+                                Video video = aweme.getVideo();
+                                if (video != null && (playAddr = video.getPlayAddr()) != null && playAddr.getUrlList() != null && !playAddr.getUrlList().isEmpty()) {
+                                    Field lizField = qepClass.getField("LIZ");
+                                    lizField.setAccessible(true);
+                                    lizField.set(qep, playAddr);
+                                    Main.log("AwemeVideoDownloadAbilityProtocol: patched with playAddr", new Object[0]);
+                                }
+                            }
+                        } catch (Exception e2) {
+                            Main.log("AwemeVideoDownloadAbilityProtocol hook error: %s", e2.getMessage());
+                        }
+                    }
+                })});
+                log("Hooked AwemeVideoDownloadAbilityProtocol constructor", new Object[0]);
+            } catch (Exception e2) {
+                log("AwemeVideoDownloadAbilityProtocol class not found: %s", e2.getMessage());
+            }
             XC_MethodHook photoNoWatermarkHook = new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) {
                     PhotoModeImageUrlModel photo = (PhotoModeImageUrlModel) param.thisObject;
                     UrlModel noWatermark = photo.getDisplayImageNoWatermark();
-                    if (noWatermark != null) {
+                    if (noWatermark != null && noWatermark.getUrlList() != null && !noWatermark.getUrlList().isEmpty()) {
                         param.setResult(noWatermark);
                     }
                 }
             };
-            addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getOwnerWatermarkImage", photoNoWatermarkHook), XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getUserWatermarkImage", photoNoWatermarkHook)});
+            addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getOwnerWatermarkImage", photoNoWatermarkHook), XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getUserWatermarkImage", photoNoWatermarkHook), XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getThumbnail", photoNoWatermarkHook)});
+            addAllHooks(XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getCode", new Class[0]), new XC_MethodReplacement() {
+                @Override
+                protected Object replaceHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                    return 0;
+                }
+            }), XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getShowType", new Class[0]), new XC_MethodReplacement() {
+                @Override
+                protected Object replaceHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                    return 2;
+                }
+            }), XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getTranscode", new Class[0]), new XC_MethodReplacement() {
+                @Override
+                protected Object replaceHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                    return 3;
+                }
+            }));
+            addAllHooks((Set<XC_MethodHook.Unhook>[]) new Set[]{XposedBridge.hookAllMethods(UrlModel.class, "getUrlList", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) {
+                    List<?> urls = (List) param.getResult();
+                    if (urls == null || urls.isEmpty()) {
+                        return;
+                    }
+                    String url = urls.get(0).toString();
+                    if (url.contains("/video/") && url.contains("tiktokcdn")) {
+                        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 3; i < Math.min(15, stack.length); i++) {
+                            sb.append("\n  ").append(stack[i].toString());
+                        }
+                        Main.log("VIDEO_URL stack:%s", sb.toString());
+                    }
+                }
+            })});
             ThemeHelper.initHooks();
-        } catch (Exception e2) {
-            Log.d(LOG_TAG, e2.toString());
+        } catch (Exception e3) {
+            Log.d(LOG_TAG, e3.toString());
         }
     }
 

@@ -25,7 +25,7 @@ public class Localization {
         this.stringsRu.put("hide_ads", "Убрать рекламу");
         this.stringsRu.put("hide_photos", "Убрать фотографии");
         this.stringsRu.put("telegram_channel", "Telegram канал");
-        this.stringsRu.put("mod_version", String.format("Версия 1.0.0 (%s)", Integer.valueOf(Main.versionCode)));
+        this.stringsRu.put("mod_version", String.format("Версия 1.0.1 (%s)", Integer.valueOf(Main.versionCode)));
         this.stringsRu.put("privacy_information", "Правовая информация");
         this.stringsRu.put("privacy_information_legal", "Используя приложение,\nвы принимаете все условия");
         this.stringsRu.put("system_colors", "Системные цвета");
@@ -47,7 +47,7 @@ public class Localization {
         this.stringsEn.put("hide_ads", "Hide ads");
         this.stringsEn.put("hide_photos", "Hide photos");
         this.stringsEn.put("telegram_channel", "Telegram channel");
-        this.stringsEn.put("mod_version", String.format("Version 1.0.0 (%s)", Integer.valueOf(Main.versionCode)));
+        this.stringsEn.put("mod_version", String.format("Version 1.0.1 (%s)", Integer.valueOf(Main.versionCode)));
         this.stringsEn.put("privacy_information", "Privacy information");
         this.stringsEn.put("privacy_information_legal", "By using the application,\nyou accept all terms and conditions");
         this.stringsEn.put("system_colors", "System colors");
