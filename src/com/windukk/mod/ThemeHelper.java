@@ -81,7 +81,6 @@ public class ThemeHelper {
             if (r - maxGB >= 48) {
                 int accent = getMonetAccentColor() & 16777215;
                 int result = (alpha << 24) | accent;
-                Main.log("fixColor: %08X -> %08X", Integer.valueOf(color), Integer.valueOf(result));
                 return result;
             }
         }
