@@ -27,10 +27,10 @@ public abstract class RustArcClass implements Disposable, AutoCloseable {
             long r3 = r0.get()
             r5 = 0
             int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r0 == 0) goto L5f
+            if (r0 == 0) goto L5c
             r1 = 9223372036854775807(0x7fffffffffffffff, double:NaN)
             int r0 = (r3 > r1 ? 1 : (r3 == r1 ? 0 : -1))
-            if (r0 == 0) goto L4b
+            if (r0 == 0) goto L48
             java.util.concurrent.atomic.AtomicLong r2 = r7.callCounter
             r0 = 1
             long r0 = r0 + r3
@@ -47,15 +47,14 @@ public abstract class RustArcClass implements Disposable, AutoCloseable {
             return r3
         L39:
             r3 = move-exception
-            com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker.doCheck(r3)
             java.util.concurrent.atomic.AtomicLong r0 = r7.callCounter
             long r1 = r0.decrementAndGet()
             int r0 = (r1 > r5 ? 1 : (r1 == r5 ? 0 : -1))
-            if (r0 != 0) goto L4a
+            if (r0 != 0) goto L47
             r7.freeRustArcPtr()
-        L4a:
+        L47:
             throw r3
-        L4b:
+        L48:
             java.lang.IllegalStateException r2 = new java.lang.IllegalStateException
             java.lang.Class r0 = r7.getClass()
             java.lang.String r1 = r0.getSimpleName()
@@ -63,7 +62,7 @@ public abstract class RustArcClass implements Disposable, AutoCloseable {
             java.lang.String r0 = r1.concat(r0)
             r2.<init>(r0)
             throw r2
-        L5f:
+        L5c:
             java.lang.IllegalStateException r2 = new java.lang.IllegalStateException
             java.lang.Class r0 = r7.getClass()
             java.lang.String r1 = r0.getSimpleName()

@@ -1,19 +1,18 @@
 package fake.com.bytedance.ttc2pa.utils;
 
-import X.04GS;
-import X.04IR;
-import X.0OsF;
-import X.0Q4C;
-import X.0U1i;
-import X.0ncw;
-import X.0vmc;
-import X.0vxB;
-import X.0w02;
-import X.119i;
+import X.0BDe;
+import X.0BKl;
+import X.0GHP;
+import X.0Hcd;
+import X.0WZG;
+import X.0Waj;
+import X.0Zof;
+import X.0b7A;
+import X.0bE4;
+import X.0bJT;
 import android.util.Pair;
 import com.bytedance.retrofit2.mime.TypedByteArray;
 import com.bytedance.retrofit2.mime.TypedInput;
-import com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker;
 import fake.com.bytedance.ttc2pa.TTC2PA;
 import fake.com.bytedance.ttc2pa.TtC2paNetworkCaller;
 import fake.com.bytedance.ttc2pa.TtC2paNetworkResponse;
@@ -37,35 +36,34 @@ public final class HttpRequestCall implements TtC2paNetworkCaller {
         c.b(str, "url");
         c.b(map, "headers");
         c.b(bArr, "body");
-        if (0Q4C.LJ(str)) {
+        if (0Zof.LJ(str)) {
             str2 = "URL empty";
         } else {
             try {
-                0U1i r9 = new 0U1i();
+                0Hcd r9 = new 0Hcd();
                 if (j > 0) {
-                    ((0vxB) r9).LIZJ = j;
-                    ((0vxB) r9).LJIIIIZZ = j;
-                    ((0vxB) r9).LIZLLL = j;
-                    ((0vxB) r9).LJ = j;
+                    ((0bE4) r9).LIZJ = j;
+                    ((0bE4) r9).LJIIIIZZ = j;
+                    ((0bE4) r9).LIZLLL = j;
+                    ((0bE4) r9).LJ = j;
                 }
                 ArrayList arrayList = new ArrayList();
                 for (Map.Entry entry : map.entrySet()) {
                     String str3 = (String) entry.getKey();
                     String str4 = (String) entry.getValue();
-                    if (!0Q4C.LJ(str3) && !0Q4C.LJ(str4)) {
-                        arrayList.add(new 04GS(str3, str4));
+                    if (!0Zof.LJ(str3) && !0Zof.LJ(str4)) {
+                        arrayList.add(new 0BDe(str3, str4));
                     }
                 }
                 LinkedHashMap linkedHashMap = new LinkedHashMap();
-                Pair pairLIZJ = 0OsF.LIZJ(str, linkedHashMap);
-                IC2paNetworkApi iC2paNetworkApi = (IC2paNetworkApi) 0w02.LJIILIIL((String) pairLIZJ.first).LIZ(IC2paNetworkApi.class);
+                Pair pairLIZJ = 0Waj.LIZJ(str, linkedHashMap);
+                IC2paNetworkApi iC2paNetworkApi = (IC2paNetworkApi) 0bJT.LJIILIIL((String) pairLIZJ.first).LIZ(IC2paNetworkApi.class);
                 Object obj = pairLIZJ.second;
                 c.a(obj, "urlPair.second");
-                0vmc r1 = iC2paNetworkApi.postBody(z, (String) obj, new TypedByteArray("", bArr, new String[0]), arrayList, linkedHashMap, r9).execute();
+                0b7A r1 = iC2paNetworkApi.postBody(z, (String) obj, new TypedByteArray("", bArr, new String[0]), arrayList, linkedHashMap, r9).execute();
                 c.a((Object) r1, "call.execute()");
                 return c2paResponseFromSsResponse(r1);
             } catch (Throwable th) {
-                TryCatchGuardChecker.doCheck(th);
                 str2 = "network request error, e:" + th;
             }
         }
@@ -78,23 +76,23 @@ public final class HttpRequestCall implements TtC2paNetworkCaller {
         return TTC2PA.INSTANCE.getMTtC2paDepend$ttc2pa_release().onRemoteSign(bArr);
     }
 
-    private final TtC2paNetworkResponse c2paResponseFromSsResponse(0vmc r10) {
+    private final TtC2paNetworkResponse c2paResponseFromSsResponse(0b7A r10) {
         String str;
         byte[] bArr = new byte[0];
         if (r10.LIZJ()) {
-            if (0ncw.LIZIZ(r10.LIZ.LIZLLL)) {
+            if (0BKl.LIZIZ(r10.LIZ.LIZLLL)) {
                 str = "";
             } else {
                 str = "";
-                for (04GS r1 : r10.LIZ.LIZLLL) {
-                    if (b.a(r1.LIZ) && !0Q4C.LJ(r1.LIZIZ)) {
+                for (0BDe r1 : r10.LIZ.LIZLLL) {
+                    if (b.a(r1.LIZ) && !0Zof.LJ(r1.LIZIZ)) {
                         str = r1.LIZIZ;
                         c.a((Object) str, "header.value");
                     }
                 }
             }
             try {
-                119i r5 = new 119i((int) ((TypedInput) r10.LIZIZ).length());
+                0GHP r5 = new 0GHP((int) ((TypedInput) r10.LIZIZ).length());
                 byte[] bArr2 = new byte[4096];
                 InputStream inputStreamIn = ((TypedInput) r10.LIZIZ).in();
                 while (true) {
@@ -111,15 +109,14 @@ public final class HttpRequestCall implements TtC2paNetworkCaller {
                 }
                 c.a((Object) bArr, "buffer.toByteArray()");
             } catch (Throwable th) {
-                TryCatchGuardChecker.doCheck(th);
                 return new TtC2paNetworkResponse(r10.LIZ.LIZIZ, th.toString(), str, new byte[0]);
             }
         } else {
             str = "";
         }
-        04IR r2 = r10.LIZ;
+        0WZG r2 = r10.LIZ;
         long j = r2.LIZIZ;
-        String str2 = 0Q4C.LJ(r2.LJI) ? "" : r10.LIZ.LJI;
+        String str2 = 0Zof.LJ(r2.LJI) ? "" : r10.LIZ.LJI;
         c.a((Object) str2, "if (StringUtils.isEmpty(…\" else response.message()");
         return new TtC2paNetworkResponse(j, str2, str, bArr);
     }

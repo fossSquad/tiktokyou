@@ -1,7 +1,5 @@
 package fake.d;
 
-import com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker;
-
 public final class e {
     public static final f a;
 
@@ -12,8 +10,7 @@ public final class e {
             if (fVar == null) {
                 fVar = new f();
             }
-        } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            TryCatchGuardChecker.doCheck(e);
+        } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | InstantiationException unused) {
         }
         a = fVar;
     }

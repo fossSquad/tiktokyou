@@ -1,6 +1,5 @@
 package fake.com.bytedance.ttc2pa;
 
-import com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker;
 import com.squareup.wire.ProtoAdapter;
 import fake.a.i;
 import fake.d.b;
@@ -45,8 +44,7 @@ public final class TtC2paNetworkCallerProxy implements TtC2paNetworkCaller, Molt
             objDecode.getClass();
             c.a((Object) null, "p.url");
             throw null;
-        } catch (Exception e) {
-            TryCatchGuardChecker.doCheck(e);
+        } catch (Exception unused) {
             return BufferCallStatus.Companion.error(RustBuffer.Companion.create$ttc2pa_release(0));
         }
     }
@@ -60,8 +58,7 @@ public final class TtC2paNetworkCallerProxy implements TtC2paNetworkCaller, Molt
         try {
             objDecode.getClass();
             throw null;
-        } catch (Exception e) {
-            TryCatchGuardChecker.doCheck(e);
+        } catch (Exception unused) {
             return BufferCallStatus.Companion.error(RustBuffer.Companion.create$ttc2pa_release(0));
         }
     }

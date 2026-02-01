@@ -2,7 +2,6 @@ package fake.com.bytedance.ttc2pa.utils;
 
 import android.os.Process;
 import com.bytedance.bpea.transmit.delegate.BPEAThread;
-import com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker;
 import fake.com.bytedance.ttc2pa.utils.C2paThreadFactory;
 import fake.d.b;
 import fake.d.c;
@@ -29,7 +28,6 @@ public final class C2paThreadFactory implements ThreadFactory {
         try {
             runnable.run();
         } catch (Throwable th) {
-            TryCatchGuardChecker.doCheck(th);
             Logger.INSTANCE.e(TAG, "C2paThreadFactory error when running in thread " + c2paThreadFactory.mThreadName, th);
         }
     }

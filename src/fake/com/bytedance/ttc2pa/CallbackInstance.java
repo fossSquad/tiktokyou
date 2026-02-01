@@ -1,6 +1,5 @@
 package fake.com.bytedance.ttc2pa;
 
-import com.bytedance.tt.reliability.monitor.catchchecker.TryCatchGuardChecker;
 import fake.d.c;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,12 +13,7 @@ public final class CallbackInstance {
     public final MoltenFFICallback getInstance(long j) {
         MoltenFFICallback moltenFFICallback;
         synchronized (this) {
-            try {
-                moltenFFICallback = (MoltenFFICallback) idToInstance.get(Long.valueOf(j));
-            } catch (Throwable th) {
-                TryCatchGuardChecker.doCheck(th);
-                throw th;
-            }
+            moltenFFICallback = (MoltenFFICallback) idToInstance.get(Long.valueOf(j));
         }
         return moltenFFICallback;
     }
@@ -28,27 +22,17 @@ public final class CallbackInstance {
         long jIncrementAndGet;
         c.b(moltenFFICallback, "cb");
         synchronized (this) {
-            try {
-                jIncrementAndGet = currentInstanceId.incrementAndGet();
-                idToInstance.put(Long.valueOf(jIncrementAndGet), moltenFFICallback);
-            } catch (Throwable th) {
-                TryCatchGuardChecker.doCheck(th);
-                throw th;
-            }
+            jIncrementAndGet = currentInstanceId.incrementAndGet();
+            idToInstance.put(Long.valueOf(jIncrementAndGet), moltenFFICallback);
         }
         return jIncrementAndGet;
     }
 
     public final void unregisterInstance(long j) {
         synchronized (this) {
-            try {
-                Map map = idToInstance;
-                if (((MoltenFFICallback) map.get(Long.valueOf(j))) == null) {
-                    return;
-                }
-            } catch (Throwable th) {
-                TryCatchGuardChecker.doCheck(th);
-                throw th;
+            Map map = idToInstance;
+            if (((MoltenFFICallback) map.get(Long.valueOf(j))) == null) {
+                return;
             }
         }
     }
