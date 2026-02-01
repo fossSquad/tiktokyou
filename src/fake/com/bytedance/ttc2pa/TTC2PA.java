@@ -1,8 +1,8 @@
 package fake.com.bytedance.ttc2pa;
 
-import X.0Vqr;
-import X.0upF;
-import X.11IG;
+import X.0XIQ;
+import X.0Zqt;
+import X.0awC;
 import android.os.SystemClock;
 import fake.a.d;
 import fake.com.bytedance.ttc2pa.TTC2PA;
@@ -87,7 +87,7 @@ public final class TTC2PA {
 
     private final d checkTempDir() {
         boolean zMkdir;
-        11IG r3 = new 11IG(0Vqr.LLLZLL(getMTtC2paDepend$ttc2pa_release().getContext()), "/ttc2pa_cache/");
+        0Zqt r3 = new 0Zqt(0XIQ.LLLLZLLLI(getMTtC2paDepend$ttc2pa_release().getContext()), "/ttc2pa_cache/");
         if (r3.exists()) {
             zMkdir = r3.isDirectory() || (r3.delete() && r3.mkdir());
         } else {
@@ -112,9 +112,9 @@ public final class TTC2PA {
 
     private final void reportEventLog(String str, JSONObject jSONObject) {
         ITTC2PADepend mTtC2paDepend$ttc2pa_release = getMTtC2paDepend$ttc2pa_release();
-        String strT = 0Vqr.T(jSONObject);
-        c.a((Object) strT, "content.toString()");
-        mTtC2paDepend$ttc2pa_release.monitorLogSend(str, strT);
+        String strN = 0XIQ.N(jSONObject);
+        c.a((Object) strN, "content.toString()");
+        mTtC2paDepend$ttc2pa_release.monitorLogSend(str, strN);
         Logger.INSTANCE.d(TAG, "report type:" + str + ", content:" + jSONObject);
     }
 
@@ -201,7 +201,7 @@ public final class TTC2PA {
             ioExecutor = getMTtC2paDepend$ttc2pa_release().getIoExecutor();
             c.a(ioExecutor);
         } else {
-            ioExecutor = new 0upF(1, new C2paThreadFactory());
+            ioExecutor = new 0awC(1, new C2paThreadFactory());
         }
         setMExecutor$ttc2pa_release(ioExecutor);
         getMExecutor$ttc2pa_release().submit(new Runnable() {

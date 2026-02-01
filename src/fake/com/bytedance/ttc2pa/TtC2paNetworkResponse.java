@@ -1,6 +1,6 @@
 package fake.com.bytedance.ttc2pa;
 
-import X.0Vqr;
+import X.0XIQ;
 import fake.d.c;
 import fake.f.m;
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public final class TtC2paNetworkResponse {
     }
 
     public int hashCode() {
-        return Arrays.hashCode(this.body) + ((this.contentType.hashCode() + ((this.errorMessage.hashCode() + (0Vqr.h(this.httpStatus) * 31)) * 31)) * 31);
+        return Arrays.hashCode(this.body) + ((this.contentType.hashCode() + ((this.errorMessage.hashCode() + (0XIQ.b(this.httpStatus) * 31)) * 31)) * 31);
     }
 
     public final m into() {

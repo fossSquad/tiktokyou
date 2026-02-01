@@ -1,6 +1,6 @@
 package fake.d;
 
-import X.0Vqr;
+import X.0XIQ;
 import com.ss.android.ugc.bytex.pthread.base.convergence.hook.ThreadMethodProxy;
 import fake.a.g;
 import java.util.Arrays;
@@ -64,7 +64,7 @@ public final class c {
         if (obj != null) {
             return;
         }
-        StackTraceElement stackTraceElement = ThreadMethodProxy.getStackTrace(0Vqr.E())[4];
+        StackTraceElement stackTraceElement = ThreadMethodProxy.getStackTrace(0XIQ.y())[4];
         NullPointerException nullPointerException = new NullPointerException("Parameter specified as non-null is null: method " + stackTraceElement.getClassName() + "." + stackTraceElement.getMethodName() + ", parameter " + str);
         a((RuntimeException) nullPointerException);
         throw nullPointerException;
