@@ -1,6 +1,6 @@
 package fake.com.bytedance.ttc2pa.localfiles;
 
-import X.0aDx;
+import X.0Vsb;
 import android.content.Context;
 import android.content.SharedPreferences;
 import fake.com.bytedance.ttc2pa.utils.Logger;
@@ -14,7 +14,7 @@ public final class SharedPreferencesUtils {
         c.b(context, "context");
         c.b(str, "key");
         try {
-            return 0aDx.LIZJ(context, 0, "ttc2pa_main_process_config").getString(str, "");
+            return 0Vsb.LIZJ(context, 0, "ttc2pa_main_process_config").getString(str, "");
         } catch (Throwable th) {
             th.printStackTrace();
             return null;
@@ -27,7 +27,7 @@ public final class SharedPreferencesUtils {
         c.b(str2, "data");
         Logger.INSTANCE.d(TAG, "data changed, save to sp: ".concat(str2));
         try {
-            SharedPreferences.Editor editorEdit = 0aDx.LIZJ(context, 0, "ttc2pa_main_process_config").edit();
+            SharedPreferences.Editor editorEdit = 0Vsb.LIZJ(context, 0, "ttc2pa_main_process_config").edit();
             editorEdit.putString(str, str2);
             editorEdit.apply();
         } catch (Throwable th) {

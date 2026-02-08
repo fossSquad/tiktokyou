@@ -1,6 +1,6 @@
 package fake.com.bytedance.ttc2pa;
 
-import X.0XIQ;
+import X.0Vx6;
 import fake.d.c;
 import fake.f.n;
 
@@ -47,7 +47,7 @@ public final class TtC2paResult {
     }
 
     public int hashCode() {
-        return this.resultJson.hashCode() + ((this.errorDesc.hashCode() + (0XIQ.b(this.errorCode) * 31)) * 31);
+        return this.resultJson.hashCode() + ((this.errorDesc.hashCode() + (0Vx6.c(this.errorCode) * 31)) * 31);
     }
 
     public final n into() {

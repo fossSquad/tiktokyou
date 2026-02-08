@@ -1,6 +1,6 @@
 package fake.com.bytedance.ttc2pa;
 
-import X.0XIQ;
+import X.0Vx6;
 import fake.d.c;
 import fake.f.l;
 
@@ -39,7 +39,7 @@ public final class TtC2paCheckCertResult {
     }
 
     public int hashCode() {
-        return this.errorMessage.hashCode() + (0XIQ.b(this.certCount) * 31);
+        return this.errorMessage.hashCode() + (0Vx6.c(this.certCount) * 31);
     }
 
     public final l into() {
