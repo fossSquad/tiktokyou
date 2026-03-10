@@ -1,23 +1,5 @@
 package X;
 
-import android.telephony.TelephonyManager;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
-
 public abstract class h1 {
-    public static void a() {
-        try {
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimCountryIso", null), new z0());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkCountryIso", null), new a1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperator", null), new b1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperatorName", null), new c1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperatorName", null), new d1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperator", null), new e1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getAllCellInfo", null), new f1());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimState", null), new g1());
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = q0.a;
-        }
-    }
+    public static final String[] a = {"X.0C36", "X.0C37", "X.0C38", "X.0C39", "X.0C3A", "X.0C3B", "X.0C3C", "X.0C3D", "X.0C3E", "X.0C3I", "X.0C3J", "X.0C3K"};
 }

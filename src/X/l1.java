@@ -1,14 +1,15 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
+import java.util.ArrayList;
 
 class l1 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (r0.a().h) {
-            int iIntValue = ((Integer) methodHookParam.args[0]).intValue();
-            if (iIntValue == 3 || iIntValue == 4) {
-                methodHookParam.args[0] = 0;
-            }
+        String str = (String) methodHookParam.args[0];
+        if (str == null || !str.contains("watermark")) {
+            return;
         }
+        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
+        ArrayList arrayList = g1.a;
     }
 }

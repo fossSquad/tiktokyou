@@ -1,20 +1,24 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
+import java.net.NetworkInterface;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 
 class c2 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (r0.a().c()) {
-            Object[] objArr = methodHookParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof Integer) || (iA = y2.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        Enumeration enumeration;
+        if (i1.a().a && (enumeration = (Enumeration) methodHookParam.getResult()) != null) {
+            ArrayList arrayList = new ArrayList();
+            while (enumeration.hasMoreElements()) {
+                NetworkInterface networkInterface = (NetworkInterface) enumeration.nextElement();
+                String name = networkInterface.getName();
+                if (!name.startsWith("tun") && !name.startsWith("ppp")) {
+                    arrayList.add(networkInterface);
                 }
-                methodHookParam.args[1] = Integer.valueOf(iA);
             }
+            methodHookParam.setResult(Collections.enumeration(arrayList));
         }
     }
 }

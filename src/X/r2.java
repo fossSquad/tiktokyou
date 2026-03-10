@@ -1,26 +1,17 @@
 package X;
 
-import android.content.res.ColorStateList;
-import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+import java.util.ArrayList;
 
-class r2 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (r0.a().c()) {
-            Object obj = methodHookParam.args[0];
-            if (!(obj instanceof Integer)) {
-                if (!(obj instanceof ColorStateList) || (colorStateListA = y2.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
-                    return;
-                }
-                methodHookParam.args[0] = colorStateListA;
-                return;
-            }
-            int iIntValue = ((Integer) obj).intValue();
-            int iA = y2.a(iIntValue);
-            if (iA != iIntValue) {
-                methodHookParam.args[0] = Integer.valueOf(iA);
-            }
+public abstract class r2 {
+    public static void a() {
+        try {
+            XposedBridge.hookAllMethods(Class.forName("X.0OUd"), "LJII", new p2());
+            XposedBridge.hookAllMethods(Class.forName("X.0OUe"), "setSeekBarShowType", new q2());
+            ArrayList arrayList = g1.a;
+        } catch (Exception e) {
+            e.getMessage();
+            ArrayList arrayList2 = g1.a;
         }
     }
 }

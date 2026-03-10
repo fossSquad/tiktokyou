@@ -1,11 +1,48 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import android.content.res.Resources;
+import de.robv.android.xposed.XposedBridge;
+import java.util.Locale;
+import java.util.TimeZone;
 
-class e1 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (r0.a().a) {
-            methodHookParam.setResult(r0.a().b().c);
+public abstract class e1 {
+    public static final Locale a = new Locale("ru", "398");
+    public static final TimeZone b;
+
+    static {
+        String id = TimeZone.getDefault().getID();
+        if (id.contains("Europe/Kaliningrad")) {
+            id = "Africa/Johannesburg";
+        } else if (id.contains("Europe/Moscow")) {
+            id = "Europe/Istanbul";
+        } else if (id.contains("Europe/Samara") || id.contains("Europe/Saratov")) {
+            id = "Asia/Dubai";
+        } else if (id.contains("Asia/Yekaterinburg")) {
+            id = "Asia/Karachi";
+        } else if (id.contains("Asia/Omsk")) {
+            id = "Asia/Dhaka";
+        } else if (id.contains("Asia/Krasnoyarsk") || id.contains("Asia/Novosibirsk")) {
+            id = "Asia/Jakarta";
+        } else if (id.contains("Asia/Irkutsk")) {
+            id = "Asia/Singapore";
+        } else if (id.contains("Asia/Yakutsk") || id.contains("Asia/Chita")) {
+            id = "Asia/Seoul";
+        } else if (id.contains("Asia/Vladivostok")) {
+            id = "Australia/Brisbane";
+        } else if (id.contains("Asia/Magadan") || id.contains("Asia/Sakhalin")) {
+            id = "Pacific/Noumea";
+        } else if (id.contains("Asia/Kamchatka") || id.contains("Asia/Anadyr")) {
+            id = "Pacific/Majuro";
+        }
+        b = TimeZone.getTimeZone(id);
+    }
+
+    public static void a() {
+        try {
+            XposedBridge.hookMethod(TimeZone.class.getMethod("getDefault", null), new b1());
+            XposedBridge.hookMethod(Locale.class.getMethod("getDefault", null), new c1());
+            XposedBridge.hookMethod(Resources.class.getMethod("getConfiguration", null), new d1());
+        } catch (Exception e) {
         }
     }
 }

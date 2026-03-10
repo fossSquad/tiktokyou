@@ -1,21 +1,16 @@
 package X;
 
-import android.content.res.ColorStateList;
 import de.robv.android.xposed.XC_MethodHook;
+import java.util.function.Consumer;
 
 class b2 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (r0.a().c()) {
-            Object[] objArr = methodHookParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof ColorStateList) || (colorStateListA = y2.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
-                    return;
-                }
-                methodHookParam.args[1] = colorStateListA;
+        if (i1.a().a) {
+            Consumer consumer = (Consumer) methodHookParam.args[3];
+            if (consumer != null) {
+                consumer.accept(null);
             }
+            methodHookParam.setResult((Object) null);
         }
     }
 }
