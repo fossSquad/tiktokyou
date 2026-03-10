@@ -1,14 +1,10 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.List;
+import de.robv.android.xposed.XC_MethodReplacement;
 
-class a0 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        List list = (List) methodHookParam.getResult();
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        list.removeIf(new a0$$ExternalSyntheticLambda0());
+class a0 extends XC_MethodReplacement {
+    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        return 3;
     }
 }

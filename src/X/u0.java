@@ -1,15 +1,34 @@
 package X;
 
+import android.graphics.Typeface;
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
 
 class u0 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String str = (String) methodHookParam.args[0];
-        if (str == null || !str.contains("watermark")) {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        ThreadLocal threadLocal = w0.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
             return;
         }
-        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        ArrayList arrayList = q0.a;
+        String str = i1.a().g;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            int i = 1;
+            int iIntValue = ((Integer) methodHookParam.args[1]).intValue();
+            boolean zBooleanValue = ((Boolean) methodHookParam.args[2]).booleanValue();
+            if (iIntValue >= 600 && zBooleanValue) {
+                i = 3;
+            } else if (iIntValue < 600) {
+                i = zBooleanValue ? 2 : 0;
+            }
+            Typeface typefaceA = w0.a(str, i);
+            if (typefaceA != null) {
+                methodHookParam.setResult(typefaceA);
+            }
+        } finally {
+            w0.d.set(Boolean.FALSE);
+        }
     }
 }

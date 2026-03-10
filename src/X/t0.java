@@ -1,15 +1,26 @@
 package X;
 
+import android.graphics.Typeface;
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
 
 class t0 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String str = (String) methodHookParam.args[0];
-        if (str == null || !str.contains("watermark")) {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        ThreadLocal threadLocal = w0.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
             return;
         }
-        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        ArrayList arrayList = q0.a;
+        String str = i1.a().g;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = w0.a(str, ((Integer) methodHookParam.args[1]).intValue());
+            if (typefaceA != null) {
+                methodHookParam.setResult(typefaceA);
+            }
+        } finally {
+            w0.d.set(Boolean.FALSE);
+        }
     }
 }

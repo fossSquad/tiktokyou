@@ -1,98 +1,111 @@
 package X;
 
-import com.ss.android.ugc.aweme.base.model.UrlModel;
-import com.ss.android.ugc.aweme.feed.model.PhotoModeImageUrlModel;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.widget.TextView;
 import de.robv.android.xposed.XposedBridge;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.HashMap;
 import java.util.function.Supplier;
 
 public abstract class w0 {
-    public static final ThreadLocal a = ThreadLocal.withInitial(new Supplier() {
+    public static volatile Typeface a;
+    public static volatile String b;
+    public static final HashMap c = new HashMap();
+    public static final ThreadLocal d = ThreadLocal.withInitial(new Supplier() {
         @Override
         public final Object get() {
             return Boolean.FALSE;
         }
     });
-    public static final AtomicInteger b = new AtomicInteger(0);
 
     public static void a() {
         try {
-            s0 s0Var = new s0();
-            XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getOwnerWatermarkImage", s0Var);
-            XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getUserWatermarkImage", s0Var);
-            XposedBridge.hookAllMethods(PhotoModeImageUrlModel.class, "getDisplayImageNoWatermark", s0Var);
-            ArrayList arrayList = q0.a;
-            try {
-                XposedBridge.hookAllMethods(Class.forName("com.ss.android.socialbase.downloader.model.DownloadInfo"), "setUrl", new t0());
-            } catch (Exception e) {
-                e.getMessage();
-                ArrayList arrayList2 = q0.a;
+            XposedBridge.hookAllMethods(Paint.class, "setTypeface", new q0());
+            XposedBridge.hookAllMethods(Typeface.class, "createFromAsset", new r0());
+            Class cls = Integer.TYPE;
+            XposedBridge.hookMethod(Typeface.class.getMethod("create", String.class, cls), new s0());
+            XposedBridge.hookMethod(Typeface.class.getMethod("create", Typeface.class, cls), new t0());
+            if (Build.VERSION.SDK_INT >= 28) {
+                try {
+                    XposedBridge.hookMethod(Typeface.class.getMethod("create", Typeface.class, cls, Boolean.TYPE), new u0());
+                } catch (NoSuchMethodException e) {
+                }
             }
-            try {
-                XposedBridge.hookAllMethods(Class.forName("com.ss.android.socialbase.downloader.model.DownloadTask"), "url", new u0());
-            } catch (Exception e2) {
-                e2.getMessage();
-                ArrayList arrayList3 = q0.a;
-            }
-            try {
-                XposedBridge.hookAllMethods(Class.forName("com.ss.android.ugc.aweme.base.model.UrlModel"), "getUrlList", new v0());
-            } catch (Exception e3) {
-                e3.getMessage();
-                ArrayList arrayList4 = q0.a;
-            }
-        } catch (Exception e4) {
-            e4.getMessage();
-            ArrayList arrayList5 = q0.a;
+            XposedBridge.hookAllMethods(TextView.class, "setTypeface", new v0());
+        } catch (Exception e2) {
+            e2.getMessage();
+            ArrayList arrayList = g1.a;
         }
     }
 
-    public static UrlModel b(PhotoModeImageUrlModel photoModeImageUrlModel) {
+    public static Typeface a(String str) {
+        if (str.equals(b) && a != null) {
+            return a;
+        }
+        Typeface typefaceCreateFromFile = null;
         try {
-            Field declaredField = PhotoModeImageUrlModel.class.getDeclaredField("displayImageNoWatermark");
-            declaredField.setAccessible(true);
-            UrlModel urlModel = (UrlModel) declaredField.get(photoModeImageUrlModel);
-            if ((urlModel == null || urlModel.getUrlList() == null || urlModel.getUrlList().isEmpty()) ? false : true) {
-                return urlModel;
-            }
-            Field declaredField2 = PhotoModeImageUrlModel.class.getDeclaredField("bitrateImages");
-            declaredField2.setAccessible(true);
-            List list = (List) declaredField2.get(photoModeImageUrlModel);
-            if (list != null && !list.isEmpty()) {
-                for (Object obj : list) {
-                    UrlModel urlModel2 = (UrlModel) obj.getClass().getMethod("getImage", null).invoke(obj, null);
-                    if ((urlModel2 == null || urlModel2.getUrlList() == null || urlModel2.getUrlList().isEmpty()) ? false : true) {
-                        ArrayList arrayList = q0.a;
-                        return urlModel2;
+            if ("system".equals(str)) {
+                typefaceCreateFromFile = Typeface.DEFAULT;
+            } else {
+                if (str.startsWith("file:")) {
+                    File file = new File(g1.b().getFilesDir(), "fonts/" + str.substring(5));
+                    if (file.exists()) {
+                        typefaceCreateFromFile = Typeface.createFromFile(file);
+                    }
+                } else if (str.startsWith("asset:")) {
+                    String strSubstring = str.substring(6);
+                    ThreadLocal threadLocal = d;
+                    threadLocal.set(Boolean.TRUE);
+                    try {
+                        Typeface typefaceCreateFromAsset = Typeface.createFromAsset(g1.b().getAssets(), "mod_fonts/" + strSubstring);
+                        threadLocal.set(Boolean.FALSE);
+                        typefaceCreateFromFile = typefaceCreateFromAsset;
+                    } catch (Throwable th) {
+                        d.set(Boolean.FALSE);
+                        throw th;
                     }
                 }
+                if (typefaceCreateFromFile != null) {
+                    b = str;
+                    a = typefaceCreateFromFile;
+                }
+                return typefaceCreateFromFile;
             }
+            if (typefaceCreateFromFile != null) {
+                b = str;
+                a = typefaceCreateFromFile;
+            }
+            return typefaceCreateFromFile;
         } catch (Exception e) {
             e.getMessage();
-            ArrayList arrayList2 = q0.a;
+            ArrayList arrayList = g1.a;
+            return null;
         }
-        return null;
     }
 
-    public static void a(PhotoModeImageUrlModel photoModeImageUrlModel) {
-        if (b.getAndIncrement() >= 20) {
-            return;
+    public static Typeface a(String str, int i) {
+        Typeface typefaceA = a(str);
+        if (typefaceA == null) {
+            return null;
         }
+        if (i == 0) {
+            return typefaceA;
+        }
+        HashMap map = c;
+        Typeface typeface = (Typeface) map.get(Integer.valueOf(i));
+        if (typeface != null) {
+            return typeface;
+        }
+        d.set(Boolean.TRUE);
         try {
-            Field declaredField = PhotoModeImageUrlModel.class.getDeclaredField("bitrateImages");
-            declaredField.setAccessible(true);
-            List list = (List) declaredField.get(photoModeImageUrlModel);
-            if (list != null) {
-                for (int i = 0; i < list.size(); i++) {
-                    Object obj = list.get(i);
-                    Method method = obj.getClass().getMethod("getName", null);
-                    Method method2 = obj.getClass().getMethod("getImage", null);
-                }
-            }
-        } catch (Exception e) {
+            Typeface typefaceCreate = Typeface.create(typefaceA, i);
+            map.put(Integer.valueOf(i), typefaceCreate);
+            return typefaceCreate;
+        } finally {
+            d.set(Boolean.FALSE);
         }
     }
 }

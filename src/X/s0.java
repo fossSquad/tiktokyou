@@ -1,34 +1,26 @@
 package X;
 
-import com.ss.android.ugc.aweme.base.model.UrlModel;
-import com.ss.android.ugc.aweme.feed.model.PhotoModeImageUrlModel;
+import android.graphics.Typeface;
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
 
 class s0 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ThreadLocal threadLocal = w0.a;
+        ThreadLocal threadLocal = w0.d;
         if (((Boolean) threadLocal.get()).booleanValue()) {
             return;
         }
+        String str = i1.a().g;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
         try {
-            try {
-                threadLocal.set(Boolean.TRUE);
-                PhotoModeImageUrlModel photoModeImageUrlModel = (PhotoModeImageUrlModel) methodHookParam.thisObject;
-                w0.a(photoModeImageUrlModel);
-                UrlModel urlModelB = w0.b(photoModeImageUrlModel);
-                if (urlModelB != null) {
-                    methodHookParam.setResult(urlModelB);
-                }
-                threadLocal.set(Boolean.FALSE);
-            } catch (Exception e) {
-                e.getMessage();
-                ArrayList arrayList = q0.a;
-                w0.a.set(Boolean.FALSE);
+            Typeface typefaceA = w0.a(str, ((Integer) methodHookParam.args[1]).intValue());
+            if (typefaceA != null) {
+                methodHookParam.setResult(typefaceA);
             }
-        } catch (Throwable th) {
-            w0.a.set(Boolean.FALSE);
-            throw th;
+        } finally {
+            w0.d.set(Boolean.FALSE);
         }
     }
 }

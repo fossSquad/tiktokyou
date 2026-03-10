@@ -1,17 +1,30 @@
 package X;
 
-import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XC_MethodHook;
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class m1 {
-    public static void a() {
-        try {
-            XposedBridge.hookAllMethods(Class.forName("X.0OUd"), "LJII", new k1());
-            XposedBridge.hookAllMethods(Class.forName("X.0OUe"), "setSeekBarShowType", new l1());
-            ArrayList arrayList = q0.a;
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList2 = q0.a;
+class m1 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        List<String> list = (List) methodHookParam.getResult();
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        ArrayList arrayList = new ArrayList();
+        boolean z = false;
+        for (String str : list) {
+            if (str == null || !str.contains("watermark")) {
+                arrayList.add(str);
+            } else {
+                String strReplaceAll = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
+                arrayList.add(strReplaceAll);
+                if (!str.equals(strReplaceAll)) {
+                    z = true;
+                }
+            }
+        }
+        if (z) {
+            methodHookParam.setResult(arrayList);
         }
     }
 }

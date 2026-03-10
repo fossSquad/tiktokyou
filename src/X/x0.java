@@ -1,15 +1,10 @@
 package X;
 
-public final class x0 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
 
-    public x0(String str, String str2, String str3, String str4) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
+class x0 extends XC_MethodReplacement {
+    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        return i1.a().f ? Boolean.FALSE : Boolean.TRUE;
     }
 }
