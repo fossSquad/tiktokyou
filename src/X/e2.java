@@ -4,8 +4,8 @@ import de.robv.android.xposed.XC_MethodHook;
 
 class e2 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (i1.a().a) {
-            methodHookParam.setResult(i1.a().b().b);
+        if (t1.a().a) {
+            methodHookParam.setResult(t1.a().b().c);
         }
     }
 }

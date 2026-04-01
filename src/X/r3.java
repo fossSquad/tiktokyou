@@ -7,7 +7,7 @@ class r3 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
         ColorStateList colorStateList;
         ColorStateList colorStateListA;
-        if (i1.a().d() && (colorStateListA = d4.a((colorStateList = (ColorStateList) methodHookParam.getResult()))) != colorStateList) {
+        if (t1.a().d() && (colorStateListA = j4.a((colorStateList = (ColorStateList) methodHookParam.getResult()))) != colorStateList) {
             methodHookParam.setResult(colorStateListA);
         }
     }

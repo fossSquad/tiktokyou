@@ -1,11 +1,15 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.ss.android.ugc.aweme.base.model.UrlModel;
 
-class g0 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (i1.a().d) {
-            methodHookParam.setResult(0);
-        }
+public final class g0 {
+    public final UrlModel a;
+    public final long b;
+    public final int c;
+
+    public g0(UrlModel urlModel, String str, long j, int i) {
+        this.a = urlModel;
+        this.b = j;
+        this.c = i;
     }
 }

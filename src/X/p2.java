@@ -1,11 +1,12 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
+import java.util.Collections;
 
 class p2 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (i1.a().h) {
-            methodHookParam.setResult(Boolean.TRUE);
+        if (t1.a().d) {
+            methodHookParam.setResult(Collections.EMPTY_LIST);
         }
     }
 }
