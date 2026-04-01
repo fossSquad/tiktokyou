@@ -1,17 +1,12 @@
 package X;
 
-public final class o1 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
-    public final String e;
+import android.content.res.Configuration;
+import de.robv.android.xposed.XC_MethodHook;
 
-    public o1(String str, String str2, String str3, String str4, String str5) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
-        this.e = str5;
+class o1 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        Configuration configuration = (Configuration) methodHookParam.getResult();
+        configuration.setLocale(p1.a);
+        methodHookParam.setResult(configuration);
     }
 }

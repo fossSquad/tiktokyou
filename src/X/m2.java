@@ -1,40 +1,18 @@
 package X;
 
-import android.telephony.TelephonyManager;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
-import java.util.function.Supplier;
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
+import de.robv.android.xposed.XC_MethodHook;
 
-public abstract class m2 {
-    public static final  int a = 0;
-
-    static {
-        ThreadLocal.withInitial(new Supplier() {
-            @Override
-            public final Object get() {
-                return Boolean.FALSE;
+class m2 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (t1.a().d) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) methodHookParam.thisObject;
+            Aweme aweme = (Aweme) methodHookParam.getResult();
+            g.a(searchMixFeed);
+            if (g.a(aweme)) {
+                methodHookParam.setResult((Object) null);
             }
-        });
-        ThreadLocal.withInitial(new Supplier() {
-            @Override
-            public final Object get() {
-                return Boolean.FALSE;
-            }
-        });
-    }
-
-    public static void a() {
-        try {
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimCountryIso", null), new a2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkCountryIso", null), new e2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperator", null), new f2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperator", null), new g2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperatorName", null), new h2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperatorName", null), new i2());
-            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimState", null), new j2());
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = g1.a;
         }
     }
 }

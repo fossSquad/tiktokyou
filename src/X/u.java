@@ -1,43 +1,23 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.feed.model.Video;
-import com.ss.android.ugc.aweme.feed.model.VideoUrlModel;
 import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 class u extends XC_MethodHook {
-    final  Class a;
-    final  Class b;
-    final  Class c;
-
-    public u(Class cls, Class cls2, Class cls3) {
-        this.a = cls;
-        this.b = cls2;
-        this.c = cls3;
-    }
-
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Video video;
-        VideoUrlModel playAddr;
-        try {
-            Object obj = methodHookParam.args[0];
-            Object obj2 = this.a.getField("LJIIL").get(obj);
-            if (obj2 == null) {
-                return;
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (Boolean.TRUE.equals(methodHookParam.getResult())) {
+            return;
+        }
+        Object[] objArr = methodHookParam.args;
+        boolean zA = false;
+        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
+        if (obj != null) {
+            try {
+                zA = y.a(obj.getClass().getMethod("getCommonModel", null).invoke(obj, null));
+            } catch (Throwable th) {
             }
-            Object obj3 = this.b.getField("LJFF").get(obj);
-            if (!(obj3 instanceof Aweme) || (video = ((Aweme) obj3).getVideo()) == null || (playAddr = video.getPlayAddr()) == null || playAddr.getUrlList() == null || playAddr.getUrlList().isEmpty()) {
-                return;
-            }
-            Field field = this.c.getField("LIZ");
-            field.setAccessible(true);
-            field.set(obj2, playAddr);
-            ArrayList arrayList = g1.a;
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList2 = g1.a;
+        }
+        if (zA) {
+            methodHookParam.setResult(Boolean.TRUE);
         }
     }
 }

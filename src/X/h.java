@@ -1,20 +1,51 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import ni.shikatu.kotlin.Metadata;
-import ni.shikatu.kotlin.Pair;
-import ni.shikatu.kotlin.TuplesKt;
-import ni.shikatu.kotlin.collections.MapsKt;
-import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import android.content.Context;
+import android.os.Handler;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-@Metadata(d1 = {"\u0000\u0016\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0002\b\u0003\b\n\u0018\u00002\u00020\u0001J\u0017\u0010\u0005\u001a\u00020\u00042\u0006\u0010\u0003\u001a\u00020\u0002H\u0014¢\u0006\u0004\b\u0005\u0010\u0006¨\u0006\u0007"}, d2 = {"LX/h;", "Lde/robv/android/xposed/XC_MethodHook;", "Lde/robv/android/xposed/XC_MethodHook$MethodHookParam;", "param", "", "afterHookedMethod", "(Lde/robv/android/xposed/XC_MethodHook$MethodHookParam;)V", "mod_release"}, k = 1, mv = {2, 1, 0}, xi = 48)
-public final class h extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Intrinsics.checkNotNullParameter(methodHookParam, "param");
-        Object result = methodHookParam.getResult();
-        if (result == null) {
-            return;
+public final class h implements Runnable {
+    @Override
+    public final void run() {
+        try {
+            Context contextB = r1.b();
+            if (contextB != null) {
+                if (t1.m == null || t1.a() == null) {
+                    if (t1.m == null) {
+                        t1.m = contextB.getSharedPreferences("ttmod_settings", 0);
+                    }
+                    if (t1.n == null) {
+                        t1.n = new t1();
+                    }
+                }
+                if (!t1.a().k) {
+                    m.a(contextB);
+                    AtomicBoolean atomicBoolean = m.b;
+                    atomicBoolean.set(false);
+                    Handler handler = m.a;
+                    handler.removeCallbacks(m.d);
+                    if (atomicBoolean.get()) {
+                        handler.postDelayed(this, 300000L);
+                        return;
+                    }
+                    return;
+                }
+                m.c(contextB, "heartbeat");
+                m.b(contextB);
+            }
+            if (m.b.get()) {
+                m.a.postDelayed(this, 300000L);
+            }
+        } catch (Throwable th) {
+            try {
+                th.getMessage();
+                ArrayList arrayList = r1.a;
+            } finally {
+                if (m.b.get()) {
+                    m.a.postDelayed(this, 300000L);
+                }
+            }
         }
-        methodHookParam.setResult(q.a(result, MapsKt.mapOf(new Pair[]{TuplesKt.to("LJJJJL", Boolean.TRUE), TuplesKt.to("LJJLIIIJ", (Object) null)})));
     }
 }

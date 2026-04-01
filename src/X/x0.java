@@ -1,10 +1,11 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
 
-class x0 extends XC_MethodReplacement {
-    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        return i1.a().f ? Boolean.FALSE : Boolean.TRUE;
+class x0 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (t1.a().d) {
+            methodHookParam.setResult(0);
+        }
     }
 }

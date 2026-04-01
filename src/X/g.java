@@ -1,29 +1,138 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.feed.model.AwemeExtKt;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
 import java.util.ArrayList;
-import ni.shikatu.kotlin.Metadata;
-import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import java.util.List;
+import java.util.Set;
 
-@Metadata(d1 = {"\u0000\u0016\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0002\b\u0003\b\n\u0018\u00002\u00020\u0001J\u0017\u0010\u0005\u001a\u00020\u00042\u0006\u0010\u0003\u001a\u00020\u0002H\u0014¢\u0006\u0004\b\u0005\u0010\u0006¨\u0006\u0007"}, d2 = {"LX/g;", "Lde/robv/android/xposed/XC_MethodHook;", "Lde/robv/android/xposed/XC_MethodHook$MethodHookParam;", "param", "", "afterHookedMethod", "(Lde/robv/android/xposed/XC_MethodHook$MethodHookParam;)V", "mod_release"}, k = 1, mv = {2, 1, 0}, xi = 48)
-public final class g extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Intrinsics.checkNotNullParameter(methodHookParam, "param");
+public abstract class g {
+    public static List a(List list) {
+        if (t1.a().d && list != null && !list.isEmpty()) {
+            int size = list.size();
+            ArrayList arrayList = null;
+            for (int i = 0; i < size; i++) {
+                Aweme aweme = (Aweme) list.get(i);
+                if (a(aweme)) {
+                    if (arrayList == null) {
+                        arrayList = new ArrayList(Math.max(0, size - 1));
+                        for (int i2 = 0; i2 < i; i2++) {
+                            arrayList.add((Aweme) list.get(i2));
+                        }
+                    }
+                } else if (arrayList != null) {
+                    arrayList.add(aweme);
+                }
+            }
+            if (arrayList != null) {
+                return arrayList;
+            }
+        }
+        return list;
+    }
+
+    public static List b(List list) {
+        if (t1.a().d && list != null && !list.isEmpty()) {
+            int size = list.size();
+            ArrayList arrayList = null;
+            for (int i = 0; i < size; i++) {
+                SearchMixFeed searchMixFeed = (SearchMixFeed) list.get(i);
+                boolean zB = b(searchMixFeed);
+                a(searchMixFeed);
+                if (zB) {
+                    if (arrayList == null) {
+                        arrayList = new ArrayList(Math.max(0, size - 1));
+                        for (int i2 = 0; i2 < i; i2++) {
+                            arrayList.add((SearchMixFeed) list.get(i2));
+                        }
+                    }
+                } else if (arrayList != null) {
+                    arrayList.add(searchMixFeed);
+                }
+            }
+            if (arrayList != null) {
+                return arrayList;
+            }
+        }
+        return list;
+    }
+
+    public static void a(SearchMixFeed searchMixFeed) {
+        if (!t1.a().d || searchMixFeed == null) {
+            return;
+        }
+        List list = searchMixFeed.awemePoolAwemeList;
+        if (list != null) {
+            searchMixFeed.awemePoolAwemeList = a(list);
+        }
+        if (a(searchMixFeed.aweme)) {
+            searchMixFeed.aweme = null;
+        }
+        if (searchMixFeed.preciseAd != null) {
+            searchMixFeed.preciseAd = null;
+        }
+    }
+
+    public static boolean b(SearchMixFeed searchMixFeed) {
+        List list;
+        if (searchMixFeed == null) {
+            return false;
+        }
+        if (searchMixFeed.preciseAd != null || a(searchMixFeed.aweme)) {
+            return true;
+        }
         try {
-            Object obj = methodHookParam.thisObject;
-            if (obj == null) {
-                return;
+            Set adCidList = searchMixFeed.getAdCidList();
+            if (adCidList != null && !adCidList.isEmpty()) {
+                return true;
             }
-            try {
-                obj.getClass().getMethod("ko", null).invoke(obj, null);
-            } catch (Throwable th) {
+        } catch (Throwable th) {
+        }
+        if (searchMixFeed.aweme != null || (list = searchMixFeed.awemePoolAwemeList) == null || list.isEmpty()) {
+            return false;
+        }
+        return a(searchMixFeed.awemePoolAwemeList).isEmpty();
+    }
+
+    public static boolean a(Aweme aweme) {
+        if (aweme == null) {
+            return false;
+        }
+        try {
+            if (AwemeExtKt.getMonetizationData(aweme) != null) {
+                return true;
             }
-            q.a(obj);
-            methodHookParam.method.getName();
-            ArrayList arrayList = g1.a;
+        } catch (Throwable th) {
+        }
+        try {
+            if (AwemeExtKt.isAdFiled(aweme)) {
+                return true;
+            }
         } catch (Throwable th2) {
-            th2.getMessage();
-            ArrayList arrayList2 = g1.a;
+        }
+        try {
+            if (AwemeExtKt.isAdTraffic(aweme)) {
+                return true;
+            }
+        } catch (Throwable th3) {
+        }
+        try {
+            if (AwemeExtKt.isMonetizationTraffic(aweme)) {
+                return true;
+            }
+        } catch (Throwable th4) {
+        }
+        try {
+            if (AwemeExtKt.isPseudoAd(aweme)) {
+                return true;
+            }
+        } catch (Throwable th5) {
+        }
+        try {
+            return AwemeExtKt.isSearchPreciseAd(aweme);
+        } catch (Throwable th6) {
+            return false;
         }
     }
 }

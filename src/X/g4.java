@@ -1,19 +1,13 @@
 package X;
 
-import android.app.Notification;
-import android.graphics.drawable.Icon;
-import com.ss.android.ugc.aweme.setting.ui.SettingContainerActivity;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
+import de.robv.android.xposed.XC_MethodHook;
 
-public abstract class g4 {
-    public static void a() {
-        try {
-            XposedBridge.hookMethod(Notification.Builder.class.getMethod("setSmallIcon", Icon.class), new e4());
-            XposedBridge.hookAllMethods(SettingContainerActivity.class, "onCreate", new f4());
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = g1.a;
+class g4 extends XC_MethodHook {
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        int iIntValue;
+        int iA;
+        if (t1.a().d() && (iA = j4.a((iIntValue = ((Integer) methodHookParam.args[0]).intValue()))) != iIntValue) {
+            methodHookParam.args[0] = Integer.valueOf(iA);
         }
     }
 }

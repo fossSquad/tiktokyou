@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 class w1 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (i1.a().a) {
-            methodHookParam.setResult(new ArrayList());
+        String str = (String) methodHookParam.args[0];
+        if (str == null || !str.contains("watermark")) {
+            return;
         }
+        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
+        ArrayList arrayList = r1.a;
     }
 }

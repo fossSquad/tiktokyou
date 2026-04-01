@@ -1,15 +1,10 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
+import de.robv.android.xposed.XC_MethodReplacement;
 
-class k1 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String str = (String) methodHookParam.args[0];
-        if (str == null || !str.contains("watermark")) {
-            return;
-        }
-        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        ArrayList arrayList = g1.a;
+class k1 extends XC_MethodReplacement {
+    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        return t1.a().f ? Boolean.FALSE : Boolean.TRUE;
     }
 }
