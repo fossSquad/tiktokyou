@@ -1,27 +1,10 @@
 package X;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
+import de.robv.android.xposed.XC_MethodHook;
 
-public final class v implements InvocationHandler {
-    public final  LinkedHashMap a;
-    public final  Object b;
-
-    public v(LinkedHashMap linkedHashMap, Object obj) {
-        this.a = linkedHashMap;
-        this.b = obj;
-    }
-
-    @Override
-    public final Object invoke(Object obj, Method method, Object[] objArr) {
-        if (this.a.containsKey(method.getName())) {
-            return this.a.get(method.getName());
-        }
-        Object obj2 = this.b;
-        if (objArr == null) {
-            objArr = new Object[0];
-        }
-        return method.invoke(obj2, objArr);
+class v extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        methodHookParam.setResult(k0.a(k0.a((IMConversation) methodHookParam.thisObject), (String) methodHookParam.getResult()));
     }
 }

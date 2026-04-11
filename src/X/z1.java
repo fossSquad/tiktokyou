@@ -1,15 +1,9 @@
 package X;
 
-public final class z1 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
+import de.robv.android.xposed.XC_MethodHook;
 
-    public z1(String str, String str2, String str3, String str4) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
+class z1 extends XC_MethodHook {
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        methodHookParam.args[0] = Boolean.FALSE;
     }
 }

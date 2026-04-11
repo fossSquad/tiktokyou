@@ -1,11 +1,19 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+public final class u0 implements Runnable {
+    public final  Class a;
+    public final  Object b;
 
-class u0 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (t1.a().d) {
-            methodHookParam.args[0] = Boolean.FALSE;
+    public u0(Class cls, Object obj) {
+        this.a = cls;
+        this.b = obj;
+    }
+
+    @Override
+    public final void run() {
+        try {
+            this.a.getDeclaredMethod("LJIIJ", null).invoke(this.b, null);
+        } catch (Throwable th) {
         }
     }
 }

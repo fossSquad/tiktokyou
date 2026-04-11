@@ -1,50 +1,10 @@
 package X;
 
-import android.content.res.Resources;
-import de.robv.android.xposed.XposedBridge;
-import java.util.Locale;
-import java.util.TimeZone;
+import de.robv.android.xposed.XC_MethodHook;
+import java.util.List;
 
-public abstract class p1 {
-    public static final Locale a = new Locale("ru", "398");
-    public static final TimeZone b;
-
-    static {
-        String id = TimeZone.getDefault().getID();
-        if (id.contains("Europe/Kaliningrad")) {
-            id = "Africa/Johannesburg";
-        } else if (id.contains("Europe/Moscow")) {
-            id = "Europe/Istanbul";
-        } else if (id.contains("Europe/Samara") || id.contains("Europe/Saratov")) {
-            id = "Asia/Dubai";
-        } else if (id.contains("Asia/Yekaterinburg")) {
-            id = "Asia/Karachi";
-        } else if (id.contains("Asia/Omsk")) {
-            id = "Asia/Dhaka";
-        } else if (id.contains("Asia/Krasnoyarsk") || id.contains("Asia/Novosibirsk")) {
-            id = "Asia/Jakarta";
-        } else if (id.contains("Asia/Irkutsk")) {
-            id = "Asia/Singapore";
-        } else if (id.contains("Asia/Yakutsk") || id.contains("Asia/Chita")) {
-            id = "Asia/Seoul";
-        } else if (id.contains("Asia/Vladivostok")) {
-            id = "Australia/Brisbane";
-        } else if (id.contains("Asia/Magadan") || id.contains("Asia/Sakhalin")) {
-            id = "Pacific/Noumea";
-        } else if (id.contains("Asia/Kamchatka") || id.contains("Asia/Anadyr")) {
-            id = "Pacific/Majuro";
-        }
-        b = TimeZone.getTimeZone(id);
-    }
-
-    public static void a() {
-        if (Locale.getDefault().getLanguage().equals("ru")) {
-            try {
-                XposedBridge.hookMethod(TimeZone.class.getMethod("getDefault", null), new m1());
-                XposedBridge.hookMethod(Locale.class.getMethod("getDefault", null), new n1());
-                XposedBridge.hookMethod(Resources.class.getMethod("getConfiguration", null), new o1());
-            } catch (Exception e) {
-            }
-        }
+class p1 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        methodHookParam.setResult(w1.a((List) methodHookParam.getResult()));
     }
 }

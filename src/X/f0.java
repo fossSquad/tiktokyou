@@ -1,26 +1,22 @@
 package X;
 
-import android.net.Uri;
-import de.robv.android.xposed.XC_MethodHook;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
+import android.app.Activity;
+import android.view.View;
+import android.widget.ScrollView;
 
-class f0 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        OutputStream outputStream;
-        try {
-            Uri uri = (Uri) methodHookParam.args[0];
-            if (uri != null) {
-                if (!((ConcurrentHashMap.KeySetView) i0.a).remove(uri.toString()) || (outputStream = (OutputStream) methodHookParam.getResult()) == null) {
-                    return;
-                }
-                methodHookParam.setResult(new h0(outputStream));
-                ArrayList arrayList = r1.a;
-            }
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList2 = r1.a;
+public final class f0 extends ScrollView {
+    public int a;
+
+    public f0(Activity activity) {
+        super(activity);
+    }
+
+    @Override
+    public final void onMeasure(int i, int i2) {
+        int i3 = this.a;
+        if (i3 > 0) {
+            i2 = View.MeasureSpec.makeMeasureSpec(i3, Integer.MIN_VALUE);
         }
+        super.onMeasure(i, i2);
     }
 }

@@ -1,21 +1,10 @@
 package X;
 
+import com.ss.android.ugc.aweme.profile.model.User;
 import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Proxy;
-import java.util.LinkedHashMap;
 
 class s extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object result = methodHookParam.getResult();
-        if (result == null) {
-            return;
-        }
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put("LJFF", -1);
-        Class<?>[] interfaces = result.getClass().getInterfaces();
-        if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new v(linkedHashMap, result));
-        }
-        methodHookParam.setResult(result);
+        methodHookParam.setResult(k0.a(((User) methodHookParam.thisObject).getUid(), (String) methodHookParam.getResult()));
     }
 }

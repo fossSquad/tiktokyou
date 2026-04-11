@@ -31,7 +31,7 @@ public abstract class m {
         try {
             String strA = a();
             if (TextUtils.isEmpty(strA)) {
-                ArrayList arrayList = r1.a;
+                ArrayList arrayList = p2.a;
                 c.set(false);
                 return;
             }
@@ -39,7 +39,7 @@ public abstract class m {
             z = listB != null;
             try {
                 if (listB == null) {
-                    ArrayList arrayList2 = r1.a;
+                    ArrayList arrayList2 = p2.a;
                     c.set(false);
                     return;
                 }
@@ -75,25 +75,25 @@ public abstract class m {
                     th = th;
                     try {
                         th.getMessage();
-                        ArrayList arrayList3 = r1.a;
+                        ArrayList arrayList3 = p2.a;
                     } finally {
                         if (!z) {
-                            ArrayList arrayList4 = r1.a;
+                            ArrayList arrayList4 = p2.a;
                         }
                         c.set(false);
                     }
                 }
                 if (i2 > 0 || i == 0) {
-                    t1 t1VarA = t1.a();
+                    r2 r2VarA = r2.a();
                     String string = LocalDate.now().toString();
-                    t1VarA.getClass();
+                    r2VarA.getClass();
                     if (string == null) {
                         string = "";
                     }
-                    t1VarA.l = string;
-                    t1.m.edit().putString("auto_streak_nudge_last_run_date", t1VarA.l).apply();
+                    r2VarA.l = string;
+                    r2.o.edit().putString("auto_streak_nudge_last_run_date", r2VarA.l).apply();
                 }
-                ArrayList arrayList5 = r1.a;
+                ArrayList arrayList5 = p2.a;
             } catch (Throwable th2) {
                 th = th2;
             }
@@ -111,17 +111,12 @@ public abstract class m {
     }
 
     public static void c(final Context context, final String str) {
-        if (t1.m == null || t1.a() == null) {
-            if (t1.m == null) {
-                t1.m = context.getSharedPreferences("ttmod_settings", 0);
-            }
-            if (t1.n == null) {
-                t1.n = new t1();
-            }
+        if (r2.o == null || r2.a() == null) {
+            r2.a(context);
         }
-        if (t1.a().k && ZonedDateTime.now().getHour() == 12) {
+        if (r2.a().k && ZonedDateTime.now().getHour() == 12) {
             String string = LocalDate.now().toString();
-            String str2 = t1.a().l;
+            String str2 = r2.a().l;
             if (str2 == null) {
                 str2 = "";
             }
@@ -148,11 +143,11 @@ public abstract class m {
     }
 
     public static List b() throws IllegalAccessException, InvocationTargetException {
-        Object obj = a((Class) Class.forName("X.0UPv"), "LIZIZ").get(null);
+        Object obj = a((Class) Class.forName("X.0Kdq"), "LIZIZ").get(null);
         if (obj == null) {
             return null;
         }
-        Object objInvoke = a(obj.getClass(), "LIZ", List.class).invoke(obj, Collections.singletonList(Enum.valueOf(Class.forName("X.0UPU"), "USER")));
+        Object objInvoke = a(obj.getClass(), "LIZ", List.class).invoke(obj, Collections.singletonList(Enum.valueOf(Class.forName("X.048n"), "USER")));
         if (!(objInvoke instanceof List)) {
             return null;
         }
@@ -176,31 +171,89 @@ public abstract class m {
             alarmManager.setAndAllowWhileIdle(0, zonedDateTimeWithNano.toInstant().toEpochMilli(), broadcast);
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = r1.a;
+            ArrayList arrayList = p2.a;
         }
     }
 
     public static boolean a(String str, String str2) {
+        boolean z;
+        Method methodA;
+        Method methodA2;
+        Object objInvoke;
         try {
             Class<?> cls = Class.forName("com.ss.android.ugc.aweme.im.sdk.chat.feature.nudge.IMNudgeAndStreakService");
             Object obj = a((Class) cls, "LJFF").get(null);
             if (obj == null) {
                 return false;
             }
-            Class<?> cls2 = Class.forName("X.0Qyl");
-            Object objA = a(cls2, Class.forName("X.0Qyo"), Class.forName("X.0Qzg"), Class.forName("X.0Qzd"), str);
-            Class<?> cls3 = Class.forName("X.0Qym");
-            return Boolean.TRUE.equals(a(cls, "LIZJ", cls2, Boolean.TYPE, String.class, cls3, Class.forName("X.0Qza"), String.class).invoke(obj, objA, Boolean.FALSE, str2, cls3.getConstructor(null).newInstance(null), null, null));
-        } catch (Throwable th) {
-            th.getMessage();
-            ArrayList arrayList = r1.a;
-            return false;
+            Class<?> cls2 = Class.forName("X.0LXH");
+            Object objA = a(cls2, Class.forName("X.0LXM"), Class.forName("X.0LXP"), Class.forName("X.0LXK"), str);
+            Class<?> cls3 = Class.forName("X.0LXF");
+            Object objNewInstance = cls3.getConstructor(null).newInstance(null);
+            Class<?> cls4 = Class.forName("X.0KAd");
+            String[] strArr = {"LJJJJI", "LIZJ"};
+            Class[] clsArr = new Class[6];
+            clsArr[0] = cls2;
+            clsArr[1] = Boolean.TYPE;
+            clsArr[2] = String.class;
+            clsArr[3] = cls3;
+            clsArr[4] = cls4;
+            z = false;
+            try {
+                clsArr[5] = String.class;
+                int i = 0;
+                while (true) {
+                    if (i >= 2) {
+                        methodA = null;
+                        break;
+                    }
+                    try {
+                        methodA = a(cls, strArr[i], clsArr);
+                        break;
+                    } catch (NoSuchMethodException e) {
+                        i++;
+                    }
+                }
+                if (methodA != null) {
+                    objInvoke = methodA.invoke(obj, objA, Boolean.FALSE, str2, objNewInstance, null, null);
+                } else {
+                    String[] strArr2 = {"LJJ", "LJJJJI"};
+                    Class[] clsArr2 = {cls2, String.class, cls3, cls4, String.class};
+                    int i2 = 0;
+                    while (true) {
+                        if (i2 >= 2) {
+                            methodA2 = null;
+                            break;
+                        }
+                        try {
+                            methodA2 = a(cls, strArr2[i2], clsArr2);
+                            break;
+                        } catch (NoSuchMethodException e2) {
+                            i2++;
+                        }
+                    }
+                    if (methodA2 != null) {
+                        objInvoke = methodA2.invoke(obj, objA, str2, objNewInstance, null, null);
+                    } else {
+                        throw new NoSuchMethodException(cls.getName().concat("#sendStreakNudge"));
+                    }
+                }
+                return Boolean.TRUE.equals(objInvoke);
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (Throwable th2) {
+            th = th2;
+            z = false;
         }
+        th.getMessage();
+        ArrayList arrayList = p2.a;
+        return z;
     }
 
     public static String a() throws IllegalAccessException, InvocationTargetException {
         Object objInvoke;
-        Object obj = a((Class) Class.forName("X.0QQR"), "LJFF").get(null);
+        Object obj = a((Class) Class.forName("X.0eki"), "LJFF").get(null);
         if (obj != null && (objInvoke = a(obj.getClass(), "LIZ", new Class[0]).invoke(obj, null)) != null) {
             if (!Boolean.TRUE.equals(a(objInvoke.getClass(), "isLogin", new Class[0]).invoke(objInvoke, null))) {
                 return null;
@@ -208,7 +261,7 @@ public abstract class m {
             Object objInvoke2 = a(objInvoke.getClass(), "getCurUserId", new Class[0]).invoke(objInvoke, null);
             if (objInvoke2 instanceof String) {
                 String str = (String) objInvoke2;
-                if (!m$$ExternalSyntheticBackport0.m(str)) {
+                if (!j3$$ExternalSyntheticBackport0.m(str)) {
                     return str;
                 }
             }
@@ -228,7 +281,7 @@ public abstract class m {
             alarmManager.cancel(PendingIntent.getBroadcast(context, 44021, intent, 201326592));
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = r1.a;
+            ArrayList arrayList = p2.a;
         }
     }
 
@@ -263,12 +316,12 @@ public abstract class m {
             return false;
         }
         int i = a((Class) obj.getClass(), "convType").getInt(obj);
-        Enum enumValueOf = Enum.valueOf(Class.forName("X.0UPU"), "USER");
+        Enum enumValueOf = Enum.valueOf(Class.forName("X.048n"), "USER");
         Object objInvoke = a(enumValueOf.getClass(), "getValue", new Class[0]).invoke(enumValueOf, null);
         if (i != (objInvoke instanceof Number ? ((Number) objInvoke).intValue() : 1)) {
             return false;
         }
-        return Boolean.TRUE.equals(a(Class.forName("X.0UPW"), "LIZLLL", obj.getClass()).invoke(null, obj));
+        return Boolean.TRUE.equals(a(Class.forName("X.0Ke5"), "LIZLLL", obj.getClass()).invoke(null, obj));
     }
 
     public static Field a(Class cls, String str) throws NoSuchFieldException {

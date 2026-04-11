@@ -1,20 +1,20 @@
 package X;
 
-import android.content.res.ColorStateList;
+import com.ss.android.ugc.aweme.search.common.model.ContinuousLoadingAwemeList;
 import de.robv.android.xposed.XC_MethodHook;
+import java.util.List;
 
 class m3 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (t1.a().d()) {
-            Object[] objArr = methodHookParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof ColorStateList) || (colorStateListA = j4.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
-                    return;
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (r2.a().d) {
+            ContinuousLoadingAwemeList continuousLoadingAwemeList = (ContinuousLoadingAwemeList) methodHookParam.thisObject;
+            continuousLoadingAwemeList.awemeList = g.a(continuousLoadingAwemeList.awemeList);
+            Object result = methodHookParam.getResult();
+            if (result instanceof List) {
+                try {
+                    methodHookParam.setResult(g.a((List) result));
+                } catch (Throwable th) {
                 }
-                methodHookParam.args[1] = colorStateListA;
             }
         }
     }

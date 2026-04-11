@@ -1,30 +1,12 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
-import java.util.List;
 
 class x1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        List<String> list = (List) methodHookParam.getResult();
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        ArrayList arrayList = new ArrayList();
-        boolean z = false;
-        for (String str : list) {
-            if (str == null || !str.contains("watermark")) {
-                arrayList.add(str);
-            } else {
-                String strReplaceAll = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-                arrayList.add(strReplaceAll);
-                if (!str.equals(strReplaceAll)) {
-                    z = true;
-                }
-            }
-        }
-        if (z) {
-            methodHookParam.setResult(arrayList);
-        }
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        int iIntValue = ((Integer) methodHookParam.args[0]).intValue();
+        int iIntValue2 = ((Integer) methodHookParam.args[1]).intValue() & (-8193);
+        methodHookParam.args[0] = Integer.valueOf(iIntValue & (-8193));
+        methodHookParam.args[1] = Integer.valueOf(iIntValue2);
     }
 }

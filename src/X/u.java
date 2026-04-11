@@ -1,23 +1,10 @@
 package X;
 
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
 import de.robv.android.xposed.XC_MethodHook;
 
 class u extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (Boolean.TRUE.equals(methodHookParam.getResult())) {
-            return;
-        }
-        Object[] objArr = methodHookParam.args;
-        boolean zA = false;
-        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
-        if (obj != null) {
-            try {
-                zA = y.a(obj.getClass().getMethod("getCommonModel", null).invoke(obj, null));
-            } catch (Throwable th) {
-            }
-        }
-        if (zA) {
-            methodHookParam.setResult(Boolean.TRUE);
-        }
+        methodHookParam.setResult(k0.a(((IMUser) methodHookParam.thisObject).getUid(), (String) methodHookParam.getResult()));
     }
 }

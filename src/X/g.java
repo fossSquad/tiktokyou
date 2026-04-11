@@ -9,7 +9,7 @@ import java.util.Set;
 
 public abstract class g {
     public static List a(List list) {
-        if (t1.a().d && list != null && !list.isEmpty()) {
+        if (r2.a().d && list != null && !list.isEmpty()) {
             int size = list.size();
             ArrayList arrayList = null;
             for (int i = 0; i < size; i++) {
@@ -33,7 +33,7 @@ public abstract class g {
     }
 
     public static List b(List list) {
-        if (t1.a().d && list != null && !list.isEmpty()) {
+        if (r2.a().d && list != null && !list.isEmpty()) {
             int size = list.size();
             ArrayList arrayList = null;
             for (int i = 0; i < size; i++) {
@@ -59,7 +59,7 @@ public abstract class g {
     }
 
     public static void a(SearchMixFeed searchMixFeed) {
-        if (!t1.a().d || searchMixFeed == null) {
+        if (!r2.a().d || searchMixFeed == null) {
             return;
         }
         List list = searchMixFeed.awemePoolAwemeList;

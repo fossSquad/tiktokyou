@@ -1,15 +1,10 @@
 package X;
 
-import com.windukk.mod.hooks.CleanModeHooks;
-import de.robv.android.xposed.XC_MethodHook;
+import android.app.Activity;
+import android.util.TypedValue;
 
-class o extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object obj;
-        Object[] objArr = methodHookParam.args;
-        if (objArr.length == 0 || (obj = objArr[0]) == null) {
-            return;
-        }
-        CleanModeHooks.handleClearModeEvent(obj);
+public abstract  class o {
+    public static float a(Activity activity, int i, float f) {
+        return TypedValue.applyDimension(i, f, activity.getResources().getDisplayMetrics());
     }
 }

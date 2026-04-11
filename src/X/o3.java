@@ -1,13 +1,16 @@
 package X;
 
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
 import de.robv.android.xposed.XC_MethodHook;
 
 class o3 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (t1.a().d() && (iA = j4.a((iIntValue = ((Integer) methodHookParam.getResult()).intValue()))) != iIntValue) {
-            methodHookParam.setResult(Integer.valueOf(iA));
+        if (r2.a().d) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) methodHookParam.thisObject;
+            if (searchMixFeed.preciseAd != null) {
+                searchMixFeed.preciseAd = null;
+                methodHookParam.setResult((Object) null);
+            }
         }
     }
 }

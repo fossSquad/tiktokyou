@@ -1,38 +1,65 @@
 package X;
 
-import android.content.Context;
+import android.app.Activity;
+import android.view.MotionEvent;
 import android.view.View;
-import com.ss.android.ugc.aweme.comment.model.Comment;
-import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+import android.view.ViewParent;
+import android.widget.FrameLayout;
 
-class q extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String text;
-        Object[] objArr = methodHookParam.args;
-        if (objArr == null || objArr.length < 2) {
-            return;
-        }
-        try {
-            Object obj = objArr[0];
-            if ((obj instanceof Comment) && (text = ((Comment) obj).getText()) != null) {
-                Method methodA = y.a((Class) Class.forName("X.0ZOL"));
-                Object objInvoke = methodA != null ? methodA.invoke(null, null) : null;
-                if (objInvoke instanceof Context) {
-                    Context context = (Context) objInvoke;
-                    Object obj2 = methodHookParam.thisObject.getClass().getField("itemView").get(methodHookParam.thisObject);
-                    View view = obj2 instanceof View ? (View) obj2 : null;
-                    y.a(context, text);
-                    if (view != null) {
-                        y.a(view, context);
-                    }
-                    methodHookParam.setResult((Object) null);
+public final class q implements View.OnTouchListener {
+    public float a;
+    public final  int b;
+    public final  FrameLayout c;
+    public final  int d;
+    public final  Activity e;
+    public final  FrameLayout f;
+
+    public q(int i, FrameLayout frameLayout, int i2, Activity activity, FrameLayout frameLayout2) {
+        this.b = i;
+        this.c = frameLayout;
+        this.d = i2;
+        this.e = activity;
+        this.f = frameLayout2;
+    }
+
+    @Override
+    public final boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getActionMasked()) {
+            case 0:
+                this.a = motionEvent.getRawY();
+                ViewParent parent = view.getParent();
+                if (parent != null) {
+                    parent.requestDisallowInterceptTouchEvent(true);
                 }
-            }
-        } catch (Throwable th) {
-            th.getMessage();
-            ArrayList arrayList = r1.a;
+                return true;
+            case 1:
+            case 3:
+                ViewParent parent2 = view.getParent();
+                if (parent2 != null) {
+                    parent2.requestDisallowInterceptTouchEvent(false);
+                }
+                float rawY = motionEvent.getRawY() - this.a;
+                if (rawY > this.d) {
+                    k0.a(this.e, this.f, this.c);
+                } else {
+                    this.c.animate().translationY(0.0f).alpha(1.0f).setDuration(200L).start();
+                    if (motionEvent.getActionMasked() == 1 && Math.abs(rawY) <= this.b && view.isClickable()) {
+                        view.performClick();
+                    }
+                }
+                return true;
+            case 2:
+                float rawY2 = motionEvent.getRawY() - this.a;
+                Math.abs(rawY2);
+                if (rawY2 > 0.0f) {
+                    this.c.setTranslationY(rawY2);
+                    this.c.setAlpha(Math.max(0.0f, 1.0f - (rawY2 / k0.a(view.getContext(), 120.0f))));
+                } else {
+                    this.c.setTranslationY(rawY2 * 0.15f);
+                }
+                return true;
+            default:
+                return false;
         }
     }
 }
