@@ -1,14 +1,19 @@
 package X;
 
-import android.content.res.ColorStateList;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeedList;
 import de.robv.android.xposed.XC_MethodHook;
 
 class r3 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (t1.a().d() && (colorStateListA = j4.a((colorStateList = (ColorStateList) methodHookParam.getResult()))) != colorStateList) {
-            methodHookParam.setResult(colorStateListA);
+        if (r2.a().d) {
+            SearchMixFeedList searchMixFeedList = (SearchMixFeedList) methodHookParam.thisObject;
+            searchMixFeedList.mItems = g.b(searchMixFeedList.mItems);
+            Object result = methodHookParam.getResult();
+            if (result instanceof SearchMixFeedList) {
+                SearchMixFeedList searchMixFeedList2 = (SearchMixFeedList) result;
+                searchMixFeedList2.mItems = g.b(searchMixFeedList2.mItems);
+                methodHookParam.setResult(searchMixFeedList2);
+            }
         }
     }
 }

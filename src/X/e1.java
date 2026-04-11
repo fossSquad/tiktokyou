@@ -1,26 +1,26 @@
 package X;
 
-import android.graphics.Typeface;
+import android.net.Uri;
 import de.robv.android.xposed.XC_MethodHook;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 class e1 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ThreadLocal threadLocal = j1.d;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
-            return;
-        }
-        String str = t1.a().g;
-        if ("default".equals(str)) {
-            return;
-        }
-        threadLocal.set(Boolean.TRUE);
+        OutputStream outputStream;
         try {
-            Typeface typefaceA = j1.a(str);
-            if (typefaceA != null) {
-                methodHookParam.setResult(typefaceA);
+            Uri uri = (Uri) methodHookParam.args[0];
+            if (uri != null) {
+                if (!((ConcurrentHashMap.KeySetView) h1.a).remove(uri.toString()) || (outputStream = (OutputStream) methodHookParam.getResult()) == null) {
+                    return;
+                }
+                methodHookParam.setResult(new g1(outputStream));
+                ArrayList arrayList = p2.a;
             }
-        } finally {
-            j1.d.set(Boolean.FALSE);
+        } catch (Exception e) {
+            e.getMessage();
+            ArrayList arrayList2 = p2.a;
         }
     }
 }

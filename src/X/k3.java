@@ -1,20 +1,34 @@
 package X;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XC_MethodReplacement;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
-class k3 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (t1.a().d()) {
-            Object[] objArr = methodHookParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = j4.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                methodHookParam.args[0] = Integer.valueOf(iA);
-            }
+class k3 extends XC_MethodReplacement {
+    final  Class a;
+
+    public k3(Class cls) {
+        this.a = cls;
+    }
+
+    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) throws IllegalAccessException, NoSuchFieldException {
+        Bitmap bitmap = (Bitmap) methodHookParam.args[0];
+        Object obj = methodHookParam.thisObject;
+        Field declaredField = this.a.getDeclaredField("LL");
+        declaredField.setAccessible(true);
+        Object obj2 = declaredField.get(obj);
+        Field declaredField2 = this.a.getDeclaredField("LLILIL");
+        declaredField2.setAccessible(true);
+        Activity activity = (Activity) declaredField2.get(obj);
+        if (bitmap == null || activity == null) {
+            l3.a(obj2, false);
+            return null;
         }
+        l3.a(obj2, l3.a(activity, bitmap));
+        ArrayList arrayList = p2.a;
+        return null;
     }
 }

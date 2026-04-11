@@ -5,6 +5,6 @@ import de.robv.android.xposed.XC_MethodReplacement;
 
 class k1 extends XC_MethodReplacement {
     public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        return t1.a().f ? Boolean.FALSE : Boolean.TRUE;
+        return 0;
     }
 }

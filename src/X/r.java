@@ -1,21 +1,28 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Proxy;
-import java.util.LinkedHashMap;
+import android.app.Activity;
+import android.content.Context;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
+import android.view.View;
 
-class r extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object result = methodHookParam.getResult();
-        if (result == null) {
-            return;
-        }
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put("LIZ", Boolean.TRUE);
-        Class<?>[] interfaces = result.getClass().getInterfaces();
-        if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new v(linkedHashMap, result));
-        }
-        methodHookParam.setResult(result);
+public final class r extends ClickableSpan {
+    public final  Context a;
+    public final  int b;
+
+    public r(Activity activity, int i) {
+        this.a = activity;
+        this.b = i;
+    }
+
+    @Override
+    public final void onClick(View view) {
+        k0.d(this.a);
+    }
+
+    @Override
+    public final void updateDrawState(TextPaint textPaint) {
+        textPaint.setColor(this.b);
+        textPaint.setUnderlineText(false);
     }
 }

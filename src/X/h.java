@@ -9,17 +9,12 @@ public final class h implements Runnable {
     @Override
     public final void run() {
         try {
-            Context contextB = r1.b();
+            Context contextB = p2.b();
             if (contextB != null) {
-                if (t1.m == null || t1.a() == null) {
-                    if (t1.m == null) {
-                        t1.m = contextB.getSharedPreferences("ttmod_settings", 0);
-                    }
-                    if (t1.n == null) {
-                        t1.n = new t1();
-                    }
+                if (r2.o == null || r2.a() == null) {
+                    r2.a(contextB);
                 }
-                if (!t1.a().k) {
+                if (!r2.a().k) {
                     m.a(contextB);
                     AtomicBoolean atomicBoolean = m.b;
                     atomicBoolean.set(false);
@@ -40,7 +35,7 @@ public final class h implements Runnable {
         } catch (Throwable th) {
             try {
                 th.getMessage();
-                ArrayList arrayList = r1.a;
+                ArrayList arrayList = p2.a;
             } finally {
                 if (m.b.get()) {
                     m.a.postDelayed(this, 300000L);

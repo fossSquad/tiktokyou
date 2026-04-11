@@ -1,86 +1,96 @@
 package X;
 
-import com.ss.android.ugc.aweme.commerce.AwemeCommerceStruct;
-import com.ss.android.ugc.aweme.feed.model.ACLCommonShare;
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.feed.model.AwemeRawAd;
-import com.ss.android.ugc.aweme.feed.model.FeedItemList;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
-import java.util.List;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.os.Build;
+import android.os.Process;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.ZonedDateTime;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class y0 {
-    public static void a() {
-        try {
-            XposedBridge.hookAllMethods(FeedItemList.class, "getAwemeList", new p0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "setItems", new q0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "getItems", new r0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "setPreloadAds", new s0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "getPreloadAds", new t0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "setHasAd", new u0());
-            XposedBridge.hookAllMethods(FeedItemList.class, "isHasAd", new v0());
-            XposedBridge.hookAllMethods(AwemeRawAd.class, "getRollType", new w0());
-            x0 x0Var = new x0();
-            k0 k0Var = new k0();
-            XposedBridge.hookAllMethods(AwemeCommerceStruct.class, "getMidRollType", x0Var);
-            XposedBridge.hookAllMethods(AwemeCommerceStruct.class, "isEnableMidRoll", k0Var);
-            String[] strArr = {"getAdInfo", "getAdExtInfo", "getCommercialInfo"};
-            for (int i = 0; i < 3; i++) {
+public final class y0 implements Thread.UncaughtExceptionHandler {
+    public static final AtomicBoolean c = new AtomicBoolean(false);
+    public static final AtomicBoolean d = new AtomicBoolean(false);
+    public final Context a;
+    public final Thread.UncaughtExceptionHandler b;
+
+    public y0(Context context, Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+        this.a = context;
+        this.b = uncaughtExceptionHandler;
+    }
+
+    public final void a(String str) throws IOException {
+        File file = new File(this.a.getFilesDir(), "ttmod_crash");
+        if (file.exists() || file.mkdirs()) {
+            byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(file, "last_java_crash.txt"), false);
+            try {
+                fileOutputStream.write(bytes);
+                fileOutputStream.close();
+                FileOutputStream fileOutputStream2 = new FileOutputStream(new File(file, "java_crash_" + System.currentTimeMillis() + ".txt"), false);
                 try {
-                    XposedBridge.hookAllMethods(Aweme.class, strArr[i], new l0());
+                    fileOutputStream2.write(bytes);
+                    fileOutputStream2.close();
                 } catch (Throwable th) {
+                    try {
+                        fileOutputStream2.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
+                    }
+                    throw th;
                 }
+            } catch (Throwable th3) {
+                try {
+                    fileOutputStream.close();
+                } catch (Throwable th4) {
+                    th3.addSuppressed(th4);
+                }
+                throw th3;
             }
-            XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getCode", null), new m0());
-            XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getShowType", null), new n0());
-            XposedBridge.hookMethod(ACLCommonShare.class.getMethod("getTranscode", null), new o0());
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = r1.a;
         }
     }
 
-    public static List a(List list) {
-        boolean z;
-        boolean z2;
-        if (list == null || list.isEmpty()) {
-            return list;
+    @Override
+    public final void uncaughtException(Thread thread, Throwable th) {
+        try {
+            if (d.compareAndSet(false, true)) {
+                String strA = a(thread, th);
+                a(strA);
+                ClipboardManager clipboardManager = (ClipboardManager) this.a.getSystemService("clipboard");
+                if (clipboardManager != null) {
+                    clipboardManager.setPrimaryClip(ClipData.newPlainText("ttmod_java_crash", strA));
+                }
+            }
+        } catch (Throwable th2) {
         }
-        int size = list.size();
-        ArrayList arrayList = null;
-        for (int i = 0; i < size; i++) {
-            Aweme aweme = (Aweme) list.get(i);
-            boolean zA = g.a(aweme);
-            boolean z3 = true;
-            try {
-                if (aweme.getLiveId() != 0 || aweme.newLiveRoomData != null || aweme.getRoomFeedCellStruct() != null || ((aweme.getAuthorLive() != null && aweme.getAuthorLive().booleanValue()) || aweme.isLiveReplay() || aweme.getLiveExtraInfoStruct() != null)) {
-                    z = true;
-                } else {
-                    z = false;
-                }
-            } catch (Throwable th) {
-            }
-            try {
-                z2 = aweme.getPhotoModeImageInfo() != null;
-            } catch (Throwable th2) {
-            }
-            try {
-                if (!aweme.getIsTikTokStory() && aweme.getUserStory() == null && aweme.getStory() == null) {
-                    z3 = false;
-                }
-            } catch (Throwable th3) {
-            }
-            if ((zA && t1.a().d) || ((z && t1.a().c) || ((z2 && t1.a().e) || (z3 && t1.a().f)))) {
-                if (arrayList == null) {
-                    arrayList = new ArrayList(Math.max(0, size - 1));
-                    for (int i2 = 0; i2 < i; i2++) {
-                        arrayList.add((Aweme) list.get(i2));
-                    }
-                }
-            } else if (arrayList != null) {
-                arrayList.add(aweme);
-            }
+        Thread.UncaughtExceptionHandler uncaughtExceptionHandler = this.b;
+        if (uncaughtExceptionHandler != null) {
+            uncaughtExceptionHandler.uncaughtException(thread, th);
+        } else {
+            Process.killProcess(Process.myPid());
+            System.exit(10);
         }
-        return arrayList != null ? arrayList : list;
+    }
+
+    public static String a(Thread thread, Throwable th) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        th.printStackTrace(printWriter);
+        printWriter.flush();
+        StringBuilder sb = new StringBuilder(2048);
+        sb.append("time=").append(ZonedDateTime.now()).append("\nthread=");
+        sb.append(thread != null ? thread.getName() : "unknown").append("\npid=");
+        sb.append(Process.myPid()).append("\nversion=v1.5 (");
+        sb.append(p2.b).append(")\nandroid=");
+        sb.append(Build.VERSION.RELEASE).append(" sdk=").append(Build.VERSION.SDK_INT).append("\ndevice=");
+        sb.append(Build.MANUFACTURER).append(' ').append(Build.MODEL).append("\n\n");
+        sb.append(stringWriter);
+        return sb.toString();
     }
 }

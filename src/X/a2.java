@@ -1,5 +1,19 @@
 package X;
 
+import android.view.SurfaceView;
+import android.view.Window;
+import de.robv.android.xposed.XposedBridge;
+import java.util.ArrayList;
+
 public abstract class a2 {
-    public static final z1[] a = {new z1("region_finland", "fi", "24491", "Elisa"), new z1("region_poland", "pl", "26001", "Plus"), new z1("region_kazakhstan", "kz", "40101", "Beeline KZ"), new z1("region_belarus", "by", "25701", "velcom"), new z1("region_egypt", "eg", "60201", "Vodafone EG"), new z1("region_usa", "us", "310260", "T-Mobile")};
+    public static void a() {
+        try {
+            Class cls = Integer.TYPE;
+            XposedBridge.hookMethod(Window.class.getMethod("setFlags", cls, cls), new x1());
+            XposedBridge.hookMethod(Window.class.getMethod("addFlags", cls), new y1());
+            XposedBridge.hookMethod(SurfaceView.class.getMethod("setSecure", Boolean.TYPE), new z1());
+        } catch (Exception e) {
+            ArrayList arrayList = p2.a;
+        }
+    }
 }

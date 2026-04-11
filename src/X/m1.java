@@ -5,6 +5,6 @@ import de.robv.android.xposed.XC_MethodReplacement;
 
 class m1 extends XC_MethodReplacement {
     public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        return p1.b;
+        return 3;
     }
 }
