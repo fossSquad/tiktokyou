@@ -1,19 +1,9 @@
 package X;
 
-import android.view.SurfaceView;
-import android.view.Window;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
+import de.robv.android.xposed.XC_MethodHook;
 
-public abstract class a2 {
-    public static void a() {
-        try {
-            Class cls = Integer.TYPE;
-            XposedBridge.hookMethod(Window.class.getMethod("setFlags", cls, cls), new x1());
-            XposedBridge.hookMethod(Window.class.getMethod("addFlags", cls), new y1());
-            XposedBridge.hookMethod(SurfaceView.class.getMethod("setSecure", Boolean.TYPE), new z1());
-        } catch (Exception e) {
-            ArrayList arrayList = p2.a;
-        }
+class a2 extends XC_MethodHook {
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        methodHookParam.args[0] = Boolean.FALSE;
     }
 }

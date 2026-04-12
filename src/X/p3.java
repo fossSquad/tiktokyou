@@ -5,11 +5,11 @@ import de.robv.android.xposed.XC_MethodHook;
 
 class p3 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (r2.a().d) {
+        if (s2.a().d) {
             SearchMixFeed searchMixFeed = (SearchMixFeed) methodHookParam.thisObject;
-            g.a(searchMixFeed);
-            if (g.b(searchMixFeed)) {
-                methodHookParam.setResult(Boolean.FALSE);
+            if (searchMixFeed.preciseAd != null) {
+                searchMixFeed.preciseAd = null;
+                methodHookParam.setResult((Object) null);
             }
         }
     }

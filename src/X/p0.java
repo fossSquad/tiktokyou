@@ -11,10 +11,10 @@ class p0 extends XC_MethodHook {
             return;
         }
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put("LJFF", -1);
+        linkedHashMap.put("LIZ", Boolean.TRUE);
         Class<?>[] interfaces = result.getClass().getInterfaces();
         if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new s0(linkedHashMap, result));
+            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new t0(linkedHashMap, result));
         }
         methodHookParam.setResult(result);
     }

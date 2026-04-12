@@ -1,55 +1,42 @@
 package X;
 
-import android.content.ContentValues;
-import android.net.Uri;
-import android.os.Environment;
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.feed.model.Video;
 import de.robv.android.xposed.XC_MethodHook;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.concurrent.ConcurrentHashMap;
 
 class d1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ThreadLocal threadLocal = h1.b;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
-            threadLocal.set(Boolean.FALSE);
-            Uri uri = (Uri) methodHookParam.getResult();
-            if (uri != null) {
-                ((ConcurrentHashMap.KeySetView) h1.a).add(uri.toString());
-                ArrayList arrayList = p2.a;
-            }
-        }
+    final  Class a;
+    final  Class b;
+    final  Class c;
+
+    public d1(Class cls, Class cls2, Class cls3) {
+        this.a = cls;
+        this.b = cls2;
+        this.c = cls3;
     }
 
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        Video video;
+        g1 g1VarA;
         try {
-            ContentValues contentValues = (ContentValues) methodHookParam.args[1];
-            if (contentValues == null) {
+            Object obj = methodHookParam.args[0];
+            Object obj2 = this.a.getField("LJIILJJIL").get(obj);
+            if (obj2 == null) {
                 return;
             }
-            String asString = contentValues.getAsString("_display_name");
-            String asString2 = contentValues.getAsString("mime_type");
-            String asString3 = contentValues.getAsString("relative_path");
-            if (asString2 == null || asString3 == null) {
+            Object obj3 = this.b.getField("LJFF").get(obj);
+            if (!(obj3 instanceof Aweme) || (video = ((Aweme) obj3).getVideo()) == null || (g1VarA = i1.a(video, null, "protocol")) == null) {
                 return;
             }
-            if (asString != null && asString.endsWith(".png") && "image/png".equals(asString2) && asString3.contains("DCIM")) {
-                contentValues.put("_display_name", asString.replace(".png", ".jpg"));
-                contentValues.put("mime_type", "image/jpeg");
-                h1.b.set(Boolean.TRUE);
-                ArrayList arrayList = p2.a;
-            }
-            if (asString3.contains("DCIM")) {
-                if (asString2.startsWith("video/")) {
-                    contentValues.put("relative_path", Environment.DIRECTORY_MOVIES + "/TikTok");
-                    ArrayList arrayList2 = p2.a;
-                } else if (asString2.startsWith("image/")) {
-                    contentValues.put("relative_path", Environment.DIRECTORY_PICTURES + "/TikTok");
-                    ArrayList arrayList3 = p2.a;
-                }
-            }
+            Field field = this.c.getField("LIZ");
+            field.setAccessible(true);
+            field.set(obj2, g1VarA.a);
+            ArrayList arrayList = q2.a;
         } catch (Exception e) {
             e.getMessage();
-            ArrayList arrayList4 = p2.a;
+            ArrayList arrayList2 = q2.a;
         }
     }
 }

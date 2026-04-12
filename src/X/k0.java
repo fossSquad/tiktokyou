@@ -93,7 +93,7 @@ public abstract class k0 {
 
     public static void a() {
         try {
-            Context contextB = p2.b();
+            Context contextB = q2.b();
             if (contextB != null) {
                 String strB = b(new File(a(contextB), "supporters_cache.txt"));
                 if (!TextUtils.isEmpty(strB)) {
@@ -135,7 +135,7 @@ public abstract class k0 {
                 XposedBridge.hookAllConstructors(FriendsV3RepostModel.class, new x());
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             }
             a(g0.a, "X.0qTQ");
             g0 g0Var = g0.b;
@@ -145,13 +145,13 @@ public abstract class k0 {
                 XposedBridge.hookAllMethods(IMFriendsServiceImpl.class, "LIZIZ", new z());
             } catch (Throwable th2) {
                 th2.getMessage();
-                ArrayList arrayList2 = p2.a;
+                ArrayList arrayList2 = q2.a;
             }
             XposedBridge.hookAllMethods(TextView.class, "setText", new a0());
             XposedBridge.hookAllMethods(TextView.class, "onTouchEvent", new p());
         } catch (Throwable th3) {
             th3.getMessage();
-            ArrayList arrayList3 = p2.a;
+            ArrayList arrayList3 = q2.a;
         }
     }
 
@@ -165,10 +165,10 @@ public abstract class k0 {
             }
             o = i0VarG;
             b(str, new File(a(context), "support_price_cache.json"));
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList2 = p2.a;
+            ArrayList arrayList2 = q2.a;
         }
     }
 
@@ -193,7 +193,7 @@ public abstract class k0 {
             context.startActivity(intent);
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
     }
 
@@ -252,7 +252,7 @@ public abstract class k0 {
                         }
                     } catch (Throwable th) {
                         th.getMessage();
-                        ArrayList arrayList = p2.a;
+                        ArrayList arrayList = q2.a;
                         return linkedHashMap;
                     }
                 }
@@ -476,7 +476,7 @@ public abstract class k0 {
             return null;
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
             return null;
         }
     }
@@ -554,7 +554,7 @@ public abstract class k0 {
                 }
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             }
         }
     }
@@ -577,20 +577,20 @@ public abstract class k0 {
                     }
                     e(context);
                     linkedHashMapH.size();
-                    ArrayList arrayList = p2.a;
+                    ArrayList arrayList = q2.a;
                     return;
                 }
                 throw new IOException("Empty supporters list");
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList2 = p2.a;
+                ArrayList arrayList2 = q2.a;
             }
         }
     }
 
     public static int h(Context context) {
-        r2 r2VarA = r2.a();
-        if (r2VarA == null || !r2VarA.d() || r2VarA.j != 0) {
+        s2 s2VarA = s2.a();
+        if (s2VarA == null || !s2VarA.d() || s2VarA.j != 0) {
             return -185258;
         }
         try {
@@ -600,11 +600,11 @@ public abstract class k0 {
             }
         } catch (Throwable th) {
         }
-        Context contextB = p2.b();
+        Context contextB = q2.b();
         if (contextB == null) {
             return -16524603;
         }
-        return k5.a(contextB);
+        return l5.a(contextB);
     }
 
     public static String a(Object obj) {
@@ -757,7 +757,7 @@ public abstract class k0 {
             XposedBridge.hookAllMethods(Class.forName(str), "getName", new y(g0Var, str));
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
     }
 
@@ -853,7 +853,7 @@ public abstract class k0 {
                 String.valueOf(actionMasked);
                 break;
         }
-        ArrayList arrayList = p2.a;
+        ArrayList arrayList = q2.a;
         if (spanned == null) {
             if (e0Var != null) {
                 map.remove(textView);
@@ -951,7 +951,7 @@ public abstract class k0 {
                             str2 = str;
                         }
                     }
-                    ArrayList arrayList2 = p2.a;
+                    ArrayList arrayList2 = q2.a;
                     if (activity != null) {
                         c(activity, fragment, d0Var, str2);
                     }
@@ -1025,7 +1025,7 @@ public abstract class k0 {
         } catch (IOException e2) {
             file.getName();
             e2.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
             return null;
         }
     }
@@ -1061,7 +1061,7 @@ public abstract class k0 {
                 Object objInvoke2 = a(objInvoke.getClass(), "getCurUserId", new Class[0]).invoke(objInvoke, null);
                 if (objInvoke2 instanceof String) {
                     String str2 = (String) objInvoke2;
-                    if (!j3$$ExternalSyntheticBackport0.m(str2)) {
+                    if (!a3$$ExternalSyntheticBackport0.m(str2)) {
                         n = str2.trim();
                         return n;
                     }
@@ -1071,7 +1071,7 @@ public abstract class k0 {
             }
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
         return null;
     }
@@ -1203,23 +1203,23 @@ public abstract class k0 {
                 dialog2.show();
             } catch (Throwable th2) {
                 th2.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             }
         }
     }
 
     public static f0 a(final Activity activity, final Dialog dialog, final Fragment fragment) {
         int color;
-        o2 o2VarA = o2.a();
+        p2 p2VarA = p2.a();
         boolean z = activity != null && (activity.getResources().getConfiguration().uiMode & 48) == 32;
         int color2 = z ? Color.parseColor("#1E1E1E") : -1;
         int color3 = z ? -1 : Color.parseColor("#161823");
         int color4 = Color.parseColor(z ? "#A7A9B0" : "#8A8B91");
         int color5 = z ? Color.parseColor("#303030") : Color.parseColor("#EFEFF0");
         int color6 = z ? Color.parseColor("#303030") : Color.parseColor("#F3F3F4");
-        r2 r2VarA = r2.a();
-        if (r2VarA != null && r2VarA.d()) {
-            color = k5.a();
+        s2 s2VarA = s2.a();
+        if (s2VarA != null && s2VarA.d()) {
+            color = l5.a();
         } else {
             color = Color.parseColor("#FE2B54");
         }
@@ -1244,7 +1244,7 @@ public abstract class k0 {
         FrameLayout frameLayout = new FrameLayout(activity);
         linearLayout.addView(frameLayout, new LinearLayout.LayoutParams(-1, -2));
         TextView textView = new TextView(activity);
-        textView.setText(o2VarA.a("badge_sheet_header", "Подробнее"));
+        textView.setText(p2VarA.a("badge_sheet_header", "Подробнее"));
         textView.setTextColor(color3);
         textView.setTextSize(2, 18.0f);
         textView.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -1274,7 +1274,7 @@ public abstract class k0 {
         layoutParams2.topMargin = (int) o.a(activity, 1, 20.0f);
         linearLayout.addView(imageView, layoutParams2);
         TextView textView3 = new TextView(activity);
-        textView3.setText(o2VarA.a("badge_sheet_title", "Поддержите разработку"));
+        textView3.setText(p2VarA.a("badge_sheet_title", "Поддержите разработку"));
         textView3.setTextColor(color3);
         textView3.setTextSize(2, 18.0f);
         textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -1283,7 +1283,7 @@ public abstract class k0 {
         layoutParams3.topMargin = (int) o.a(activity, 1, 18.0f);
         linearLayout.addView(textView3, layoutParams3);
         TextView textView4 = new TextView(activity);
-        textView4.setText(o2VarA.a("badge_sheet_subtitle", "Внесите вклад в развитие разработки и получите уникальный значок."));
+        textView4.setText(p2VarA.a("badge_sheet_subtitle", "Внесите вклад в развитие разработки и получите уникальный значок."));
         textView4.setTextColor(color4);
         textView4.setTextSize(2, 14.0f);
         textView4.setGravity(17);
@@ -1291,7 +1291,7 @@ public abstract class k0 {
         LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, -2);
         layoutParams4.topMargin = (int) o.a(activity, 1, 10.0f);
         linearLayout.addView(textView4, layoutParams4);
-        String strA = o2VarA.a("badge_sheet_copy_uid", "Скопировать мой UID");
+        String strA = p2VarA.a("badge_sheet_copy_uid", "Скопировать мой UID");
         LinearLayout linearLayout2 = new LinearLayout(activity);
         linearLayout2.setOrientation(0);
         linearLayout2.setGravity(17);
@@ -1332,12 +1332,12 @@ public abstract class k0 {
         layoutParams7.topMargin = (int) o.a(activity, 1, 20.0f);
         linearLayout.addView(linearLayout3, layoutParams7);
         i0 i0Var = o != null ? o : new i0("5", "500");
-        linearLayout3.addView(a(activity, "ic_coin", String.format(o2VarA.a("badge_sheet_step1_title_format", "Пожертвуйте не менее $%1$s (%2$s₽)"), i0Var.a, i0Var.b), o2VarA.a("badge_sheet_step1_subtitle", "Переведите сумму по любым из наших реквизитов"), color6, color3, color4));
+        linearLayout3.addView(a(activity, "ic_coin", String.format(p2VarA.a("badge_sheet_step1_title_format", "Пожертвуйте не менее $%1$s (%2$s₽)"), i0Var.a, i0Var.b), p2VarA.a("badge_sheet_step1_subtitle", "Переведите сумму по любым из наших реквизитов"), color6, color3, color4));
         LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
         layoutParams8.topMargin = (int) o.a(activity, 1, 8.0f);
-        String strA2 = o2VarA.a("badge_sheet_step2_title", "Пришлите подтверждение и ваш UID");
-        String strA3 = o2VarA.a("badge_sheet_step2_contact", "@tt_u_bot");
-        String str = String.format(o2VarA.a("badge_sheet_step2_subtitle", "Отправьте чек или скриншот в %s, а также ваш UID для выдачи"), strA3);
+        String strA2 = p2VarA.a("badge_sheet_step2_title", "Пришлите подтверждение и ваш UID");
+        String strA3 = p2VarA.a("badge_sheet_step2_contact", "@tt_u_bot");
+        String str = String.format(p2VarA.a("badge_sheet_step2_subtitle", "Отправьте чек или скриншот в %s, а также ваш UID для выдачи"), strA3);
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str);
         int iIndexOf = str.indexOf(strA3);
         if (iIndexOf >= 0) {
@@ -1346,13 +1346,13 @@ public abstract class k0 {
         linearLayout3.addView(a(activity, "photo", strA2, spannableStringBuilder, color6, color3, color4), layoutParams8);
         LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, -2);
         layoutParams9.topMargin = (int) o.a(activity, 1, 8.0f);
-        linearLayout3.addView(a(activity, "ic_mod_logo", o2VarA.a("badge_sheet_step3_title", "Получите значок"), o2VarA.a("badge_sheet_step3_subtitle", "После проверки он появится в вашем профиле и будет виден всем"), color6, color3, color4), layoutParams9);
+        linearLayout3.addView(a(activity, "ic_mod_logo", p2VarA.a("badge_sheet_step3_title", "Получите значок"), p2VarA.a("badge_sheet_step3_subtitle", "После проверки он появится в вашем профиле и будет виден всем"), color6, color3, color4), layoutParams9);
         LinearLayout linearLayout4 = new LinearLayout(activity);
         linearLayout4.setOrientation(0);
         LinearLayout.LayoutParams layoutParams10 = new LinearLayout.LayoutParams(-1, -2);
         layoutParams10.topMargin = (int) o.a(activity, 1, 28.0f);
         linearLayout.addView(linearLayout4, layoutParams10);
-        String strA4 = o2VarA.a("badge_sheet_cancel", "Отмена");
+        String strA4 = p2VarA.a("badge_sheet_cancel", "Отмена");
         TextView textView6 = new TextView(activity);
         textView6.setText(strA4);
         textView6.setTextColor(color3);
@@ -1372,7 +1372,7 @@ public abstract class k0 {
         LinearLayout.LayoutParams layoutParams11 = new LinearLayout.LayoutParams(0, (int) o.a(activity, 1, 48.0f));
         layoutParams11.weight = 1.0f;
         linearLayout4.addView(textView6, layoutParams11);
-        String strA5 = o2VarA.a("badge_sheet_support", "Поддержать");
+        String strA5 = p2VarA.a("badge_sheet_support", "Поддержать");
         TextView textView7 = new TextView(activity);
         textView7.setText(strA5);
         textView7.setTextColor(-1);
@@ -1398,7 +1398,7 @@ public abstract class k0 {
 
     public static  void a(Fragment fragment, Activity activity, Dialog dialog, View view) {
         if (fragment != null) {
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
         d(activity);
         dialog.dismiss();
@@ -1450,21 +1450,21 @@ public abstract class k0 {
 
     public static void a(Activity activity, View view) {
         String strB = b();
-        o2.a();
+        p2.a();
         if (TextUtils.isEmpty(strB)) {
-            Toast.makeText(activity, o2.a().a("copy_uid_unavailable"), 0).show();
+            Toast.makeText(activity, p2.a().a("copy_uid_unavailable"), 0).show();
             return;
         }
         ClipboardManager clipboardManager = (ClipboardManager) activity.getSystemService("clipboard");
         if (clipboardManager == null) {
-            Toast.makeText(activity, o2.a().a("copy_uid_failed"), 0).show();
+            Toast.makeText(activity, p2.a().a("copy_uid_failed"), 0).show();
             return;
         }
         try {
             clipboardManager.setPrimaryClip(ClipData.newPlainText("uid", strB));
-            Toast.makeText(activity, o2.a().a("copy_uid_copied"), 0).show();
+            Toast.makeText(activity, p2.a().a("copy_uid_copied"), 0).show();
         } catch (Throwable th) {
-            Toast.makeText(activity, o2.a().a("copy_uid_failed"), 0).show();
+            Toast.makeText(activity, p2.a().a("copy_uid_failed"), 0).show();
         }
     }
 
@@ -1473,8 +1473,8 @@ public abstract class k0 {
         boolean z = activity != null && (activity.getResources().getConfiguration().uiMode & 48) == 32;
         int color = z ? Color.parseColor("#1E1E1E") : -1;
         int color2 = z ? -1 : Color.parseColor("#161823");
-        r2 r2VarA = r2.a();
-        int color3 = (r2VarA == null || !r2VarA.d()) ? Color.parseColor("#FE2B54") : k5.a();
+        s2 s2VarA = s2.a();
+        int color3 = (s2VarA == null || !s2VarA.d()) ? Color.parseColor("#FE2B54") : l5.a();
         FrameLayout frameLayout = new FrameLayout(activity);
         int iA = a(activity, 14.0f);
         int iA2 = (int) o.a(activity, 1, 12.0f);
@@ -1500,10 +1500,10 @@ public abstract class k0 {
         layoutParams.rightMargin = (int) o.a(activity, 1, 6.0f);
         linearLayout.addView(linearLayout2, layoutParams);
         TextView textView = new TextView(activity);
-        o2 o2VarA = o2.a();
-        String strA = !TextUtils.isEmpty(str) ? str : o2VarA.a("badge_bulletin_unknown_name", "Этот человек");
+        p2 p2VarA = p2.a();
+        String strA = !TextUtils.isEmpty(str) ? str : p2VarA.a("badge_bulletin_unknown_name", "Этот человек");
         if (d0Var == null || TextUtils.isEmpty(d0Var.e)) {
-            strReplace = (d0Var == null || !d0Var.d) ? String.format(o2VarA.a("badge_bulletin_supporter_format", "%s поддержал разработку TikTok You"), strA) : String.format(o2VarA.a("badge_bulletin_developer_format", "%s член команды разработки TikTok You"), strA);
+            strReplace = (d0Var == null || !d0Var.d) ? String.format(p2VarA.a("badge_bulletin_supporter_format", "%s поддержал разработку TikTok You"), strA) : String.format(p2VarA.a("badge_bulletin_developer_format", "%s член команды разработки TikTok You"), strA);
         } else {
             strReplace = d0Var.e.replace("${1}", strA);
         }
@@ -1514,7 +1514,7 @@ public abstract class k0 {
         textView.setTypeface(Typeface.create("sans-serif-medium", 0));
         linearLayout2.addView(textView);
         TextView textView2 = new TextView(activity);
-        textView2.setText(o2.a().a("badge_bulletin_button", "Подробнее"));
+        textView2.setText(p2.a().a("badge_bulletin_button", "Подробнее"));
         textView2.setTextColor(-1);
         textView2.setTextSize(2, 13.0f);
         textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -1558,7 +1558,7 @@ public abstract class k0 {
                 bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap2, Math.max(1, iMax2), Math.max(1, iMax), true);
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
                 bitmapCreateScaledBitmap = null;
             }
         } else {
@@ -1767,7 +1767,7 @@ public abstract class k0 {
                 bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap2, Math.max(1, iMax2), Math.max(1, iMax), true);
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
                 bitmapCreateScaledBitmap = null;
             }
         } else {
@@ -1792,26 +1792,26 @@ public abstract class k0 {
             Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmapCreateBitmap);
             Paint paint = new Paint(3);
-            boolean z = k5.c;
-            k5.c = false;
+            boolean z = l5.c;
+            l5.c = false;
             try {
                 paint.setColorFilter(new PorterDuffColorFilter(i2, PorterDuff.Mode.SRC_IN));
-                k5.c = z;
+                l5.c = z;
                 try {
                     canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
                     return bitmapCreateBitmap;
                 } catch (Throwable th) {
                     th.getMessage();
-                    ArrayList arrayList = p2.a;
+                    ArrayList arrayList = q2.a;
                     return null;
                 }
             } catch (Throwable th2) {
-                k5.c = z;
+                l5.c = z;
                 throw th2;
             }
         } catch (Throwable th3) {
             th3.getMessage();
-            ArrayList arrayList2 = p2.a;
+            ArrayList arrayList2 = q2.a;
             return null;
         }
     }
@@ -1875,7 +1875,7 @@ public abstract class k0 {
                 }
             } catch (IOException e2) {
                 e2.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
                 return null;
             }
         }
@@ -1910,7 +1910,7 @@ public abstract class k0 {
         } catch (Throwable th3) {
             try {
                 th3.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             } finally {
                 f.remove(str);
             }

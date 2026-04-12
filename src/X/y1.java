@@ -4,6 +4,9 @@ import de.robv.android.xposed.XC_MethodHook;
 
 class y1 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.args[0] = Integer.valueOf(((Integer) methodHookParam.args[0]).intValue() & (-8193));
+        int iIntValue = ((Integer) methodHookParam.args[0]).intValue();
+        int iIntValue2 = ((Integer) methodHookParam.args[1]).intValue() & (-8193);
+        methodHookParam.args[0] = Integer.valueOf(iIntValue & (-8193));
+        methodHookParam.args[1] = Integer.valueOf(iIntValue2);
     }
 }

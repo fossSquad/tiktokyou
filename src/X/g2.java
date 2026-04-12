@@ -4,40 +4,31 @@ import android.graphics.Typeface;
 import de.robv.android.xposed.XC_MethodHook;
 
 class g2 extends XC_MethodHook {
-
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int style;
-        Typeface typefaceA;
-        ThreadLocal threadLocal = h2.d;
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        ThreadLocal threadLocal = i2.d;
         if (((Boolean) threadLocal.get()).booleanValue()) {
             return;
         }
-        String str = r2.a().g;
+        String str = s2.a().g;
         if ("default".equals(str)) {
             return;
         }
         threadLocal.set(Boolean.TRUE);
         try {
-            Object[] objArr = methodHookParam.args;
-            Typeface typeface = (Typeface) objArr[0];
-            if (objArr.length < 2) {
-                if (typeface != null) {
-                    style = typeface.getStyle();
-                } else {
-                    style = 0;
-                }
-                typefaceA = h2.a(str, style);
-                if (typefaceA != null) {
-                    methodHookParam.args[0] = typefaceA;
-                }
+            int i = 1;
+            int iIntValue = ((Integer) methodHookParam.args[1]).intValue();
+            boolean zBooleanValue = ((Boolean) methodHookParam.args[2]).booleanValue();
+            if (iIntValue >= 600 && zBooleanValue) {
+                i = 3;
+            } else if (iIntValue < 600) {
+                i = zBooleanValue ? 2 : 0;
             }
-            style = ((Integer) objArr[1]).intValue();
-            typefaceA = h2.a(str, style);
+            Typeface typefaceA = i2.a(str, i);
             if (typefaceA != null) {
-                methodHookParam.args[0] = typefaceA;
+                methodHookParam.setResult(typefaceA);
             }
         } finally {
-            h2.d.set(Boolean.FALSE);
+            i2.d.set(Boolean.FALSE);
         }
     }
 }

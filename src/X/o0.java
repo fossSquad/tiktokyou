@@ -1,21 +1,38 @@
 package X;
 
+import android.content.Context;
+import android.view.View;
+import com.ss.android.ugc.aweme.comment.model.Comment;
 import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Proxy;
-import java.util.LinkedHashMap;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 class o0 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object result = methodHookParam.getResult();
-        if (result == null) {
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        String text;
+        Object[] objArr = methodHookParam.args;
+        if (objArr == null || objArr.length < 2) {
             return;
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put("LIZ", Boolean.TRUE);
-        Class<?>[] interfaces = result.getClass().getInterfaces();
-        if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new s0(linkedHashMap, result));
+        try {
+            Object obj = objArr[0];
+            if ((obj instanceof Comment) && (text = ((Comment) obj).getText()) != null) {
+                Method methodA = w0.a((Class) Class.forName("X.19xH"));
+                Object objInvoke = methodA != null ? methodA.invoke(null, null) : null;
+                if (objInvoke instanceof Context) {
+                    Context context = (Context) objInvoke;
+                    Object obj2 = methodHookParam.thisObject.getClass().getField("itemView").get(methodHookParam.thisObject);
+                    View view = obj2 instanceof View ? (View) obj2 : null;
+                    w0.a(context, text);
+                    if (view != null) {
+                        w0.a(view, context);
+                    }
+                    methodHookParam.setResult((Object) null);
+                }
+            }
+        } catch (Throwable th) {
+            th.getMessage();
+            ArrayList arrayList = q2.a;
         }
-        methodHookParam.setResult(result);
     }
 }

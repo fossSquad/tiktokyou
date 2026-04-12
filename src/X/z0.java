@@ -1,61 +1,96 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.os.Build;
+import android.os.Process;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.ZonedDateTime;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-class z0 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String str;
-        Object result = methodHookParam.getResult();
-        if (result instanceof String) {
-            String str2 = (String) result;
-            if (str2.length() != 19) {
-                return;
-            }
-            int i = 0;
-            for (int i2 = 0; i2 < str2.length(); i2++) {
-                if (!Character.isDigit(str2.charAt(i2))) {
-                    return;
-                }
-            }
-            r2 r2VarA = r2.a();
-            if (r2VarA == null) {
-                return;
-            }
-            String string = r2VarA.m;
-            if (string == null) {
-                string = r2.o.getString("random_android_id", null);
-            }
-            String strSubstring = str2.substring(0, 15);
-            String strSubstring2 = str2.substring(15);
-            if (string == null || string.length() != 19) {
-                str = strSubstring + a1.a(strSubstring2);
-                r2VarA.a(str);
-                break;
-            }
-            while (true) {
-                if (i >= string.length()) {
-                    String strSubstring3 = string.substring(15);
-                    if (strSubstring3.equals(strSubstring2)) {
-                        strSubstring3 = a1.a(strSubstring2);
+public final class z0 implements Thread.UncaughtExceptionHandler {
+    public static final AtomicBoolean c = new AtomicBoolean(false);
+    public static final AtomicBoolean d = new AtomicBoolean(false);
+    public final Context a;
+    public final Thread.UncaughtExceptionHandler b;
+
+    public z0(Context context, Thread.UncaughtExceptionHandler uncaughtExceptionHandler) {
+        this.a = context;
+        this.b = uncaughtExceptionHandler;
+    }
+
+    public final void a(String str) throws IOException {
+        File file = new File(this.a.getFilesDir(), "ttmod_crash");
+        if (file.exists() || file.mkdirs()) {
+            byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(file, "last_java_crash.txt"), false);
+            try {
+                fileOutputStream.write(bytes);
+                fileOutputStream.close();
+                FileOutputStream fileOutputStream2 = new FileOutputStream(new File(file, "java_crash_" + System.currentTimeMillis() + ".txt"), false);
+                try {
+                    fileOutputStream2.write(bytes);
+                    fileOutputStream2.close();
+                } catch (Throwable th) {
+                    try {
+                        fileOutputStream2.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
                     }
-                    str = strSubstring + strSubstring3;
-                    if (!str.equals(string)) {
-                        r2VarA.a(str);
-                        break;
-                    }
-                    break;
+                    throw th;
                 }
-                if (!Character.isDigit(string.charAt(i))) {
-                    str = strSubstring + a1.a(strSubstring2);
-                    r2VarA.a(str);
-                    break;
+            } catch (Throwable th3) {
+                try {
+                    fileOutputStream.close();
+                } catch (Throwable th4) {
+                    th3.addSuppressed(th4);
                 }
-                i++;
+                throw th3;
             }
-            if (str == null || str.equals(str2)) {
-                return;
-            }
-            methodHookParam.setResult(str);
         }
+    }
+
+    @Override
+    public final void uncaughtException(Thread thread, Throwable th) {
+        try {
+            if (d.compareAndSet(false, true)) {
+                String strA = a(thread, th);
+                a(strA);
+                ClipboardManager clipboardManager = (ClipboardManager) this.a.getSystemService("clipboard");
+                if (clipboardManager != null) {
+                    clipboardManager.setPrimaryClip(ClipData.newPlainText("ttmod_java_crash", strA));
+                }
+            }
+        } catch (Throwable th2) {
+        }
+        Thread.UncaughtExceptionHandler uncaughtExceptionHandler = this.b;
+        if (uncaughtExceptionHandler != null) {
+            uncaughtExceptionHandler.uncaughtException(thread, th);
+        } else {
+            Process.killProcess(Process.myPid());
+            System.exit(10);
+        }
+    }
+
+    public static String a(Thread thread, Throwable th) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        th.printStackTrace(printWriter);
+        printWriter.flush();
+        StringBuilder sb = new StringBuilder(2048);
+        sb.append("time=").append(ZonedDateTime.now()).append("\nthread=");
+        sb.append(thread != null ? thread.getName() : "unknown").append("\npid=");
+        sb.append(Process.myPid()).append("\nversion=v1.5.1 (");
+        sb.append(q2.b).append(")\nandroid=");
+        sb.append(Build.VERSION.RELEASE).append(" sdk=").append(Build.VERSION.SDK_INT).append("\ndevice=");
+        sb.append(Build.MANUFACTURER).append(' ').append(Build.MODEL).append("\n\n");
+        sb.append(stringWriter);
+        return sb.toString();
     }
 }
