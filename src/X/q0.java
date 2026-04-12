@@ -1,17 +1,21 @@
 package X;
 
 import de.robv.android.xposed.XC_MethodHook;
+import java.lang.reflect.Proxy;
+import java.util.LinkedHashMap;
 
 class q0 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
         Object result = methodHookParam.getResult();
-        Boolean bool = Boolean.TRUE;
-        if (bool.equals(result)) {
+        if (result == null) {
             return;
         }
-        Object[] objArr = methodHookParam.args;
-        if (v0.a((objArr == null || objArr.length <= 0) ? null : objArr[0])) {
-            methodHookParam.setResult(bool);
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put("LJFF", -1);
+        Class<?>[] interfaces = result.getClass().getInterfaces();
+        if (interfaces.length != 0) {
+            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new t0(linkedHashMap, result));
         }
+        methodHookParam.setResult(result);
     }
 }

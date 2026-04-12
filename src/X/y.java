@@ -18,7 +18,7 @@ class y extends XC_MethodHook {
                 methodHookParam.setResult(k0.a(this.a.b(methodHookParam.thisObject), (String) methodHookParam.getResult()));
             } catch (Exception e) {
                 e.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             }
         }
     }

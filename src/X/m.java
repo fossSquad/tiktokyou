@@ -31,7 +31,7 @@ public abstract class m {
         try {
             String strA = a();
             if (TextUtils.isEmpty(strA)) {
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
                 c.set(false);
                 return;
             }
@@ -39,7 +39,7 @@ public abstract class m {
             z = listB != null;
             try {
                 if (listB == null) {
-                    ArrayList arrayList2 = p2.a;
+                    ArrayList arrayList2 = q2.a;
                     c.set(false);
                     return;
                 }
@@ -75,25 +75,25 @@ public abstract class m {
                     th = th;
                     try {
                         th.getMessage();
-                        ArrayList arrayList3 = p2.a;
+                        ArrayList arrayList3 = q2.a;
                     } finally {
                         if (!z) {
-                            ArrayList arrayList4 = p2.a;
+                            ArrayList arrayList4 = q2.a;
                         }
                         c.set(false);
                     }
                 }
                 if (i2 > 0 || i == 0) {
-                    r2 r2VarA = r2.a();
+                    s2 s2VarA = s2.a();
                     String string = LocalDate.now().toString();
-                    r2VarA.getClass();
+                    s2VarA.getClass();
                     if (string == null) {
                         string = "";
                     }
-                    r2VarA.l = string;
-                    r2.o.edit().putString("auto_streak_nudge_last_run_date", r2VarA.l).apply();
+                    s2VarA.l = string;
+                    s2.o.edit().putString("auto_streak_nudge_last_run_date", s2VarA.l).apply();
                 }
-                ArrayList arrayList5 = p2.a;
+                ArrayList arrayList5 = q2.a;
             } catch (Throwable th2) {
                 th = th2;
             }
@@ -111,12 +111,10 @@ public abstract class m {
     }
 
     public static void c(final Context context, final String str) {
-        if (r2.o == null || r2.a() == null) {
-            r2.a(context);
-        }
-        if (r2.a().k && ZonedDateTime.now().getHour() == 12) {
+        b(context);
+        if (s2.a().k && ZonedDateTime.now().getHour() == 12) {
             String string = LocalDate.now().toString();
-            String str2 = r2.a().l;
+            String str2 = s2.a().l;
             if (str2 == null) {
                 str2 = "";
             }
@@ -155,6 +153,12 @@ public abstract class m {
     }
 
     public static void b(Context context) {
+        if (s2.o == null || s2.a() == null) {
+            s2.a(context);
+        }
+    }
+
+    public static void c(Context context) {
         try {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(AlarmManager.class);
             if (alarmManager == null) {
@@ -171,7 +175,7 @@ public abstract class m {
             alarmManager.setAndAllowWhileIdle(0, zonedDateTimeWithNano.toInstant().toEpochMilli(), broadcast);
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
     }
 
@@ -247,7 +251,7 @@ public abstract class m {
             z = false;
         }
         th.getMessage();
-        ArrayList arrayList = p2.a;
+        ArrayList arrayList = q2.a;
         return z;
     }
 
@@ -261,7 +265,7 @@ public abstract class m {
             Object objInvoke2 = a(objInvoke.getClass(), "getCurUserId", new Class[0]).invoke(objInvoke, null);
             if (objInvoke2 instanceof String) {
                 String str = (String) objInvoke2;
-                if (!j3$$ExternalSyntheticBackport0.m(str)) {
+                if (!a3$$ExternalSyntheticBackport0.m(str)) {
                     return str;
                 }
             }
@@ -281,7 +285,7 @@ public abstract class m {
             alarmManager.cancel(PendingIntent.getBroadcast(context, 44021, intent, 201326592));
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
     }
 

@@ -10,6 +10,6 @@ class u2 extends XC_MethodHook {
             return;
         }
         methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        ArrayList arrayList = p2.a;
+        ArrayList arrayList = q2.a;
     }
 }

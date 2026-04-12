@@ -33,7 +33,7 @@ public final class c0 extends DynamicDrawableSpan {
                 this.a.draw(canvas);
             } catch (Throwable th) {
                 th.getMessage();
-                ArrayList arrayList = p2.a;
+                ArrayList arrayList = q2.a;
             }
             canvas.restore();
         }

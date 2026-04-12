@@ -1,32 +1,38 @@
 package X;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
+import android.telephony.TelephonyManager;
+import de.robv.android.xposed.XposedBridge;
+import java.util.ArrayList;
+import java.util.function.Supplier;
 
-public final class i3 implements TextWatcher {
-    public final  EditText a;
-    public final  j3 b;
-
-    public i3(j3 j3Var, EditText editText) {
-        this.b = j3Var;
-        this.a = editText;
+public abstract class i3 {
+    static {
+        ThreadLocal.withInitial(new Supplier() {
+            @Override
+            public final Object get() {
+                return Boolean.FALSE;
+            }
+        });
+        ThreadLocal.withInitial(new Supplier() {
+            @Override
+            public final Object get() {
+                return Boolean.FALSE;
+            }
+        });
     }
 
-    @Override
-    public final void afterTextChanged(Editable editable) {
-        j3 j3Var = this.b;
-        if (j3Var.p) {
-            return;
+    public static void a() {
+        try {
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimCountryIso", null), new b3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkCountryIso", null), new c3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperator", null), new d3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperator", null), new e3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimOperatorName", null), new f3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getNetworkOperatorName", null), new g3());
+            XposedBridge.hookMethod(TelephonyManager.class.getMethod("getSimState", null), new h3());
+        } catch (Exception e) {
+            e.getMessage();
+            ArrayList arrayList = q2.a;
         }
-        j3Var.a(editable != null ? editable.toString() : "", this.a);
-    }
-
-    @Override
-    public final void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-    }
-
-    @Override
-    public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
     }
 }

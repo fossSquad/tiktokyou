@@ -1,27 +1,23 @@
 package X;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
+import de.robv.android.xposed.XC_MethodHook;
 
-public final class s0 implements InvocationHandler {
-    public final  LinkedHashMap a;
-    public final  Object b;
-
-    public s0(LinkedHashMap linkedHashMap, Object obj) {
-        this.a = linkedHashMap;
-        this.b = obj;
-    }
-
-    @Override
-    public final Object invoke(Object obj, Method method, Object[] objArr) {
-        if (this.a.containsKey(method.getName())) {
-            return this.a.get(method.getName());
+class s0 extends XC_MethodHook {
+    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (Boolean.TRUE.equals(methodHookParam.getResult())) {
+            return;
         }
-        Object obj2 = this.b;
-        if (objArr == null) {
-            objArr = new Object[0];
+        Object[] objArr = methodHookParam.args;
+        boolean zA = false;
+        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
+        if (obj != null) {
+            try {
+                zA = w0.a(obj.getClass().getMethod("getCommonModel", null).invoke(obj, null));
+            } catch (Throwable th) {
+            }
         }
-        return method.invoke(obj2, objArr);
+        if (zA) {
+            methodHookParam.setResult(Boolean.TRUE);
+        }
     }
 }

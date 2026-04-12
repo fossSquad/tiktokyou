@@ -4,20 +4,14 @@ import de.robv.android.xposed.XC_MethodHook;
 
 class r0 extends XC_MethodHook {
     public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (Boolean.TRUE.equals(methodHookParam.getResult())) {
+        Object result = methodHookParam.getResult();
+        Boolean bool = Boolean.TRUE;
+        if (bool.equals(result)) {
             return;
         }
         Object[] objArr = methodHookParam.args;
-        boolean zA = false;
-        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
-        if (obj != null) {
-            try {
-                zA = v0.a(obj.getClass().getMethod("getCommonModel", null).invoke(obj, null));
-            } catch (Throwable th) {
-            }
-        }
-        if (zA) {
-            methodHookParam.setResult(Boolean.TRUE);
+        if (w0.a((objArr == null || objArr.length <= 0) ? null : objArr[0])) {
+            methodHookParam.setResult(bool);
         }
     }
 }

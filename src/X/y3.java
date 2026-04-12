@@ -1,17 +1,14 @@
 package X;
 
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
+import de.robv.android.xposed.XC_MethodHook;
 
-public abstract class y3 {
-    public static void a() {
-        try {
-            XposedBridge.hookAllMethods(Class.forName("X.0OEt"), "LJII", new w3());
-            XposedBridge.hookAllMethods(Class.forName("X.0OEu"), "setSeekBarShowType", new x3());
-            ArrayList arrayList = p2.a;
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList2 = p2.a;
+class y3 extends XC_MethodHook {
+    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        if (s2.a().h) {
+            int iIntValue = ((Integer) methodHookParam.args[0]).intValue();
+            if (iIntValue == 3 || iIntValue == 4) {
+                methodHookParam.args[0] = 0;
+            }
         }
     }
 }

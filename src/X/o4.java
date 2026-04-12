@@ -1,19 +1,20 @@
 package X;
 
+import android.content.res.ColorStateList;
 import de.robv.android.xposed.XC_MethodHook;
 
 class o4 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (r2.a().d()) {
+        ColorStateList colorStateList;
+        ColorStateList colorStateListA;
+        if (s2.a().d()) {
             Object[] objArr = methodHookParam.args;
             if (objArr.length >= 2) {
                 Object obj = objArr[1];
-                if (!(obj instanceof Integer) || (iA = k5.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
+                if (!(obj instanceof ColorStateList) || (colorStateListA = l5.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
                     return;
                 }
-                methodHookParam.args[1] = Integer.valueOf(iA);
+                methodHookParam.args[1] = colorStateListA;
             }
         }
     }

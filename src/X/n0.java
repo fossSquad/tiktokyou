@@ -1,38 +1,40 @@
 package X;
 
 import android.content.Context;
-import android.view.View;
+import androidx.fragment.app.Fragment;
 import com.ss.android.ugc.aweme.comment.model.Comment;
 import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Method;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 class n0 extends XC_MethodHook {
     public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
+        Context context;
         String text;
-        Object[] objArr = methodHookParam.args;
-        if (objArr == null || objArr.length < 2) {
-            return;
-        }
         try {
-            Object obj = objArr[0];
-            if ((obj instanceof Comment) && (text = ((Comment) obj).getText()) != null) {
-                Method methodA = v0.a((Class) Class.forName("X.19xH"));
-                Object objInvoke = methodA != null ? methodA.invoke(null, null) : null;
-                if (objInvoke instanceof Context) {
-                    Context context = (Context) objInvoke;
-                    Object obj2 = methodHookParam.thisObject.getClass().getField("itemView").get(methodHookParam.thisObject);
-                    View view = obj2 instanceof View ? (View) obj2 : null;
-                    v0.a(context, text);
-                    if (view != null) {
-                        v0.a(view, context);
-                    }
+            Object obj = methodHookParam.thisObject;
+            Field declaredField = obj.getClass().getDeclaredField("LIZ");
+            declaredField.setAccessible(true);
+            WeakReference weakReference = (WeakReference) declaredField.get(obj);
+            Fragment fragment = weakReference != null ? (Fragment) weakReference.get() : null;
+            if (fragment != null && (context = fragment.getContext()) != null) {
+                Field declaredField2 = obj.getClass().getDeclaredField("LIZJ");
+                declaredField2.setAccessible(true);
+                Object obj2 = declaredField2.get(obj);
+                if (obj2 == null) {
+                    return;
+                }
+                Object objInvoke = obj2.getClass().getMethod("LIZ", null).invoke(obj2, null);
+                if ((objInvoke instanceof Comment) && (text = ((Comment) objInvoke).getText()) != null) {
+                    w0.a(context, text);
+                    w0.a(fragment, context);
                     methodHookParam.setResult((Object) null);
                 }
             }
         } catch (Throwable th) {
             th.getMessage();
-            ArrayList arrayList = p2.a;
+            ArrayList arrayList = q2.a;
         }
     }
 }

@@ -83,7 +83,7 @@ class x extends XC_MethodHook {
                                         } catch (Throwable th) {
                                             th = th;
                                             th.getMessage();
-                                            ArrayList arrayList2 = p2.a;
+                                            ArrayList arrayList2 = q2.a;
                                             h0Var2 = null;
                                             if (h0Var2 == null) {
                                                 return;
@@ -99,7 +99,7 @@ class x extends XC_MethodHook {
                                         th = th2;
                                         c2 = c2;
                                         th.getMessage();
-                                        ArrayList arrayList3 = p2.a;
+                                        ArrayList arrayList3 = q2.a;
                                         h0Var2 = null;
                                         if (h0Var2 == null) {
                                             return;
