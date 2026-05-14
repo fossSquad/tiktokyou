@@ -1,9 +1,10 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
 
-class a2 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.args[0] = Boolean.FALSE;
+class a2 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return h2.b;
     }
 }

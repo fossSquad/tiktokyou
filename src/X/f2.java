@@ -1,26 +1,15 @@
 package X;
 
-import android.graphics.Typeface;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class f2 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ThreadLocal threadLocal = i2.d;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
-            return;
-        }
-        String str = s2.a().g;
-        if ("default".equals(str)) {
-            return;
-        }
-        threadLocal.set(Boolean.TRUE);
-        try {
-            Typeface typefaceA = i2.a(str, ((Integer) methodHookParam.args[1]).intValue());
-            if (typefaceA != null) {
-                methodHookParam.setResult(typefaceA);
-            }
-        } finally {
-            i2.d.set(Boolean.FALSE);
-        }
+class f2 extends HookMethod {
+    final  String a;
+
+    public f2(String str) {
+        this.a = str;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        h2.a(hookMethodParam.getResult(), this.a);
     }
 }

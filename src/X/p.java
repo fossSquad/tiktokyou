@@ -1,21 +1,10 @@
 package X;
 
-import android.view.MotionEvent;
-import android.widget.TextView;
-import de.robv.android.xposed.XC_MethodHook;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
+import com.windukk.hook.HookMethod;
 
-class p extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object obj = methodHookParam.thisObject;
-        if (obj instanceof TextView) {
-            TextView textView = (TextView) obj;
-            Object[] objArr = methodHookParam.args;
-            if (objArr.length != 0) {
-                Object obj2 = objArr[0];
-                if ((obj2 instanceof MotionEvent) && k0.a(textView, (MotionEvent) obj2)) {
-                    methodHookParam.setResult(Boolean.TRUE);
-                }
-            }
-        }
+class p extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(t0.a(t0.a((IMConversation) hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
     }
 }

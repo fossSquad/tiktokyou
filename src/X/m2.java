@@ -1,10 +1,15 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
+import com.ss.android.ugc.aweme.base.model.UrlModel;
 
-class m2 extends XC_MethodReplacement {
-    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        return o2.a;
+public final class m2 {
+    public final UrlModel a;
+    public final long b;
+    public final int c;
+
+    public m2(UrlModel urlModel, String str, long j, int i) {
+        this.a = urlModel;
+        this.b = j;
+        this.c = i;
     }
 }

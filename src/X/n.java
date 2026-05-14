@@ -14,7 +14,7 @@ public class n extends BroadcastReceiver {
         }
         Context applicationContext = context.getApplicationContext();
         m.b(applicationContext);
-        if (!s2.a().k) {
+        if (!y3.a().k) {
             m.a(applicationContext);
             m.b.set(false);
             m.a.removeCallbacks(m.d);

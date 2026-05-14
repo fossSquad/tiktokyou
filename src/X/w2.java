@@ -1,30 +1,35 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
+import com.windukk.hook.HookMethod;
+import java.lang.reflect.Field;
 import java.util.List;
 
-class w2 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        List<String> list = (List) methodHookParam.getResult();
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        ArrayList arrayList = new ArrayList();
-        boolean z = false;
-        for (String str : list) {
-            if (str == null || !str.contains("watermark")) {
-                arrayList.add(str);
-            } else {
-                String strReplaceAll = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-                arrayList.add(strReplaceAll);
-                if (!str.equals(strReplaceAll)) {
-                    z = true;
+class w2 extends HookMethod {
+    final  Field a;
+    final  boolean b;
+
+    public w2(Field field, boolean z) {
+        this.a = field;
+        this.b = z;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object obj;
+        if (g3.a() && (obj = hookMethodParam.thisObject) != null) {
+            try {
+                Object obj2 = this.a.get(obj);
+                if (obj2 instanceof List) {
+                    List list = (List) obj2;
+                    if (list.isEmpty()) {
+                        return;
+                    }
+                    List listB = this.b ? g3.b(list) : g3.a(list);
+                    if (listB != obj2) {
+                        this.a.set(obj, listB);
+                    }
                 }
+            } catch (Throwable th) {
             }
-        }
-        if (z) {
-            methodHookParam.setResult(arrayList);
         }
     }
 }

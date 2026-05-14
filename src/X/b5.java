@@ -1,13 +1,12 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
+import java.util.Collections;
 
-class b5 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (s2.a().d() && (iA = l5.a((iIntValue = ((Integer) methodHookParam.args[0]).intValue()))) != iIntValue) {
-            methodHookParam.args[0] = Integer.valueOf(iA);
+class b5 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().d) {
+            hookMethodParam.setResult(Collections.EMPTY_LIST);
         }
     }
 }

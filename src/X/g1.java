@@ -1,15 +1,19 @@
 package X;
 
-import com.ss.android.ugc.aweme.base.model.UrlModel;
+public final class g1 implements Runnable {
+    public final  Class a;
+    public final  Object b;
 
-public final class g1 {
-    public final UrlModel a;
-    public final long b;
-    public final int c;
+    public g1(Class cls, Object obj) {
+        this.a = cls;
+        this.b = obj;
+    }
 
-    public g1(UrlModel urlModel, String str, long j, int i) {
-        this.a = urlModel;
-        this.b = j;
-        this.c = i;
+    @Override
+    public final void run() {
+        try {
+            e4.a(this.a, "LJIIJ", new Class[0]).invoke(this.b, null);
+        } catch (Throwable th) {
+        }
     }
 }

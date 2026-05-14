@@ -1,11 +1,10 @@
 package X;
 
-public final class i0 {
-    public final String a;
-    public final String b;
+import com.ss.android.ugc.aweme.im.common.model.BaseContact;
+import com.windukk.hook.HookMethod;
 
-    public i0(String str, String str2) {
-        this.a = str;
-        this.b = str2;
+class i0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(t0.a(((BaseContact) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

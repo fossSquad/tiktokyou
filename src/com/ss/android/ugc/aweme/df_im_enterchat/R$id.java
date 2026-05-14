@@ -1,4 +1,4 @@
-package com.ss.mediakit.medialoaderp2plib;
+package com.ss.android.ugc.aweme.df_im_enterchat;
 
 import com.ss.android.ugc.aweme.app.R;
 

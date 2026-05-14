@@ -1,40 +1,10 @@
 package X;
 
-import android.content.Context;
-import androidx.fragment.app.Fragment;
-import com.ss.android.ugc.aweme.comment.model.Comment;
-import de.robv.android.xposed.XC_MethodHook;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+public final class n0 {
+    public final l0 a;
+    public boolean b;
 
-class n0 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Context context;
-        String text;
-        try {
-            Object obj = methodHookParam.thisObject;
-            Field declaredField = obj.getClass().getDeclaredField("LIZ");
-            declaredField.setAccessible(true);
-            WeakReference weakReference = (WeakReference) declaredField.get(obj);
-            Fragment fragment = weakReference != null ? (Fragment) weakReference.get() : null;
-            if (fragment != null && (context = fragment.getContext()) != null) {
-                Field declaredField2 = obj.getClass().getDeclaredField("LIZJ");
-                declaredField2.setAccessible(true);
-                Object obj2 = declaredField2.get(obj);
-                if (obj2 == null) {
-                    return;
-                }
-                Object objInvoke = obj2.getClass().getMethod("LIZ", null).invoke(obj2, null);
-                if ((objInvoke instanceof Comment) && (text = ((Comment) objInvoke).getText()) != null) {
-                    w0.a(context, text);
-                    w0.a(fragment, context);
-                    methodHookParam.setResult((Object) null);
-                }
-            }
-        } catch (Throwable th) {
-            th.getMessage();
-            ArrayList arrayList = q2.a;
-        }
+    public n0(l0 l0Var) {
+        this.a = l0Var;
     }
 }

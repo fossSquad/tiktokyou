@@ -1,19 +1,16 @@
 package X;
 
-import android.app.Notification;
-import android.graphics.drawable.Icon;
-import com.ss.android.ugc.aweme.setting.ui.SettingContainerActivity;
-import de.robv.android.xposed.XposedBridge;
-import java.util.ArrayList;
+import android.app.Activity;
+import com.windukk.hook.HookMethod;
 
-public abstract class o5 {
-    public static void a() {
+class o5 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         try {
-            XposedBridge.hookMethod(Notification.Builder.class.getMethod("setSmallIcon", Icon.class), new m5());
-            XposedBridge.hookAllMethods(SettingContainerActivity.class, "onCreate", new n5());
+            ((Activity) hookMethodParam.thisObject).finish();
+            int i = v3.a;
         } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = q2.a;
+            new StringBuilder("Failed to finish splash activity: ").append(e.getMessage());
+            int i2 = v3.a;
         }
     }
 }

@@ -1,15 +1,18 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
+import com.windukk.hook.HookMethod;
+import java.util.List;
 
-class u2 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        String str = (String) methodHookParam.args[0];
-        if (str == null || !str.contains("watermark")) {
-            return;
+class u2 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (g3.a()) {
+            Object result = hookMethodParam.getResult();
+            if (result instanceof List) {
+                try {
+                    hookMethodParam.setResult(g3.a((List) result));
+                } catch (Throwable th) {
+                }
+            }
         }
-        methodHookParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        ArrayList arrayList = q2.a;
     }
 }

@@ -1,18 +1,17 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.profile.model.User;
-import de.robv.android.xposed.XC_MethodHook;
+import android.widget.TextView;
+import com.windukk.hook.HookMethod;
 
-class w extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Object[] objArr = methodHookParam.args;
+class w extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        CharSequence charSequence;
+        CharSequence charSequenceA;
+        Object[] objArr = hookMethodParam.args;
         if (objArr.length != 0) {
             Object obj = objArr[0];
-            if (obj instanceof Aweme) {
-                Aweme aweme = (Aweme) obj;
-                User author = aweme != null ? aweme.getAuthor() : null;
-                methodHookParam.setResult(k0.a(author != null ? author.getUid() : null, (String) methodHookParam.getResult()));
+            if ((obj instanceof CharSequence) && (charSequenceA = t0.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
+                hookMethodParam.args[0] = charSequenceA;
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.ss.mediakit.medialoaderp2plib;
+package com.ss.android.ugc.aweme.df_social_fi;
 
 import com.ss.android.ugc.aweme.app.R;
 

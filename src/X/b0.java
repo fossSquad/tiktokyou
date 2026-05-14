@@ -1,13 +1,10 @@
 package X;
 
-import android.graphics.Bitmap;
+import com.ss.android.ugc.profile.platform.base.data.UserProfileInfo;
+import com.windukk.hook.HookMethod;
 
-public final class b0 {
-    public final String a;
-    public final Bitmap b;
-
-    public b0(String str, Bitmap bitmap) {
-        this.a = str;
-        this.b = bitmap;
+class b0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(t0.a(((UserProfileInfo) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

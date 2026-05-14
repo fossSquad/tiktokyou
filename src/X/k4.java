@@ -1,14 +1,11 @@
 package X;
 
-import android.content.res.ColorStateList;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class k4 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (s2.a().d() && (colorStateListA = l5.a((colorStateList = (ColorStateList) methodHookParam.args[0]))) != colorStateList) {
-            methodHookParam.args[0] = colorStateListA;
+class k4 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().a) {
+            hookMethodParam.setResult(13);
         }
     }
 }

@@ -1,10 +1,15 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.List;
+import com.windukk.hook.HookMethod;
 
-class o1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.setResult(x1.a((List) methodHookParam.getResult()));
+class o1 extends HookMethod {
+    final  String a;
+
+    public o1(String str) {
+        this.a = str;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        h2.a(hookMethodParam.getResult(), this.a);
     }
 }
