@@ -1,13 +1,11 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class q4 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        int iIntValue;
-        int iA;
-        if (s2.a().d() && (iA = l5.a((iIntValue = ((Integer) methodHookParam.getResult()).intValue()))) != iIntValue) {
-            methodHookParam.setResult(Integer.valueOf(iA));
+class q4 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().a) {
+            hookMethodParam.setResult(y3.a().b().e);
         }
     }
 }

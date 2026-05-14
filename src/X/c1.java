@@ -1,29 +1,17 @@
 package X;
 
-import com.ss.android.ugc.aweme.base.model.UrlModel;
-import com.ss.android.ugc.aweme.feed.model.Video;
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
+import com.windukk.hook.HookMethod;
 
-class c1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Video video = (Video) methodHookParam.thisObject;
-        String name = methodHookParam.method.getName();
-        UrlModel urlModel = (UrlModel) methodHookParam.getResult();
-        g1 g1VarA = i1.a(video, urlModel, name);
-        if (g1VarA != null) {
-            methodHookParam.setResult(g1VarA.a);
-            String urlKey = urlModel != null ? urlModel.getUrlKey() : null;
-            UrlModel urlModel2 = g1VarA.a;
-            String urlKey2 = urlModel2 != null ? urlModel2.getUrlKey() : null;
-            if (urlKey2 != null) {
-                if (urlKey2.equals(urlKey)) {
-                    return;
-                }
-            } else if (g1VarA.a == urlModel) {
-                return;
-            }
-            ArrayList arrayList = q2.a;
+class c1 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object result = hookMethodParam.getResult();
+        Boolean bool = Boolean.TRUE;
+        if (bool.equals(result)) {
+            return;
+        }
+        Object[] objArr = hookMethodParam.args;
+        if (h1.a((objArr == null || objArr.length <= 0) ? null : objArr[0])) {
+            hookMethodParam.setResult(bool);
         }
     }
 }

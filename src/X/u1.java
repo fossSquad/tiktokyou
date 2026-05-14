@@ -1,11 +1,18 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class u1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().d) {
-            methodHookParam.setResult(Boolean.FALSE);
+class u1 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj = objArr[0];
+            if (obj instanceof String) {
+                String str = (String) obj;
+                if (h2.a(str)) {
+                    h2.a(hookMethodParam.getResult(), "prefs_iface.".concat(str));
+                }
+            }
         }
     }
 }

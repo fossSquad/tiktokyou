@@ -1,10 +1,18 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XC_MethodReplacement;
+import com.windukk.hook.HookMethod;
 
-class n1 extends XC_MethodReplacement {
-    public Object replaceHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        return 3;
+class n1 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj = objArr[0];
+            if (obj instanceof String) {
+                String str = (String) obj;
+                if (h2.c(str)) {
+                    h2.a(hookMethodParam.getResult(), "AppLog.headerValue.".concat(str));
+                }
+            }
+        }
     }
 }

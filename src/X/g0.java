@@ -1,41 +1,15 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
-import java.lang.reflect.InvocationTargetException;
+import com.windukk.hook.HookMethod;
 
-public interface g0 {
-    public static final g0 a = new g0() {
-        @Override
-        public final String b(Object obj) {
-            return g0.c(obj);
-        }
-    };
-    public static final g0 b = new g0() {
-        @Override
-        public final String b(Object obj) {
-            return g0.a(obj);
-        }
-    };
+class g0 extends HookMethod {
+    final  int a;
 
-    static  String a(Object obj) throws IllegalAccessException, InvocationTargetException {
-        Object objInvoke = k0.a(obj.getClass(), "getExtra", new Class[0]).invoke(obj, null);
-        if (objInvoke == null) {
-            return null;
-        }
-        Object objInvoke2 = k0.a(objInvoke.getClass(), "getImUser", new Class[0]).invoke(objInvoke, null);
-        if (objInvoke2 instanceof IMUser) {
-            return ((IMUser) objInvoke2).getUid();
-        }
-        return null;
+    public g0(int i) {
+        this.a = i;
     }
 
-    static  String c(Object obj) throws IllegalAccessException, InvocationTargetException {
-        Object objInvoke = k0.a(obj.getClass(), "getUid", new Class[0]).invoke(obj, null);
-        if (objInvoke instanceof String) {
-            return (String) objInvoke;
-        }
-        return null;
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        t0.a(hookMethodParam, this.a);
     }
-
-    String b(Object obj);
 }

@@ -1,48 +1,43 @@
 package X;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import de.robv.android.xposed.XC_MethodHook;
-import java.lang.reflect.Method;
+import com.ss.android.ugc.aweme.discover.model.Banner;
+import com.windukk.hook.HookMethod;
+import java.util.ArrayList;
+import java.util.List;
 
-class d5 extends XC_MethodHook {
-    final  Class a;
-    final  Class b;
-    final  String c;
-    final  boolean d;
-    final  Class e;
-    final  Class f;
+class d5 extends HookMethod {
 
-    public d5(Class cls, Class cls2, String str, boolean z, Class cls3, Class cls4) {
-        this.a = cls;
-        this.b = cls2;
-        this.c = str;
-        this.d = z;
-        this.e = cls3;
-        this.f = cls4;
-    }
-
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        Class cls;
-        if (s2.a().d()) {
-            try {
-                Object obj = methodHookParam.thisObject;
-                int iA = l5.a();
-                Object objNewInstance = this.a.getConstructor(String[].class).newInstance(new String[]{"**"});
-                Method method = null;
-                Object obj2 = this.b.getField(this.c).get(null);
-                Object objNewInstance2 = (!this.d || (cls = this.e) == null) ? this.f.getConstructor(Object.class).newInstance(new PorterDuffColorFilter(iA, PorterDuff.Mode.SRC_IN)) : this.f.getConstructor(this.e).newInstance(cls.getConstructor(Integer.TYPE).newInstance(Integer.valueOf(iA)));
-                for (Method method2 : obj.getClass().getMethods()) {
-                    if (method2.getName().equals("addValueCallback") && method2.getParameterCount() == 3 && method2.getParameterTypes()[0].isAssignableFrom(this.a)) {
-                        method = method2;
-                        break;
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().d) {
+            List list = (List) hookMethodParam.getResult();
+            if (y3.a().d && list != null && !list.isEmpty()) {
+                int size = list.size();
+                ArrayList arrayList = null;
+                for (int i = 0; i < size; i++) {
+                    Banner banner = (Banner) list.get(i);
+                    if (banner != null) {
+                        try {
+                            if (banner.adData != null) {
+                                if (arrayList == null) {
+                                    arrayList = new ArrayList(Math.max(0, size - 1));
+                                    for (int i2 = 0; i2 < i; i2++) {
+                                        arrayList.add((Banner) list.get(i2));
+                                    }
+                                }
+                            } else if (arrayList != null) {
+                                arrayList.add(banner);
+                            }
+                        } catch (Throwable th) {
+                        }
+                    } else if (arrayList != null) {
+                        arrayList.add(banner);
                     }
                 }
-                if (method != null) {
-                    method.invoke(obj, objNewInstance, obj2, objNewInstance2);
+                if (arrayList != null) {
+                    list = arrayList;
                 }
-            } catch (Exception e) {
             }
+            hookMethodParam.setResult(list);
         }
     }
 }

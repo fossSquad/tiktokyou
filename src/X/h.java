@@ -2,18 +2,17 @@ package X;
 
 import android.content.Context;
 import android.os.Handler;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class h implements Runnable {
     @Override
     public final void run() {
         try {
-            Context contextB = q2.b();
-            if (contextB != null) {
-                m.b(contextB);
-                if (!s2.a().k) {
-                    m.a(contextB);
+            Context contextC = v3.c();
+            if (contextC != null) {
+                m.b(contextC);
+                if (!y3.a().k) {
+                    m.a(contextC);
                     AtomicBoolean atomicBoolean = m.b;
                     atomicBoolean.set(false);
                     Handler handler = m.a;
@@ -24,8 +23,8 @@ public final class h implements Runnable {
                     }
                     return;
                 }
-                m.c(contextB, "heartbeat");
-                m.c(contextB);
+                m.c(contextC, "heartbeat");
+                m.c(contextC);
             }
             if (m.b.get()) {
                 m.a.postDelayed(this, 300000L);
@@ -33,7 +32,7 @@ public final class h implements Runnable {
         } catch (Throwable th) {
             try {
                 th.getMessage();
-                ArrayList arrayList = q2.a;
+                int i = v3.a;
             } finally {
                 if (m.b.get()) {
                     m.a.postDelayed(this, 300000L);

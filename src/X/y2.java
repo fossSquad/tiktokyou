@@ -1,17 +1,11 @@
 package X;
 
-public final class y2 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
-    public final String e;
+import com.windukk.hook.HookMethod;
+import java.util.List;
 
-    public y2(String str, String str2, String str3, String str4, String str5) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
-        this.e = str5;
+class y2 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        objArr[0] = g3.a((List) objArr[0]);
     }
 }

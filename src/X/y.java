@@ -1,25 +1,10 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.ArrayList;
+import com.ss.android.ugc.aweme.profile.model.User;
+import com.windukk.hook.HookMethod;
 
-class y extends XC_MethodHook {
-    final  g0 a;
-    final  String b;
-
-    public y(g0 g0Var, String str) {
-        this.a = g0Var;
-        this.b = str;
-    }
-
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (methodHookParam.getResult() instanceof String) {
-            try {
-                methodHookParam.setResult(k0.a(this.a.b(methodHookParam.thisObject), (String) methodHookParam.getResult()));
-            } catch (Exception e) {
-                e.getMessage();
-                ArrayList arrayList = q2.a;
-            }
-        }
+class y extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(t0.a(((User) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

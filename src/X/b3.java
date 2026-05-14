@@ -1,11 +1,12 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
+import java.util.Collections;
 
-class b3 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().a) {
-            methodHookParam.setResult(s2.a().b().c);
+class b3 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().d) {
+            hookMethodParam.setResult(Collections.EMPTY_LIST);
         }
     }
 }

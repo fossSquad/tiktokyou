@@ -1,19 +1,10 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeedList;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
 
-class s3 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().d) {
-            SearchMixFeedList searchMixFeedList = (SearchMixFeedList) methodHookParam.thisObject;
-            searchMixFeedList.mItems = g.b(searchMixFeedList.mItems);
-            Object result = methodHookParam.getResult();
-            if (result instanceof SearchMixFeedList) {
-                SearchMixFeedList searchMixFeedList2 = (SearchMixFeedList) result;
-                searchMixFeedList2.mItems = g.b(searchMixFeedList2.mItems);
-                methodHookParam.setResult(searchMixFeedList2);
-            }
-        }
+class s3 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return y3.a().f ? Boolean.FALSE : Boolean.TRUE;
     }
 }

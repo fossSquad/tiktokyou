@@ -1,14 +1,16 @@
 package X;
 
-import android.content.res.ColorStateList;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookBridge;
 
-class j5 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (s2.a().d() && (colorStateListA = l5.a((colorStateList = (ColorStateList) methodHookParam.args[0]))) != colorStateList) {
-            methodHookParam.args[0] = colorStateListA;
+public abstract class j5 {
+    public static void a() {
+        try {
+            HookBridge.hookAllMethods(Class.forName("X.0QXy"), "LJII", new h5());
+            HookBridge.hookAllMethods(Class.forName("X.0QXz"), "setSeekBarShowType", new i5());
+            int i = v3.a;
+        } catch (Exception e) {
+            e.getMessage();
+            int i2 = v3.a;
         }
     }
 }

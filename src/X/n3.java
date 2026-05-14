@@ -1,21 +1,26 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.common.model.ContinuousLoadingAwemeList;
-import de.robv.android.xposed.XC_MethodHook;
-import java.util.List;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-class n3 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().d) {
-            ContinuousLoadingAwemeList continuousLoadingAwemeList = (ContinuousLoadingAwemeList) methodHookParam.thisObject;
-            continuousLoadingAwemeList.awemeList = g.a(continuousLoadingAwemeList.awemeList);
-            Object result = methodHookParam.getResult();
-            if (result instanceof List) {
-                try {
-                    methodHookParam.setResult(g.a((List) result));
-                } catch (Throwable th) {
-                }
+class n3 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = r3.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = y3.a().g;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = r3.a(str, ((Integer) hookMethodParam.args[1]).intValue());
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
             }
+        } finally {
+            r3.d.set(Boolean.FALSE);
         }
     }
 }

@@ -1,14 +1,16 @@
 package X;
 
-import android.content.res.ColorStateList;
-import de.robv.android.xposed.XC_MethodHook;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
+import com.windukk.hook.HookMethod;
 
-class z4 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (s2.a().d() && (colorStateListA = l5.a((colorStateList = (ColorStateList) methodHookParam.getResult()))) != colorStateList) {
-            methodHookParam.setResult(colorStateListA);
+class z4 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y3.a().d) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
+            if (searchMixFeed.preciseAd != null) {
+                searchMixFeed.preciseAd = null;
+                hookMethodParam.setResult((Object) null);
+            }
         }
     }
 }

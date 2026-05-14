@@ -1,18 +1,28 @@
 package X;
 
-import android.widget.TextView;
-import de.robv.android.xposed.XC_MethodHook;
+import android.app.Activity;
+import android.content.Context;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
+import android.view.View;
 
-class a0 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        CharSequence charSequence;
-        CharSequence charSequenceA;
-        Object[] objArr = methodHookParam.args;
-        if (objArr.length != 0) {
-            Object obj = objArr[0];
-            if ((obj instanceof CharSequence) && (charSequenceA = k0.a((TextView) methodHookParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
-                methodHookParam.args[0] = charSequenceA;
-            }
-        }
+public final class a0 extends ClickableSpan {
+    public final  Context a;
+    public final  int b;
+
+    public a0(Activity activity, int i) {
+        this.a = activity;
+        this.b = i;
+    }
+
+    @Override
+    public final void onClick(View view) {
+        t0.e(this.a);
+    }
+
+    @Override
+    public final void updateDrawState(TextPaint textPaint) {
+        textPaint.setColor(this.b);
+        textPaint.setUnderlineText(false);
     }
 }

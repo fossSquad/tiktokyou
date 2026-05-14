@@ -1,18 +1,26 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
-import de.robv.android.xposed.XC_MethodHook;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-class o3 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().d) {
-            SearchMixFeed searchMixFeed = (SearchMixFeed) methodHookParam.thisObject;
-            Aweme aweme = (Aweme) methodHookParam.getResult();
-            g.a(searchMixFeed);
-            if (g.a(aweme)) {
-                methodHookParam.setResult((Object) null);
+class o3 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = r3.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = y3.a().g;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = r3.a(str, ((Integer) hookMethodParam.args[1]).intValue());
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
             }
+        } finally {
+            r3.d.set(Boolean.FALSE);
         }
     }
 }

@@ -1,9 +1,11 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class z1 extends XC_MethodHook {
-    public void beforeHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.args[0] = Integer.valueOf(((Integer) methodHookParam.args[0]).intValue() & (-8193));
+class z1 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if ("android_id".equals(hookMethodParam.args[1])) {
+            hookMethodParam.setResult(h2.b);
+        }
     }
 }

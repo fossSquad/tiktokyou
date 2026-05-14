@@ -1,19 +1,34 @@
 package X;
 
-public final class u0 implements Runnable {
-    public final  Class a;
-    public final  Object b;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
 
-    public u0(Class cls, Object obj) {
-        this.a = cls;
-        this.b = obj;
-    }
-
+public class u0 extends BroadcastReceiver {
     @Override
-    public final void run() {
-        try {
-            this.a.getDeclaredMethod("LJIIJ", null).invoke(this.b, null);
-        } catch (Throwable th) {
+    public void onReceive(Context context, Intent intent) {
+        if (intent != null && "android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+            Handler handler = m.a;
+            if (context == null) {
+                return;
+            }
+            Context applicationContext = context.getApplicationContext();
+            m.b(applicationContext);
+            if (!y3.a().k) {
+                m.a(applicationContext);
+                m.b.set(false);
+                m.a.removeCallbacks(m.d);
+                return;
+            }
+            m.c(applicationContext);
+            if (m.b.compareAndSet(false, true)) {
+                Handler handler2 = m.a;
+                h hVar = m.d;
+                handler2.removeCallbacks(hVar);
+                handler2.postDelayed(hVar, 300000L);
+            }
+            m.d(applicationContext, "boot");
         }
     }
 }

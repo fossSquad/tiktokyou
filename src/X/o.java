@@ -1,10 +1,10 @@
 package X;
 
-import android.app.Activity;
-import android.util.TypedValue;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
+import com.windukk.hook.HookMethod;
 
-public abstract  class o {
-    public static float a(Activity activity, int i, float f) {
-        return TypedValue.applyDimension(i, f, activity.getResources().getDisplayMetrics());
+class o extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(t0.a(((IMUser) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

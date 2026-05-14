@@ -1,111 +1,29 @@
 package X;
 
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.os.Build;
-import android.widget.TextView;
-import de.robv.android.xposed.XposedBridge;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.function.Supplier;
+import com.ss.android.ugc.aweme.base.model.UrlModel;
+import com.ss.android.ugc.aweme.feed.model.Video;
+import com.windukk.hook.HookMethod;
+import java.lang.reflect.InvocationTargetException;
 
-public abstract class i2 {
-    public static volatile Typeface a;
-    public static volatile String b;
-    public static final HashMap c = new HashMap();
-    public static final ThreadLocal d = ThreadLocal.withInitial(new Supplier() {
-        @Override
-        public final Object get() {
-            return Boolean.FALSE;
-        }
-    });
-
-    public static void a() {
-        try {
-            XposedBridge.hookAllMethods(Paint.class, "setTypeface", new c2());
-            XposedBridge.hookAllMethods(Typeface.class, "createFromAsset", new d2());
-            Class cls = Integer.TYPE;
-            XposedBridge.hookMethod(Typeface.class.getMethod("create", String.class, cls), new e2());
-            XposedBridge.hookMethod(Typeface.class.getMethod("create", Typeface.class, cls), new f2());
-            if (Build.VERSION.SDK_INT >= 28) {
-                try {
-                    XposedBridge.hookMethod(Typeface.class.getMethod("create", Typeface.class, cls, Boolean.TYPE), new g2());
-                } catch (NoSuchMethodException e) {
+class i2 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException {
+        Video video = (Video) hookMethodParam.thisObject;
+        String name = hookMethodParam.method.getName();
+        UrlModel urlModel = (UrlModel) hookMethodParam.getResult();
+        m2 m2VarA = o2.a(video, urlModel, name);
+        if (m2VarA != null) {
+            hookMethodParam.setResult(m2VarA.a);
+            String urlKey = urlModel != null ? urlModel.getUrlKey() : null;
+            UrlModel urlModel2 = m2VarA.a;
+            String urlKey2 = urlModel2 != null ? urlModel2.getUrlKey() : null;
+            if (urlKey2 != null) {
+                if (urlKey2.equals(urlKey)) {
+                    return;
                 }
+            } else if (m2VarA.a == urlModel) {
+                return;
             }
-            XposedBridge.hookAllMethods(TextView.class, "setTypeface", new h2());
-        } catch (Exception e2) {
-            e2.getMessage();
-            ArrayList arrayList = q2.a;
-        }
-    }
-
-    public static Typeface a(String str) {
-        if (str.equals(b) && a != null) {
-            return a;
-        }
-        Typeface typefaceCreateFromFile = null;
-        try {
-            if ("system".equals(str)) {
-                typefaceCreateFromFile = Typeface.DEFAULT;
-            } else {
-                if (str.startsWith("file:")) {
-                    File file = new File(q2.b().getFilesDir(), "fonts/" + str.substring(5));
-                    if (file.exists()) {
-                        typefaceCreateFromFile = Typeface.createFromFile(file);
-                    }
-                } else if (str.startsWith("asset:")) {
-                    String strSubstring = str.substring(6);
-                    ThreadLocal threadLocal = d;
-                    threadLocal.set(Boolean.TRUE);
-                    try {
-                        Typeface typefaceCreateFromAsset = Typeface.createFromAsset(q2.b().getAssets(), "mod_fonts/" + strSubstring);
-                        threadLocal.set(Boolean.FALSE);
-                        typefaceCreateFromFile = typefaceCreateFromAsset;
-                    } catch (Throwable th) {
-                        d.set(Boolean.FALSE);
-                        throw th;
-                    }
-                }
-                if (typefaceCreateFromFile != null) {
-                    b = str;
-                    a = typefaceCreateFromFile;
-                }
-                return typefaceCreateFromFile;
-            }
-            if (typefaceCreateFromFile != null) {
-                b = str;
-                a = typefaceCreateFromFile;
-            }
-            return typefaceCreateFromFile;
-        } catch (Exception e) {
-            e.getMessage();
-            ArrayList arrayList = q2.a;
-            return null;
-        }
-    }
-
-    public static Typeface a(String str, int i) {
-        Typeface typefaceA = a(str);
-        if (typefaceA == null) {
-            return null;
-        }
-        if (i == 0) {
-            return typefaceA;
-        }
-        HashMap map = c;
-        Typeface typeface = (Typeface) map.get(Integer.valueOf(i));
-        if (typeface != null) {
-            return typeface;
-        }
-        d.set(Boolean.TRUE);
-        try {
-            Typeface typefaceCreate = Typeface.create(typefaceA, i);
-            map.put(Integer.valueOf(i), typefaceCreate);
-            return typefaceCreate;
-        } finally {
-            d.set(Boolean.FALSE);
+            int i = v3.a;
         }
     }
 }

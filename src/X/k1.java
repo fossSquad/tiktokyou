@@ -1,11 +1,10 @@
 package X;
 
-import de.robv.android.xposed.XC_MethodHook;
+import android.app.Activity;
+import android.util.TypedValue;
 
-class k1 extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        if (s2.a().d) {
-            methodHookParam.setResult((Object) null);
-        }
+public abstract  class k1 {
+    public static float a(Activity activity, int i, float f) {
+        return TypedValue.applyDimension(i, f, activity.getResources().getDisplayMetrics());
     }
 }

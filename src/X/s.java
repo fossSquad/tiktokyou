@@ -1,10 +1,24 @@
 package X;
 
-import com.ss.android.ugc.aweme.profile.model.User;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class s extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.setResult(k0.a(((User) methodHookParam.thisObject).getUid(), (String) methodHookParam.getResult()));
+class s extends HookMethod {
+    final  p0 a;
+    final  String b;
+
+    public s(p0 p0Var, String str) {
+        this.a = p0Var;
+        this.b = str;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (hookMethodParam.getResult() instanceof String) {
+            try {
+                hookMethodParam.setResult(t0.a(this.a.b(hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+            } catch (Exception e) {
+                e.getMessage();
+                int i = v3.a;
+            }
+        }
     }
 }

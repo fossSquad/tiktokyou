@@ -1,10 +1,9 @@
 package X;
 
-public final class e0 {
-    public final c0 a;
-    public boolean b;
+import com.windukk.hook.HookMethod;
 
-    public e0(c0 c0Var) {
-        this.a = c0Var;
+class e0 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        t0.a(hookMethodParam, 0);
     }
 }

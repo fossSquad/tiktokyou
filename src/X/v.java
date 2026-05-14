@@ -1,10 +1,18 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
-import de.robv.android.xposed.XC_MethodHook;
+import android.widget.TextView;
+import com.windukk.hook.HookMethod;
 
-class v extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.setResult(k0.a(k0.a((IMConversation) methodHookParam.thisObject), (String) methodHookParam.getResult()));
+class v extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        CharSequence charSequence;
+        CharSequence charSequenceA;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if ((obj instanceof CharSequence) && (charSequenceA = t0.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
+                hookMethodParam.args[0] = charSequenceA;
+            }
+        }
     }
 }

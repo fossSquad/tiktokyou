@@ -1,10 +1,16 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.common.model.BaseContact;
-import de.robv.android.xposed.XC_MethodHook;
+import com.windukk.hook.HookMethod;
 
-class t extends XC_MethodHook {
-    public void afterHookedMethod(XC_MethodHook.MethodHookParam methodHookParam) {
-        methodHookParam.setResult(k0.a(((BaseContact) methodHookParam.thisObject).getUid(), (String) methodHookParam.getResult()));
+class t extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (hookMethodParam.args.length >= 2) {
+            Object result = hookMethodParam.getResult();
+            if (result instanceof String) {
+                String str = (String) result;
+                Object obj = hookMethodParam.args[0];
+                hookMethodParam.setResult(t0.a(obj instanceof String ? (String) obj : null, str));
+            }
+        }
     }
 }
