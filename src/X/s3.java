@@ -1,10 +1,10 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
+import java.util.List;
 
-class s3 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        return y3.a().f ? Boolean.FALSE : Boolean.TRUE;
+class s3 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(z3.a((List) hookMethodParam.getResult()));
     }
 }

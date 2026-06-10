@@ -1,35 +1,25 @@
 package X;
 
+import com.ss.android.ugc.aweme.base.model.UrlModel;
+import com.ss.android.ugc.aweme.feed.model.Video;
 import com.windukk.hook.HookMethod;
-import java.lang.reflect.Field;
-import java.util.List;
+import java.util.Map;
 
 class w2 extends HookMethod {
-    final  Field a;
-    final  boolean b;
-
-    public w2(Field field, boolean z) {
-        this.a = field;
-        this.b = z;
-    }
-
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object obj;
-        if (g3.a() && (obj = hookMethodParam.thisObject) != null) {
-            try {
-                Object obj2 = this.a.get(obj);
-                if (obj2 instanceof List) {
-                    List list = (List) obj2;
-                    if (list.isEmpty()) {
-                        return;
-                    }
-                    List listB = this.b ? g3.b(list) : g3.a(list);
-                    if (listB != obj2) {
-                        this.a.set(obj, listB);
-                    }
-                }
-            } catch (Throwable th) {
-            }
+        g3 g3Var;
+        Video video = (Video) hookMethodParam.thisObject;
+        hookMethodParam.method.getName();
+        UrlModel urlModel = (UrlModel) hookMethodParam.getResult();
+        if (video != null) {
+            g3Var = (g3) z2.a.get(video);
+        } else {
+            Map map = z2.a;
+            g3Var = null;
+        }
+        if (g3Var != null) {
+            hookMethodParam.setResult(g3Var.a);
+            h3.a(g3Var, urlModel);
         }
     }
 }

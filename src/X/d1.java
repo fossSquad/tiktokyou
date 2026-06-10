@@ -1,23 +1,23 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.text.TextUtils;
 
-class d1 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (Boolean.TRUE.equals(hookMethodParam.getResult())) {
-            return;
+public abstract class d1 {
+    public static boolean a(String str) {
+        if (str != null) {
+            return str.startsWith("https://") || str.startsWith("http://");
         }
-        Object[] objArr = hookMethodParam.args;
-        boolean zA = false;
-        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
-        if (obj != null) {
-            try {
-                zA = h1.a(e4.a(obj.getClass(), "getCommonModel", new Class[0]).invoke(obj, null));
-            } catch (Throwable th) {
-            }
+        return false;
+    }
+
+    public static String b(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return "asset:supporter.png";
         }
-        if (zA) {
-            hookMethodParam.setResult(Boolean.TRUE);
+        String strTrim = str.trim();
+        if (strTrim.isEmpty()) {
+            return "asset:supporter.png";
         }
+        return (a(strTrim) || strTrim.startsWith("asset:")) ? strTrim : "asset:".concat(strTrim);
     }
 }

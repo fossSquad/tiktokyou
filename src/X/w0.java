@@ -1,48 +1,15 @@
 package X;
 
-import android.content.Context;
-import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import java.util.concurrent.ConcurrentHashMap;
 
 class w0 extends HookMethod {
+    final  int a;
+
+    public w0(int i) {
+        this.a = i;
+    }
+
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String str;
-        String str2;
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 2) {
-            boolean zEquals = false;
-            Object obj = objArr[0];
-            if (obj instanceof Context) {
-                Context context = (Context) obj;
-                Object obj2 = objArr[1];
-                ConcurrentHashMap concurrentHashMap = x0.a;
-                if (obj2 == null || !TextUtils.equals(obj2.getClass().getName(), "com.bytedance.hybrid.spark.third.router.SparkThirdContext")) {
-                    return;
-                }
-                Object obj3 = hookMethodParam.args[1];
-                try {
-                    Object obj4 = e4.a(obj3.getClass(), "url").get(obj3);
-                    str = obj4 instanceof String ? (String) obj4 : null;
-                } catch (Throwable th) {
-                }
-                Object obj5 = hookMethodParam.args[1];
-                try {
-                    Object obj6 = e4.a(obj5.getClass(), "seclinkConfig").get(obj5);
-                    if (obj6 != null) {
-                        try {
-                            Object obj7 = e4.a(obj6.getClass(), "scene").get(obj6);
-                            str2 = obj7 instanceof String ? (String) obj7 : null;
-                        } catch (Throwable th2) {
-                        }
-                        zEquals = TextUtils.equals(str2, "bio_url");
-                    }
-                } catch (Throwable th3) {
-                }
-                if (zEquals && x0.a(context, str, true)) {
-                    hookMethodParam.setResult((Object) null);
-                }
-            }
-        }
+        a1.a(hookMethodParam, this.a);
     }
 }

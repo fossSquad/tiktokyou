@@ -1,18 +1,27 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
 
-class s1 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 1) {
-            Object obj = objArr[0];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                if (h2.a(str)) {
-                    h2.a(hookMethodParam.getResult(), "prefs.".concat(str));
-                }
-            }
+public final class s1 implements InvocationHandler {
+    public final  LinkedHashMap a;
+    public final  Object b;
+
+    public s1(LinkedHashMap linkedHashMap, Object obj) {
+        this.a = linkedHashMap;
+        this.b = obj;
+    }
+
+    @Override
+    public final Object invoke(Object obj, Method method, Object[] objArr) {
+        if (this.a.containsKey(method.getName())) {
+            return this.a.get(method.getName());
         }
+        Object obj2 = this.b;
+        if (objArr == null) {
+            objArr = new Object[0];
+        }
+        return method.invoke(obj2, objArr);
     }
 }

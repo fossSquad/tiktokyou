@@ -1,34 +1,15 @@
 package X;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
+import com.windukk.hook.HookMethod;
 
-public class u0 extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (intent != null && "android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-            Handler handler = m.a;
-            if (context == null) {
-                return;
+class u0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        z7 z7Var = (z7) a1.r.get();
+        if (z7Var != null) {
+            Object result = hookMethodParam.getResult();
+            if (result instanceof String) {
+                hookMethodParam.setResult(a1.a(z7Var.a, (String) result));
             }
-            Context applicationContext = context.getApplicationContext();
-            m.b(applicationContext);
-            if (!y3.a().k) {
-                m.a(applicationContext);
-                m.b.set(false);
-                m.a.removeCallbacks(m.d);
-                return;
-            }
-            m.c(applicationContext);
-            if (m.b.compareAndSet(false, true)) {
-                Handler handler2 = m.a;
-                h hVar = m.d;
-                handler2.removeCallbacks(hVar);
-                handler2.postDelayed(hVar, 300000L);
-            }
-            m.d(applicationContext, "boot");
         }
     }
 }

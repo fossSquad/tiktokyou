@@ -1,89 +1,53 @@
 package X;
 
+import android.content.Context;
+import com.ss.android.ugc.profile.business.ur.platform.business.BioUserWebSiteComponent;
 import com.windukk.hook.HookMethod;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 class i1 extends HookMethod {
-    final  int a;
-    final  Method b;
-    final  String c;
 
-    public i1(int i, Method method, String str) {
-        this.a = i;
-        this.b = method;
-        this.c = str;
-    }
-
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        int length = objArr.length;
-        int i = this.a;
-        if (length > i) {
-            Object obj = objArr[i];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                Object result = hookMethodParam.getResult();
-                HashMap map = j1.a;
-                if (map.containsKey(str)) {
-                    Object objValueOf = map.get(str);
-                    Class<?> returnType = this.b.getReturnType();
-                    if (objValueOf == null) {
-                        objValueOf = null;
-                    } else {
-                        try {
-                            if (returnType == Boolean.TYPE || returnType == Boolean.class) {
-                                if (!(objValueOf instanceof Boolean)) {
-                                    if (objValueOf instanceof Number) {
-                                        objValueOf = Boolean.valueOf(((Number) objValueOf).intValue() != 0);
-                                    } else if (objValueOf instanceof String) {
-                                        objValueOf = Boolean.valueOf(Boolean.parseBoolean((String) objValueOf));
-                                    }
-                                }
-                            } else if (returnType == Integer.TYPE || returnType == Integer.class) {
-                                if (objValueOf instanceof Number) {
-                                    objValueOf = Integer.valueOf(((Number) objValueOf).intValue());
-                                } else if (objValueOf instanceof Boolean) {
-                                    objValueOf = Integer.valueOf(((Boolean) objValueOf).booleanValue() ? 1 : 0);
-                                } else if (objValueOf instanceof String) {
-                                    objValueOf = Integer.valueOf(Integer.parseInt((String) objValueOf));
-                                }
-                            } else if (returnType == Long.TYPE || returnType == Long.class) {
-                                if (objValueOf instanceof Number) {
-                                    objValueOf = Long.valueOf(((Number) objValueOf).longValue());
-                                } else if (objValueOf instanceof String) {
-                                    objValueOf = Long.valueOf(Long.parseLong((String) objValueOf));
-                                }
-                            } else if (returnType == Float.TYPE || returnType == Float.class) {
-                                if (objValueOf instanceof Number) {
-                                    objValueOf = Float.valueOf(((Number) objValueOf).floatValue());
-                                } else if (objValueOf instanceof String) {
-                                    objValueOf = Float.valueOf(Float.parseFloat((String) objValueOf));
-                                }
-                            } else if (returnType == Double.TYPE || returnType == Double.class) {
-                                if (objValueOf instanceof Number) {
-                                    objValueOf = Double.valueOf(((Number) objValueOf).doubleValue());
-                                } else if (objValueOf instanceof String) {
-                                    objValueOf = Double.valueOf(Double.parseDouble((String) objValueOf));
-                                }
-                            } else if (returnType == String.class) {
-                                objValueOf = String.valueOf(objValueOf);
-                            }
-                        } catch (Exception e) {
-                            objValueOf.toString();
-                            returnType.getClass();
-                            int i2 = v3.a;
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Context contextC;
+        String str;
+        Object objInvoke;
+        BioUserWebSiteComponent bioUserWebSiteComponent = (BioUserWebSiteComponent) hookMethodParam.thisObject;
+        ConcurrentHashMap concurrentHashMap = k1.a;
+        try {
+            Object objInvoke2 = g8.a(bioUserWebSiteComponent.getClass(), "getContext", new Class[0]).invoke(bioUserWebSiteComponent, null);
+            contextC = objInvoke2 instanceof Context ? (Context) objInvoke2 : p4.c();
+        } catch (Throwable th) {
+        }
+        try {
+            Object obj = t4.b.a(bioUserWebSiteComponent.getClass()).get(bioUserWebSiteComponent);
+            if (obj != null) {
+                Object objInvoke3 = g8.a(obj.getClass(), "getBioUrl", new Class[0]).invoke(obj, null);
+                if (objInvoke3 instanceof String) {
+                    str = (String) objInvoke3;
+                    if (k1.a(str, false) == null) {
+                        objInvoke = g8.a(obj.getClass(), "getBioSecureUrl", new Class[0]).invoke(obj, null);
+                        if (objInvoke instanceof String) {
+                            str = (String) objInvoke;
                         }
                     }
-                    if (objValueOf != null) {
-                        Objects.toString(result);
-                        objValueOf.toString();
-                        int i3 = v3.a;
-                        hookMethodParam.setResult(objValueOf);
+                } else {
+                    objInvoke = g8.a(obj.getClass(), "getBioSecureUrl", new Class[0]).invoke(obj, null);
+                    if (objInvoke instanceof String) {
+                        str = (String) objInvoke;
                     }
                 }
+                if (k1.a(contextC, str, false)) {
+                    hookMethodParam.setResult((Object) null);
+                }
             }
+            str = null;
+        } catch (Throwable th2) {
+            th2.getMessage();
+            int i = p4.a;
+            str = null;
+        }
+        if (k1.a(contextC, str, false)) {
+            hookMethodParam.setResult((Object) null);
         }
     }
 }

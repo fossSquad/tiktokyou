@@ -1,11 +1,24 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import com.ss.android.ugc.aweme.services.MandatoryLoginService;
+import com.windukk.hook.HookBridge;
+import com.windukk.hook.ReplaceMethod;
+import java.lang.reflect.Method;
 
-class q4 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().a) {
-            hookMethodParam.setResult(y3.a().b().e);
+public abstract class q4 {
+    public static void a() {
+        try {
+            Class cls = Long.TYPE;
+            Method declaredMethod = MandatoryLoginService.class.getDeclaredMethod("checkDynamicMandatoryLoginRegionSettings", String.class, String.class, cls);
+            Boolean bool = Boolean.FALSE;
+            HookBridge.hookMethod(declaredMethod, ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("checkForceLoginForBR", String.class, cls), ReplaceMethod.returnConstant(bool));
+            Class cls2 = Boolean.TYPE;
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("enableForcedLogin", cls2), ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowForcedLogin", cls2), ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowLoginTabFirst", null), ReplaceMethod.returnConstant(bool));
+        } catch (Exception e) {
+            int i = p4.a;
         }
     }
 }

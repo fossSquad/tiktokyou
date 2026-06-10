@@ -1,19 +1,12 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeedList;
-import com.windukk.hook.HookMethod;
+public abstract class c5 {
+    public static final x4 a;
+    public static final x5 b;
 
-class c5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            SearchMixFeedList searchMixFeedList = (SearchMixFeedList) hookMethodParam.thisObject;
-            searchMixFeedList.mItems = g.b(searchMixFeedList.mItems);
-            Object result = hookMethodParam.getResult();
-            if (result instanceof SearchMixFeedList) {
-                SearchMixFeedList searchMixFeedList2 = (SearchMixFeedList) result;
-                searchMixFeedList2.mItems = g.b(searchMixFeedList2.mItems);
-                hookMethodParam.setResult(searchMixFeedList2);
-            }
-        }
+    static {
+        x4 x4Var = new x4("COMMENT_TRANSLATION_CAN_SHOW", "X.0ArS");
+        a = x4Var;
+        b = new x5(x4Var, "CAN_SHOW", new String[]{"LIZJ"});
     }
 }

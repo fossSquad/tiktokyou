@@ -1,18 +1,23 @@
 package X;
 
-import android.widget.TextView;
-import com.windukk.hook.HookMethod;
+import android.view.ViewGroup;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.WeakHashMap;
 
-class v extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        CharSequence charSequence;
-        CharSequence charSequenceA;
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length != 0) {
-            Object obj = objArr[0];
-            if ((obj instanceof CharSequence) && (charSequenceA = t0.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
-                hookMethodParam.args[0] = charSequenceA;
-            }
-        }
+public final class v {
+    public final WeakReference a;
+    public p d;
+    public boolean e;
+    public boolean f;
+    public boolean g;
+    public long i;
+    public long j;
+    public final ArrayList b = new ArrayList(12);
+    public final WeakHashMap c = new WeakHashMap();
+    public boolean h = w.b();
+
+    public v(ViewGroup viewGroup) {
+        this.a = new WeakReference(viewGroup);
     }
 }

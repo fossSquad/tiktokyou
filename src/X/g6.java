@@ -1,13 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class g6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d() && (iA = x6.a((iIntValue = ((Integer) hookMethodParam.getResult()).intValue()))) != iIntValue) {
-            hookMethodParam.setResult(Integer.valueOf(iA));
-        }
-    }
+public abstract class g6 {
+    public static final x5 a = new x5(new x4("SAVE_PHOTO_CALLBACK", "X.0Wji"), "SAVE", new String[]{"LIZ"});
 }

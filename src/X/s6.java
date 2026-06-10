@@ -1,20 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class s6 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof Integer) || (iA = x6.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                hookMethodParam.args[1] = Integer.valueOf(iA);
-            }
-        }
-    }
+public abstract class s6 {
+    public static final x5 a = new x5(new x4("STREAK_STATE_HELPER_CLASS", "X.05kA"), "IS_ACTIVE", new String[]{"LIZLLL"});
 }

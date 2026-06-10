@@ -1,11 +1,10 @@
 package X;
 
 import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
 
-class q2 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            hookMethodParam.setResult((Object) null);
-        }
+class q2 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return v2.b;
     }
 }

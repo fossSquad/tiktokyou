@@ -1,11 +1,10 @@
 package X;
 
 import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
 
-class l4 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().a) {
-            hookMethodParam.setResult(Boolean.TRUE);
-        }
+class l4 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return d7.a().g ? Boolean.FALSE : Boolean.TRUE;
     }
 }

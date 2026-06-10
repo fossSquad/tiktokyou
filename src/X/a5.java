@@ -1,16 +1,5 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
-import com.windukk.hook.HookMethod;
-
-class a5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
-            g.a(searchMixFeed);
-            if (g.b(searchMixFeed)) {
-                hookMethodParam.setResult(Boolean.FALSE);
-            }
-        }
-    }
+public abstract class a5 {
+    public static final x5 a = new x5(new x4("COMMENT_INLINE_SORT", "X.0lft"), "CAN_PLACE_INLINE", new String[]{"LIZIZ"});
 }

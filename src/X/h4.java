@@ -1,114 +1,26 @@
 package X;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import com.bytedance.ies.foundation.activity.BaseActivity;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Locale;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-public abstract class h4 {
-    public static Bitmap a(BaseActivity baseActivity, String str) {
+class h4 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = k4.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = d7.a().h;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
         try {
-            InputStream inputStreamOpen = baseActivity.getAssets().open(str);
-            try {
-                Bitmap bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
-                if (inputStreamOpen != null) {
-                    inputStreamOpen.close();
-                }
-                return bitmapDecodeStream;
-            } catch (Throwable th) {
-                if (inputStreamOpen != null) {
-                    try {
-                        inputStreamOpen.close();
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                    }
-                }
-                throw th;
+            Typeface typefaceA = k4.a(str, ((Integer) hookMethodParam.args[1]).intValue());
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
             }
-        } catch (IOException e) {
-            return null;
+        } finally {
+            k4.d.set(Boolean.FALSE);
         }
-    }
-
-    public static Drawable a(BaseActivity baseActivity, f4 f4Var, int i) {
-        String str;
-        if (f4Var == null) {
-            GradientDrawable gradientDrawable = new GradientDrawable();
-            gradientDrawable.setShape(1);
-            gradientDrawable.setColor(Color.parseColor("#444444"));
-            gradientDrawable.setSize(i, i);
-            return gradientDrawable;
-        }
-        String str2 = f4Var.c;
-        Bitmap bitmapA = null;
-        Bitmap bitmapA2 = h4$$ExternalSyntheticBackport0.m(str2) ? null : a(baseActivity, "mod_icons/flags_new/ic_flag_" + str2.toLowerCase(Locale.ROOT) + ".png");
-        if (bitmapA2 != null) {
-            bitmapA = bitmapA2;
-        } else {
-            String str3 = f4Var.a;
-            if (!h4$$ExternalSyntheticBackport0.m(str3)) {
-                switch (str3) {
-                    case "region_usa":
-                        str = "ic_flag_usa";
-                        break;
-                    case "region_poland":
-                        str = "ic_flag_poland";
-                        break;
-                    case "region_egypt":
-                        str = "ic_flag_egypt";
-                        break;
-                    case "region_finland":
-                        str = "ic_flag_finland";
-                        break;
-                    case "region_ukraine":
-                        str = "ic_flag_ukraine";
-                        break;
-                    case "region_belarus":
-                        str = "ic_flag_belarus";
-                        break;
-                    case "region_kazakhstan":
-                        str = "ic_flag_kazakhstan";
-                        break;
-                    default:
-                        str = null;
-                        break;
-                }
-                if (str != null) {
-                    bitmapA = a(baseActivity, "mod_icons/" + str + ".png");
-                }
-            }
-        }
-        if (bitmapA == null) {
-            bitmapA = a(baseActivity, "mod_icons/ic_flag_custom.png");
-        }
-        if (bitmapA == null) {
-            GradientDrawable gradientDrawable2 = new GradientDrawable();
-            gradientDrawable2.setShape(1);
-            gradientDrawable2.setColor(Color.parseColor("#444444"));
-            gradientDrawable2.setSize(i, i);
-            return gradientDrawable2;
-        }
-        Resources resources = baseActivity.getResources();
-        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapA, i, i, true);
-        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmapCreateBitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        float f = i / 2.0f;
-        canvas.drawCircle(f, f, f, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmapCreateScaledBitmap, 0.0f, 0.0f, paint);
-        return new BitmapDrawable(resources, bitmapCreateBitmap);
     }
 }

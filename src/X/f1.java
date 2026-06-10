@@ -1,19 +1,15 @@
 package X;
 
-public final class f1 implements Runnable {
-    public final  Class a;
-    public final  Object b;
+import android.app.Activity;
+import android.content.Context;
+import android.util.TypedValue;
 
-    public f1(Class cls, Object obj) {
-        this.a = cls;
-        this.b = obj;
+public abstract class f1 {
+    public static int a(Context context, float f) {
+        return (int) TypedValue.applyDimension(1, f, context.getResources().getDisplayMetrics());
     }
 
-    @Override
-    public final void run() {
-        try {
-            e4.a(this.a, "LJIIJ", new Class[0]).invoke(this.b, null);
-        } catch (Throwable th) {
-        }
+    public static boolean a(Activity activity) {
+        return (activity == null || activity.isFinishing() || activity.isDestroyed()) ? false : true;
     }
 }

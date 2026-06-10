@@ -1,13 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class k6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d() && (iA = x6.a((iIntValue = ((Integer) hookMethodParam.getResult()).intValue()))) != iIntValue) {
-            hookMethodParam.setResult(Integer.valueOf(iA));
-        }
-    }
+public abstract class k6 {
+    public static final x5 a = new x5(new x4("SETTINGS_GROUP_COMBINER_CLASS", "X.0zVy"), "SETTINGS_GROUP_COMBINER_APPEND", new String[]{"LIZ"});
 }

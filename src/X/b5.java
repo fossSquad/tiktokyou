@@ -1,12 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-import java.util.Collections;
-
-class b5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            hookMethodParam.setResult(Collections.EMPTY_LIST);
-        }
-    }
+public abstract class b5 {
+    public static final x5 a = new x5(new x4("COMMENT_TIME_SORT_FEAT_EXP_CLASS", "com.ss.android.ugc.aweme.experiment.CommentTimeSortFeatExp"), "COMMENT_TIME_SORT_ENABLED", new String[]{"LIZ"});
 }

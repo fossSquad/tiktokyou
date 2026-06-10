@@ -1,14 +1,12 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
+public abstract class f6 {
+    public static final x4 a;
+    public static final x5 b;
 
-class f6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
-        }
+    static {
+        x4 x4Var = new x4("REFACTOR_PLAYER_CONTROLLER_CLASS", "com.ss.android.ugc.aweme.feed.controller.RefactorPlayerController");
+        a = x4Var;
+        b = new x5(x4Var, "REFACTOR_PLAYER_CONTROLLER_APPLY_SPEED", new String[]{"LJIILL", "I"});
     }
 }

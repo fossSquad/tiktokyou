@@ -1,14 +1,12 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
+public abstract class l6 {
+    public static final x5 a = new x5(new x4("SETTINGS_ITEM_INTERFACE", "X.19St"), "SETTINGS_ITEM_GET_KEY", new String[]{"getKey"});
 
-class l6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
-        }
+    static {
+        c7.a("method", "SETTINGS_ITEM_GET_IDENTIFIER", (String[]) new String[]{"getIdentifier"}.clone());
+        c7.a("method", "SETTINGS_ITEM_GET_CONTENT_TYPE", (String[]) new String[]{"getContentType"}.clone());
+        c7.a("method", "SETTINGS_ITEM_GET_HEADING_ITEM", (String[]) new String[]{"getHeadingItem"}.clone());
+        c7.a("method", "SETTINGS_ITEM_GET_TAG", (String[]) new String[]{"getTag"}.clone());
     }
 }

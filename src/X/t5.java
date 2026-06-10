@@ -1,21 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public abstract class t5 {
+    public static final p5 a;
+    public static final x5 b;
 
-class t5 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = x6.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                int i = v3.a;
-                hookMethodParam.args[0] = Integer.valueOf(iA);
-            }
-        }
+    static {
+        x4 x4Var = new x4("IM_HOST_RUNTIME_CLASS", "X.0mA4");
+        a = new p5(x4Var, "INSTANCE", new String[]{"LJFF"});
+        b = new x5(x4Var, "ACCOUNT_SERVICE", new String[]{"LIZ"});
     }
 }

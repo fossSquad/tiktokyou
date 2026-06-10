@@ -1,10 +1,16 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import java.util.List;
 
 class x2 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(g3.a((List) hookMethodParam.getResult()));
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        try {
+            if (z2.a(hookMethodParam.thisObject, hookMethodParam.method)) {
+                hookMethodParam.setResult((Object) null);
+            }
+        } catch (Throwable th) {
+            th.getMessage();
+            int i = p4.a;
+        }
     }
 }

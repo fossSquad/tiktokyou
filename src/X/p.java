@@ -1,10 +1,42 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
-import com.windukk.hook.HookMethod;
+import android.os.SystemClock;
+import android.view.ViewTreeObserver;
 
-class p extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(t0.a(t0.a((IMConversation) hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+public final class p implements ViewTreeObserver.OnPreDrawListener {
+    public final  v a;
+
+    public p(v vVar) {
+        this.a = vVar;
+    }
+
+    @Override
+    public final boolean onPreDraw() {
+        v vVar = this.a;
+        boolean zB = w.b();
+        if (zB != vVar.h) {
+            if (zB) {
+                w.b(vVar);
+            }
+            vVar.h = zB;
+            vVar.e = false;
+            w.b(vVar, true);
+            w.a(vVar, true);
+            w.c();
+        }
+        if (zB) {
+            if (vVar.g) {
+                vVar.g = false;
+                w.b(vVar, true);
+            }
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            if (!vVar.e || jUptimeMillis < vVar.i) {
+                w.a(vVar, false);
+            } else {
+                vVar.e = false;
+                w.a(vVar, true);
+            }
+        }
+        return true;
     }
 }

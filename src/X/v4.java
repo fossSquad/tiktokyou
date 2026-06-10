@@ -1,23 +1,12 @@
 package X;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
-import kotlin.jvm.functions.Function1;
+public abstract class v4 {
+    public static final x4 a;
+    public static final x5 b;
 
-class v4 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Bitmap bitmap = (Bitmap) hookMethodParam.args[0];
-        Object obj = hookMethodParam.thisObject;
-        Object objA = w4.a(Function1.class, obj);
-        Activity activity = (Activity) w4.a(Activity.class, obj);
-        if (bitmap == null || activity == null) {
-            w4.a(objA, false);
-            return null;
-        }
-        w4.a(objA, w4.a(activity, bitmap));
-        int i = v3.a;
-        return null;
+    static {
+        x4 x4Var = new x4("CHAT_LIST_NAME_MODEL_TYPE_A_CLASS", "X.0xIH");
+        a = x4Var;
+        b = new x5(x4Var, "GET_NAME", new String[]{"getName"});
     }
 }

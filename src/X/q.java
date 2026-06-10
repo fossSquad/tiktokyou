@@ -1,19 +1,30 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.profile.model.User;
-import com.windukk.hook.HookMethod;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
-class q extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length != 0) {
-            Object obj = objArr[0];
-            if (obj instanceof Aweme) {
-                Aweme aweme = (Aweme) obj;
-                User author = aweme != null ? aweme.getAuthor() : null;
-                hookMethodParam.setResult(t0.a(author != null ? author.getUid() : null, (String) hookMethodParam.getResult()));
-            }
+public final class q implements View.OnAttachStateChangeListener {
+    public final  ViewGroup a;
+    public final  v b;
+
+    public q(ViewGroup viewGroup, v vVar) {
+        this.a = viewGroup;
+        this.b = vVar;
+    }
+
+    @Override
+    public final void onViewAttachedToWindow(View view) {
+    }
+
+    @Override
+    public final void onViewDetachedFromWindow(View view) {
+        p pVar;
+        ViewTreeObserver viewTreeObserver = this.a.getViewTreeObserver();
+        if (viewTreeObserver.isAlive() && (pVar = this.b.d) != null) {
+            viewTreeObserver.removeOnPreDrawListener(pVar);
         }
+        w.b.remove(this.a);
+        w.c();
     }
 }

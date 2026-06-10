@@ -1,69 +1,28 @@
 package X;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.text.style.DynamicDrawableSpan;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
+import com.ss.android.ugc.aweme.profile.model.User;
+import com.windukk.hook.HookMethod;
 
-public final class l0 extends DynamicDrawableSpan {
-    public final BitmapDrawable a;
-    public final m0 b;
-
-    public l0(BitmapDrawable bitmapDrawable, m0 m0Var) {
-        this.a = bitmapDrawable;
-        this.b = m0Var;
-    }
-
-    @Override
-    public final void draw(Canvas canvas, CharSequence charSequence, int i, int i2, float f, int i3, int i4, int i5, Paint paint) {
-        if (t0.a(this.a)) {
-            Rect bounds = this.a.getBounds();
-            if (bounds.isEmpty()) {
+class l0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        String uid;
+        Object result = hookMethodParam.getResult();
+        if (result instanceof String) {
+            String str = (String) result;
+            Object[] objArr = hookMethodParam.args;
+            if (objArr.length == 0) {
                 return;
             }
-            Paint.FontMetricsInt fontMetricsInt = paint.getFontMetricsInt();
-            int i6 = fontMetricsInt.descent;
-            int iHeight = ((i4 + i6) - ((i6 - fontMetricsInt.ascent) / 2)) - (bounds.height() / 2);
-            canvas.save();
-            canvas.translate(f, iHeight);
-            try {
-                this.a.draw(canvas);
-            } catch (Throwable th) {
-                th.getMessage();
-                int i7 = v3.a;
+            Object obj = objArr[0];
+            if (obj instanceof User) {
+                uid = ((User) obj).getUid();
+            } else if (obj instanceof IMUser) {
+                uid = ((IMUser) obj).getUid();
+            } else {
+                uid = obj instanceof String ? (String) obj : null;
             }
-            canvas.restore();
+            hookMethodParam.setResult(a1.a(uid, str));
         }
-    }
-
-    @Override
-    public final Drawable getDrawable() {
-        return this.a;
-    }
-
-    @Override
-    public final int getSize(Paint paint, CharSequence charSequence, int i, int i2, Paint.FontMetricsInt fontMetricsInt) {
-        if (!t0.a(this.a)) {
-            return 0;
-        }
-        Rect bounds = this.a.getBounds();
-        if (bounds.isEmpty()) {
-            return 0;
-        }
-        if (fontMetricsInt != null) {
-            Paint.FontMetricsInt fontMetricsInt2 = paint.getFontMetricsInt();
-            int i3 = fontMetricsInt2.descent;
-            int i4 = fontMetricsInt2.ascent;
-            int i5 = bounds.bottom - bounds.top;
-            int i6 = (((i3 - i4) / 2) + i4) - (i5 / 2);
-            fontMetricsInt.ascent = i6;
-            fontMetricsInt.top = i6;
-            int i7 = i6 + i5;
-            fontMetricsInt.descent = i7;
-            fontMetricsInt.bottom = i7;
-        }
-        return bounds.right;
     }
 }

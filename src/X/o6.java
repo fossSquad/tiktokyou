@@ -1,14 +1,12 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
+public abstract class o6 {
+    public static final p5 a;
+    public static final x5 b;
 
-class o6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
-        }
+    static {
+        x4 x4Var = new x4("SINGLE_PHOTO_VIDEO_WATERMARK_TASK", "X.0WgF");
+        a = new p5(x4Var, "AWEME", new String[]{"LL", "l1"});
+        b = new x5(x4Var, "SUBSCRIBE", new String[]{"subscribe"});
     }
 }

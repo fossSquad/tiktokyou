@@ -1,21 +1,16 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
+public abstract class d6 {
+    public static final x5 a;
+    public static final x5 b;
+    public static final x5 c;
+    public static final x5 d;
 
-class d6 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof ColorStateList) || (colorStateListA = x6.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
-                    return;
-                }
-                hookMethodParam.args[1] = colorStateListA;
-            }
-        }
+    static {
+        x4 x4Var = new x4("PROFILE_NAVBAR_NICKNAME_PROTOCOL_CLASS", "com.ss.android.ugc.profile.business.ur.ProfileNavbarNickNameProtocol");
+        a = new x5(x4Var, "PROFILE_NAVBAR_NICKNAME_CONTEXT", new String[]{"LJJLIIIJJI", "LJJLIIIJL"});
+        b = new x5(x4Var, "PROFILE_NAVBAR_NICKNAME_COMMON_INFO", new String[]{"LJIILL", "LJJLJLI", "LJIILIIL"});
+        c = new x5(x4Var, "PROFILE_NAVBAR_NICKNAME_TEXT", new String[]{"LJJZZI", "LJLJL"});
+        d = new x5(x4Var, "PROFILE_NAVBAR_NICKNAME_POPUP", new String[]{"LJLJLLL", "LLD"});
     }
 }

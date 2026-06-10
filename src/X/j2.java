@@ -1,38 +1,39 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.feed.model.Video;
 import com.windukk.hook.HookMethod;
 
 class j2 extends HookMethod {
-    final  Class a;
-    final  Class b;
-    final  Class c;
+    final  String a;
 
-    public j2(Class cls, Class cls2, Class cls3) {
-        this.a = cls;
-        this.b = cls2;
-        this.c = cls3;
+    public j2(String str) {
+        this.a = str;
     }
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Video video;
-        m2 m2VarA;
-        try {
-            Object obj = hookMethodParam.args[0];
-            Object obj2 = e4.a(this.a, "LJIILJJIL").get(obj);
-            if (obj2 == null) {
-                return;
+        Object obj;
+        if ("clear".equals(this.a)) {
+            v2.a((Object) "called", "prefs.write.clear");
+            return;
+        }
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj2 = objArr[0];
+            if (obj2 instanceof String) {
+                String str = (String) obj2;
+                if (v2.a(str)) {
+                    if ("remove".equals(this.a)) {
+                        obj = "<remove>";
+                    } else {
+                        Object[] objArr2 = hookMethodParam.args;
+                        if (objArr2.length < 2) {
+                            obj = "<remove>";
+                        } else {
+                            obj = objArr2[1];
+                        }
+                    }
+                    v2.a(obj, "prefs.write.".concat(str));
+                }
             }
-            Object obj3 = e4.a(this.b, "LJFF").get(obj);
-            if (!(obj3 instanceof Aweme) || (video = ((Aweme) obj3).getVideo()) == null || (m2VarA = o2.a(video, null, "protocol")) == null) {
-                return;
-            }
-            e4.a(this.c, "LIZ").set(obj2, m2VarA.a);
-            int i = v3.a;
-        } catch (Exception e) {
-            e.getMessage();
-            int i2 = v3.a;
         }
     }
 }

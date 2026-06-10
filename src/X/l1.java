@@ -1,45 +1,41 @@
 package X;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.ContextWrapper;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
+import java.lang.reflect.InvocationTargetException;
 
-public final class l1 implements Application.ActivityLifecycleCallbacks {
-    @Override
-    public final void onActivityCreated(Activity activity, Bundle bundle) {
+public interface l1 {
+    public static final l1 a = new l1() {
+        @Override
+        public final String b(Object obj) {
+            return l1.c(obj);
+        }
+    };
+    public static final l1 b = new l1() {
+        @Override
+        public final String b(Object obj) {
+            return l1.a(obj);
+        }
+    };
+
+    static  String a(Object obj) throws IllegalAccessException, InvocationTargetException {
+        Object objInvoke = g8.a(obj.getClass(), "getExtra", new Class[0]).invoke(obj, null);
+        if (objInvoke == null) {
+            return null;
+        }
+        Object objInvoke2 = g8.a(objInvoke.getClass(), "getImUser", new Class[0]).invoke(objInvoke, null);
+        if (objInvoke2 instanceof IMUser) {
+            return ((IMUser) objInvoke2).getUid();
+        }
+        return null;
     }
 
-    @Override
-    public final void onActivityDestroyed(Activity activity) {
+    static  String c(Object obj) throws IllegalAccessException, InvocationTargetException {
+        Object objInvoke = g8.a(obj.getClass(), "getUid", new Class[0]).invoke(obj, null);
+        if (objInvoke instanceof String) {
+            return (String) objInvoke;
+        }
+        return null;
     }
 
-    @Override
-    public final void onActivityPaused(Activity activity) {
-    }
-
-    @Override
-    public final void onActivityResumed(final Activity activity) {
-        m1.a((ContextWrapper) activity);
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public final void run() {
-                m1.a(activity);
-            }
-        }, 500L);
-    }
-
-    @Override
-    public final void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-    }
-
-    @Override
-    public final void onActivityStarted(Activity activity) {
-    }
-
-    @Override
-    public final void onActivityStopped(Activity activity) {
-    }
+    String b(Object obj);
 }

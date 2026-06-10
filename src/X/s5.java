@@ -1,13 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class s5 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d() && (iA = x6.a((iIntValue = ((Integer) hookMethodParam.args[0]).intValue()))) != iIntValue) {
-            hookMethodParam.args[0] = Integer.valueOf(iA);
-        }
-    }
+public abstract class s5 {
+    public static final x5 a = new x5(new x4("IM_FRIENDS_SERVICE_IMPL_CLASS", "com.ss.android.ugc.aweme.im.saas.host.impl.friends.IMFriendsServiceImpl"), "IM_FRIENDS_DISPLAY_NAME", new String[]{"LIZIZ"});
 }

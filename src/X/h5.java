@@ -1,11 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class h5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().h) {
-            hookMethodParam.setResult(Boolean.TRUE);
-        }
-    }
+public abstract class h5 {
+    public static final x5 a = new x5(new x4("COMMENT_TRANSLATION_KEVA_SERVICE", "com.ss.android.ugc.aweme.translation.service.ITranslationKevaService"), "WRAPPED_IS_ENABLED", new String[]{"LIZ"});
 }

@@ -1,20 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public abstract class v5 {
+    public static final x5 a;
+    public static final x5 b;
 
-class v5 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = x6.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                hookMethodParam.args[0] = Integer.valueOf(iA);
-            }
-        }
+    static {
+        x4 x4Var = new x4("LOTTIE_ANIMATION_VIEW", "X.1AJZ");
+        a = new x5(x4Var, "PLAY_ANIMATION", new String[]{"playAnimation"});
+        b = new x5(x4Var, "SET_COMPOSITION", new String[]{"setComposition"});
     }
 }

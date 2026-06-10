@@ -1,22 +1,21 @@
 package X;
 
-import android.app.Activity;
-import android.view.View;
-import android.widget.ScrollView;
+import android.view.MotionEvent;
+import android.widget.TextView;
+import com.windukk.hook.HookMethod;
 
-public final class o0 extends ScrollView {
-    public int a;
-
-    public o0(Activity activity) {
-        super(activity);
-    }
-
-    @Override
-    public final void onMeasure(int i, int i2) {
-        int i3 = this.a;
-        if (i3 > 0) {
-            i2 = View.MeasureSpec.makeMeasureSpec(i3, Integer.MIN_VALUE);
+class o0 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object obj = hookMethodParam.thisObject;
+        if (obj instanceof TextView) {
+            TextView textView = (TextView) obj;
+            Object[] objArr = hookMethodParam.args;
+            if (objArr.length != 0) {
+                Object obj2 = objArr[0];
+                if ((obj2 instanceof MotionEvent) && a1.a(textView, (MotionEvent) obj2)) {
+                    hookMethodParam.setResult(Boolean.TRUE);
+                }
+            }
         }
-        super.onMeasure(i, i2);
     }
 }
