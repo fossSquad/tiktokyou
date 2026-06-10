@@ -1,16 +1,5 @@
 package X;
 
-import android.app.Activity;
-import com.windukk.hook.HookMethod;
-
-class o5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        try {
-            ((Activity) hookMethodParam.thisObject).finish();
-            int i = v3.a;
-        } catch (Exception e) {
-            new StringBuilder("Failed to finish splash activity: ").append(e.getMessage());
-            int i2 = v3.a;
-        }
-    }
+public abstract class o5 {
+    public static final x5 a = new x5(new x4("EDIT_SAVE_WATERMARK_GATE", "X.0W1d"), "EDIT_SAVE_NO_WATERMARK", new String[]{"LJJ"});
 }

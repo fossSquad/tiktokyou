@@ -1,14 +1,5 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
-
-class v6 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.args[0]))) != colorStateList) {
-            hookMethodParam.args[0] = colorStateListA;
-        }
-    }
+public abstract class v6 {
+    public static final p5 a = new p5(new x4("TUX_ACTION_SHEET", "com.bytedance.tux.sheet.actionsheet.TuxActionSheet"), "TUX_ACTION_SHEET_TITLE", new String[]{"LLJJIJI", "LLJJ"});
 }

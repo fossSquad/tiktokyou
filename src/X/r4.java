@@ -1,11 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class r4 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().a) {
-            hookMethodParam.setResult(y3.a().b().e);
-        }
-    }
+public abstract class r4 {
+    public static final x5 a = new x5(new x4("ALIAS_DISPLAY_NAME_HELPER_CLASS", "X.0TaZ"), "DISPLAY_NAME", new String[]{"LIZ", "LIZIZ", "LIZJ"});
 }

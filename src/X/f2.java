@@ -3,13 +3,16 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class f2 extends HookMethod {
-    final  String a;
-
-    public f2(String str) {
-        this.a = str;
-    }
-
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        h2.a(hookMethodParam.getResult(), this.a);
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj = objArr[0];
+            if (obj instanceof String) {
+                String str = (String) obj;
+                if (v2.a(str)) {
+                    v2.a(hookMethodParam.getResult(), "prefs.".concat(str));
+                }
+            }
+        }
     }
 }

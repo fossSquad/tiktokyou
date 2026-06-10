@@ -3,9 +3,13 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class n4 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().a) {
-            hookMethodParam.setResult(y3.a().b().c);
-        }
+    final  String a;
+
+    public n4(String str) {
+        this.a = str;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object obj = hookMethodParam.thisObject;
     }
 }

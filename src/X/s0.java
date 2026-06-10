@@ -1,11 +1,10 @@
 package X;
 
-public final class s0 {
-    public final String a;
-    public final String b;
+import com.ss.android.ugc.profile.platform.base.data.UserProfileInfo;
+import com.windukk.hook.HookMethod;
 
-    public s0(String str, String str2) {
-        this.a = str;
-        this.b = str2;
+class s0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(a1.a(((UserProfileInfo) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

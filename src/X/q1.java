@@ -1,29 +1,17 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import java.util.concurrent.ConcurrentHashMap;
 
 class q1 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object result = hookMethodParam.getResult();
+        Boolean bool = Boolean.TRUE;
+        if (bool.equals(result)) {
+            return;
+        }
         Object[] objArr = hookMethodParam.args;
-        boolean z = true;
-        if (objArr.length >= 1) {
-            Object obj = objArr[0];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                ConcurrentHashMap concurrentHashMap = h2.a;
-                if (str.length() > 12000) {
-                    return;
-                }
-                boolean z2 = str.contains("\"device_id\"") || str.contains("\"device_id_str\"") || str.contains("\"did\"");
-                boolean z3 = str.contains("\"install_id\"") || str.contains("\"install_id_str\"") || str.contains("\"iid\"");
-                if (!str.contains("\"openudid\"") && !str.contains("\"clientudid\"") && !str.contains("\"cliend_udid\"")) {
-                    z = false;
-                }
-                if ((str.contains("\"server_time\"") && z2 && z3) || ((z && z2) || str.contains("\"install_info\""))) {
-                    h2.b("JSONObject.ctor", str);
-                }
-            }
+        if (v1.a((objArr == null || objArr.length <= 0) ? null : objArr[0])) {
+            hookMethodParam.setResult(bool);
         }
     }
 }

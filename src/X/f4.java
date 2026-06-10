@@ -1,17 +1,26 @@
 package X;
 
-public final class f4 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
-    public final String e;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-    public f4(String str, String str2, String str3, String str4, String str5) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
-        this.e = str5;
+class f4 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = k4.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = d7.a().h;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = k4.a(str);
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
+            }
+        } finally {
+            k4.d.set(Boolean.FALSE);
+        }
     }
 }

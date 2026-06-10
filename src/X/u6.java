@@ -1,13 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public abstract class u6 {
+    public static final x5 a;
+    public static final x5 b;
 
-class u6 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d() && (iA = x6.a((iIntValue = ((Integer) hookMethodParam.args[0]).intValue()))) != iIntValue) {
-            hookMethodParam.args[0] = Integer.valueOf(iA);
-        }
+    static {
+        x4 x4Var = new x4("TIKTOK_SNACKBAR", "X.14OT");
+        a = new x5(x4Var, "SET_TEXT", new String[]{"LJIIIZ"});
+        b = new x5(x4Var, "SHOW", new String[]{"LJIIJ"});
     }
 }

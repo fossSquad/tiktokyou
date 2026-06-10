@@ -1,15 +1,19 @@
 package X;
 
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookMethod;
 
 class g0 extends HookMethod {
-    final  int a;
-
-    public g0(int i) {
-        this.a = i;
-    }
-
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        t0.a(hookMethodParam, this.a);
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if (obj instanceof Aweme) {
+                Aweme aweme = (Aweme) obj;
+                User author = aweme != null ? aweme.getAuthor() : null;
+                hookMethodParam.setResult(a1.a(author != null ? author.getUid() : null, (String) hookMethodParam.getResult()));
+            }
+        }
     }
 }

@@ -1,16 +1,29 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.os.SystemClock;
+import android.view.View;
+import android.view.ViewGroup;
+import java.util.ArrayList;
 
-class t extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (hookMethodParam.args.length >= 2) {
-            Object result = hookMethodParam.getResult();
-            if (result instanceof String) {
-                String str = (String) result;
-                Object obj = hookMethodParam.args[0];
-                hookMethodParam.setResult(t0.a(obj instanceof String ? (String) obj : null, str));
+public final class t implements View.OnLongClickListener {
+    @Override
+    public final boolean onLongClick(View view) {
+        ViewGroup viewGroup;
+        ArrayList arrayList = new ArrayList(w.b.values());
+        int size = arrayList.size();
+        int i = 0;
+        while (i < size) {
+            Object obj = arrayList.get(i);
+            i++;
+            v vVar = (v) obj;
+            if (w.b() && (viewGroup = (ViewGroup) vVar.a.get()) != null) {
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                vVar.e = true;
+                vVar.i = jUptimeMillis + 2600;
+                w.a(vVar, true);
+                viewGroup.postDelayed(new u(vVar, vVar.i), 2640L);
             }
         }
+        return true;
     }
 }

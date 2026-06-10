@@ -1,18 +1,19 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public final class u1 implements Runnable {
+    public final  Class a;
+    public final  Object b;
 
-class u1 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 1) {
-            Object obj = objArr[0];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                if (h2.a(str)) {
-                    h2.a(hookMethodParam.getResult(), "prefs_iface.".concat(str));
-                }
-            }
+    public u1(Class cls, Object obj) {
+        this.a = cls;
+        this.b = obj;
+    }
+
+    @Override
+    public final void run() {
+        try {
+            u6.b.a(this.a, new Class[0]).invoke(this.b, null);
+        } catch (Throwable th) {
         }
     }
 }

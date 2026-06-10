@@ -1,17 +1,19 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.text.TextUtils;
 
-class c1 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object result = hookMethodParam.getResult();
-        Boolean bool = Boolean.TRUE;
-        if (bool.equals(result)) {
-            return;
-        }
-        Object[] objArr = hookMethodParam.args;
-        if (h1.a((objArr == null || objArr.length <= 0) ? null : objArr[0])) {
-            hookMethodParam.setResult(bool);
-        }
+public final class c1 {
+    public final String a;
+    public final String b;
+    public final boolean c;
+    public final boolean d;
+    public final String e;
+
+    public c1(String str, String str2, boolean z, boolean z2, String str3) {
+        this.a = str;
+        this.b = d1.b(str2);
+        this.c = z;
+        this.d = z2;
+        this.e = TextUtils.isEmpty(str3) ? null : str3;
     }
 }

@@ -1,19 +1,41 @@
 package X;
 
-import android.view.MotionEvent;
-import android.widget.TextView;
-import com.windukk.hook.HookMethod;
+import android.content.Context;
+import android.os.Handler;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-class x extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object obj = hookMethodParam.thisObject;
-        if (obj instanceof TextView) {
-            TextView textView = (TextView) obj;
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length != 0) {
-                Object obj2 = objArr[0];
-                if ((obj2 instanceof MotionEvent) && t0.a(textView, (MotionEvent) obj2)) {
-                    hookMethodParam.setResult(Boolean.TRUE);
+public final class x implements Runnable {
+    @Override
+    public final void run() {
+        try {
+            Context contextC = p4.c();
+            if (contextC != null) {
+                y.b(contextC);
+                if (!d7.a().m) {
+                    y.a(contextC);
+                    AtomicBoolean atomicBoolean = y.b;
+                    atomicBoolean.set(false);
+                    Handler handler = y.a;
+                    handler.removeCallbacks(y.e);
+                    if (atomicBoolean.get()) {
+                        handler.postDelayed(this, 300000L);
+                        return;
+                    }
+                    return;
+                }
+                y.b(contextC, "heartbeat");
+                y.c(contextC);
+            }
+            if (y.b.get()) {
+                y.a.postDelayed(this, 300000L);
+            }
+        } catch (Throwable th) {
+            try {
+                th.getMessage();
+                int i = p4.a;
+            } finally {
+                if (y.b.get()) {
+                    y.a.postDelayed(this, 300000L);
                 }
             }
         }

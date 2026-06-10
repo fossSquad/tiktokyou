@@ -1,10 +1,15 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
 
-class t2 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        return 3;
+class t2 extends HookMethod {
+    final  String a;
+
+    public t2(String str) {
+        this.a = str;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        v2.a(hookMethodParam.getResult(), this.a);
     }
 }

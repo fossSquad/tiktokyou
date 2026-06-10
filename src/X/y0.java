@@ -1,31 +1,43 @@
 package X;
 
-import android.content.Context;
-import androidx.fragment.app.Fragment;
-import com.ss.android.ugc.aweme.comment.model.Comment;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import java.lang.ref.WeakReference;
+import java.util.concurrent.ConcurrentHashMap;
 
 class y0 extends HookMethod {
+    final  int a;
+
+    public y0(int i) {
+        this.a = i;
+    }
+
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Context context;
-        Object obj;
-        String text;
-        try {
-            Object obj2 = hookMethodParam.thisObject;
-            WeakReference weakReference = (WeakReference) e4.a(obj2.getClass(), "LIZ").get(obj2);
-            Fragment fragment = weakReference != null ? (Fragment) weakReference.get() : null;
-            if (fragment != null && (context = fragment.getContext()) != null && (obj = e4.a(obj2.getClass(), "LIZJ").get(obj2)) != null) {
-                Object objInvoke = e4.a(obj.getClass(), "LIZ", new Class[0]).invoke(obj, null);
-                if ((objInvoke instanceof Comment) && (text = ((Comment) objInvoke).getText()) != null) {
-                    h1.a(context, text);
-                    h1.a(fragment, context);
-                    hookMethodParam.setResult((Object) null);
+        CharSequence charSequenceAppend;
+        z7 z7VarA;
+        int i = this.a;
+        ConcurrentHashMap concurrentHashMap = a1.a;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length > i) {
+            Object obj = objArr[i];
+            if (obj instanceof CharSequence) {
+                CharSequence charSequence = (CharSequence) obj;
+                Object obj2 = hookMethodParam.thisObject;
+                if (TextUtils.isEmpty(charSequence) || (z7VarA = a1.a(obj2)) == null) {
+                    charSequenceAppend = charSequence;
+                } else {
+                    String string = charSequence.toString();
+                    String strA = a1.a(z7VarA.a, string);
+                    if (TextUtils.equals(strA, string)) {
+                        charSequenceAppend = charSequence;
+                    } else {
+                        charSequenceAppend = new SpannableStringBuilder(charSequence).append((CharSequence) strA.substring(string.length()));
+                    }
+                }
+                if (charSequenceAppend != charSequence) {
+                    hookMethodParam.args[i] = charSequenceAppend;
                 }
             }
-        } catch (Throwable th) {
-            th.getMessage();
-            int i = v3.a;
         }
     }
 }

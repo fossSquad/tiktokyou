@@ -1,11 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class e3 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            hookMethodParam.setResult(0);
-        }
-    }
+public interface e3 {
+    void a(g3 g3Var);
 }

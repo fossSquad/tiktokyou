@@ -1,13 +1,16 @@
 package X;
 
-import android.graphics.Bitmap;
+import com.windukk.hook.HookMethod;
 
-public final class k0 {
-    public final String a;
-    public final Bitmap b;
-
-    public k0(String str, Bitmap bitmap) {
-        this.a = str;
-        this.b = bitmap;
+class k0 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (hookMethodParam.args.length >= 2) {
+            Object result = hookMethodParam.getResult();
+            if (result instanceof String) {
+                String str = (String) result;
+                Object obj = hookMethodParam.args[0];
+                hookMethodParam.setResult(a1.a(obj instanceof String ? (String) obj : null, str));
+            }
+        }
     }
 }

@@ -1,0 +1,11 @@
+package X;
+
+import com.windukk.hook.HookMethod;
+
+class i9 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (d7.a().d) {
+            hookMethodParam.setResult((Object) null);
+        }
+    }
+}

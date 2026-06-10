@@ -1,14 +1,5 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
-
-class j6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
-        }
-    }
+public abstract class j6 {
+    public static final p5 a = new p5(new x4("SETTINGS_CELL_CLICK_CLASS", "X.06fg"), "SETTINGS_CELL_CLICK_CONTEXT", new String[]{"LIZ"});
 }

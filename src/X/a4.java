@@ -4,11 +4,9 @@ import com.windukk.hook.HookMethod;
 
 class a4 extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String str = (String) hookMethodParam.args[0];
-        if (str == null || !str.contains("watermark")) {
-            return;
-        }
-        hookMethodParam.args[0] = str.replace("watermark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-        int i = v3.a;
+        int iIntValue = ((Integer) hookMethodParam.args[0]).intValue();
+        int iIntValue2 = ((Integer) hookMethodParam.args[1]).intValue() & (-8193);
+        hookMethodParam.args[0] = Integer.valueOf(iIntValue & (-8193));
+        hookMethodParam.args[1] = Integer.valueOf(iIntValue2);
     }
 }

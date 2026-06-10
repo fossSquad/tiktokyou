@@ -1,18 +1,14 @@
 package X;
 
-import android.app.Notification;
-import android.graphics.drawable.Icon;
-import com.ss.android.ugc.aweme.setting.ui.SettingContainerActivity;
-import com.windukk.hook.HookBridge;
-
 public abstract class a7 {
-    public static void a() {
-        try {
-            HookBridge.hookMethod(Notification.Builder.class.getMethod("setSmallIcon", Icon.class), new y6());
-            HookBridge.hookAllMethods(SettingContainerActivity.class, "onCreate", new z6());
-        } catch (Exception e) {
-            e.getMessage();
-            int i = v3.a;
-        }
+    public static final p5 a;
+    public static final p5 b;
+    public static final p5 c;
+
+    static {
+        x4 x4Var = new x4("WATERMARK_BUILDER", "com.ss.android.ugc.aweme.services.watermark.WaterMarkBuilder");
+        a = new p5(x4Var, "INPUT_PATH", new String[]{"inputPath"});
+        b = new p5(x4Var, "OUT_PATH", new String[]{"outPath"});
+        c = new p5(x4Var, "LISTENER", new String[]{"listener"});
     }
 }

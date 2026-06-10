@@ -1,14 +1,5 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
-
-class h6 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (y3.a().d() && (colorStateListA = x6.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
-        }
-    }
+public abstract class h6 {
+    public static final x5 a = new x5(new x4("SEEKBAR_CONTROLLER", "X.19Zy"), "SHOULD_SHOW", new String[]{"LJII", "LIZLLL"});
 }

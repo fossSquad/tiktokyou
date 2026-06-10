@@ -1,21 +1,15 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.common.model.ContinuousLoadingAwemeList;
-import com.windukk.hook.HookMethod;
-import java.util.List;
+public final class x4 {
+    public final String a;
+    public final String b;
 
-class x4 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            ContinuousLoadingAwemeList continuousLoadingAwemeList = (ContinuousLoadingAwemeList) hookMethodParam.thisObject;
-            continuousLoadingAwemeList.awemeList = g.a(continuousLoadingAwemeList.awemeList);
-            Object result = hookMethodParam.getResult();
-            if (result instanceof List) {
-                try {
-                    hookMethodParam.setResult(g.a((List) result));
-                } catch (Throwable th) {
-                }
-            }
-        }
+    public x4(String str, String str2) {
+        this.a = str;
+        this.b = str2;
+    }
+
+    public final String toString() {
+        return this.a + "=" + this.b;
     }
 }

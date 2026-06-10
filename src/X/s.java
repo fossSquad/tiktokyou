@@ -1,24 +1,40 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.view.View;
+import java.util.ArrayList;
 
-class s extends HookMethod {
-    final  p0 a;
-    final  String b;
-
-    public s(p0 p0Var, String str) {
-        this.a = p0Var;
-        this.b = str;
-    }
-
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (hookMethodParam.getResult() instanceof String) {
-            try {
-                hookMethodParam.setResult(t0.a(this.a.b(hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
-            } catch (Exception e) {
-                e.getMessage();
-                int i = v3.a;
+public final class s implements View.OnClickListener {
+    @Override
+    public final void onClick(View view) {
+        d7 d7VarA = d7.a();
+        if (d7VarA == null) {
+            return;
+        }
+        boolean z = d7VarA.f;
+        boolean z2 = !z;
+        if (!z) {
+            ArrayList arrayList = new ArrayList(w.b.values());
+            int size = arrayList.size();
+            int i = 0;
+            while (i < size) {
+                Object obj = arrayList.get(i);
+                i++;
+                w.b((v) obj);
             }
         }
+        d7VarA.b(z2);
+        ArrayList arrayList2 = new ArrayList(w.b.values());
+        int size2 = arrayList2.size();
+        int i2 = 0;
+        while (i2 < size2) {
+            Object obj2 = arrayList2.get(i2);
+            i2++;
+            v vVar = (v) obj2;
+            vVar.h = z2;
+            vVar.e = false;
+            w.b(vVar, true);
+            w.a(vVar, true);
+        }
+        w.c();
     }
 }

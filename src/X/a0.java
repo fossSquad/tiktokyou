@@ -1,28 +1,13 @@
 package X;
 
-import android.app.Activity;
-import android.content.Context;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
-import android.view.View;
+import android.graphics.Bitmap;
 
-public final class a0 extends ClickableSpan {
-    public final  Context a;
-    public final  int b;
+public final class a0 {
+    public final String a;
+    public final Bitmap b;
 
-    public a0(Activity activity, int i) {
-        this.a = activity;
-        this.b = i;
-    }
-
-    @Override
-    public final void onClick(View view) {
-        t0.e(this.a);
-    }
-
-    @Override
-    public final void updateDrawState(TextPaint textPaint) {
-        textPaint.setColor(this.b);
-        textPaint.setUnderlineText(false);
+    public a0(String str, Bitmap bitmap) {
+        this.a = str;
+        this.b = bitmap;
     }
 }

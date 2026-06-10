@@ -1,34 +1,35 @@
 package X;
 
-import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
+import java.lang.reflect.Field;
+import java.util.List;
 
 class p3 extends HookMethod {
+    final  Field a;
+    final  boolean b;
+
+    public p3(Field field, boolean z) {
+        this.a = field;
+        this.b = z;
+    }
+
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ThreadLocal threadLocal = r3.d;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
-            return;
-        }
-        String str = y3.a().g;
-        if ("default".equals(str)) {
-            return;
-        }
-        threadLocal.set(Boolean.TRUE);
-        try {
-            int i = 1;
-            int iIntValue = ((Integer) hookMethodParam.args[1]).intValue();
-            boolean zBooleanValue = ((Boolean) hookMethodParam.args[2]).booleanValue();
-            if (iIntValue >= 600 && zBooleanValue) {
-                i = 3;
-            } else if (iIntValue < 600) {
-                i = zBooleanValue ? 2 : 0;
+        Object obj;
+        if (z3.a() && (obj = hookMethodParam.thisObject) != null) {
+            try {
+                Object obj2 = this.a.get(obj);
+                if (obj2 instanceof List) {
+                    List list = (List) obj2;
+                    if (list.isEmpty()) {
+                        return;
+                    }
+                    List listB = this.b ? z3.b(list) : z3.a(list);
+                    if (listB != obj2) {
+                        this.a.set(obj, listB);
+                    }
+                }
+            } catch (Throwable th) {
             }
-            Typeface typefaceA = r3.a(str, i);
-            if (typefaceA != null) {
-                hookMethodParam.setResult(typefaceA);
-            }
-        } finally {
-            r3.d.set(Boolean.FALSE);
         }
     }
 }

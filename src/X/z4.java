@@ -1,16 +1,5 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
-import com.windukk.hook.HookMethod;
-
-class z4 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
-            if (searchMixFeed.preciseAd != null) {
-                searchMixFeed.preciseAd = null;
-                hookMethodParam.setResult((Object) null);
-            }
-        }
-    }
+public abstract class z4 {
+    public static final x5 a = new x5(new x4("COMMENT_HOLDER_CLASS", "X.0lbr"), "COMMENT_HOLDER_COMMENT", new String[]{"LIZ"});
 }

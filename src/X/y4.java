@@ -1,18 +1,14 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
-import com.windukk.hook.HookMethod;
+public abstract class y4 {
+    public static final p5 a;
+    public static final p5 b;
+    public static final x5 c;
 
-class y4 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (y3.a().d) {
-            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
-            Aweme aweme = (Aweme) hookMethodParam.getResult();
-            g.a(searchMixFeed);
-            if (g.a(aweme)) {
-                hookMethodParam.setResult((Object) null);
-            }
-        }
+    static {
+        x4 x4Var = new x4("COMMENT_CLICK_HANDLER", "X.0lmM");
+        a = new p5(x4Var, "FRAGMENT_REF", new String[]{"LIZ"});
+        b = new p5(x4Var, "COMMENT_HOLDER", new String[]{"LIZJ"});
+        c = new x5(x4Var, "COPY", new String[]{"LJIILL", "LJIILJJIL"});
     }
 }

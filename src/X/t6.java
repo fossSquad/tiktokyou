@@ -1,13 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-
-class t6 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (y3.a().d() && (iA = x6.a((iIntValue = ((Integer) hookMethodParam.args[0]).intValue()))) != iIntValue) {
-            hookMethodParam.args[0] = Integer.valueOf(iA);
-        }
-    }
+public abstract class t6 {
+    public static final x5 a = new x5(new x4("TABLET_PLAYBACK_SPEED_COMPONENT_CLASS", "com.ss.android.ugc.feed.platform.panel.speed.TabletPlaybackSpeedComponent"), "TABLET_PLAYBACK_SPEED_RESTORE", new String[]{"cn"});
 }
