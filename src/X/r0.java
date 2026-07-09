@@ -1,28 +1,22 @@
 package X;
 
-import android.app.Activity;
-import android.content.Context;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
-import android.view.View;
+import android.view.MotionEvent;
+import android.widget.TextView;
+import com.windukk.hook.HookMethod;
 
-public final class r0 extends ClickableSpan {
-    public final  Context a;
-    public final  int b;
-
-    public r0(Activity activity, int i) {
-        this.a = activity;
-        this.b = i;
-    }
-
+class r0 extends HookMethod {
     @Override
-    public final void onClick(View view) {
-        a1.c(this.a);
-    }
-
-    @Override
-    public final void updateDrawState(TextPaint textPaint) {
-        textPaint.setColor(this.b);
-        textPaint.setUnderlineText(false);
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object obj = hookMethodParam.thisObject;
+        if (obj instanceof TextView) {
+            TextView textView = (TextView) obj;
+            Object[] objArr = hookMethodParam.args;
+            if (objArr.length != 0) {
+                Object obj2 = objArr[0];
+                if ((obj2 instanceof MotionEvent) && d1.a(textView, (MotionEvent) obj2)) {
+                    hookMethodParam.setResult(Boolean.TRUE);
+                }
+            }
+        }
     }
 }

@@ -1,30 +1,17 @@
 package X;
 
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
 import com.windukk.hook.HookMethod;
 
 class eb extends HookMethod {
-    final  Class a;
-    final  Class b;
-
-    public eb(Class cls, Class cls2) {
-        this.a = cls;
-        this.b = cls2;
-    }
-
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length < 2 || !this.a.isInstance(objArr[1])) {
-            return;
-        }
-        try {
-            ib.a(hookMethodParam, this.b);
-        } catch (Throwable th) {
-            if (ib.c) {
-                return;
+        if (l8.a().c) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
+            g.a(searchMixFeed);
+            if (g.b(searchMixFeed)) {
+                hookMethodParam.setResult(Boolean.FALSE);
             }
-            ib.c = true;
-            th.getMessage();
-            int i = p4.a;
         }
     }
 }

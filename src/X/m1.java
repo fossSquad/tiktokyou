@@ -1,31 +1,49 @@
 package X;
 
 import android.content.Context;
-import androidx.fragment.app.Fragment;
-import com.ss.android.ugc.aweme.comment.model.Comment;
+import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import java.lang.ref.WeakReference;
+import java.util.concurrent.ConcurrentHashMap;
 
 class m1 extends HookMethod {
+    @Override
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Context context;
-        Object obj;
-        String text;
-        try {
-            Object obj2 = hookMethodParam.thisObject;
-            WeakReference weakReference = (WeakReference) y4.a.a(obj2.getClass()).get(obj2);
-            Fragment fragment = weakReference != null ? (Fragment) weakReference.get() : null;
-            if (fragment != null && (context = fragment.getContext()) != null && (obj = y4.b.a(obj2.getClass()).get(obj2)) != null) {
-                Object objInvoke = z4.a.a(obj.getClass(), new Class[0]).invoke(obj, null);
-                if ((objInvoke instanceof Comment) && (text = ((Comment) objInvoke).getText()) != null) {
-                    v1.a(context, text);
-                    v1.a(fragment, context);
-                    hookMethodParam.setResult((Object) null);
+        String str;
+        String str2;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 2) {
+            boolean zEquals = false;
+            Object obj = objArr[0];
+            if (obj instanceof Context) {
+                Context context = (Context) obj;
+                Object obj2 = objArr[1];
+                ConcurrentHashMap concurrentHashMap = n1.a;
+                if (obj2 == null || !TextUtils.equals(obj2.getClass().getName(), "com.bytedance.hybrid.spark.third.router.SparkThirdContext")) {
+                    return;
+                }
+                Object obj3 = hookMethodParam.args[1];
+                try {
+                    Object obj4 = ha.a((Class) obj3.getClass(), "url").get(obj3);
+                    str = obj4 instanceof String ? (String) obj4 : null;
+                } catch (Throwable th) {
+                }
+                Object obj5 = hookMethodParam.args[1];
+                try {
+                    Object obj6 = ha.a((Class) obj5.getClass(), "seclinkConfig").get(obj5);
+                    if (obj6 != null) {
+                        try {
+                            Object obj7 = ha.a((Class) obj6.getClass(), "scene").get(obj6);
+                            str2 = obj7 instanceof String ? (String) obj7 : null;
+                        } catch (Throwable th2) {
+                        }
+                        zEquals = TextUtils.equals(str2, "bio_url");
+                    }
+                } catch (Throwable th3) {
+                }
+                if (zEquals && n1.a(context, str, true)) {
+                    hookMethodParam.setResult(null);
                 }
             }
-        } catch (Throwable th) {
-            th.getMessage();
-            int i = p4.a;
         }
     }
 }

@@ -3,11 +3,9 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class sa extends HookMethod {
+    @Override
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (d7.a().d() && (iA = cb.a((iIntValue = ((Integer) hookMethodParam.args[0]).intValue()))) != iIntValue) {
-            hookMethodParam.args[0] = Integer.valueOf(iA);
-        }
+        l8.a().getClass();
+        hookMethodParam.setResult(l8.a().b().d);
     }
 }

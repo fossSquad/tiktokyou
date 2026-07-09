@@ -1,10 +1,19 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
 
-class p2 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        return v2.d;
+class p2 extends HookMethod {
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj = objArr[0];
+            if (obj instanceof String) {
+                String str = (String) obj;
+                if (d3.a(str)) {
+                    d3.a(hookMethodParam.getResult(), "prefs_iface.".concat(str));
+                }
+            }
+        }
     }
 }

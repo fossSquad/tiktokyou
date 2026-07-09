@@ -1,17 +1,16 @@
 package X;
 
-import android.widget.TextView;
 import com.windukk.hook.HookMethod;
 
 class m0 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        CharSequence charSequence;
-        CharSequence charSequenceA;
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length != 0) {
-            Object obj = objArr[0];
-            if ((obj instanceof CharSequence) && (charSequenceA = a1.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
-                hookMethodParam.args[0] = charSequenceA;
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (hookMethodParam.args.length >= 2) {
+            Object result = hookMethodParam.getResult();
+            if (result instanceof String) {
+                String str = (String) result;
+                Object obj = hookMethodParam.args[0];
+                hookMethodParam.setResult(d1.a(obj instanceof String ? (String) obj : null, str));
             }
         }
     }

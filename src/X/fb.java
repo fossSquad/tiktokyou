@@ -1,13 +1,13 @@
 package X;
 
 import com.windukk.hook.HookMethod;
+import java.util.Collections;
 
 class fb extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length <= 0 || !ib.a(objArr[0])) {
-            return;
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (l8.a().c) {
+            hookMethodParam.setResult(Collections.EMPTY_LIST);
         }
-        hookMethodParam.setResult(-100);
     }
 }

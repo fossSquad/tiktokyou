@@ -1,12 +1,14 @@
 package X;
 
 public abstract class w6 {
-    public static final p5 a;
-    public static final x5 b;
+    public static final o5 a;
+    public static final t6 b;
+    public static final t6 c;
 
     static {
-        x4 x4Var = new x4("TUX_ACTION_SHEET_BASE_ITEM", "X.0nng");
-        a = new p5(x4Var, "TITLE", new String[]{"LIZ"});
-        b = new x5(x4Var, "SET_CLICK_LISTENER", new String[]{"LIZ"});
+        o5 o5Var = new o5("OFFLINE_MODE_COUNT_OPTIONS", "X.0MjJ");
+        a = o5Var;
+        b = new t6(o5Var, "OPTIONS", new String[]{"LJ"});
+        c = new t6(o5Var, "DEFAULT", new String[]{"LIZ"});
     }
 }

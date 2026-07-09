@@ -1,11 +1,13 @@
 package X;
 
-public final class b0 {
-    public final byte[] a;
-    public final String b;
+import android.graphics.Bitmap;
 
-    public b0(byte[] bArr, String str) {
-        this.a = bArr;
-        this.b = str;
+public final class b0 {
+    public final String a;
+    public final Bitmap b;
+
+    public b0(String str, Bitmap bitmap) {
+        this.a = str;
+        this.b = bitmap;
     }
 }

@@ -1,22 +1,22 @@
 package X;
 
-import android.app.Activity;
-import com.windukk.hook.HookMethod;
+public final class u9 implements Runnable {
+    public final Object a;
+    public final float b;
 
-class u9 extends HookMethod {
-    final  String a;
-
-    public u9(String str) {
-        this.a = str;
+    public u9(Object obj, float f, String str) {
+        this.a = obj;
+        this.b = f;
     }
 
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        try {
-            ((Activity) hookMethodParam.thisObject).finish();
-            int i = p4.a;
-        } catch (Exception e) {
-            e.getMessage();
-            int i2 = p4.a;
+    @Override
+    public final void run() {
+        if (Math.abs(v9.f - this.b) > 0.001f || v9.a(v9.f) || v9.h != null) {
+            return;
+        }
+        long j = v9.j;
+        if (j <= 0 || System.currentTimeMillis() - j >= 1200) {
+            v9.a(this.a, this.b);
         }
     }
 }

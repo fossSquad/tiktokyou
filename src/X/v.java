@@ -1,23 +1,29 @@
 package X;
 
+import android.os.SystemClock;
+import android.view.View;
 import android.view.ViewGroup;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.WeakHashMap;
 
-public final class v {
-    public final WeakReference a;
-    public p d;
-    public boolean e;
-    public boolean f;
-    public boolean g;
-    public long i;
-    public long j;
-    public final ArrayList b = new ArrayList(12);
-    public final WeakHashMap c = new WeakHashMap();
-    public boolean h = w.b();
-
-    public v(ViewGroup viewGroup) {
-        this.a = new WeakReference(viewGroup);
+public final class v implements View.OnLongClickListener {
+    @Override
+    public final boolean onLongClick(View view) {
+        ViewGroup viewGroup;
+        ArrayList arrayList = new ArrayList(x.b.values());
+        int size = arrayList.size();
+        int i = 0;
+        while (i < size) {
+            Object obj = arrayList.get(i);
+            i++;
+            w wVar = (w) obj;
+            if (x.b() && (viewGroup = (ViewGroup) wVar.a.get()) != null) {
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                wVar.e = true;
+                wVar.i = jUptimeMillis + 2600;
+                x.a(wVar, true);
+                viewGroup.postDelayed(new h(wVar, wVar.i), 2640L);
+            }
+        }
+        return true;
     }
 }

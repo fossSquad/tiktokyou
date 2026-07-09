@@ -1,5 +1,5 @@
 package X;
 
 public abstract class i5 {
-    public static final x5 a = new x5(new x4("COMMENT_TRANSLATION_LANG_KEVA_SERVICE", "com.ss.android.ugc.aweme.translation.service.ITranslationLangKevaService"), "WRAPPED_LANGUAGE", new String[]{"LJFF"});
+    public static final t6 a = new t6(new o5("ALIAS_DISPLAY_NAME_HELPER_CLASS", "X.0T8b"), "DISPLAY_NAME", new String[]{"LIZ", "LIZIZ", "LIZJ"});
 }

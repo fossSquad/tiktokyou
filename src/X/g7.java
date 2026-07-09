@@ -1,20 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public abstract class g7 {
+    public static final o5 a;
+    public static final t6 b;
 
-class g7 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object result = hookMethodParam.getResult();
-        if (result instanceof String) {
-            String str = (String) result;
-            CharSequence charSequenceB = a1.b((CharSequence) str);
-            String string = charSequenceB != null ? charSequenceB.toString() : null;
-            if (string == null || string.equals(str)) {
-                return;
-            }
-            hookMethodParam.setResult(string);
-            hookMethodParam.method.getName();
-            int i = p4.a;
-        }
+    static {
+        o5 o5Var = new o5("REFACTOR_PLAYER_CONTROLLER_CLASS", "com.ss.android.ugc.aweme.feed.controller.RefactorPlayerController");
+        a = o5Var;
+        b = new t6(o5Var, "REFACTOR_PLAYER_CONTROLLER_APPLY_SPEED", new String[]{"LJIILL", "I"});
     }
 }

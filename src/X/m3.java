@@ -1,10 +1,5 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
-
-class m3 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        return 3;
-    }
+public interface m3 {
+    void a(o3 o3Var);
 }

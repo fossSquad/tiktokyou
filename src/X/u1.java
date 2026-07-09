@@ -1,19 +1,24 @@
 package X;
 
-public final class u1 implements Runnable {
-    public final  Class a;
-    public final  Object b;
+import com.windukk.hook.HookMethod;
 
-    public u1(Class cls, Object obj) {
-        this.a = cls;
-        this.b = obj;
-    }
-
+class u1 extends HookMethod {
     @Override
-    public final void run() {
-        try {
-            u6.b.a(this.a, new Class[0]).invoke(this.b, null);
-        } catch (Throwable th) {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (Boolean.TRUE.equals(hookMethodParam.getResult())) {
+            return;
+        }
+        Object[] objArr = hookMethodParam.args;
+        boolean zA = false;
+        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
+        if (obj != null) {
+            try {
+                zA = y1.a(ha.a(obj.getClass(), "getCommonModel", new Class[0]).invoke(obj, null));
+            } catch (Throwable th) {
+            }
+        }
+        if (zA) {
+            hookMethodParam.setResult(Boolean.TRUE);
         }
     }
 }

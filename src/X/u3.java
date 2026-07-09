@@ -1,12 +1,11 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import java.util.Collections;
+import com.windukk.hook.ReplaceMethod;
 
-class u3 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d7.a().d) {
-            hookMethodParam.setResult(Collections.EMPTY_LIST);
-        }
+class u3 extends ReplaceMethod {
+    @Override
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return 3;
     }
 }

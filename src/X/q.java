@@ -1,30 +1,18 @@
 package X;
 
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
-public final class q implements View.OnAttachStateChangeListener {
-    public final  ViewGroup a;
-    public final  v b;
+public final class q implements View.OnLayoutChangeListener {
+    public final  w a;
 
-    public q(ViewGroup viewGroup, v vVar) {
-        this.a = viewGroup;
-        this.b = vVar;
+    public q(w wVar) {
+        this.a = wVar;
     }
 
     @Override
-    public final void onViewAttachedToWindow(View view) {
-    }
-
-    @Override
-    public final void onViewDetachedFromWindow(View view) {
-        p pVar;
-        ViewTreeObserver viewTreeObserver = this.a.getViewTreeObserver();
-        if (viewTreeObserver.isAlive() && (pVar = this.b.d) != null) {
-            viewTreeObserver.removeOnPreDrawListener(pVar);
-        }
-        w.b.remove(this.a);
-        w.c();
+    public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+        w wVar = this.a;
+        wVar.g = true;
+        x.a(wVar, 80L, true);
     }
 }

@@ -1,12 +1,22 @@
 package X;
 
 public abstract class c7 {
-    public static final String[] a = {"X.0BH1", "X.0BH2", "X.0BH3", "X.0BH4", "X.0BH5", "X.0BH6", "X.0BH7", "X.0BH8", "X.0BH9", "X.0BHA", "X.0BHB", "X.0BHC"};
+    public static final t6 a;
+    public static final t6 b;
+    public static final t6 c;
+    public static final t6 d;
+    public static final t6 e;
+    public static final t6 f;
+    public static final t6 g;
 
-    public static void a(String str, String str2, String[] strArr) {
-        if (strArr.length == 0) {
-            throw new IllegalArgumentException(str + " mapping has no obfuscated name: " + str2);
-        }
-        String str3 = strArr[0];
+    static {
+        o5 o5Var = new o5("PROFILE_INFO_NICKNAME_PROTOCOL_CLASS", "com.ss.android.ugc.profile.business.ur.nickname.ProfileInfoNicknameProtocol");
+        a = new t6(o5Var, "PROFILE_INFO_NICKNAME_CONTEXT", new String[]{"LJJLIIIJ"});
+        b = new t6(o5Var, "PROFILE_INFO_NICKNAME_COMMON_INFO", new String[]{"LJJLJLI", "LJJLIIIJJIZ"});
+        c = new t6(o5Var, "PROFILE_INFO_NICKNAME_TEXT", new String[]{"LJLJJLL", "LJLIL"});
+        d = new t6(o5Var, "PROFILE_INFO_NICKNAME_TEXT_WITH_PREFIX", new String[]{"LJZ", "LJLL"});
+        e = new t6(o5Var, "PROFILE_INFO_NICKNAME_TEXT_WITH_SUFFIX", new String[]{"LJLLL", "LJLJLLL"});
+        f = new t6(o5Var, "PROFILE_INFO_NICKNAME_TEXT_COMPACT", new String[]{"LJZI", "LJLLL"});
+        g = new t6(o5Var, "PROFILE_INFO_NICKNAME_CHAR_SEQUENCE", new String[]{"LJLJLLL", "LJLJI"});
     }
 }

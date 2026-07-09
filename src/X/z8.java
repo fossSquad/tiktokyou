@@ -1,120 +1,73 @@
 package X;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
+import com.windukk.hook.HookBridge;
+import com.windukk.hook.callbacks.HookCallback;
+import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public abstract class z8 {
-    public static void a(Object obj, boolean z) {
-        if (obj == null) {
-            return;
-        }
-        try {
-            g8.a(obj.getClass(), "invoke", Object.class).invoke(obj, Boolean.valueOf(z));
-        } catch (Exception e) {
-            e.getMessage();
-            int i = p4.a;
-        }
+    public static final LinkedHashMap a;
+    public static Method b;
+    public static Method c;
+    public static Method d;
+
+    static {
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        a = linkedHashMap;
+        linkedHashMap.put("DOWNLOAD_50_VIDEOS", new y8(200, 120, 600));
+        linkedHashMap.put("DOWNLOAD_60_VIDEOS", new y8(500, 300, 1500));
+        linkedHashMap.put("DOWNLOAD_100_VIDEOS", new y8(1000, 600, 3000));
+        linkedHashMap.put("DOWNLOAD_120_VIDEOS", new y8(2000, 1200, 6000));
+        linkedHashMap.put("DOWNLOAD_150_VIDEOS", new y8(3000, 1800, 9000));
+        linkedHashMap.put("DOWNLOAD_200_VIDEOS", new y8(5000, 3000, 15000));
+        linkedHashMap.put("DOWNLOAD_240_VIDEOS", new y8(HookCallback.PRIORITY_HIGHEST, 6000, 30000));
+        linkedHashMap.put("DOWNLOAD_480_VIDEOS", new y8(100000, 60000, 300000));
     }
 
-    public static Object a(Class cls, Object obj) {
-        if (obj == null) {
-            return null;
-        }
-        for (Class<?> superclass = obj.getClass(); superclass != null && superclass != Object.class; superclass = superclass.getSuperclass()) {
-            for (Field field : superclass.getDeclaredFields()) {
-                if (cls.isAssignableFrom(field.getType())) {
-                    try {
-                        field.setAccessible(true);
-                        Object obj2 = field.get(obj);
-                        if (obj2 != null) {
-                            return obj2;
-                        }
-                    } catch (IllegalAccessException e) {
-                    }
-                }
+    public static void a() {
+        try {
+            Method methodA = w6.b.a(w6.a.a(), new Class[0]);
+            if (!List.class.isAssignableFrom(methodA.getReturnType())) {
+                throw new NoSuchMethodException("Unexpected offline count-options return type: " + methodA);
             }
-        }
-        return null;
-    }
-
-    public static boolean a(Activity activity, Bitmap bitmap) throws Throwable {
-        OutputStream outputStreamOpenOutputStream;
-        OutputStream outputStream = null;
-        try {
+            HookBridge.hookMethod(methodA, new t8());
+            methodA.getName();
+            int i = g5.a;
             try {
-                String str = System.currentTimeMillis() + ".jpg";
-                ContentResolver contentResolver = activity.getContentResolver();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("_display_name", str);
-                contentValues.put("mime_type", "image/jpeg");
-                int i = Build.VERSION.SDK_INT;
-                if (i >= 29) {
-                    contentValues.put("relative_path", Environment.DIRECTORY_PICTURES + "/TikTok");
-                    contentValues.put("is_pending", (Integer) 1);
-                }
-                Uri uriInsert = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-                if (uriInsert == null) {
-                    return false;
-                }
-                outputStreamOpenOutputStream = contentResolver.openOutputStream(uriInsert);
-                if (outputStreamOpenOutputStream != null) {
-                    try {
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStreamOpenOutputStream);
-                        outputStreamOpenOutputStream.close();
-                        if (i >= 29) {
-                            contentValues.clear();
-                            contentValues.put("is_pending", (Integer) 0);
-                            contentResolver.update(uriInsert, contentValues, null, null);
-                        }
-                        try {
-                            outputStreamOpenOutputStream.close();
-                            return true;
-                        } catch (Exception e) {
-                            return true;
-                        }
-                    } catch (Exception e2) {
-                        e = e2;
-                        outputStream = outputStreamOpenOutputStream;
-                    } catch (Throwable th) {
-                        th = th;
-                        outputStream = outputStreamOpenOutputStream;
-                        if (outputStream != null) {
-                            try {
-                                outputStream.close();
-                            } catch (Exception e3) {
-                            }
-                        }
-                        throw th;
-                    }
-                } else {
-                    if (outputStreamOpenOutputStream != null) {
-                        try {
-                            outputStreamOpenOutputStream.close();
-                        } catch (Exception e4) {
-                        }
-                    }
-                    return false;
-                }
-            } catch (Throwable th2) {
-                th = th2;
+                Class clsA = v6.a.a();
+                Method methodA2 = v6.b.a(clsA, new Class[0]);
+                Method methodA3 = v6.c.a(clsA, new Class[0]);
+                Method methodA4 = v6.d.a(clsA, new Class[0]);
+                HookBridge.hookMethod(methodA2, new u8());
+                HookBridge.hookMethod(methodA3, new v8());
+                HookBridge.hookMethod(methodA4, new w8());
+            } catch (Throwable th) {
+                th.toString();
+                int i2 = g5.a;
             }
-        } catch (Exception e5) {
-            e = e5;
+            try {
+                Class clsA2 = u6.a.a();
+                Method methodA5 = u6.b.a(clsA2, new Class[0]);
+                b = u6.c.a(clsA2, new Class[0]);
+                d = w6.c.a(w6.a.a(), new Class[0]);
+                HookBridge.hookMethod(methodA5, new r8());
+                methodA5.getName();
+            } catch (Throwable th2) {
+                th2.toString();
+                int i3 = g5.a;
+            }
+            try {
+                Method methodA6 = x6.b.a(x6.a.a(), Boolean.TYPE);
+                HookBridge.hookMethod(methodA6, new s8());
+                methodA6.getName();
+            } catch (Throwable th3) {
+                th3.toString();
+                int i4 = g5.a;
+            }
+        } catch (Throwable th4) {
+            th4.toString();
+            int i5 = g5.a;
         }
-        e.getMessage();
-        int i2 = p4.a;
-        if (outputStream != null) {
-            outputStreamOpenOutputStream = outputStream;
-            outputStreamOpenOutputStream.close();
-        }
-        return false;
     }
 }

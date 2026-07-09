@@ -1,12 +1,14 @@
 package X;
 
 public abstract class u6 {
-    public static final x5 a;
-    public static final x5 b;
+    public static final o5 a;
+    public static final t6 b;
+    public static final t6 c;
 
     static {
-        x4 x4Var = new x4("TIKTOK_SNACKBAR", "X.14OT");
-        a = new x5(x4Var, "SET_TEXT", new String[]{"LJIIIZ"});
-        b = new x5(x4Var, "SHOW", new String[]{"LJIIJ"});
+        o5 o5Var = new o5("OFFLINE_MODE_CACHE_COUNT", "X.0Mge");
+        a = o5Var;
+        b = new t6(o5Var, "GET", new String[]{"LIZ"});
+        c = new t6(o5Var, "STORE", new String[]{"LJIIIIZZ"});
     }
 }

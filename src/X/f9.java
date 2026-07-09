@@ -1,19 +1,14 @@
 package X;
 
-import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeedList;
 import com.windukk.hook.HookMethod;
 
 class f9 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d7.a().d) {
-            SearchMixFeedList searchMixFeedList = (SearchMixFeedList) hookMethodParam.thisObject;
-            searchMixFeedList.mItems = g.b(searchMixFeedList.mItems);
-            Object result = hookMethodParam.getResult();
-            if (result instanceof SearchMixFeedList) {
-                SearchMixFeedList searchMixFeedList2 = (SearchMixFeedList) result;
-                searchMixFeedList2.mItems = g.b(searchMixFeedList2.mItems);
-                hookMethodParam.setResult(searchMixFeedList2);
-            }
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        String str = (String) hookMethodParam.args[0];
+        if (n9.a(str)) {
+            hookMethodParam.args[0] = str.replace("watermark", "origin").replace("water_mark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
+            int i = g5.a;
         }
     }
 }

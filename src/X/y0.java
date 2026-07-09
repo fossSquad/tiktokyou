@@ -1,43 +1,10 @@
 package X;
 
-import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import java.util.concurrent.ConcurrentHashMap;
 
 class y0 extends HookMethod {
-    final  int a;
-
-    public y0(int i) {
-        this.a = i;
-    }
-
+    @Override
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        CharSequence charSequenceAppend;
-        z7 z7VarA;
-        int i = this.a;
-        ConcurrentHashMap concurrentHashMap = a1.a;
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length > i) {
-            Object obj = objArr[i];
-            if (obj instanceof CharSequence) {
-                CharSequence charSequence = (CharSequence) obj;
-                Object obj2 = hookMethodParam.thisObject;
-                if (TextUtils.isEmpty(charSequence) || (z7VarA = a1.a(obj2)) == null) {
-                    charSequenceAppend = charSequence;
-                } else {
-                    String string = charSequence.toString();
-                    String strA = a1.a(z7VarA.a, string);
-                    if (TextUtils.equals(strA, string)) {
-                        charSequenceAppend = charSequence;
-                    } else {
-                        charSequenceAppend = new SpannableStringBuilder(charSequence).append((CharSequence) strA.substring(string.length()));
-                    }
-                }
-                if (charSequenceAppend != charSequence) {
-                    hookMethodParam.args[i] = charSequenceAppend;
-                }
-            }
-        }
+        d1.a(hookMethodParam, 0);
     }
 }

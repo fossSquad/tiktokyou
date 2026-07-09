@@ -6,7 +6,7 @@ final class CallbackDispatcher {
     private CallbackDispatcher() {
     }
 
-    public static Object dispatch(HookBridge.HookInfo hookInfo, Object[] objArr) {
+    public static Object dispatch(HookBridge.HookInfo hookInfo, Object[] objArr) throws Throwable {
         HookMethod.HookMethodParam hookMethodParam = new HookMethod.HookMethodParam();
         hookMethodParam.method = hookInfo.getMethod();
         if (hookInfo.isStaticHook()) {

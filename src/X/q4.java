@@ -1,24 +1,18 @@
 package X;
 
-import com.ss.android.ugc.aweme.services.MandatoryLoginService;
+import android.view.SurfaceView;
+import android.view.Window;
 import com.windukk.hook.HookBridge;
-import com.windukk.hook.ReplaceMethod;
-import java.lang.reflect.Method;
 
 public abstract class q4 {
     public static void a() {
         try {
-            Class cls = Long.TYPE;
-            Method declaredMethod = MandatoryLoginService.class.getDeclaredMethod("checkDynamicMandatoryLoginRegionSettings", String.class, String.class, cls);
-            Boolean bool = Boolean.FALSE;
-            HookBridge.hookMethod(declaredMethod, ReplaceMethod.returnConstant(bool));
-            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("checkForceLoginForBR", String.class, cls), ReplaceMethod.returnConstant(bool));
-            Class cls2 = Boolean.TYPE;
-            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("enableForcedLogin", cls2), ReplaceMethod.returnConstant(bool));
-            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowForcedLogin", cls2), ReplaceMethod.returnConstant(bool));
-            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowLoginTabFirst", null), ReplaceMethod.returnConstant(bool));
+            Class cls = Integer.TYPE;
+            HookBridge.hookMethod(Window.class.getMethod("setFlags", cls, cls), new n4());
+            HookBridge.hookMethod(Window.class.getMethod("addFlags", cls), new o4());
+            HookBridge.hookMethod(SurfaceView.class.getMethod("setSecure", Boolean.TYPE), new p4());
         } catch (Exception e) {
-            int i = p4.a;
+            int i = g5.a;
         }
     }
 }

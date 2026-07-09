@@ -1,33 +1,12 @@
 package X;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.windukk.hook.HookMethod;
-import java.util.List;
+public abstract class n7 {
+    public static final t6 a;
+    public static final k6 b;
 
-class n7 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        q7.b.set(Boolean.FALSE);
-    }
-
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        try {
-            boolean z = false;
-            Aweme aweme = (Aweme) g8.a(hookMethodParam.thisObject, o6.a.c[0], Aweme.class);
-            if (aweme != null) {
-                ThreadLocal threadLocal = q7.a;
-                List listA = g8.a(g8.b(aweme, "getPhotoModeImageInfo"), "getImageList");
-                if (listA != null && listA.size() == 1) {
-                    z = true;
-                }
-            }
-            q7.b.set(Boolean.valueOf(z));
-            if (z) {
-                int i = p4.a;
-            }
-        } catch (Throwable th) {
-            q7.b.set(Boolean.FALSE);
-            th.getMessage();
-            int i2 = p4.a;
-        }
+    static {
+        o5 o5Var = new o5("SETTINGS_PRIVACY_CELL_VM_CLASS", "com.ss.android.ugc.aweme.setting.ui.rvmpcompose.group.privacy.cell.PrivacyItemVM");
+        a = new t6(o5Var, "SETTINGS_PRIVACY_CELL_VM_DEFAULT_STATE", new String[]{"defaultState"});
+        b = new k6(o5Var, "SETTINGS_PRIVACY_CELL_VM_KEY", new String[]{"LL"});
     }
 }

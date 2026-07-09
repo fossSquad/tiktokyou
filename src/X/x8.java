@@ -1,14 +1,19 @@
 package X;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.windukk.hook.HookMethod;
 
-public final class x8 {
-    public final String a;
-    public final List b;
+abstract class x8 extends HookMethod {
+    private x8() {
+    }
 
-    public x8(String str, ArrayList arrayList) {
-        this.a = str;
-        this.b = arrayList;
+    public abstract int a(y8 y8Var);
+
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        y8 y8Var;
+        Object obj = hookMethodParam.thisObject;
+        if ((obj instanceof Enum) && (y8Var = (y8) z8.a.get(((Enum) obj).name())) != null) {
+            hookMethodParam.setResult(Integer.valueOf(a(y8Var)));
+        }
     }
 }

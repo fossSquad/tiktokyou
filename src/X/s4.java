@@ -1,12 +1,27 @@
 package X;
 
-public abstract class s4 {
-    public static final p5 a;
-    public static final p5 b;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-    static {
-        x4 x4Var = new x4("AWEME_DOWNLOAD_PROTOCOL", "com.ss.android.ugc.trill.download.protocol.download.AwemeVideoDownloadAbilityProtocol");
-        a = new p5(x4Var, "CONTEXT", new String[]{"LL"});
-        b = new p5(x4Var, "URL_LIST", new String[]{"LLILLL", "LLILLJJLI"});
+class s4 extends HookMethod {
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = x4.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = l8.a().i;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = x4.a(str);
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
+            }
+        } finally {
+            x4.d.set(Boolean.FALSE);
+        }
     }
 }

@@ -1,12 +1,27 @@
 package X;
 
-public abstract class t4 {
-    public static final x5 a;
-    public static final p5 b;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-    static {
-        x4 x4Var = new x4("BIO_USER_WEBSITE_COMPONENT_CLASS", "com.ss.android.ugc.profile.business.ur.platform.business.BioUserWebSiteComponent");
-        a = new x5(x4Var, "BIO_USER_WEBSITE_OPEN", new String[]{"hn"});
-        b = new p5(x4Var, "BIO_USER_WEBSITE_DATA", new String[]{"LLJJL"});
+class t4 extends HookMethod {
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = x4.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = l8.a().i;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = x4.a(str, ((Integer) hookMethodParam.args[1]).intValue());
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
+            }
+        } finally {
+            x4.d.set(Boolean.FALSE);
+        }
     }
 }

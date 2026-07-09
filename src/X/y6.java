@@ -1,5 +1,5 @@
 package X;
 
 public abstract class y6 {
-    public static final p5 a = new p5(new x4("TUX_ACTION_SHEET_ITEM", "X.0nnh"), "SUBTITLE", new String[]{"LJFF"});
+    public static final t6 a = new t6(new o5("PHOTO_DOWNLOAD_URL_SELECTOR", "X.0nJR"), "SELECT", new String[]{"LIZIZ"});
 }

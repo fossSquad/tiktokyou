@@ -1,40 +1,30 @@
 package X;
 
 import android.view.View;
-import java.util.ArrayList;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
-public final class s implements View.OnClickListener {
+public final class s implements View.OnAttachStateChangeListener {
+    public final  ViewGroup a;
+    public final  w b;
+
+    public s(ViewGroup viewGroup, w wVar) {
+        this.a = viewGroup;
+        this.b = wVar;
+    }
+
     @Override
-    public final void onClick(View view) {
-        d7 d7VarA = d7.a();
-        if (d7VarA == null) {
-            return;
+    public final void onViewAttachedToWindow(View view) {
+    }
+
+    @Override
+    public final void onViewDetachedFromWindow(View view) {
+        r rVar;
+        ViewTreeObserver viewTreeObserver = this.a.getViewTreeObserver();
+        if (viewTreeObserver.isAlive() && (rVar = this.b.d) != null) {
+            viewTreeObserver.removeOnPreDrawListener(rVar);
         }
-        boolean z = d7VarA.f;
-        boolean z2 = !z;
-        if (!z) {
-            ArrayList arrayList = new ArrayList(w.b.values());
-            int size = arrayList.size();
-            int i = 0;
-            while (i < size) {
-                Object obj = arrayList.get(i);
-                i++;
-                w.b((v) obj);
-            }
-        }
-        d7VarA.b(z2);
-        ArrayList arrayList2 = new ArrayList(w.b.values());
-        int size2 = arrayList2.size();
-        int i2 = 0;
-        while (i2 < size2) {
-            Object obj2 = arrayList2.get(i2);
-            i2++;
-            v vVar = (v) obj2;
-            vVar.h = z2;
-            vVar.e = false;
-            w.b(vVar, true);
-            w.a(vVar, true);
-        }
-        w.c();
+        x.b.remove(this.a);
+        x.c();
     }
 }
