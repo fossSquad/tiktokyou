@@ -2,6 +2,7 @@ package com.windukk.hook;
 
 import android.os.Build;
 import android.util.Log;
+import com.windukk.hook.HookMethod.Unhook;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Member;
@@ -385,7 +386,7 @@ public final class HookBridge {
             }
             hookInfo.callbacks.add(hookMethod);
         }
-        return new HookMethod.Unhook(hookMethod, member);
+        return hookMethod.new Unhook(member);
     }
 
     public static Object invokeMember(Member member, Object obj, Object[] objArr) {

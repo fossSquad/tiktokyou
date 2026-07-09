@@ -1,21 +1,20 @@
 package X;
 
-import android.content.res.ColorStateList;
-import com.windukk.hook.HookMethod;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
+import android.graphics.Shader;
+import android.text.TextPaint;
+import android.text.style.CharacterStyle;
+import android.text.style.UpdateAppearance;
 
-class fa extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (d7.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length >= 2) {
-                Object obj = objArr[1];
-                if (!(obj instanceof ColorStateList) || (colorStateListA = cb.a((colorStateList = (ColorStateList) obj))) == colorStateList) {
-                    return;
-                }
-                hookMethodParam.args[1] = colorStateListA;
-            }
-        }
+public final class fa extends CharacterStyle implements UpdateAppearance {
+    @Override
+    public final void updateDrawState(TextPaint textPaint) {
+        float fMax = Math.max(textPaint.getTextSize() * 10.0f, 1.0f);
+        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, fMax, 0.0f, ga.a, (float[]) null, Shader.TileMode.MIRROR);
+        Matrix matrix = new Matrix();
+        matrix.setTranslate(((System.currentTimeMillis() % 1800) / 1800.0f) * fMax * 2.0f, 0.0f);
+        linearGradient.setLocalMatrix(matrix);
+        textPaint.setShader(linearGradient);
     }
 }

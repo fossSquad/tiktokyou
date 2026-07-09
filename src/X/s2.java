@@ -3,13 +3,17 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class s2 extends HookMethod {
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 2) {
-            Object obj = objArr[1];
-            if ((obj instanceof String) && "android_id".equals((String) obj)) {
-                v2.a(hookMethodParam.getResult(), "Settings.Secure.android_id");
+        l8 l8VarA;
+        Object obj = hookMethodParam.args[1];
+        if ((obj instanceof String) && "android_id".equals((String) obj) && (l8VarA = l8.a()) != null) {
+            String str = hookMethodParam.getResult() instanceof String ? (String) hookMethodParam.getResult() : null;
+            String strA = d3.a(l8VarA, str);
+            if (strA == null || strA.equals(str)) {
+                return;
             }
+            hookMethodParam.setResult(strA);
         }
     }
 }

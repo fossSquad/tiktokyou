@@ -1,5 +1,5 @@
 package X;
 
 public abstract class s6 {
-    public static final x5 a = new x5(new x4("STREAK_STATE_HELPER_CLASS", "X.05kA"), "IS_ACTIVE", new String[]{"LIZLLL"});
+    public static final t6 a = new t6(new o5("MENTION_CONTAINER_VIEW_MODEL_CLASS", "com.ss.android.ugc.aweme.base.vm.MentionContainerViewModel"), "MENTION_INSERT", new String[]{"UP2", "QN2"});
 }

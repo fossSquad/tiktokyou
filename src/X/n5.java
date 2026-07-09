@@ -1,12 +1,12 @@
 package X;
 
 public abstract class n5 {
-    public static final p5 a;
-    public static final p5 b;
+    public static final o5 a;
+    public static final t6 b;
 
     static {
-        x4 x4Var = new x4("DOWNLOAD_URL_CONTAINER", "X.0yku");
-        a = new p5(x4Var, "SELECTED_URL", new String[]{"LIZ"});
-        b = new p5(x4Var, "FILE_BASE", new String[]{"LIZIZ"});
+        o5 o5Var = new o5("CHAT_LIST_NAME_MODEL_TYPE_B_CLASS", "X.0e7S");
+        a = o5Var;
+        b = new t6(o5Var, "GET_NAME", new String[]{"getName"});
     }
 }

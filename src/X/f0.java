@@ -1,10 +1,11 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
+import com.ss.android.ugc.aweme.im.common.model.BaseContact;
 import com.windukk.hook.HookMethod;
 
 class f0 extends HookMethod {
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(a1.a(a1.a((IMConversation) hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+        hookMethodParam.setResult(d1.a(((BaseContact) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
     }
 }

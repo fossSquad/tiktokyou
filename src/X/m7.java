@@ -1,30 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-import java.util.ArrayList;
-import java.util.List;
+public abstract class m7 {
+    public static final t6 a = new t6(new o5("SETTINGS_ITEM_INTERFACE", "X.12Wm"), "SETTINGS_ITEM_GET_KEY", new String[]{"getKey"});
 
-class m7 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        List<String> list = (List) hookMethodParam.getResult();
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        ArrayList arrayList = new ArrayList();
-        boolean z = false;
-        for (String str : list) {
-            if (q7.a(str)) {
-                String strReplaceAll = str.replace("watermark", "origin").replace("water_mark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
-                arrayList.add(strReplaceAll);
-                if (!str.equals(strReplaceAll)) {
-                    z = true;
-                }
-            } else {
-                arrayList.add(str);
-            }
-        }
-        if (z) {
-            hookMethodParam.setResult(arrayList);
-        }
+    static {
+        g8.a("method", "SETTINGS_ITEM_GET_IDENTIFIER", (String[]) new String[]{"getIdentifier"}.clone());
+        g8.a("method", "SETTINGS_ITEM_GET_CONTENT_TYPE", (String[]) new String[]{"getContentType"}.clone());
+        g8.a("method", "SETTINGS_ITEM_GET_HEADING_ITEM", (String[]) new String[]{"getHeadingItem"}.clone());
+        g8.a("method", "SETTINGS_ITEM_GET_TAG", (String[]) new String[]{"getTag"}.clone());
     }
 }

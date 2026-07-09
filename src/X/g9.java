@@ -1,43 +1,14 @@
 package X;
 
-import com.ss.android.ugc.aweme.discover.model.Banner;
 import com.windukk.hook.HookMethod;
-import java.util.ArrayList;
-import java.util.List;
 
 class g9 extends HookMethod {
-
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d7.a().d) {
-            List list = (List) hookMethodParam.getResult();
-            if (d7.a().d && list != null && !list.isEmpty()) {
-                int size = list.size();
-                ArrayList arrayList = null;
-                for (int i = 0; i < size; i++) {
-                    Banner banner = (Banner) list.get(i);
-                    if (banner != null) {
-                        try {
-                            if (banner.adData != null) {
-                                if (arrayList == null) {
-                                    arrayList = new ArrayList(Math.max(0, size - 1));
-                                    for (int i2 = 0; i2 < i; i2++) {
-                                        arrayList.add((Banner) list.get(i2));
-                                    }
-                                }
-                            } else if (arrayList != null) {
-                                arrayList.add(banner);
-                            }
-                        } catch (Throwable th) {
-                        }
-                    } else if (arrayList != null) {
-                        arrayList.add(banner);
-                    }
-                }
-                if (arrayList != null) {
-                    list = arrayList;
-                }
-            }
-            hookMethodParam.setResult(list);
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        String str = (String) hookMethodParam.args[0];
+        if (n9.a(str)) {
+            hookMethodParam.args[0] = str.replace("watermark", "origin").replace("water_mark", "origin").replaceAll("q[0-9]{1,3}", "q100").replaceAll("shrink:[0-9]+:[0-9]+", "shrink:0:0");
+            int i = g5.a;
         }
     }
 }

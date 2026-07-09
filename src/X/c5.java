@@ -1,12 +1,15 @@
 package X;
 
-public abstract class c5 {
-    public static final x4 a;
-    public static final x5 b;
+import java.util.Comparator;
 
-    static {
-        x4 x4Var = new x4("COMMENT_TRANSLATION_CAN_SHOW", "X.0ArS");
-        a = x4Var;
-        b = new x5(x4Var, "CAN_SHOW", new String[]{"LIZJ"});
+public final class c5 implements Comparator {
+    @Override
+    public final int compare(Object obj, Object obj2) {
+        d5 d5Var = (d5) obj;
+        d5 d5Var2 = (d5) obj2;
+        if ("default".equals(d5Var.a) != "default".equals(d5Var2.a)) {
+            return "default".equals(d5Var.a) ? -1 : 1;
+        }
+        return d5Var.a().compareToIgnoreCase(d5Var2.a());
     }
 }

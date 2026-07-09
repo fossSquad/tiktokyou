@@ -1,20 +1,15 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
-class z9 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (d7.a().d()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = cb.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                hookMethodParam.args[0] = Integer.valueOf(iA);
-            }
-        }
+public final class z9 extends LayerDrawable {
+    public final Drawable a;
+    public final y9 b;
+
+    public z9(Drawable drawable, y9 y9Var) {
+        super(drawable != null ? new Drawable[]{drawable, y9Var} : new Drawable[]{y9Var});
+        this.a = drawable;
+        this.b = y9Var;
     }
 }

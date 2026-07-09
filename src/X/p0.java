@@ -1,10 +1,19 @@
 package X;
 
-import com.ss.android.ugc.aweme.profile.model.User;
+import android.widget.TextView;
 import com.windukk.hook.HookMethod;
 
 class p0 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(a1.a(((User) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        CharSequence charSequence;
+        CharSequence charSequenceA;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if ((obj instanceof CharSequence) && (charSequenceA = d1.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
+                hookMethodParam.args[0] = charSequenceA;
+            }
+        }
     }
 }

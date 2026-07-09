@@ -1,20 +1,14 @@
 package X;
 
-import android.graphics.LinearGradient;
-import android.graphics.Matrix;
-import android.graphics.Shader;
-import android.text.TextPaint;
-import android.text.style.CharacterStyle;
-import android.text.style.UpdateAppearance;
+public abstract class e8 {
+    public static final k6 a;
+    public static final k6 b;
+    public static final k6 c;
 
-public final class e8 extends CharacterStyle implements UpdateAppearance {
-    @Override
-    public final void updateDrawState(TextPaint textPaint) {
-        float fMax = Math.max(textPaint.getTextSize() * 10.0f, 1.0f);
-        LinearGradient linearGradient = new LinearGradient(0.0f, 0.0f, fMax, 0.0f, f8.a, (float[]) null, Shader.TileMode.MIRROR);
-        Matrix matrix = new Matrix();
-        matrix.setTranslate(((System.currentTimeMillis() % 1800) / 1800.0f) * fMax * 2.0f, 0.0f);
-        linearGradient.setLocalMatrix(matrix);
-        textPaint.setShader(linearGradient);
+    static {
+        o5 o5Var = new o5("WATERMARK_BUILDER", "com.ss.android.ugc.aweme.services.watermark.WaterMarkBuilder");
+        a = new k6(o5Var, "INPUT_PATH", new String[]{"inputPath"});
+        b = new k6(o5Var, "OUT_PATH", new String[]{"outPath"});
+        c = new k6(o5Var, "LISTENER", new String[]{"listener"});
     }
 }

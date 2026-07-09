@@ -1,14 +1,12 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+public abstract class p7 {
+    public static final o5 a;
+    public static final t6 b;
 
-class p7 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr;
-        if (!Boolean.TRUE.equals(q7.b.get()) || (objArr = hookMethodParam.args) == null || objArr.length == 0 || !q7.a(objArr[0])) {
-            return;
-        }
-        hookMethodParam.setResult((Object) null);
-        int i = p4.a;
+    static {
+        o5 o5Var = new o5("SHARE_DOWNLOAD_ACCOUNT_GATE", "X.0lgI");
+        a = o5Var;
+        b = new t6(o5Var, "SHARE_DOWNLOAD_ACCOUNT_BLOCKED", new String[]{"LJIIIIZZ"});
     }
 }

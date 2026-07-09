@@ -1,21 +1,41 @@
 package X;
 
-import com.windukk.hook.HookMethod;
-import java.lang.reflect.Proxy;
-import java.util.LinkedHashMap;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
+import java.lang.reflect.InvocationTargetException;
 
-class o1 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object result = hookMethodParam.getResult();
-        if (result == null) {
-            return;
+public interface o1 {
+    public static final o1 a = new o1() {
+        @Override
+        public final String b(Object obj) {
+            return o1.c(obj);
         }
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put(h5.a.c[0], Boolean.TRUE);
-        Class<?>[] interfaces = result.getClass().getInterfaces();
-        if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new s1(linkedHashMap, result));
+    };
+    public static final o1 b = new o1() {
+        @Override
+        public final String b(Object obj) {
+            return o1.a(obj);
         }
-        hookMethodParam.setResult(result);
+    };
+
+    static  String a(Object obj) throws IllegalAccessException, InvocationTargetException {
+        Object objInvoke = ha.a(obj.getClass(), "getExtra", new Class[0]).invoke(obj, null);
+        if (objInvoke == null) {
+            return null;
+        }
+        Object objInvoke2 = ha.a(objInvoke.getClass(), "getImUser", new Class[0]).invoke(objInvoke, null);
+        if (objInvoke2 instanceof IMUser) {
+            return ((IMUser) objInvoke2).getUid();
+        }
+        return null;
     }
+
+    static  String c(Object obj) throws IllegalAccessException, InvocationTargetException {
+        Object objInvoke = ha.a(obj.getClass(), "getUid", new Class[0]).invoke(obj, null);
+        if (objInvoke instanceof String) {
+            return (String) objInvoke;
+        }
+        return null;
+    }
+
+    String b(Object obj);
 }

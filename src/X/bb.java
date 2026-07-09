@@ -1,17 +1,22 @@
 package X;
 
+import com.ss.android.ugc.aweme.search.common.model.ContinuousLoadingAwemeList;
 import com.windukk.hook.HookMethod;
+import java.util.List;
 
 class bb extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (d7.a().d()) {
-            Object obj = hookMethodParam.args[0];
-            if (!(obj instanceof Integer) || (iA = cb.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                return;
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (l8.a().c) {
+            ContinuousLoadingAwemeList continuousLoadingAwemeList = (ContinuousLoadingAwemeList) hookMethodParam.thisObject;
+            continuousLoadingAwemeList.awemeList = g.a(continuousLoadingAwemeList.awemeList);
+            Object result = hookMethodParam.getResult();
+            if (result instanceof List) {
+                try {
+                    hookMethodParam.setResult(g.a((List) result));
+                } catch (Throwable th) {
+                }
             }
-            hookMethodParam.args[0] = Integer.valueOf(iA);
         }
     }
 }

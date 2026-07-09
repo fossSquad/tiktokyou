@@ -1,20 +1,18 @@
 package X;
 
-import android.view.MotionEvent;
 import android.widget.TextView;
 import com.windukk.hook.HookMethod;
 
 class o0 extends HookMethod {
+    @Override
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object obj = hookMethodParam.thisObject;
-        if (obj instanceof TextView) {
-            TextView textView = (TextView) obj;
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length != 0) {
-                Object obj2 = objArr[0];
-                if ((obj2 instanceof MotionEvent) && a1.a(textView, (MotionEvent) obj2)) {
-                    hookMethodParam.setResult(Boolean.TRUE);
-                }
+        CharSequence charSequence;
+        CharSequence charSequenceA;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if ((obj instanceof CharSequence) && (charSequenceA = d1.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
+                hookMethodParam.args[0] = charSequenceA;
             }
         }
     }

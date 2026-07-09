@@ -1,13 +1,14 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import java.util.ArrayList;
+import java.util.List;
 
-class ya extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (d7.a().d() && (iA = cb.a((iIntValue = ((Integer) hookMethodParam.args[0]).intValue()))) != iIntValue) {
-            hookMethodParam.args[0] = Integer.valueOf(iA);
-        }
+public final class ya {
+    public final String a;
+    public final List b;
+
+    public ya(String str, ArrayList arrayList) {
+        this.a = str;
+        this.b = arrayList;
     }
 }

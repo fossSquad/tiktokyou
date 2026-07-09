@@ -1,12 +1,44 @@
 package X;
 
-public abstract class w4 {
-    public static final x4 a;
-    public static final x5 b;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-    static {
-        x4 x4Var = new x4("CHAT_LIST_NAME_MODEL_TYPE_B_CLASS", "X.0xIG");
-        a = x4Var;
-        b = new x5(x4Var, "GET_NAME", new String[]{"getName"});
+class w4 extends HookMethod {
+
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        int style;
+        Typeface typefaceA;
+        ThreadLocal threadLocal = x4.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
+        }
+        String str = l8.a().i;
+        if ("default".equals(str)) {
+            return;
+        }
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Object[] objArr = hookMethodParam.args;
+            Typeface typeface = (Typeface) objArr[0];
+            if (objArr.length < 2) {
+                if (typeface != null) {
+                    style = typeface.getStyle();
+                } else {
+                    style = 0;
+                }
+                typefaceA = x4.a(str, style);
+                if (typefaceA != null) {
+                    hookMethodParam.args[0] = typefaceA;
+                }
+            }
+            style = ((Integer) objArr[1]).intValue();
+            typefaceA = x4.a(str, style);
+            if (typefaceA != null) {
+                hookMethodParam.args[0] = typefaceA;
+            }
+        } finally {
+            x4.d.set(Boolean.FALSE);
+        }
     }
 }

@@ -1,12 +1,12 @@
 package X;
 
 import com.windukk.hook.HookMethod;
+import java.util.List;
 
 class a4 extends HookMethod {
+    @Override
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue = ((Integer) hookMethodParam.args[0]).intValue();
-        int iIntValue2 = ((Integer) hookMethodParam.args[1]).intValue() & (-8193);
-        hookMethodParam.args[0] = Integer.valueOf(iIntValue & (-8193));
-        hookMethodParam.args[1] = Integer.valueOf(iIntValue2);
+        Object[] objArr = hookMethodParam.args;
+        objArr[0] = i4.a((List) objArr[0]);
     }
 }

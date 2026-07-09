@@ -1,10 +1,12 @@
 package X;
 
 import com.windukk.hook.HookMethod;
-import java.util.List;
 
 class q3 extends HookMethod {
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(z3.a((List) hookMethodParam.getResult()));
+        if (l8.a().c) {
+            hookMethodParam.setResult(Boolean.FALSE);
+        }
     }
 }

@@ -1,18 +1,19 @@
 package X;
 
 import android.view.View;
+import com.windukk.hook.HookMethod;
 
-public final class o implements View.OnLayoutChangeListener {
-    public final  v a;
-
-    public o(v vVar) {
-        this.a = vVar;
-    }
-
+class o extends HookMethod {
     @Override
-    public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-        v vVar = this.a;
-        vVar.g = true;
-        w.a(vVar, 80L, true);
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        w wVarD;
+        View view = (View) hookMethodParam.args[0];
+        x.a(view.getContext());
+        if (x.g == 0 || (wVarD = x.d(view)) == null) {
+            return;
+        }
+        x.b(wVarD, true);
+        x.a(wVarD, 300L, false);
+        x.a(wVarD, 1000L, false);
     }
 }

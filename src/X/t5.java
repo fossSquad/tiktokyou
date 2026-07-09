@@ -1,12 +1,14 @@
 package X;
 
 public abstract class t5 {
-    public static final p5 a;
-    public static final x5 b;
+    public static final k6 a;
+    public static final k6 b;
+    public static final k6 c;
 
     static {
-        x4 x4Var = new x4("IM_HOST_RUNTIME_CLASS", "X.0mA4");
-        a = new p5(x4Var, "INSTANCE", new String[]{"LJFF"});
-        b = new x5(x4Var, "ACCOUNT_SERVICE", new String[]{"LIZ"});
+        o5 o5Var = new o5("COMMENT_STICKER_ACTION_CONFIG", "X.0HP6");
+        a = new k6(o5Var, "URL_MODEL", new String[]{"LIZ"});
+        b = new k6(o5Var, "ACTION_1", new String[]{"LJ"});
+        c = new k6(o5Var, "ACTION_2", new String[]{"LJFF"});
     }
 }

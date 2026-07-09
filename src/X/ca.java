@@ -1,14 +1,28 @@
 package X;
 
-import android.content.res.ColorStateList;
+import android.widget.ImageView;
 import com.windukk.hook.HookMethod;
+import java.util.Map;
 
 class ca extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (d7.a().d() && (colorStateListA = cb.a((colorStateList = (ColorStateList) hookMethodParam.args[0]))) != colorStateList) {
-            hookMethodParam.args[0] = colorStateListA;
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        int[] iArr = ga.a;
+        l8 l8VarA = l8.a();
+        if (l8VarA == null || !l8VarA.r) {
+            return;
+        }
+        Object obj = hookMethodParam.thisObject;
+        if (obj instanceof ImageView) {
+            ImageView imageView = (ImageView) obj;
+            if (ga.a(imageView)) {
+                Map map = ga.c;
+                if (map.containsKey(imageView)) {
+                    return;
+                }
+                map.put(imageView, Boolean.TRUE);
+                imageView.post(new ea(imageView));
+            }
         }
     }
 }

@@ -1,12 +1,13 @@
 package X;
 
 public abstract class l6 {
-    public static final x5 a = new x5(new x4("SETTINGS_ITEM_INTERFACE", "X.19St"), "SETTINGS_ITEM_GET_KEY", new String[]{"getKey"});
+    public static final t6 a;
 
     static {
-        c7.a("method", "SETTINGS_ITEM_GET_IDENTIFIER", (String[]) new String[]{"getIdentifier"}.clone());
-        c7.a("method", "SETTINGS_ITEM_GET_CONTENT_TYPE", (String[]) new String[]{"getContentType"}.clone());
-        c7.a("method", "SETTINGS_ITEM_GET_HEADING_ITEM", (String[]) new String[]{"getHeadingItem"}.clone());
-        c7.a("method", "SETTINGS_ITEM_GET_TAG", (String[]) new String[]{"getTag"}.clone());
+        o5 o5Var = new o5("FRAGMENT_MANAGER_CLASS", "androidx.fragment.app.FragmentManager");
+        g8.a("method", "FRAGMENT_MANAGER_POP_BACK_STACK", (String[]) new String[]{"popBackStack", "LJLJLJ", "LJLJL"}.clone());
+        g8.a("method", "FRAGMENT_MANAGER_BEGIN_TRANSACTION", (String[]) new String[]{"beginTransaction", "LJIIJ"}.clone());
+        g8.a("method", "FRAGMENT_MANAGER_BACK_STACK_COUNT", (String[]) new String[]{"getBackStackEntryCount", "LJJJLZIJ"}.clone());
+        a = new t6(o5Var, "FRAGMENT_MANAGER_FIND_FRAGMENT", new String[]{"findFragment", "LJJJJL"});
     }
 }

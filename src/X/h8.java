@@ -1,17 +1,17 @@
 package X;
 
-public final class h8 {
-    public final String a;
-    public final String b;
-    public final String c;
-    public final String d;
-    public final String e;
+import com.windukk.hook.HookMethod;
 
-    public h8(String str, String str2, String str3, String str4, String str5) {
-        this.a = str;
-        this.b = str2;
-        this.c = str3;
-        this.d = str4;
-        this.e = str5;
+class h8 extends HookMethod {
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        d1.g();
+    }
+
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (d1.x.getAndIncrement() == 0) {
+            int i = g5.a;
+        }
     }
 }

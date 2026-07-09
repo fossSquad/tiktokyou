@@ -1,28 +1,26 @@
 package X;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
-import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookMethod;
 
 class l0 extends HookMethod {
+    final  o1 a;
+    final  o5 b;
+
+    public l0(o1 o1Var, o5 o5Var) {
+        this.a = o1Var;
+        this.b = o5Var;
+    }
+
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String uid;
-        Object result = hookMethodParam.getResult();
-        if (result instanceof String) {
-            String str = (String) result;
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length == 0) {
-                return;
+        if (hookMethodParam.getResult() instanceof String) {
+            try {
+                hookMethodParam.setResult(d1.a(this.a.b(hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+            } catch (Exception e) {
+                String str = this.b.b;
+                e.getMessage();
+                int i = g5.a;
             }
-            Object obj = objArr[0];
-            if (obj instanceof User) {
-                uid = ((User) obj).getUid();
-            } else if (obj instanceof IMUser) {
-                uid = ((IMUser) obj).getUid();
-            } else {
-                uid = obj instanceof String ? (String) obj : null;
-            }
-            hookMethodParam.setResult(a1.a(uid, str));
         }
     }
 }

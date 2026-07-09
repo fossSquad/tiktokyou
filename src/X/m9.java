@@ -1,30 +1,37 @@
 package X;
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.windukk.hook.HookBridge;
-import java.lang.reflect.Method;
+import com.windukk.hook.HookMethod;
+import java.util.List;
 
-public abstract class m9 {
-    public static void a() {
+class m9 extends HookMethod {
+    @Override
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object objA;
         try {
-            x5 x5Var = h6.a;
-            Method methodA = h6.a.a(Class.forName("X.19Zy"), Aweme.class);
-            if (methodA.getReturnType() != Boolean.TYPE) {
-                throw new NoSuchMethodException("Unexpected SeekBar should-show return type: " + methodA);
+            Object[] objArr = hookMethodParam.args;
+            if (objArr == null || objArr.length != 2) {
+                return;
             }
-            HookBridge.hookMethod(methodA, new k9());
-            x5 x5Var2 = i6.a;
-            Method methodA2 = i6.a.a(Class.forName("X.19TK"), Integer.TYPE);
-            if (methodA2.getReturnType() != Void.TYPE) {
-                throw new NoSuchMethodException("Unexpected SeekBar show-type return type: " + methodA2);
+            boolean z = false;
+            if ((objArr[0] instanceof String) && (objArr[1] instanceof String)) {
+                Object obj = hookMethodParam.thisObject;
+                ThreadLocal threadLocal = n9.a;
+                Aweme aweme = (Aweme) ha.a(obj, r7.a.c[0], Aweme.class);
+                if (aweme != null) {
+                    List listA = ha.a(ha.b(aweme, "getPhotoModeImageInfo"), "getImageList");
+                    if (listA != null && listA.size() == 1) {
+                        z = true;
+                    }
+                    if (z && (objA = ha.a(hookMethodParam.thisObject, "LJIIIIZZ", Object.class)) != null && n9.a(objA)) {
+                        hookMethodParam.setResult(null);
+                        int i = g5.a;
+                    }
+                }
             }
-            HookBridge.hookMethod(methodA2, new l9());
-            methodA.getName();
-            methodA2.getName();
-            int i = p4.a;
         } catch (Throwable th) {
-            th.toString();
-            int i2 = p4.a;
+            th.getMessage();
+            int i2 = g5.a;
         }
     }
 }

@@ -1,5 +1,8 @@
 package X;
 
-public interface o9 {
-    void a(int i);
+public final class o9 extends ThreadLocal {
+    @Override
+    public final /* bridge */  Object initialValue() {
+        return Boolean.FALSE;
+    }
 }

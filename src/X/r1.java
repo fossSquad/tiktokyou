@@ -1,23 +1,22 @@
 package X;
 
 import com.windukk.hook.HookMethod;
+import java.lang.reflect.Proxy;
+import java.util.LinkedHashMap;
 
 class r1 extends HookMethod {
+    @Override
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (Boolean.TRUE.equals(hookMethodParam.getResult())) {
+        Object result = hookMethodParam.getResult();
+        if (result == null) {
             return;
         }
-        Object[] objArr = hookMethodParam.args;
-        boolean zA = false;
-        Object obj = (objArr == null || objArr.length <= 0) ? null : objArr[0];
-        if (obj != null) {
-            try {
-                zA = v1.a(g8.a(obj.getClass(), "getCommonModel", new Class[0]).invoke(obj, null));
-            } catch (Throwable th) {
-            }
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put(c6.a.c[0], Boolean.TRUE);
+        Class<?>[] interfaces = result.getClass().getInterfaces();
+        if (interfaces.length != 0) {
+            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new v1(linkedHashMap, result));
         }
-        if (zA) {
-            hookMethodParam.setResult(Boolean.TRUE);
-        }
+        hookMethodParam.setResult(result);
     }
 }

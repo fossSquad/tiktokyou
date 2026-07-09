@@ -1,5 +1,5 @@
 package X;
 
 public abstract class u5 {
-    public static final p5 a = new p5(new x4("KOTLIN_UNIT_CLASS", "kotlin.Unit"), "KOTLIN_UNIT_OBF_INSTANCE", new String[]{"LIZ"});
+    public static final t6 a = new t6(new o5("COMMENT_STICKER_HELPER", "X.0HP0"), "SHOW_SHEET", new String[]{"LJ"});
 }

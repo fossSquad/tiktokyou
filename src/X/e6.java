@@ -1,18 +1,20 @@
 package X;
 
 public abstract class e6 {
-    public static final x5 a;
-    public static final x5 b;
-    public static final x5 c;
-    public static final x5 d;
-    public static final x5 e;
+    public static final k6 a;
+    public static final k6 b;
+    public static final k6 c;
+    public static final k6 d;
+    public static final k6 e;
+    public static final t6 f;
 
     static {
-        x4 x4Var = new x4("PROFILE_NAVBAR_OTHER_NICKNAME_PROTOCOL_CLASS", "com.ss.android.ugc.profile.business.ur.ProfileNavbarOtherNicknameProtocol");
-        a = new x5(x4Var, "PROFILE_NAVBAR_OTHER_NICKNAME_CONTEXT", new String[]{"LJJLIIIJJI", "LJJLIIIJL"});
-        b = new x5(x4Var, "PROFILE_NAVBAR_OTHER_NICKNAME_COMMON_INFO", new String[]{"LJIILL", "LJJLJLI", "LJIILIIL"});
-        c = new x5(x4Var, "PROFILE_NAVBAR_OTHER_NICKNAME_TEXT", new String[]{"LJJZZI", "LJLJL"});
-        d = new x5(x4Var, "PROFILE_NAVBAR_OTHER_NICKNAME_POPUP", new String[]{"LJLI", "LJLLI"});
-        e = new x5(x4Var, "PROFILE_NAVBAR_OTHER_NICKNAME_TEXT_ARGUMENT", new String[]{"ud1", "Jc1"});
+        o5 o5Var = new o5("DOWNLOAD_ABILITY", "X.16Mr");
+        a = new k6(o5Var, "PROTOCOL", new String[]{"LJII"});
+        b = new k6(o5Var, "INDEX", new String[]{"LJIIJ"});
+        c = new k6(o5Var, "FULL_PATH", new String[]{"LIZLLL"});
+        d = new k6(o5Var, "FILE_BASE", new String[]{"LJIIIIZZ"});
+        e = new k6(o5Var, "DISPLAY_PATH", new String[]{"LJIIIZ"});
+        f = new t6(o5Var, "START", new String[]{"LJI"});
     }
 }

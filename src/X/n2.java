@@ -3,9 +3,17 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class n2 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if ("android_id".equals(hookMethodParam.args[1])) {
-            hookMethodParam.setResult(v2.b);
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length >= 1) {
+            Object obj = objArr[0];
+            if (obj instanceof String) {
+                String str = (String) obj;
+                if (d3.a(str)) {
+                    d3.a(hookMethodParam.getResult(), "prefs.".concat(str));
+                }
+            }
         }
     }
 }

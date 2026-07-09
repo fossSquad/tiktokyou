@@ -3,9 +3,10 @@ package X;
 import com.windukk.hook.HookMethod;
 
 class v3 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d7.a().d) {
-            hookMethodParam.args[0] = Boolean.FALSE;
+    @Override
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if ("panel_download_bar".equals(hookMethodParam.args[0])) {
+            hookMethodParam.setResult(Boolean.TRUE);
         }
     }
 }

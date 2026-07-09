@@ -1,18 +1,10 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.app.Activity;
+import android.util.TypedValue;
 
-class g2 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 1) {
-            Object obj = objArr[0];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                if (v2.a(str)) {
-                    v2.a(hookMethodParam.getResult(), "prefs.".concat(str));
-                }
-            }
-        }
+public abstract  class g2 {
+    public static float a(Activity activity, int i, float f) {
+        return TypedValue.applyDimension(i, f, activity.getResources().getDisplayMetrics());
     }
 }

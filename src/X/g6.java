@@ -1,5 +1,5 @@
 package X;
 
 public abstract class g6 {
-    public static final x5 a = new x5(new x4("SAVE_PHOTO_CALLBACK", "X.0Wji"), "SAVE", new String[]{"LIZ"});
+    public static final k6 a = new k6(new o5("DOWNLOAD_BASE", "X.0nTo"), "AWEME", new String[]{"LJFF"});
 }

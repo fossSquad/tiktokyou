@@ -1,25 +1,28 @@
 package X;
 
-import com.windukk.hook.HookMethod;
+import android.app.Activity;
+import android.content.Context;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
+import android.view.View;
 
-class t0 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ThreadLocal threadLocal = a1.s;
-        int iMax = Math.max(0, ((Integer) threadLocal.get()).intValue() - 1);
-        if (iMax != 0) {
-            threadLocal.set(Integer.valueOf(iMax));
-        } else {
-            a1.r.remove();
-            threadLocal.remove();
-        }
+public final class t0 extends ClickableSpan {
+    public final  Context a;
+    public final  int b;
+
+    public t0(Activity activity, int i) {
+        this.a = activity;
+        this.b = i;
     }
 
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ThreadLocal threadLocal = a1.s;
-        threadLocal.set(Integer.valueOf(((Integer) threadLocal.get()).intValue() + 1));
-        z7 z7VarA = a1.a(hookMethodParam.thisObject);
-        if (z7VarA != null) {
-            a1.r.set(z7VarA);
-        }
+    @Override
+    public final void onClick(View view) {
+        d1.c(this.a);
+    }
+
+    @Override
+    public final void updateDrawState(TextPaint textPaint) {
+        textPaint.setColor(this.b);
+        textPaint.setUnderlineText(false);
     }
 }

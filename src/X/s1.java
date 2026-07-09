@@ -1,27 +1,22 @@
 package X;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
+import com.windukk.hook.HookMethod;
+import java.lang.reflect.Proxy;
 import java.util.LinkedHashMap;
 
-public final class s1 implements InvocationHandler {
-    public final  LinkedHashMap a;
-    public final  Object b;
-
-    public s1(LinkedHashMap linkedHashMap, Object obj) {
-        this.a = linkedHashMap;
-        this.b = obj;
-    }
-
+class s1 extends HookMethod {
     @Override
-    public final Object invoke(Object obj, Method method, Object[] objArr) {
-        if (this.a.containsKey(method.getName())) {
-            return this.a.get(method.getName());
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object result = hookMethodParam.getResult();
+        if (result == null) {
+            return;
         }
-        Object obj2 = this.b;
-        if (objArr == null) {
-            objArr = new Object[0];
+        LinkedHashMap linkedHashMap = new LinkedHashMap();
+        linkedHashMap.put(d6.a.c[0], -1);
+        Class<?>[] interfaces = result.getClass().getInterfaces();
+        if (interfaces.length != 0) {
+            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new v1(linkedHashMap, result));
         }
-        return method.invoke(obj2, objArr);
+        hookMethodParam.setResult(result);
     }
 }
