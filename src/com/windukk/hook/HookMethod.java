@@ -18,7 +18,7 @@ public abstract class HookMethod extends HookCallback {
             return this.result;
         }
 
-        public Object getResultOrThrowable() throws Throwable {
+        public Object getResultOrThrowable() {
             Throwable th = this.throwable;
             if (th == null) {
                 return this.result;
