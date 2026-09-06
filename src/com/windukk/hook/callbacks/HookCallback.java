@@ -25,7 +25,7 @@ public abstract class HookCallback implements Comparable<HookCallback> {
         int i = hookCallback.priority;
         int i2 = this.priority;
         if (i != i2) {
-            return i - i2;
+            return Integer.compare(i, i2);
         }
         return System.identityHashCode(this) < System.identityHashCode(hookCallback) ? -1 : 1;
     }

@@ -3,10 +3,12 @@ package com.windukk.hook;
 import java.lang.reflect.InvocationTargetException;
 
 final class CallbackDispatcher {
+    private static final Object[] EMPTY_ARGS = new Object[0];
+
     private CallbackDispatcher() {
     }
 
-    public static Object dispatch(HookBridge.HookInfo hookInfo, Object[] objArr) throws Throwable {
+    public static Object dispatch(HookBridge.HookInfo hookInfo, Object[] objArr) {
         HookMethod.HookMethodParam hookMethodParam = new HookMethod.HookMethodParam();
         hookMethodParam.method = hookInfo.getMethod();
         if (hookInfo.isStaticHook()) {
@@ -20,13 +22,18 @@ final class CallbackDispatcher {
             hookMethodParam.args = HookBridge.EMPTY_ARRAY;
         } else {
             hookMethodParam.thisObject = objArr[0];
-            Object[] objArr2 = new Object[objArr.length - 1];
-            hookMethodParam.args = objArr2;
-            System.arraycopy(objArr, 1, objArr2, 0, objArr.length - 1);
+            int length = objArr.length - 1;
+            if (length == 0) {
+                hookMethodParam.args = EMPTY_ARGS;
+            } else {
+                Object[] objArr2 = new Object[length];
+                hookMethodParam.args = objArr2;
+                System.arraycopy(objArr, 1, objArr2, 0, length);
+            }
         }
         Object[] snapshot = hookInfo.getCallbacks().getSnapshot();
-        int length = snapshot.length;
-        if (length == 0) {
+        int length2 = snapshot.length;
+        if (length2 == 0) {
             return invokeOriginal(hookInfo, hookMethodParam.thisObject, hookMethodParam.args);
         }
         int i = 0;
@@ -43,7 +50,7 @@ final class CallbackDispatcher {
                 hookMethodParam.setResult(null);
                 hookMethodParam.returnEarly = false;
             }
-        } while (i < length);
+        } while (i < length2);
         if (!hookMethodParam.returnEarly) {
             try {
                 hookMethodParam.setResult(invokeOriginal(hookInfo, hookMethodParam.thisObject, hookMethodParam.args));
@@ -73,6 +80,6 @@ final class CallbackDispatcher {
     }
 
     private static Object invokeOriginal(HookBridge.HookInfo hookInfo, Object obj, Object[] objArr) {
-        return HookBridge.invokeMember(hookInfo.getBackup(), obj, objArr);
+        return hookInfo.getBackupMethod().invoke(obj, objArr);
     }
 }

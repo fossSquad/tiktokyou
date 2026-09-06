@@ -1,23 +1,25 @@
 package com.windukk.hook;
 
+import a.g;
 import android.os.Build;
 import android.util.Log;
-import com.windukk.hook.HookMethod.Unhook;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import org.lsposed.hiddenapibypass.HiddenApiBypass;
 import sun.misc.Unsafe;
 
 public final class HookBridge {
-    private static final String TAG = "TTMod-HookBridge";
     private static volatile Boolean hiddenApiRestrictionsDisabled;
     private static volatile boolean nativeLoaded;
+    private static volatile boolean nativeRuntimeReady;
+    private static final String TAG = "HookBridge";
     static final Object[] EMPTY_ARRAY = new Object[0];
     private static final Method CALLBACK_METHOD = resolveCallbackMethod();
     private static final HashMap<Member, HookInfo> HOOKS = new HashMap<>();
@@ -25,24 +27,41 @@ public final class HookBridge {
     public static final class CopyOnWriteSortedSet<E> {
         private volatile Object[] elements = HookBridge.EMPTY_ARRAY;
 
-        private int indexOf(Object obj) {
-            for (int i = 0; i < this.elements.length; i++) {
-                if (obj.equals(this.elements[i])) {
+        private int indexOf(Object[] objArr, Object obj) {
+            for (int i = 0; i < objArr.length; i++) {
+                if (obj.equals(objArr[i])) {
                     return i;
                 }
             }
             return -1;
         }
 
+        private int insertionIndex(Object[] objArr, E e) {
+            for (Object obj : objArr) {
+                if (e.equals(obj)) {
+                    return -1;
+                }
+            }
+            Comparable comparable = (Comparable) e;
+            for (int i = 0; i < objArr.length; i++) {
+                if (comparable.compareTo(objArr[i]) < 0) {
+                    return i;
+                }
+            }
+            return objArr.length;
+        }
+
         public synchronized boolean add(E e) {
-            if (indexOf(e) >= 0) {
+            Object[] objArr = this.elements;
+            int iInsertionIndex = insertionIndex(objArr, e);
+            if (iInsertionIndex < 0) {
                 return false;
             }
-            Object[] objArr = new Object[this.elements.length + 1];
-            System.arraycopy(this.elements, 0, objArr, 0, this.elements.length);
-            objArr[this.elements.length] = e;
-            Arrays.sort(objArr);
-            this.elements = objArr;
+            Object[] objArr2 = new Object[objArr.length + 1];
+            System.arraycopy(objArr, 0, objArr2, 0, iInsertionIndex);
+            objArr2[iInsertionIndex] = e;
+            System.arraycopy(objArr, iInsertionIndex, objArr2, iInsertionIndex + 1, objArr.length - iInsertionIndex);
+            this.elements = objArr2;
             return true;
         }
 
@@ -51,14 +70,15 @@ public final class HookBridge {
         }
 
         public synchronized boolean remove(E e) {
-            int iIndexOf = indexOf(e);
+            Object[] objArr = this.elements;
+            int iIndexOf = indexOf(objArr, e);
             if (iIndexOf < 0) {
                 return false;
             }
-            Object[] objArr = new Object[this.elements.length - 1];
-            System.arraycopy(this.elements, 0, objArr, 0, iIndexOf);
-            System.arraycopy(this.elements, iIndexOf + 1, objArr, iIndexOf, (this.elements.length - iIndexOf) - 1);
-            this.elements = objArr;
+            Object[] objArr2 = new Object[objArr.length - 1];
+            System.arraycopy(objArr, 0, objArr2, 0, iIndexOf);
+            System.arraycopy(objArr, iIndexOf + 1, objArr2, iIndexOf, (objArr.length - iIndexOf) - 1);
+            this.elements = objArr2;
             return true;
         }
 
@@ -256,7 +276,7 @@ public final class HookBridge {
     }
 
     public static final class HookInfo {
-        private Member backup;
+        private Method backup;
         final CopyOnWriteSortedSet<HookMethod> callbacks = new CopyOnWriteSortedSet<>();
         private final boolean isStatic;
         private final Member method;
@@ -281,6 +301,10 @@ public final class HookBridge {
             return this.backup;
         }
 
+        public Method getBackupMethod() {
+            return this.backup;
+        }
+
         public CopyOnWriteSortedSet<HookMethod> getCallbacks() {
             return this.callbacks;
         }
@@ -298,12 +322,12 @@ public final class HookBridge {
         }
 
         public void setBackup(Member member) {
-            this.backup = member;
+            Method method = (Method) member;
+            if (!method.isAccessible()) {
+                method.setAccessible(true);
+            }
+            this.backup = method;
         }
-    }
-
-    static {
-        loadNative();
     }
 
     private HookBridge() {
@@ -328,13 +352,49 @@ public final class HookBridge {
                 return bool2.booleanValue();
             }
             boolean zTryDisableHiddenApiRestrictions = tryDisableHiddenApiRestrictions();
-            hiddenApiRestrictionsDisabled = Boolean.valueOf(zTryDisableHiddenApiRestrictions);
+            if (!zTryDisableHiddenApiRestrictions) {
+                zTryDisableHiddenApiRestrictions = tryDisableNativeHiddenApiRestrictions();
+            }
+            if (zTryDisableHiddenApiRestrictions) {
+                hiddenApiRestrictionsDisabled = Boolean.TRUE;
+            }
             return zTryDisableHiddenApiRestrictions;
         }
     }
 
+    private static native boolean disableHiddenApiRestrictions0();
+
     public static boolean disableProfileSaver() {
-        return false;
+        if (!ensureNativeLibraryLoaded()) {
+            return false;
+        }
+        try {
+            return disableProfileSaver0();
+        } catch (Throwable th) {
+            Log.w("HookBridge", "Native ProfileSaver disable failed", th);
+            return false;
+        }
+    }
+
+    private static native boolean disableProfileSaver0();
+
+    private static boolean ensureNativeLibraryLoaded() {
+        if (nativeLoaded) {
+            return true;
+        }
+        synchronized (HookBridge.class) {
+            if (nativeLoaded) {
+                return true;
+            }
+            try {
+                System.loadLibrary("ttmod");
+                nativeLoaded = true;
+                return true;
+            } catch (Throwable th) {
+                Log.e("HookBridge", "Failed to load ttmod native library", th);
+                return false;
+            }
+        }
     }
 
     private static native Member hook0(Object obj, Member member, Method method);
@@ -344,10 +404,15 @@ public final class HookBridge {
             throw new NullPointerException("hookClass");
         }
         HashSet hashSet = new HashSet();
-        for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
-            hashSet.add(hookMethod(constructor, hookMethod));
+        try {
+            for (Constructor<?> constructor : cls.getDeclaredConstructors()) {
+                hashSet.add(hookMethod(constructor, hookMethod));
+            }
+            return hashSet;
+        } catch (Error | RuntimeException e) {
+            rollbackHooks(hashSet, e);
+            throw e;
         }
-        return hashSet;
     }
 
     public static Set<HookMethod.Unhook> hookAllMethods(Class<?> cls, String str, HookMethod hookMethod) {
@@ -358,12 +423,17 @@ public final class HookBridge {
             throw new NullPointerException("methodName");
         }
         HashSet hashSet = new HashSet();
-        for (Method method : cls.getDeclaredMethods()) {
-            if (str.equals(method.getName())) {
-                hashSet.add(hookMethod(method, hookMethod));
+        try {
+            for (Method method : cls.getDeclaredMethods()) {
+                if (str.equals(method.getName())) {
+                    hashSet.add(hookMethod(method, hookMethod));
+                }
             }
+            return hashSet;
+        } catch (Error | RuntimeException e) {
+            rollbackHooks(hashSet, e);
+            throw e;
         }
-        return hashSet;
     }
 
     public static HookMethod.Unhook hookMethod(Member member, HookMethod hookMethod) {
@@ -386,8 +456,10 @@ public final class HookBridge {
             }
             hookInfo.callbacks.add(hookMethod);
         }
-        return hookMethod.new Unhook(member);
+        return new HookMethod.Unhook(hookMethod, member);
     }
+
+    private static native boolean initialize0(String str);
 
     public static Object invokeMember(Member member, Object obj, Object[] objArr) {
         if (objArr == null) {
@@ -409,14 +481,18 @@ public final class HookBridge {
         synchronized (map) {
             hookInfo = map.get(member);
         }
-        if (hookInfo != null) {
-            try {
-                member = hookInfo.getBackup();
-            } catch (InstantiationException e) {
-                throw new IllegalArgumentException("Constructor invocation failed", e);
+        try {
+            if (hookInfo == null) {
+                return invokeMember(member, obj, objArr);
             }
+            Method backupMethod = hookInfo.getBackupMethod();
+            if (objArr == null) {
+                objArr = EMPTY_ARRAY;
+            }
+            return backupMethod.invoke(obj, objArr);
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException("Constructor invocation failed", e);
         }
-        return invokeMember(member, obj, objArr);
     }
 
     public static boolean isHooked(Member member) {
@@ -432,25 +508,33 @@ public final class HookBridge {
     private static native boolean isHooked0(Member member);
 
     private static boolean loadNative() {
-        if (nativeLoaded) {
+        if (nativeRuntimeReady) {
             return true;
         }
         synchronized (HookBridge.class) {
-            if (nativeLoaded) {
+            if (nativeRuntimeReady) {
                 return true;
             }
-            try {
-                System.loadLibrary("ttmod");
-                nativeLoaded = true;
-            } catch (Throwable th) {
-                Log.e(TAG, "Failed to load ttmod native library", th);
+            if (!disableHiddenApiRestrictions()) {
+                Log.w("HookBridge", "Hidden API bypass was not confirmed before native initialization");
             }
-            return nativeLoaded;
+            if (!ensureNativeLibraryLoaded()) {
+                return false;
+            }
+            nativeRuntimeReady = initialize0(g.a());
+            if (!nativeRuntimeReady) {
+                Log.e("HookBridge", "Failed to initialize LSPlant runtime");
+                return false;
+            }
+            if (!disableProfileSaver0()) {
+                Log.w("HookBridge", "ART ProfileSaver disable was not confirmed");
+            }
+            return true;
         }
     }
 
     public static void log(Throwable th) {
-        Log.e(TAG, "Uncaught hook callback exception", th);
+        Log.e("HookBridge", "Uncaught hook callback exception", th);
     }
 
     public static boolean makeClassInheritable(Class<?> cls) {
@@ -462,6 +546,20 @@ public final class HookBridge {
     }
 
     private static native boolean makeClassInheritable0(Class<?> cls);
+
+    private static native boolean pauseNativeLogging0();
+
+    public static boolean pauseNativeLoggingForSnapshot() {
+        if (!nativeLoaded) {
+            return false;
+        }
+        try {
+            return pauseNativeLogging0();
+        } catch (Throwable th) {
+            Log.w("HookBridge", "Failed to pause native logging", th);
+            return false;
+        }
+    }
 
     private static void requireHookableMethod(Member member) {
         if (member == null) {
@@ -477,7 +575,7 @@ public final class HookBridge {
 
     private static void requireNativeLoaded() {
         if (!loadNative()) {
-            throw new IllegalStateException("ttmod native library is not loaded");
+            throw new IllegalStateException("ttmod hook runtime is not initialized");
         }
     }
 
@@ -489,15 +587,59 @@ public final class HookBridge {
         }
     }
 
+    private static native void resumeNativeLogging0();
+
+    public static void resumeNativeLoggingAfterSnapshot() {
+        if (nativeLoaded) {
+            try {
+                resumeNativeLogging0();
+            } catch (Throwable th) {
+                Log.w("HookBridge", "Failed to resume native logging", th);
+            }
+        }
+    }
+
+    private static void rollbackHooks(Set<HookMethod.Unhook> set, Throwable th) {
+        Iterator<HookMethod.Unhook> it = set.iterator();
+        while (it.hasNext()) {
+            try {
+                it.next().unhook();
+            } catch (Throwable th2) {
+                if (th2 != th) {
+                    th.addSuppressed(th2);
+                }
+            }
+        }
+    }
+
     private static boolean tryDisableHiddenApiRestrictions() {
         if (Build.VERSION.SDK_INT < 28) {
             return true;
         }
         try {
+            if (HiddenApiBypass.addHiddenApiExemptions(new String[]{""})) {
+                return true;
+            }
+        } catch (Throwable th) {
+            Log.w("HookBridge", "LSPosed HiddenApiBypass failed, trying local fallback", th);
+        }
+        try {
             HiddenApiAccess.addExemptions("");
             return true;
+        } catch (Throwable th2) {
+            Log.w("HookBridge", "Failed to disable hidden API restrictions", th2);
+            return false;
+        }
+    }
+
+    private static boolean tryDisableNativeHiddenApiRestrictions() {
+        if (!ensureNativeLibraryLoaded()) {
+            return false;
+        }
+        try {
+            return disableHiddenApiRestrictions0();
         } catch (Throwable th) {
-            Log.w(TAG, "Failed to disable hidden API restrictions", th);
+            Log.w("HookBridge", "Native hidden API bypass failed", th);
             return false;
         }
     }
