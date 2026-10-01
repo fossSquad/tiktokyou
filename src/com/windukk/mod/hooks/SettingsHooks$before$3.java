@@ -1,4 +1,6 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +18,7 @@ import ni.shikatu.kotlin.io.CloseableKt;
 public final class SettingsHooks$before$3 extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         try {
-            Context contextA = Main.a();
+            Context contextA = Main.getApplicationContext();
             try {
                 InputStream inputStreamOpen = ResourceOverlay.open(contextA, "ic_mod_logo_status.png");
                 try {

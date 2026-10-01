@@ -3,13 +3,13 @@ package Z;
 import android.content.Context;
 import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BrowserHooks;
+import Z.BrowserHooks;
 import java.util.concurrent.ConcurrentHashMap;
 
 class x1 extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String str;
-        String str2;
+        String str = null;
+        String str2 = null;
         Object[] objArr = hookMethodParam.args;
         if (objArr.length >= 2) {
             boolean zEquals = false;

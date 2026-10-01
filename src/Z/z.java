@@ -13,8 +13,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.Typeface;
 import android.graphics.drawable.StateListDrawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -26,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +56,7 @@ public abstract class z {
     public static final ExecutorService b = Executors.newFixedThreadPool(2, new ThreadFactory() {
         @Override
         public final Thread newThread(Runnable runnable) {
-            return z.a(runnable);
+            return Z.z.a(runnable);
         }
     });
 
@@ -81,7 +84,7 @@ public abstract class z {
         int color = z ? -1 : Color.parseColor("#161823");
         int i3 = z ? -6579293 : -9210757;
         int iA = ta.a.f() ? ThemeHooks.a() : Color.parseColor("#FE2B54");
-        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(activity, z ? R.style.Theme.DeviceDefault : R.style.Theme.DeviceDefault.Light);
+        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(activity, z ? R.style.Theme_DeviceDefault : R.style.Theme_DeviceDefault_Light);
         LinearLayout linearLayout2 = new LinearLayout(activity);
         linearLayout2.setOrientation(1);
         float f = 20;
@@ -123,7 +126,7 @@ public abstract class z {
         linearLayout2.addView(textView2, layoutParams2);
         LinearLayout linearLayout3 = new LinearLayout(activity);
         linearLayout3.setOrientation(1);
-        final Set mutableSet = CollectionsKt.toMutableSet(ta.b());
+        Set mutableSet = CollectionsKt.toMutableSet(ta.b());
         ArrayList arrayList2 = new ArrayList();
         String strA = l6.a("auto_streak_recipients_all_toggle");
         SharedPreferences sharedPreferences = ta.b;
@@ -148,10 +151,11 @@ public abstract class z {
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 final w wVar = (w) it.next();
+                final Set mutableSetRef = mutableSet;
                 boolean z2 = !mutableSet.contains(wVar.a);
                 Function1 function1 = new Function1() {
                     public final Object invoke(Object obj) {
-                        return z.a(mutableSet, wVar, runnable, ((Boolean) obj).booleanValue());
+                        return Z.z.a(mutableSetRef, wVar, runnable, ((Boolean) obj).booleanValue());
                     }
                 };
                 Set set = mutableSet;
@@ -199,7 +203,7 @@ public abstract class z {
         checkBoxA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z6) {
-                z.a(arrayList, runnable, compoundButton, z6);
+                Z.z.a(arrayList, runnable, compoundButton, z6);
             }
         });
         ScrollView scrollView = new ScrollView(activity);
@@ -224,7 +228,7 @@ public abstract class z {
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view2) {
-                z.a(dialogA, view2);
+                Z.z.a(dialogA, view2);
             }
         });
         LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, (int) (52 * activity.getResources().getDisplayMetrics().density));
@@ -233,14 +237,14 @@ public abstract class z {
         dialogA.setContentView(wa.a(activity, viewGroup, Math.min((int) (activity.getResources().getDisplayMetrics().heightPixels * 0.82f), (int) (680 * activity.getResources().getDisplayMetrics().density)), new View.OnClickListener() {
             @Override
             public final void onClick(View view2) {
-                z.b(dialogA, view2);
+                Z.z.b(dialogA, view2);
             }
         }));
         dialogA.setCancelable(true);
         dialogA.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public final void onDismiss(DialogInterface dialogInterface) {
-                z.a(dialogInterface);
+                Z.z.a(dialogInterface);
             }
         });
         wa.a(dialogA, viewGroup, i2, 0.55f);
@@ -264,7 +268,7 @@ public abstract class z {
         b.execute(new Runnable() {
             @Override
             public final void run() {
-                z.a(str, activity, wVar, imageView);
+                Z.z.a(str, activity, wVar, imageView);
             }
         });
     }
@@ -279,7 +283,8 @@ public abstract class z {
         y yVar = y.a;
         Function0 function0 = new Function0() {
             public final Object invoke() {
-                return z.a(leVar, runnable);
+                Z.z.a(leVar, runnable);
+                return Unit.INSTANCE;
             }
         };
         yVar.getClass();
@@ -291,7 +296,7 @@ public abstract class z {
         activity.runOnUiThread(new Runnable() {
             @Override
             public final void run() {
-                z.a(activity, listA, runnable);
+                Z.z.a(activity, listA, runnable);
             }
         });
         return Unit.INSTANCE;
@@ -305,12 +310,12 @@ public abstract class z {
         try {
             Result.Companion companion = Result.Companion;
             b(activity, list, runnable);
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Failed to show recipients sheet", new Object[0]), th2);
         }
@@ -353,12 +358,12 @@ public abstract class z {
         ta.d().a("");
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(Main.a());
+            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context = (Context) obj;
@@ -379,7 +384,7 @@ public abstract class z {
         checkBoxA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z3) {
-                z.a(function1, compoundButton, z3);
+                Z.z.a(function1, compoundButton, z3);
             }
         });
         linearLayout.addView(checkBoxA, new LinearLayout.LayoutParams(-2, -2));
@@ -404,7 +409,7 @@ public abstract class z {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                z.a(linearLayout, checkBoxA, view);
+                Z.z.a(linearLayout, checkBoxA, view);
             }
         });
         a(activity, wVar, imageView);
@@ -456,16 +461,16 @@ public abstract class z {
         try {
             Result.Companion companion = Result.Companion;
             Bitmap bitmapA = a(str);
-            obj = Result.constructor-impl(bitmapA != null ? a(bitmapA) : null);
+            obj = RCompat.m6constructorimpl(bitmapA != null ? a(bitmapA) : null);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Avatar decode failed for uid=%s", new Object[]{wVar.a}), th2);
         }
-        final Bitmap bitmap = (Bitmap) (Result.isFailure-impl(obj) ? null : obj);
+        final Bitmap bitmap = (Bitmap) (RCompat.m12isFailureimpl(obj) ? null : obj);
         if (bitmap == null) {
             return;
         }
@@ -473,7 +478,7 @@ public abstract class z {
         activity.runOnUiThread(new Runnable() {
             @Override
             public final void run() {
-                z.a(activity, bitmap, imageView);
+                Z.z.a(activity, bitmap, imageView);
             }
         });
     }

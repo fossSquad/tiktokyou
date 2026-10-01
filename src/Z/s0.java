@@ -4,7 +4,7 @@ import android.text.TextUtils;
 import com.ss.android.ugc.aweme.friendstab.repo.RepostTextExtra;
 import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,9 @@ import java.util.List;
 class s0 extends HookMethod {
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Throwable th = null;
         md mdVar;
-        md mdVar2;
+        md mdVar2 = null;
         Object[] objArr;
         List list;
         Object[] objArr2 = hookMethodParam.args;
@@ -65,8 +66,8 @@ class s0 extends HookMethod {
                                             z2 = true;
                                         }
                                         arrayList.add(declaredConstructor.newInstance(num != null ? Integer.valueOf(iMax) : null, num2 != null ? Integer.valueOf(iMax2) : null, str2, num3));
-                                    } catch (Throwable th) {
-                                        th = th;
+                                    } catch (Throwable th_2) {
+                                        th = th_2;
                                         String strDecrypt = "Failed to patch repost text";
                                         Object obj5 = h6.a;
                                         h6.a(6, String.valueOf(strDecrypt), th);

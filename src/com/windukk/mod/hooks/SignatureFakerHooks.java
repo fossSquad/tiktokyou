@@ -1,4 +1,7 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.dd;
+import Z.h6;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -38,32 +41,32 @@ public class SignatureFakerHooks {
         }
     });
 
-    public class a extends HookMethod {
-        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class a extends HookMethod {
+        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (Boolean.TRUE.equals(SignatureFakerHooks.h.get())) {
                 hookMethodParam.setResult(SignatureFakerHooks.k());
             }
         }
     }
 
-    public class b extends HookMethod {
-        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class b extends HookMethod {
+        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (Boolean.TRUE.equals(SignatureFakerHooks.h.get())) {
                 hookMethodParam.setResult(SignatureFakerHooks.k());
             }
         }
     }
 
-    public class c extends HookMethod {
-        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class c extends HookMethod {
+        public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (Boolean.TRUE.equals(SignatureFakerHooks.h.get())) {
                 hookMethodParam.setResult(Boolean.FALSE);
             }
         }
     }
 
-    public class d extends HookMethod {
-        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class d extends HookMethod {
+        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             PackageInfo packageInfoA;
             if (Boolean.FALSE.equals(SignatureFakerHooks.h.get())) {
                 return;
@@ -76,24 +79,24 @@ public class SignatureFakerHooks {
         }
     }
 
-    public class e extends HookMethod {
-        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class e extends HookMethod {
+        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (!Boolean.FALSE.equals(SignatureFakerHooks.h.get()) && hookMethodParam.args.length > 0 && "com.zhiliaoapp.musically".equals(hookMethodParam.args[0])) {
                 hookMethodParam.setResult("com.android.vending");
             }
         }
     }
 
-    public class f extends HookMethod {
-        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class f extends HookMethod {
+        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (!Boolean.FALSE.equals(SignatureFakerHooks.h.get()) && hookMethodParam.args.length > 0 && "com.zhiliaoapp.musically".equals(hookMethodParam.args[0])) {
                 SignatureFakerHooks.a(hookMethodParam.getResult());
             }
         }
     }
 
-    public class g extends HookMethod {
-        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public static class g extends HookMethod {
+        public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
             if (Boolean.FALSE.equals(SignatureFakerHooks.h.get())) {
                 return;
             }
@@ -331,7 +334,7 @@ public class SignatureFakerHooks {
         }
     }
 
-    public class h implements Parcelable.Creator<PackageInfo> {
+    public static class h implements Parcelable.Creator<PackageInfo> {
         @Override
 
         public PackageInfo createFromParcel(Parcel parcel) {

@@ -1,4 +1,36 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.k8;
+import Z.l6;
+import Z.le;
+import Z.o9;
+import Z.r9;
+import Z.s9;
+
+import Z.a1;
+import Z.b4;
+import Z.dc;
+import Z.h6;
+import Z.i9;
+import Z.j9;
+import Z.k1;
+import Z.l0;
+import Z.lc;
+import Z.m1;
+import Z.m2;
+import Z.n1;
+import Z.n2;
+import Z.p8;
+import Z.p9;
+import Z.q9;
+import Z.t1;
+import Z.t9;
+import Z.u9;
+import Z.v1;
+import Z.w6;
+import Z.z1;
+import Z.z7;
+import Z.ze;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -49,12 +81,12 @@ public final class SettingsHooks {
             try {
                 Result.Companion companion = Result.Companion;
                 Object obj4 = z7Var.a(obj.getClass()).get(obj);
-                obj2 = Result.constructor-impl(obj4 instanceof String ? (String) obj4 : null);
+                obj2 = RCompat.m6constructorimpl(obj4 instanceof String ? (String) obj4 : null);
             } catch (Throwable th) {
                 Result.Companion companion2 = Result.Companion;
-                obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
-            obj3 = (String) (Result.isFailure-impl(obj2) ? null : obj2);
+            obj3 = (String) (RCompat.m12isFailureimpl(obj2) ? null : obj2);
         }
         return Intrinsics.areEqual(strDecrypt, obj3);
     }
@@ -124,14 +156,14 @@ public final class SettingsHooks {
                     }
                 }
                 arrayList.size();
-                obj = Result.constructor-impl(Unit.INSTANCE);
-                Throwable th = Result.exceptionOrNull-impl(obj);
+                obj = RCompat.m6constructorimpl(Unit.INSTANCE);
+                Throwable th = RCompat.m9exceptionOrNullimpl(obj);
                 if (th != null) {
                     h6.a(6, h6.a("Unable to deoptimize settings caller " + p8Var7, new Object[0]), th);
                 }
             } catch (Throwable th2) {
                 Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th2));
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
             }
         }
         p8 p8Var8 = q9.a;
@@ -146,12 +178,12 @@ public final class SettingsHooks {
             Result.Companion companion = Result.Companion;
             ogVar.getClass();
             a();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Notification icon hook unavailable", new Object[0]), th2);
         }
@@ -160,12 +192,12 @@ public final class SettingsHooks {
             Result.Companion companion3 = Result.Companion;
             ogVar2.getClass();
             b();
-            obj2 = Result.constructor-impl(Unit.INSTANCE);
+            obj2 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th3) {
             Result.Companion companion4 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        Throwable th4 = Result.exceptionOrNull-impl(obj2);
+        Throwable th4 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th4 != null) {
             h6.a(6, h6.a("Settings row hook unavailable", new Object[0]), th4);
         }
@@ -174,7 +206,7 @@ public final class SettingsHooks {
     public static void c(Object[] objArr) {
         Context contextA;
         Object obj;
-        Context context;
+        Context context = null;
         Object objFirstOrNull = ArraysKt.firstOrNull(objArr);
         if (objFirstOrNull != null) {
             if (objFirstOrNull instanceof Context) {
@@ -188,22 +220,22 @@ public final class SettingsHooks {
                         if (obj2 instanceof Context) {
                             context = (Context) obj2;
                         }
-                        obj = Result.constructor-impl(context);
-                        contextA = (Context) (Result.isFailure-impl(obj) ? null : obj);
+                        obj = RCompat.m6constructorimpl(context);
+                        contextA = (Context) (RCompat.m12isFailureimpl(obj) ? null : obj);
                     }
                     context = null;
-                    obj = Result.constructor-impl(context);
+                    obj = RCompat.m6constructorimpl(context);
                 } catch (Throwable th) {
                     Result.Companion companion2 = Result.Companion;
-                    obj = Result.constructor-impl(ResultKt.createFailure(th));
+                    obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                 }
-                contextA = (Context) (Result.isFailure-impl(obj) ? null : obj);
+                contextA = (Context) (RCompat.m12isFailureimpl(obj) ? null : obj);
             }
             if (contextA == null) {
-                contextA = Main.a();
+                contextA = Main.getApplicationContext();
             }
         } else {
-            contextA = Main.a();
+            contextA = Main.getApplicationContext();
         }
         Intent intent = new Intent(contextA, (Class<?>) le.class);
         if (!(contextA instanceof Activity)) {
@@ -322,12 +354,12 @@ public final class SettingsHooks {
                 try {
                     Result.Companion companion = Result.Companion;
                     Object objInvoke = p8Var.a(obj.getClass(), new Class[0]).invoke(obj, null);
-                    obj2 = Result.constructor-impl(objInvoke instanceof String ? (String) objInvoke : null);
+                    obj2 = RCompat.m6constructorimpl(objInvoke instanceof String ? (String) objInvoke : null);
                 } catch (Throwable th) {
                     Result.Companion companion2 = Result.Companion;
-                    obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                    obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                 }
-                obj3 = (String) (Result.isFailure-impl(obj2) ? null : obj2);
+                obj3 = (String) (RCompat.m12isFailureimpl(obj2) ? null : obj2);
             }
             if (!Intrinsics.areEqual(strDecrypt, obj3)) {
                 return false;
@@ -365,12 +397,12 @@ public final class SettingsHooks {
         try {
             Result.Companion companion = Result.Companion;
             z7 z7Var = k8.a;
-            obj2 = Result.constructor-impl(Class.forName("kotlin.Unit", false, classLoader));
+            obj2 = RCompat.m6constructorimpl(Class.forName("kotlin.Unit", false, classLoader));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = null;
         }
         Class cls = (Class) obj2;
@@ -379,22 +411,22 @@ public final class SettingsHooks {
         }
         try {
             Result.Companion companion3 = Result.Companion;
-            obj3 = Result.constructor-impl(cls.getField("INSTANCE").get(null));
+            obj3 = RCompat.m6constructorimpl(cls.getField("INSTANCE").get(null));
         } catch (Throwable th2) {
             Result.Companion companion4 = Result.Companion;
-            obj3 = Result.constructor-impl(ResultKt.createFailure(th2));
+            obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
         }
-        if (Result.exceptionOrNull-impl(obj3) == null) {
+        if (RCompat.m9exceptionOrNullimpl(obj3) == null) {
             return obj3;
         }
         try {
             Result.Companion companion5 = Result.Companion;
-            obj4 = Result.constructor-impl(k8.a.a(cls).get(null));
+            obj4 = RCompat.m6constructorimpl(k8.a.a(cls).get(null));
         } catch (Throwable th3) {
             Result.Companion companion6 = Result.Companion;
-            obj4 = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj4 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        if (Result.isFailure-impl(obj4)) {
+        if (RCompat.m12isFailureimpl(obj4)) {
             return null;
         }
         return obj4;
@@ -453,9 +485,7 @@ public final class SettingsHooks {
             a(th);
             objNewInstance = null;
         }
-        String strDecrypt = "ttmod_settings";
-        m6 m6Var = l6.a;
-        Object objNewInstance2 = declaredConstructor.newInstance(objNewInstance, null, "", strDecrypt, l6.a("settings_title", "Mod Settings"), objA, objA2);
+        Object objNewInstance2 = declaredConstructor.newInstance(objNewInstance, null, "", "ttmod_settings", l6.a("settings_title", "Mod Settings"), objA, objA2);
         return objNewInstance2;
     }
 

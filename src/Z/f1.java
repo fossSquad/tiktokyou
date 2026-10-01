@@ -3,7 +3,7 @@ package Z;
 import android.text.TextUtils;
 import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class f1 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

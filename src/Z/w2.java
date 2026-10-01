@@ -9,7 +9,7 @@ public final  class w2 extends FunctionReferenceImpl implements Function1 {
     }
 
     public final Object invoke(Object obj) {
-        ((se) ((FunctionReferenceImpl) this).receiver).a(((Number) obj).intValue());
+        ((se) this.receiver).a(((Number) obj).intValue());
         return Unit.INSTANCE;
     }
 }

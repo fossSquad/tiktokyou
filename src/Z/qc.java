@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
-import com.ss.android.ugc.profile.platform.base.component.BaseContainerComponent;
-import com.windukk.hook.HookBridge;
 import com.windukk.stable.ResourceOverlay;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,9 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,33 +51,163 @@ public abstract class qc {
         g = Collections.synchronizedMap(new WeakHashMap());
     }
 
-    public static void a(LinkedHashMap linkedHashMap) {
-        ConcurrentHashMap concurrentHashMap = b;
-        HashSet hashSet = new HashSet(concurrentHashMap.values());
-        concurrentHashMap.clear();
-        for (Map.Entry entry : linkedHashMap.entrySet()) {
-            if (!TextUtils.isEmpty((CharSequence) entry.getKey()) && !TextUtils.isEmpty((CharSequence) entry.getValue())) {
-                b.put((String) entry.getKey(), (String) entry.getValue());
+    public static void a(View view) {
+        String string = null;
+        String str;
+        ViewGroup viewGroup;
+        nc ncVar;
+        Object objInvoke;
+        Object objInvoke2;
+        Object objInvoke3;
+        int width = view.getWidth();
+        int height = view.getHeight();
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+        try {
+            Method methodA = a();
+            string = (methodA == null || (objInvoke = methodA.invoke(null, view)) == null || (objInvoke2 = objInvoke.getClass().getMethod("getUser", null).invoke(objInvoke, null)) == null || (objInvoke3 = objInvoke2.getClass().getMethod("getUid", null).invoke(objInvoke2, null)) == null) ? null : objInvoke3.toString();
+        } catch (Throwable th) {
+        }
+        if (TextUtils.isEmpty(string)) {
+            str = null;
+        } else {
+            str = (String) b.get(string);
+            if (TextUtils.isEmpty(str)) {
+                str = null;
             }
         }
-        hashSet.removeAll(b.values());
-        Iterator it = hashSet.iterator();
-        while (it.hasNext()) {
-            c.remove((String) it.next());
+        if (str == null) {
+            WeakReference weakReference = (WeakReference) f.remove(view);
+            View view2 = weakReference != null ? (View) weakReference.get() : null;
+            if (view2 != null) {
+                if (view2.getBackground() instanceof oc) {
+                    view2.setBackground(((oc) view2.getBackground()).a);
+                } else if (view2.getBackground() instanceof nc) {
+                    view2.setBackground(null);
+                }
+            }
+            e.remove(view);
+            g.remove(view);
+            return;
         }
+        Bitmap bitmap = (Bitmap) c.get(str);
+        if (bitmap == null) {
+            a(view.getContext(), str, view);
+            return;
+        }
+        int[] iArr = new int[2];
+        ViewParent parent = view.getParent();
+        while (true) {
+            if (parent instanceof ViewGroup) {
+                viewGroup = (ViewGroup) parent;
+                if (viewGroup.getId() != 16908290 && !viewGroup.getClass().getName().contains("DecorView")) {
+                    viewGroup.getLocationInWindow(iArr);
+                    if (iArr[1] <= 24) {
+                        break;
+                    } else {
+                        parent = viewGroup.getParent();
+                    }
+                }
+            }
+            viewGroup = null;
+            break;
+        }
+        if (viewGroup == null) {
+            if ((view.getBackground() instanceof nc) && str.equals(e.get(view))) {
+                return;
+            }
+            view.setBackground(new nc(bitmap, c()));
+            e.put(view, str);
+            f.put(view, new WeakReference(view));
+            return;
+        }
+        int[] iArr2 = new int[2];
+        int[] iArr3 = new int[2];
+        view.getLocationInWindow(iArr2);
+        viewGroup.getLocationInWindow(iArr3);
+        int i2 = iArr2[1] - iArr3[1];
+        pc pcVarC = c();
+        Map map = g;
+        Integer numValueOf = (Integer) map.get(view);
+        if (numValueOf == null) {
+            numValueOf = Integer.valueOf(i2);
+            map.put(view, numValueOf);
+        }
+        int iMin = Math.min(0, i2 - numValueOf.intValue());
+        float width2 = viewGroup.getWidth();
+        pcVarC.getClass();
+        int iMax = Math.max(1, Math.round(width2 * 0.9292929f)) + iMin;
+        Map map2 = f;
+        WeakReference weakReference2 = (WeakReference) map2.get(view);
+        View view3 = weakReference2 != null ? (View) weakReference2.get() : null;
+        if (view3 != null && view3 != viewGroup) {
+            if (view3.getBackground() instanceof oc) {
+                view3.setBackground(((oc) view3.getBackground()).a);
+            } else if (view3.getBackground() instanceof nc) {
+                view3.setBackground(null);
+            }
+            map.remove(view);
+        }
+        Drawable background = viewGroup.getBackground();
+        boolean z = background instanceof oc;
+        if (z) {
+            ncVar = ((oc) background).b;
+            if (ncVar.a != bitmap) {
+                if (z) {
+                    background = ((oc) background).a;
+                }
+                ncVar = new nc(bitmap, pcVarC);
+                viewGroup.setBackground(new oc(background, ncVar));
+            }
+        } else {
+            if (z) {
+                background = ((oc) background).a;
+            }
+            ncVar = new nc(bitmap, pcVarC);
+            viewGroup.setBackground(new oc(background, ncVar));
+        }
+        if (ncVar.f != pcVarC) {
+            ncVar.f = pcVarC;
+            ncVar.invalidateSelf();
+        }
+        if (!ncVar.g || ncVar.h != iMin || ncVar.i != iMax) {
+            ncVar.g = true;
+            ncVar.h = iMin;
+            ncVar.i = iMax;
+            ncVar.invalidateSelf();
+        }
+        e.put(view, str + "@" + System.identityHashCode(viewGroup));
+        map2.put(view, new WeakReference(viewGroup));
+        h(view);
     }
 
-    public static void b() {
-        try {
-            HookBridge.hookAllMethods(BaseContainerComponent.class, "onViewCreated", new mc());
-            String strDecrypt = "Initialized";
-            Object obj = h6.a;
-            h6.a(4, String.valueOf(strDecrypt), (Throwable) null);
-        } catch (Throwable th) {
-            String strDecrypt2 = "Init failed";
-            Object obj2 = h6.a;
-            h6.a(6, String.valueOf(strDecrypt2), th);
-        }
+    public static void b(final View view) {
+        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public final void onGlobalLayout() {
+                qc.a(view);
+            }
+        });
+        viewTreeObserver.addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public final void onScrollChanged() {
+                qc.a(view);
+            }
+        });
+        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public final boolean onPreDraw() {
+                return qc.e(view);
+            }
+        });
+        view.post(new Runnable() {
+            @Override
+            public final void run() {
+                qc.a(view);
+            }
+        });
     }
 
     public static  boolean e(View view) {
@@ -166,179 +291,6 @@ public abstract class qc {
             }
         }
         return pcVar;
-    }
-
-    public static void a(View view) {
-        String string;
-        String str;
-        ViewGroup viewGroup;
-        View view2;
-        nc ncVar;
-        View view3;
-        Object objInvoke;
-        Object objInvoke2;
-        Object objInvoke3;
-        int width = view.getWidth();
-        int height = view.getHeight();
-        if (width <= 0 || height <= 0) {
-            return;
-        }
-        try {
-            Method methodA = a();
-            if (methodA == null || (objInvoke = methodA.invoke(null, view)) == null || (objInvoke2 = objInvoke.getClass().getMethod("getUser", null).invoke(objInvoke, null)) == null || (objInvoke3 = objInvoke2.getClass().getMethod("getUid", null).invoke(objInvoke2, null)) == null) {
-                string = null;
-            } else {
-                string = objInvoke3.toString();
-            }
-        } catch (Throwable th) {
-        }
-        if (TextUtils.isEmpty(string)) {
-            str = null;
-        } else {
-            str = (String) b.get(string);
-            if (TextUtils.isEmpty(str)) {
-                str = null;
-            }
-        }
-        if (str == null) {
-            WeakReference weakReference = (WeakReference) f.remove(view);
-            if (weakReference == null) {
-                view3 = null;
-            } else {
-                view3 = (View) weakReference.get();
-            }
-            if (view3 != null) {
-                if (view3.getBackground() instanceof oc) {
-                    view3.setBackground(((oc) view3.getBackground()).a);
-                } else if (view3.getBackground() instanceof nc) {
-                    view3.setBackground(null);
-                }
-            }
-            e.remove(view);
-            g.remove(view);
-            return;
-        }
-        Bitmap bitmap = (Bitmap) c.get(str);
-        if (bitmap == null) {
-            a(view.getContext(), str, view);
-            return;
-        }
-        int[] iArr = new int[2];
-        ViewParent parent = view.getParent();
-        while (true) {
-            if (parent instanceof ViewGroup) {
-                viewGroup = (ViewGroup) parent;
-                if (viewGroup.getId() != 16908290 && !viewGroup.getClass().getName().contains("DecorView")) {
-                    viewGroup.getLocationInWindow(iArr);
-                    if (iArr[1] <= 24) {
-                        break;
-                    } else {
-                        parent = viewGroup.getParent();
-                    }
-                }
-            }
-            viewGroup = null;
-            break;
-        }
-        if (viewGroup == null) {
-            if ((view.getBackground() instanceof nc) && str.equals(e.get(view))) {
-                return;
-            }
-            view.setBackground(new nc(bitmap, c()));
-            e.put(view, str);
-            f.put(view, new WeakReference(view));
-            return;
-        }
-        int[] iArr2 = new int[2];
-        int[] iArr3 = new int[2];
-        view.getLocationInWindow(iArr2);
-        viewGroup.getLocationInWindow(iArr3);
-        int i2 = iArr2[1] - iArr3[1];
-        pc pcVarC = c();
-        Map map = g;
-        Integer numValueOf = (Integer) map.get(view);
-        if (numValueOf == null) {
-            numValueOf = Integer.valueOf(i2);
-            map.put(view, numValueOf);
-        }
-        int iMin = Math.min(0, i2 - numValueOf.intValue());
-        float width2 = viewGroup.getWidth();
-        pcVarC.getClass();
-        int iMax = Math.max(1, Math.round(width2 * 0.9292929f)) + iMin;
-        Map map2 = f;
-        WeakReference weakReference2 = (WeakReference) map2.get(view);
-        if (weakReference2 == null) {
-            view2 = null;
-        } else {
-            view2 = (View) weakReference2.get();
-        }
-        if (view2 != null && view2 != viewGroup) {
-            if (view2.getBackground() instanceof oc) {
-                view2.setBackground(((oc) view2.getBackground()).a);
-            } else if (view2.getBackground() instanceof nc) {
-                view2.setBackground(null);
-            }
-            map.remove(view);
-        }
-        Drawable background = viewGroup.getBackground();
-        boolean z = background instanceof oc;
-        if (z) {
-            ncVar = ((oc) background).b;
-            if (ncVar.a != bitmap) {
-                if (z) {
-                    background = ((oc) background).a;
-                }
-                ncVar = new nc(bitmap, pcVarC);
-                viewGroup.setBackground(new oc(background, ncVar));
-            }
-        } else {
-            if (z) {
-                background = ((oc) background).a;
-            }
-            ncVar = new nc(bitmap, pcVarC);
-            viewGroup.setBackground(new oc(background, ncVar));
-        }
-        if (ncVar.f != pcVarC) {
-            ncVar.f = pcVarC;
-            ncVar.invalidateSelf();
-        }
-        if (!ncVar.g || ncVar.h != iMin || ncVar.i != iMax) {
-            ncVar.g = true;
-            ncVar.h = iMin;
-            ncVar.i = iMax;
-            ncVar.invalidateSelf();
-        }
-        e.put(view, str + "@" + System.identityHashCode(viewGroup));
-        map2.put(view, new WeakReference(viewGroup));
-        h(view);
-    }
-
-    public static void b(final View view) {
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public final void onGlobalLayout() {
-                qc.a(view);
-            }
-        });
-        viewTreeObserver.addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public final void onScrollChanged() {
-                qc.a(view);
-            }
-        });
-        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public final boolean onPreDraw() {
-                return qc.e(view);
-            }
-        });
-        view.post(new Runnable() {
-            @Override
-            public final void run() {
-                qc.a(view);
-            }
-        });
     }
 
     public static void b(File file) {
@@ -470,7 +422,12 @@ public abstract class qc {
         try {
             String strDecrypt = "TTMod-ProfileBanner/1.0";
             AtomicBoolean atomicBoolean = p.a;
-            byte[] bArr = p.a(str, strDecrypt, null, 25165824, MapsKt.emptyMap()).b;
+            byte[] bArr;
+            try {
+                bArr = p.a(str, strDecrypt, 25165824, MapsKt.emptyMap(), (String) null).b;
+            } catch (Exception ex9) {
+                bArr = null;
+            }
             if (bArr == null || bArr.length == 0) {
                 if (!z) {
                     return null;

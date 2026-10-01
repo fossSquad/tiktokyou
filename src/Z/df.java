@@ -1,6 +1,6 @@
 package Z;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 
 class df extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

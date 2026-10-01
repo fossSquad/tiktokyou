@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.bytedance.ies.foundation.activity.BaseActivity;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.util.ArrayList;
 
 public class c6 extends BaseActivity {
@@ -45,7 +45,7 @@ public class c6 extends BaseActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(j6Var, view);
+                c6.this.a(j6Var, view);
             }
         });
         ImageView imageView = new ImageView(this);
@@ -107,7 +107,6 @@ public class c6 extends BaseActivity {
         linearLayout.setPadding(a(8.0f), 0, a(8.0f), a(20.0f) + this.c);
         scrollView.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2));
         TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("icon_picker_title"));
         textView.setTextSize(2, 28.0f);
         textView.setTextColor(this.a ? -1 : -16777216);
@@ -169,7 +168,6 @@ public class c6 extends BaseActivity {
         if (arrayListA.isEmpty()) {
             LinearLayout linearLayout2 = this.d;
             TextView textView = new TextView(this);
-            m6 m6Var = l6.a;
             textView.setText(l6.a("icon_picker_empty"));
             textView.setTextSize(2, 14.0f);
             textView.setTextColor(h);
@@ -201,7 +199,7 @@ public class c6 extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(view);
+                c6.this.a(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(a(24.0f), a(24.0f));

@@ -56,13 +56,13 @@ public final class z3 {
         Object obj;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(aweme.aid);
+            obj = RCompat.m6constructorimpl(aweme.aid);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        final String str = null;
-        if (Result.isFailure-impl(obj)) {
+        String str = null;
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         String str2 = (String) obj;
@@ -83,6 +83,7 @@ public final class z3 {
             concurrentHashMap.remove(str, y3Var);
         }
         final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        final String strF = str;
         final Function1 function2 = new Function1() {
             public final Object invoke(Object obj2) {
                 return z3.a(atomicBoolean, function1, (List) obj2);
@@ -91,13 +92,13 @@ public final class z3 {
         c.postDelayed(new Runnable() {
             @Override
             public final void run() {
-                z3.a(atomicBoolean, str, function1);
+                z3.a(atomicBoolean, strF, function1);
             }
         }, 2500L);
         b.execute(new Runnable() {
             @Override
             public final void run() {
-                z3.a(str, function2, video);
+                z3.a(strF, function2, video);
             }
         });
     }
@@ -134,18 +135,18 @@ public final class z3 {
         try {
             Result.Companion companion = Result.Companion;
             z3Var.getClass();
-            obj = Result.constructor-impl(a(str, video));
+            obj = RCompat.m6constructorimpl(a(str, video));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             AtomicLong atomicLong = c4.a;
             c4.a(str, th2.toString());
         }
         List listEmptyList = CollectionsKt.emptyList();
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = listEmptyList;
         }
         List list = (List) obj;
@@ -172,7 +173,6 @@ public final class z3 {
     }
 
     public static List a(String str, Video video) throws NoWhenBranchMatchedException {
-        JsonElement jsonElement;
         JsonArray jsonArray;
         JsonObject jsonObject;
         int i;
@@ -188,7 +188,12 @@ public final class z3 {
         String strA = new StringBuilder().append("https://www.tiktok.com/@_/video/").append(str).toString();
         String strDecrypt = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36";
         AtomicBoolean atomicBoolean = p.a;
-        String strA2 = p.a(strA, strDecrypt, null, 2097152, MapsKt.emptyMap()).a();
+        String strA2;
+        try {
+            strA2 = p.a(strA, strDecrypt, 2097152, MapsKt.emptyMap(), (String) null).a();
+        } catch (Exception ex9) {
+            strA2 = null;
+        }
         if (strA2 != null) {
             int iIndexOf$default = StringsKt.indexOf$default(strA2, "__UNIVERSAL_DATA_FOR_REHYDRATION__", 0, false, 6, (Object) null);
             if (iIndexOf$default >= 0) {
@@ -202,7 +207,7 @@ public final class z3 {
                             string = null;
                         }
                         if (string != null) {
-                            JsonObject jsonObjectB = f6.b(string);
+                            JsonObject jsonObjectB = (JsonObject) f6.b(string);
                             JsonObject jsonObject2 = jsonObjectB instanceof JsonObject ? jsonObjectB : null;
                             if (jsonObject2 != null) {
                                 Object obj = jsonObject2.get("__DEFAULT_SCOPE__");
@@ -219,11 +224,7 @@ public final class z3 {
                                     }
                                     Object obj4 = jsonObject4.get("itemInfo");
                                     JsonObject jsonObject5 = obj4 instanceof JsonObject ? (JsonObject) obj4 : null;
-                                    if (jsonObject5 == null) {
-                                        jsonElement = null;
-                                    } else {
-                                        jsonElement = (JsonElement) jsonObject5.get("itemStruct");
-                                    }
+                                    JsonElement jsonElement = jsonObject5 != null ? (JsonElement) jsonObject5.get("itemStruct") : null;
                                     JsonObject jsonObject6 = jsonElement instanceof JsonObject ? (JsonObject) jsonElement : null;
                                     if (jsonObject6 != null) {
                                         Object obj5 = jsonObject6.get("video");
@@ -252,7 +253,7 @@ public final class z3 {
                                             int size = jsonArray.size();
                                             int i5 = 0;
                                             while (i5 < size) {
-                                                JsonObject jsonObject8 = jsonArray.get(i5);
+                                                JsonObject jsonObject8 = (JsonObject) jsonArray.get(i5);
                                                 JsonObject jsonObject9 = jsonObject8 instanceof JsonObject ? jsonObject8 : null;
                                                 if (jsonObject9 == null) {
                                                     i = i2;
@@ -295,7 +296,7 @@ public final class z3 {
                                                                 jsonNull = null;
                                                                 break;
                                                             }
-                                                            jsonNull = (JsonElement) jsonObject.get(strArr3[i7]);
+                                                            jsonNull = (JsonNull) jsonObject.get(strArr3[i7]);
                                                             if (jsonNull == null || jsonNull == JsonNull.INSTANCE) {
                                                                 jsonNull = null;
                                                             }

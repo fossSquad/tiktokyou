@@ -10,7 +10,7 @@ public final  class sc extends FunctionReferenceImpl implements Function0 {
     }
 
     public final Object invoke() {
-        g3 g3Var = (g3) ((FunctionReferenceImpl) this).receiver;
+        g3 g3Var = (g3) this.receiver;
         g3Var.getClass();
         AtomicLong atomicLong = c4.a;
         c4.a(g3Var.a);

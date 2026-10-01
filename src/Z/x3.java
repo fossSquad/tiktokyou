@@ -25,7 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,22 +79,18 @@ public final class x3 {
 
     public static String c(b3 b3Var) {
         if (b3Var.b()) {
-            m6 m6Var = l6.a;
             return l6.a("download_quality_audio_only", "Только звук");
         }
         int i = b3Var.l;
-        if (i > 0) {
-            return i + "p";
-        }
-        m6 m6Var2 = l6.a;
-        return l6.a("download_quality_unknown", "Неизвестно");
+        return i > 0 ? i + "p" : l6.a("download_quality_unknown", "Неизвестно");
     }
 
     public final boolean b(final Activity activity, s3 s3Var, final c3 c3Var) {
-        final ?? r7;
-        final int iA;
-        Object obj;
-        ?? r8;
+        Throwable th = null;
+        Object r7;
+        int iA;
+        Object obj = null;
+        Object r8;
         String str;
         try {
             Result.Companion companion = Result.Companion;
@@ -113,30 +109,29 @@ public final class x3 {
             final int i5 = z ? 587202559 : 402653184;
             List list = listEmptyList;
             final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-            final ?? A = wa.a(activity);
-            final ?? linearLayout = new LinearLayout(activity);
+            final Dialog A = wa.a(activity);
+            final LinearLayout linearLayout = new LinearLayout(activity);
             linearLayout.setOrientation(1);
-            float fA = Main.a(24.0f);
+            float fA = Main.dp(24.0f);
             try {
                 GradientDrawable gradientDrawable = new GradientDrawable();
                 gradientDrawable.setColor(i);
                 gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
                 linearLayout.setBackground(gradientDrawable);
-                linearLayout.setPadding(Main.a(16.0f), Main.a(12.0f), Main.a(16.0f), Main.a(24.0f));
+                linearLayout.setPadding(Main.dp(16.0f), Main.dp(12.0f), Main.dp(16.0f), Main.dp(24.0f));
                 linearLayout.setClickable(true);
                 linearLayout.setClipToOutline(true);
                 View view = new View(activity);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.a(48.0f), Main.a(4.0f));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.dp(48.0f), Main.dp(4.0f));
                 layoutParams.gravity = 1;
                 view.setLayoutParams(layoutParams);
-                float fA2 = Main.a(50.0f);
+                float fA2 = Main.dp(50.0f);
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
                 gradientDrawable2.setColor(i4);
                 gradientDrawable2.setCornerRadius(fA2);
                 view.setBackground(gradientDrawable2);
                 linearLayout.addView(view);
                 final TextView textView = new TextView(activity);
-                m6 m6Var = l6.a;
                 textView.setText(l6.a("download_quality_title", "Качество загрузки"));
                 textView.setGravity(17);
                 textView.setTextColor(-8026747);
@@ -147,8 +142,8 @@ public final class x3 {
                     textView.setIncludeFontPadding(false);
                     try {
                         textView.setMaxLines(1);
-                        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, Main.a(17.0f));
-                        layoutParams2.topMargin = Main.a(24.0f);
+                        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, Main.dp(17.0f));
+                        layoutParams2.topMargin = Main.dp(24.0f);
                         textView.setLayoutParams(layoutParams2);
                         linearLayout.addView(textView);
                         final LinearLayout linearLayout2 = new LinearLayout(activity);
@@ -159,7 +154,7 @@ public final class x3 {
                         scrollView.setClipToPadding(false);
                         scrollView.addView(linearLayout2, new FrameLayout.LayoutParams(-1, -2));
                         LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-                        layoutParams3.topMargin = Main.a(17.0f);
+                        layoutParams3.topMargin = Main.dp(17.0f);
                         Unit unit = Unit.INSTANCE;
                         linearLayout.addView(scrollView, layoutParams3);
                         TextView textView2 = new TextView(activity);
@@ -172,7 +167,7 @@ public final class x3 {
                         textView2.setIncludeFontPadding(false);
                         textView2.setClickable(true);
                         textView2.setFocusable(true);
-                        float fA3 = Main.a(68.0f);
+                        float fA3 = Main.dp(68.0f);
                         ColorStateList colorStateListValueOf = ColorStateList.valueOf(i5);
                         try {
                             GradientDrawable gradientDrawable3 = new GradientDrawable();
@@ -187,18 +182,18 @@ public final class x3 {
                                 textView2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public final void onClick(View view2) {
-                                        x3.a(this.f$0, linearLayout, A, view2);
+                                        x3.a(x3.this, linearLayout, A, view2);
                                     }
                                 });
-                                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.a(48.0f));
-                                layoutParams4.topMargin = Main.a(24.0f);
+                                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.dp(48.0f));
+                                layoutParams4.topMargin = Main.dp(24.0f);
                                 linearLayout.addView(textView2, layoutParams4);
-                                ?? frameLayout = new FrameLayout(activity);
+                                FrameLayout frameLayout = new FrameLayout(activity);
                                 frameLayout.setClickable(true);
                                 frameLayout.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public final void onClick(View view2) {
-                                        x3.b(this.f$0, linearLayout, A, view2);
+                                        x3.b(x3.this, linearLayout, A, view2);
                                     }
                                 });
                                 frameLayout.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2, 80));
@@ -211,15 +206,17 @@ public final class x3 {
                                 final int i9 = i4;
                                 final int i10 = -8026747;
                                 try {
+                                    final int iAF = iA;
                                     objectRef3.element = new Function0() {
                                         public final Object invoke() {
-                                            return x3.a(textView, linearLayout2, objectRef, this, objectRef2, atomicBoolean, linearLayout, A, c3Var, activity, i2, i3, i8, iA, i5, i7, i9, i10, scrollView);
+                                            return x3.a(textView, linearLayout2, objectRef, x3.this, objectRef2, atomicBoolean, linearLayout, A, c3Var, activity, i2, i3, i8, iAF, i5, i7, i9, i10, scrollView);
                                         }
                                     };
                                     r7 = scrollView;
+                                    final Object r7F = r7;
                                     Function0 function1 = new Function0() {
                                         public final Object invoke() {
-                                            return x3.a(textView, linearLayout2, activity, this, iA, i8, r7);
+                                            return x3.a(textView, linearLayout2, activity, x3.this, iAF, i8, (ScrollView) r7F);
                                         }
                                     };
                                     try {
@@ -254,7 +251,7 @@ public final class x3 {
                                             A.setOnKeyListener(new DialogInterface.OnKeyListener() {
                                                 @Override
                                                 public final boolean onKey(DialogInterface dialogInterface, int i11, KeyEvent keyEvent) {
-                                                    return x3.a(this.f$0, linearLayout, A, dialogInterface, i11, keyEvent);
+                                                    return x3.a(x3.this, linearLayout, A, dialogInterface, i11, keyEvent);
                                                 }
                                             });
                                             wa.a((Dialog) A, (ViewGroup) linearLayout, i7, 0.5f);
@@ -264,16 +261,16 @@ public final class x3 {
                                             if (s3Var instanceof q3) {
                                                 a(activity, (Dialog) A, atomicBoolean, ((q3) s3Var).a, new Function1() {
                                                     public final Object invoke(Object obj3) {
-                                                        return x3.a(objectRef, this, objectRef2, objectRef3, (List) obj3);
+                                                        return x3.a(objectRef, x3.this, objectRef2, objectRef3, (List) obj3);
                                                     }
                                                 }, new v3(atomicBoolean, this, linearLayout, A, c3Var));
                                             }
-                                            obj = Result.constructor-impl(Boolean.TRUE);
+                                            obj = RCompat.m6constructorimpl(Boolean.TRUE);
                                             r8 = r7;
-                                        } catch (Throwable th) {
-                                            th = th;
+                                        } catch (Throwable th_2) {
+                                            th = th_2;
                                             Result.Companion companion2 = Result.Companion;
-                                            obj = Result.constructor-impl(ResultKt.createFailure(th));
+                                            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                                             r8 = r7;
                                         }
                                     } catch (Throwable th2) {
@@ -281,7 +278,7 @@ public final class x3 {
                                         r7 = r7;
                                         iA = 0;
                                         Result.Companion companion3 = Result.Companion;
-                                        obj = Result.constructor-impl(ResultKt.createFailure(th));
+                                        obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                                         r8 = r7;
                                     }
                                 } catch (Throwable th3) {
@@ -316,12 +313,12 @@ public final class x3 {
             r7 = "aes";
             iA = 0;
         }
-        Throwable th10 = Result.exceptionOrNull-impl(obj);
+        Throwable th10 = RCompat.m9exceptionOrNullimpl(obj);
         if (th10 != null) {
             h6.a(6, h6.a("Download quality bottom sheet unavailable", new Object[iA]), th10);
         }
         Boolean bool = Boolean.FALSE;
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = bool;
         }
         return ((Boolean) obj).booleanValue();
@@ -366,7 +363,7 @@ public final class x3 {
             iCoerceAtLeast += RangesKt.coerceAtLeast(linearLayout.getChildAt(it.nextInt()).getLayoutParams().height, 0);
         }
         x3Var.getClass();
-        int iMin = Math.min(i, RangesKt.coerceAtLeast(iCoerceAtLeast, Main.a(64.0f)));
+        int iMin = Math.min(i, RangesKt.coerceAtLeast(iCoerceAtLeast, Main.dp(64.0f)));
         ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();
         LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) layoutParams;
         layoutParams2.height = iMin;
@@ -376,7 +373,7 @@ public final class x3 {
 
     public static final void a(LinearLayout linearLayout, Activity activity, x3 x3Var, int i, int i2, int i3, int i4, int i5, String str, String str2, String str3, boolean z, boolean z2, final Function0 function0) {
         if (linearLayout.getChildCount() > 0) {
-            linearLayout.addView(new View(activity), new LinearLayout.LayoutParams(-1, Main.a(4.0f)));
+            linearLayout.addView(new View(activity), new LinearLayout.LayoutParams(-1, Main.dp(4.0f)));
         }
         FrameLayout frameLayoutA = a(activity, str, str2, str3, z, i, i2, i3, i4, i5, z2);
         frameLayoutA.setOnClickListener(new View.OnClickListener() {
@@ -396,7 +393,7 @@ public final class x3 {
         if (atomicBoolean.compareAndSet(false, true)) {
             x3Var.a(linearLayout, dialog, new Function0() {
                 public final Object invoke() {
-                    return x3.a(this.f$0, dialog2, c3Var, b3Var);
+                    return x3.a(x3Var, dialog2, c3Var, b3Var);
                 }
             });
         }
@@ -412,7 +409,7 @@ public final class x3 {
     public static final Unit a(final x3 x3Var, LinearLayout linearLayout, Dialog dialog, final LinearLayout linearLayout2, final Dialog dialog2) {
         x3Var.a(linearLayout, dialog, new Function0() {
             public final Object invoke() {
-                return x3.a(this.f$0, linearLayout2, dialog2);
+                return x3.a(x3Var, linearLayout2, dialog2);
             }
         });
         return Unit.INSTANCE;
@@ -422,10 +419,9 @@ public final class x3 {
         String strDecrypt;
         String str;
         String str2;
-        m6 m6Var = l6.a;
         textView.setText(l6.a("download_quality_title", "Качество загрузки"));
         linearLayout.removeAllViews();
-        for (final n3 n3Var : (Iterable) objectRef.element) {
+        for (final n3 n3Var : (Iterable<n3>) (Iterable) objectRef.element) {
             final b3 b3Var = (b3) CollectionsKt.singleOrNull(n3Var.b);
             if (b3Var != null) {
                 x3Var.getClass();
@@ -498,28 +494,27 @@ public final class x3 {
     }
 
     public static final Unit a(TextView textView, LinearLayout linearLayout, Activity activity, x3 x3Var, int i, int i2, ScrollView scrollView) {
-        m6 m6Var = l6.a;
         textView.setText(l6.a("download_quality_title", "Качество загрузки"));
         linearLayout.removeAllViews();
         LinearLayout linearLayout2 = new LinearLayout(activity);
         linearLayout2.setOrientation(1);
         linearLayout2.setGravity(17);
         x3Var.getClass();
-        linearLayout2.setMinimumHeight(Main.a(64.0f));
+        linearLayout2.setMinimumHeight(Main.dp(64.0f));
         ProgressBar progressBar = new ProgressBar(activity);
         progressBar.setIndeterminate(true);
         progressBar.setIndeterminateTintList(ColorStateList.valueOf(i));
-        linearLayout2.addView(progressBar, new LinearLayout.LayoutParams(Main.a(30.0f), Main.a(30.0f)));
+        linearLayout2.addView(progressBar, new LinearLayout.LayoutParams(Main.dp(30.0f), Main.dp(30.0f)));
         TextView textView2 = new TextView(activity);
         textView2.setText(l6.a("download_quality_loading", "Загрузка…"));
         textView2.setGravity(17);
         textView2.setTextColor(i2);
         textView2.setTextSize(2, 13.5f);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams.topMargin = Main.a(8.0f);
+        layoutParams.topMargin = Main.dp(8.0f);
         Unit unit = Unit.INSTANCE;
         linearLayout2.addView(textView2, layoutParams);
-        linearLayout.addView(linearLayout2, new LinearLayout.LayoutParams(-1, Main.a(64.0f)));
+        linearLayout.addView(linearLayout2, new LinearLayout.LayoutParams(-1, Main.dp(64.0f)));
         a(activity, linearLayout, x3Var, scrollView);
         return unit;
     }
@@ -556,29 +551,31 @@ public final class x3 {
     }
 
     public static void a(final Activity activity, final Dialog dialog, final AtomicBoolean atomicBoolean, p3 p3Var, final Function1 function1, v3 v3Var) {
-        final v3 v3Var2;
-        Object obj;
+        Throwable th = null;
+        v3 v3Var2;
+        Object obj = null;
         try {
             Result.Companion companion = Result.Companion;
             v3Var2 = v3Var;
             try {
+                final v3 v3Var2F = v3Var2;
                 p3Var.a(new o3() {
                     @Override
                     public final void a(List list) {
-                        x3.a(activity, atomicBoolean, dialog, v3Var2, function1, list);
+                        x3.a(activity, atomicBoolean, dialog, v3Var2F, function1, list);
                     }
                 });
-                obj = Result.constructor-impl(Unit.INSTANCE);
-            } catch (Throwable th) {
-                th = th;
+                obj = RCompat.m6constructorimpl(Unit.INSTANCE);
+            } catch (Throwable th_2) {
+                th = th_2;
                 Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th));
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
         } catch (Throwable th2) {
             th = th2;
             v3Var2 = v3Var;
         }
-        Throwable th3 = Result.exceptionOrNull-impl(obj);
+        Throwable th3 = RCompat.m9exceptionOrNullimpl(obj);
         if (th3 != null) {
             h6.a(6, h6.a("Download quality loading failed", new Object[0]), th3);
             v3Var2.invoke();
@@ -616,7 +613,7 @@ public final class x3 {
     }
 
     public static final void b(n3 n3Var, final x3 x3Var, Activity activity, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, final AtomicBoolean atomicBoolean, final Dialog dialog, final c3 c3Var, final LinearLayout linearLayout) {
-        Object obj;
+        Object obj = null;
         Activity activity2 = activity;
         try {
             Result.Companion companion = Result.Companion;
@@ -624,26 +621,25 @@ public final class x3 {
             LinearLayout linearLayout2 = new LinearLayout(activity2);
             linearLayout2.setOrientation(1);
             x3Var.getClass();
-            float fA = Main.a(24.0f);
+            float fA = Main.dp(24.0f);
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setColor(i);
             gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
             linearLayout2.setBackground(gradientDrawable);
-            linearLayout2.setPadding(Main.a(16.0f), Main.a(12.0f), Main.a(16.0f), Main.a(24.0f));
+            linearLayout2.setPadding(Main.dp(16.0f), Main.dp(12.0f), Main.dp(16.0f), Main.dp(24.0f));
             linearLayout2.setClickable(true);
             linearLayout2.setClipToOutline(true);
             View view = new View(activity2);
-            float fA2 = Main.a(50.0f);
+            float fA2 = Main.dp(50.0f);
             GradientDrawable gradientDrawable2 = new GradientDrawable();
             gradientDrawable2.setColor(i2);
             gradientDrawable2.setCornerRadius(fA2);
             view.setBackground(gradientDrawable2);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.a(48.0f), Main.a(4.0f));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.dp(48.0f), Main.dp(4.0f));
             layoutParams.gravity = 1;
             Unit unit = Unit.INSTANCE;
             linearLayout2.addView(view, layoutParams);
             TextView textView = new TextView(activity2);
-            m6 m6Var = l6.a;
             textView.setText(l6.a("download_quality_variants_title", "Варианты загрузки"));
             textView.setGravity(17);
             textView.setTextColor(i3);
@@ -652,14 +648,14 @@ public final class x3 {
             textView.setIncludeFontPadding(false);
             textView.setMaxLines(1);
             int i9 = -1;
-            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, Main.a(17.0f));
-            layoutParams2.topMargin = Main.a(24.0f);
+            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, Main.dp(17.0f));
+            layoutParams2.topMargin = Main.dp(24.0f);
             linearLayout2.addView(textView, layoutParams2);
             LinearLayout linearLayout3 = new LinearLayout(activity2);
             linearLayout3.setOrientation(1);
-            for (final b3 b3Var : n3Var.b) {
+            for (final b3 b3Var : (Iterable<b3>) (Iterable) n3Var.b) {
                 if (linearLayout3.getChildCount() > 0) {
-                    linearLayout3.addView(new View(activity2), new LinearLayout.LayoutParams(i9, Main.a(4.0f)));
+                    linearLayout3.addView(new View(activity2), new LinearLayout.LayoutParams(i9, Main.dp(4.0f)));
                 }
                 final LinearLayout linearLayout4 = linearLayout2;
                 LinearLayout linearLayout5 = linearLayout3;
@@ -693,17 +689,16 @@ public final class x3 {
             while (it.hasNext()) {
                 iCoerceAtLeast += RangesKt.coerceAtLeast(linearLayout7.getChildAt(it.nextInt()).getLayoutParams().height, 0);
             }
-            LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, Math.min(i10, RangesKt.coerceAtLeast(iCoerceAtLeast, Main.a(64.0f))));
-            layoutParams3.topMargin = Main.a(17.0f);
+            LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, Math.min(i10, RangesKt.coerceAtLeast(iCoerceAtLeast, Main.dp(64.0f))));
+            layoutParams3.topMargin = Main.dp(17.0f);
             Unit unit2 = Unit.INSTANCE;
             linearLayout6.addView(scrollView, layoutParams3);
             final Function0 function0 = new Function0() {
                 public final Object invoke() {
-                    return x3.a(this.f$0, linearLayout6, dialog3, linearLayout, dialog);
+                    return x3.a(x3Var, linearLayout6, dialog3, linearLayout, dialog);
                 }
             };
             TextView textView2 = new TextView(activity3);
-            m6 m6Var2 = l6.a;
             textView2.setText(l6.a("download_quality_cancel", "Отмена"));
             textView2.setGravity(17);
             textView2.setTextColor(i5);
@@ -712,7 +707,7 @@ public final class x3 {
             textView2.setIncludeFontPadding(false);
             textView2.setClickable(true);
             textView2.setFocusable(true);
-            float fA3 = Main.a(68.0f);
+            float fA3 = Main.dp(68.0f);
             ColorStateList colorStateListValueOf = ColorStateList.valueOf(i8);
             GradientDrawable gradientDrawable3 = new GradientDrawable();
             gradientDrawable3.setColor(0);
@@ -727,15 +722,15 @@ public final class x3 {
                     x3.b(function0, view2);
                 }
             });
-            LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.a(48.0f));
-            layoutParams4.topMargin = Main.a(24.0f);
+            LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.dp(48.0f));
+            layoutParams4.topMargin = Main.dp(24.0f);
             linearLayout6.addView(textView2, layoutParams4);
             FrameLayout frameLayout = new FrameLayout(activity3);
             frameLayout.setClickable(true);
             frameLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public final void onClick(View view2) {
-                    x3.c(this.f$0, linearLayout6, dialog3, view2);
+                    x3.c(x3Var, linearLayout6, dialog3, view2);
                 }
             });
             frameLayout.addView(linearLayout6, new FrameLayout.LayoutParams(-1, -2, 80));
@@ -744,19 +739,19 @@ public final class x3 {
             dialog3.setOnKeyListener(new DialogInterface.OnKeyListener() {
                 @Override
                 public final boolean onKey(DialogInterface dialogInterface, int i11, KeyEvent keyEvent) {
-                    return x3.b(this.f$0, linearLayout6, dialog3, dialogInterface, i11, keyEvent);
+                    return x3.b(x3Var, linearLayout6, dialog3, dialogInterface, i11, keyEvent);
                 }
             });
             wa.a(dialog3, linearLayout6, i, 0.0f);
             dialog3.show();
             a(activity3, linearLayout6, dialog3);
             linearLayout6.getViewTreeObserver().addOnPreDrawListener(new w3(linearLayout6));
-            obj = Result.constructor-impl(unit2);
+            obj = RCompat.m6constructorimpl(unit2);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Download quality variants sheet unavailable", new Object[0]), th2);
         }
@@ -786,13 +781,12 @@ public final class x3 {
             }
             ((Collection) arrayList3).add(b3Var);
         }
-        for (Map.Entry entry : linkedHashMap.entrySet()) {
+        for (Map.Entry entry : (java.util.Set<Map.Entry>) linkedHashMap.entrySet()) {
             int iIntValue = ((Number) entry.getKey()).intValue();
             List list2 = (List) entry.getValue();
             if (iIntValue > 0) {
                 strA = iIntValue + "p";
             } else {
-                m6 m6Var = l6.a;
                 strA = l6.a("download_quality_unknown", "Неизвестно");
             }
             arrayList.add(new n3(strA, list2));
@@ -804,7 +798,6 @@ public final class x3 {
             }
         }
         if (!arrayList4.isEmpty()) {
-            m6 m6Var2 = l6.a;
             arrayList.add(new n3(l6.a("download_quality_audio_only", "Только звук"), arrayList4));
         }
         return arrayList;
@@ -927,21 +920,21 @@ public final class x3 {
     }
 
     public final void a(View view, final Dialog dialog, final Function0 function0) {
-        Object obj;
+        Object obj = null;
         try {
             Result.Companion companion = Result.Companion;
             view.animate().translationY(view.getHeight()).setDuration(220L).withEndAction(new Runnable() {
                 @Override
                 public final void run() {
-                    x3.a(this.f$0, dialog, function0);
+                    x3.a(x3.this, dialog, function0);
                 }
             }).start();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.exceptionOrNull-impl(obj) != null) {
+        if (RCompat.m9exceptionOrNullimpl(obj) != null) {
             a(dialog);
             if (function0 != null) {
                 function0.invoke();
@@ -963,15 +956,15 @@ public final class x3 {
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-            Result.constructor-impl(Unit.INSTANCE);
+            RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            Result.constructor-impl(ResultKt.createFailure(th));
+            RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
     }
 
     public final u3 a(Context context, final s3 s3Var, final c3 c3Var) {
-        final Activity activity;
+        Activity activity;
         List list;
         while (true) {
             if (context instanceof ContextWrapper) {
@@ -1003,10 +996,11 @@ public final class x3 {
                 c3Var.a();
                 return u3.c;
             }
+            final Activity activityF = activity;
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public final void run() {
-                    x3.a(activity, s3Var, c3Var);
+                    x3.a(activityF, s3Var, c3Var);
                 }
             });
             return u3.b;
@@ -1017,7 +1011,7 @@ public final class x3 {
     }
 
     public static int a() {
-        Object obj;
+        Object obj = null;
         int color;
         try {
             Result.Companion companion = Result.Companion;
@@ -1026,13 +1020,13 @@ public final class x3 {
             } else {
                 color = ThemeHooks.a();
             }
-            obj = Result.constructor-impl(Integer.valueOf(color));
+            obj = RCompat.m6constructorimpl(Integer.valueOf(color));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
         Integer numValueOf = Integer.valueOf(Color.parseColor("#FE2B54"));
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = numValueOf;
         }
         return ((Number) obj).intValue();
@@ -1047,7 +1041,7 @@ public final class x3 {
         FrameLayout frameLayout = new FrameLayout(activity);
         frameLayout.setClickable(true);
         frameLayout.setFocusable(true);
-        float fA = Main.a(z2 ? 12.0f : 16.0f);
+        float fA = Main.dp(z2 ? 12.0f : 16.0f);
         ColorStateList colorStateListValueOf = ColorStateList.valueOf(iArgb3);
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(iArgb);
@@ -1056,18 +1050,18 @@ public final class x3 {
         gradientDrawable2.setColor(-1);
         gradientDrawable2.setCornerRadius(fA);
         frameLayout.setBackground(new RippleDrawable(colorStateListValueOf, gradientDrawable, gradientDrawable2));
-        frameLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, Main.a(StringsKt.isBlank("") ? 64.0f : 82.0f)));
+        frameLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, Main.dp(StringsKt.isBlank("") ? 64.0f : 82.0f)));
         LinearLayout linearLayout = new LinearLayout(activity);
         linearLayout.setOrientation(1);
         linearLayout.setGravity(16);
         if (z2 && z) {
-            iA = Main.a(124.0f);
+            iA = Main.dp(124.0f);
         } else if (z2) {
-            iA = Main.a(103.0f);
+            iA = Main.dp(103.0f);
         } else {
-            iA = z ? Main.a(52.0f) : Main.a(16.0f);
+            iA = z ? Main.dp(52.0f) : Main.dp(16.0f);
         }
-        linearLayout.setPadding(Main.a(16.0f), 0, iA, 0);
+        linearLayout.setPadding(Main.dp(16.0f), 0, iA, 0);
         LinearLayout linearLayout2 = new LinearLayout(activity);
         linearLayout2.setOrientation(0);
         linearLayout2.setGravity(16);
@@ -1087,7 +1081,7 @@ public final class x3 {
             textView2.setIncludeFontPadding(false);
             textView2.setMaxLines(1);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, -2);
-            layoutParams.setMarginStart(Main.a(8.0f));
+            layoutParams.setMarginStart(Main.dp(8.0f));
             Unit unit = Unit.INSTANCE;
             linearLayout2.addView(textView2, layoutParams);
         }
@@ -1100,7 +1094,7 @@ public final class x3 {
             textView3.setIncludeFontPadding(false);
             textView3.setMaxLines(1);
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
-            layoutParams2.topMargin = Main.a(5.0f);
+            layoutParams2.topMargin = Main.dp(5.0f);
             Unit unit2 = Unit.INSTANCE;
             linearLayout.addView(textView3, layoutParams2);
         }
@@ -1113,37 +1107,36 @@ public final class x3 {
             textView4.setMaxLines(1);
             textView4.setEllipsize(TextUtils.TruncateAt.END);
             LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-            layoutParams3.topMargin = Main.a(3.0f);
+            layoutParams3.topMargin = Main.dp(3.0f);
             Unit unit3 = Unit.INSTANCE;
             linearLayout.addView(textView4, layoutParams3);
         }
         frameLayout.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2, 16));
         if (z2) {
             TextView textView5 = new TextView(activity);
-            m6 m6Var = l6.a;
             textView5.setText(l6.a("download_quality_best", "Лучшее"));
             textView5.setGravity(17);
             textView5.setTextColor((Color.blue(i4) * 114) + ((Color.green(i4) * 587) + (Color.red(i4) * 299)) > 186000 ? -16777216 : -1);
             textView5.setTextSize(2, 12.0f);
             textView5.setTypeface(Typeface.create("sans-serif-medium", 0));
             textView5.setIncludeFontPadding(false);
-            textView5.setMinWidth(Main.a(71.0f));
-            textView5.setPadding(Main.a(12.0f), 0, Main.a(12.0f), 0);
-            float fA2 = Main.a(60.0f);
+            textView5.setMinWidth(Main.dp(71.0f));
+            textView5.setPadding(Main.dp(12.0f), 0, Main.dp(12.0f), 0);
+            float fA2 = Main.dp(60.0f);
             GradientDrawable gradientDrawable3 = new GradientDrawable();
             gradientDrawable3.setColor(i4);
             gradientDrawable3.setCornerRadius(fA2);
             textView5.setBackground(gradientDrawable3);
-            FrameLayout.LayoutParams layoutParams4 = new FrameLayout.LayoutParams(-2, Main.a(29.0f), 8388629);
-            layoutParams4.setMarginEnd(z ? Main.a(44.0f) : Main.a(16.0f));
+            FrameLayout.LayoutParams layoutParams4 = new FrameLayout.LayoutParams(-2, Main.dp(29.0f), 8388629);
+            layoutParams4.setMarginEnd(z ? Main.dp(44.0f) : Main.dp(16.0f));
             Unit unit4 = Unit.INSTANCE;
             frameLayout.addView(textView5, layoutParams4);
         }
         if (z) {
             ImageView imageView = new ImageView(activity);
             imageView.setImageDrawable(new t3());
-            FrameLayout.LayoutParams layoutParams5 = new FrameLayout.LayoutParams(Main.a(20.0f), Main.a(20.0f), 8388629);
-            layoutParams5.setMarginEnd(Main.a(16.0f));
+            FrameLayout.LayoutParams layoutParams5 = new FrameLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f), 8388629);
+            layoutParams5.setMarginEnd(Main.dp(16.0f));
             Unit unit5 = Unit.INSTANCE;
             frameLayout.addView(imageView, layoutParams5);
         }

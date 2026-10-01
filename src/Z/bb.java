@@ -4,7 +4,7 @@ import com.ss.android.ugc.profile.business.ur.ui.ProfileEditActivity;
 import com.ss.android.ugc.profile.business.ur.ui.ProfileEditNicknameFragment;
 import com.windukk.hook.HookBridge;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 import java.lang.reflect.Member;
 
 public abstract class bb {
@@ -47,8 +47,7 @@ public abstract class bb {
         } else {
             member.getName();
         }
-        if (BadgeHooks.y.getAndSet(z ? 1 : 0) != z) {
-            (z ? "enabled" : "disabled");
-        }
+        if (BadgeHooks.y.getAndSet(z ? 1 : 0) != (z ? 1 : 0)) {
+            }
     }
 }

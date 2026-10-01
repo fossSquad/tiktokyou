@@ -211,7 +211,7 @@ public abstract class n {
             if (bitmap != null) {
                 imageView.setImageBitmap(bitmap);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                int iA = Main.a(14.0f);
+                int iA = Main.dp(14.0f);
                 imageView.setPadding(iA, iA, iA, iA);
             }
         }
@@ -235,7 +235,7 @@ public abstract class n {
                 WeakHashMap weakHashMap = d;
                 ObjectAnimator objectAnimator = (ObjectAnimator) weakHashMap.get(view);
                 if (objectAnimator == null || !objectAnimator.isStarted()) {
-                    float fA = Main.a(5.0f);
+                    float fA = Main.dp(5.0f);
                     ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "translationY", -fA, fA);
                     objectAnimatorOfFloat.setDuration(40000L);
                     objectAnimatorOfFloat.setRepeatCount(-1);

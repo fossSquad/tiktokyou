@@ -8,13 +8,16 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import ni.shikatu.kotlin.ExceptionsKt;
 import ni.shikatu.kotlin.Lazy;
 import ni.shikatu.kotlin.LazyKt;
 import ni.shikatu.kotlin.Unit;
 import ni.shikatu.kotlin.io.CloseableKt;
 import ni.shikatu.kotlin.io.FilesKt;
 import ni.shikatu.kotlin.jvm.functions.Function0;
+import ni.shikatu.kotlin.jvm.functions.Function1;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import ni.shikatu.kotlin.text.StringsKt;
 import ni.shikatu.okhttp3.Cache;
 import ni.shikatu.okhttp3.Dispatcher;
 import ni.shikatu.okhttp3.OkHttpClient;
@@ -40,7 +43,7 @@ public abstract class p {
         dispatcher.setMaxRequests(16);
         dispatcher.setMaxRequestsPerHost(4);
         OkHttpClient.Builder builderDispatcher = new OkHttpClient.Builder().dispatcher(dispatcher);
-        File cacheDir = Main.a().getCacheDir();
+        File cacheDir = Main.getApplicationContext().getCacheDir();
         OkHttpClient.Builder builderCache = builderDispatcher.cache(new Cache(FilesKt.resolve(cacheDir, "tty_http"), 8388608L));
         TimeUnit timeUnit = TimeUnit.SECONDS;
         return builderCache.connectTimeout(8L, timeUnit).readTimeout(8L, timeUnit).followRedirects(true).followSslRedirects(true).retryOnConnectionFailure(true).build();
@@ -52,18 +55,23 @@ public abstract class p {
         return builderCache.connectTimeout(15L, timeUnit).readTimeout(120L, timeUnit).writeTimeout(30L, timeUnit).build();
     }
 
-    public static final o a(String str, String str2, String str3, int i, Map map) {
-        Request.Builder builder = new Request.Builder().url(str).get();
+    public static final o b(String str, String str2, int i, Map map, String str3) {
+        Request.Builder builder = new Request.Builder().url(str3).get();
+        if (str != null && str.length() != 0) {
+            builder.header("User-Agent", str);
+        }
         if (str2 != null && str2.length() != 0) {
-            builder.header("User-Agent", str2);
+            builder.header("If-None-Match", str2);
         }
-        if (str3 != null && str3.length() != 0) {
-            builder.header("If-None-Match", str3);
-        }
-        for (Map.Entry entry : map.entrySet()) {
+        for (Map.Entry entry : (java.util.Set<Map.Entry>) map.entrySet()) {
             builder.header((String) entry.getKey(), (String) entry.getValue());
         }
-        Response responseExecute = ((OkHttpClient) b.getValue()).newCall(builder.build()).execute();
+        Response responseExecute;
+        try {
+            responseExecute = ((OkHttpClient) b.getValue()).newCall(builder.build()).execute();
+        } catch (IOException e) {
+            responseExecute = null;
+        }
         try {
             if (a.compareAndSet(false, true)) {
                 responseExecute.protocol();
@@ -113,151 +121,155 @@ public abstract class p {
                     throw new IOException("Response too large: " + jContentLength);
                 }
             } else {
-                throw new IOException("HTTP " + iCode + " for " + str);
+                throw new t7(iCode, str3);
             }
         } catch (Throwable th3) {
             try {
                 throw th3;
             } catch (Throwable th4) {
                 CloseableKt.closeFinally(responseExecute, th3);
-                throw th4;
+                throw new RuntimeException(th4);
             }
         }
     }
 
-    public static final void a(String str, File file, String str2, Map map) throws IOException {
-        Throwable th;
-        ?? r6;
-        File parentFile = file.getParentFile();
-        if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs()) {
-            throw new IOException("Cannot create download directory");
-        }
-        Request.Builder builder = new Request.Builder().url(str).get();
-        if (str2 != null && str2.length() != 0) {
-            builder.header("User-Agent", str2);
-        }
-        for (Map.Entry entry : map.entrySet()) {
-            builder.header((String) entry.getKey(), (String) entry.getValue());
-        }
-        Response responseExecute = ((OkHttpClient) c.getValue()).newCall(builder.build()).execute();
-        try {
-            if (responseExecute.isSuccessful()) {
-                if (Intrinsics.areEqual(responseExecute.request().url().scheme(), "https")) {
-                    ResponseBody responseBodyBody = responseExecute.body();
-                    long jContentLength = responseBodyBody.contentLength();
-                    if (jContentLength <= 201326592) {
-                        file = "FhdMb2TgrLECWfiO";
-                        File file2 = new File(file.getParentFile(), file.getName() + ".part");
-                        try {
+    public static final o a(String str, final String str2, final int i, final Map map, final String str3) throws IOException {
+        return (o) a(str, new Function1() {
+            public final Object invoke(Object obj) {
+                return p.b(str2, str3, i, map, (String) obj);
+            }
+        });
+    }
+
+    public static final void a(String str, final File file, final String str2, final Map map) throws IOException, IOException{
+        final long j = 201326592;
+        a(str, new Function1() {
+            public final Object invoke(Object obj) {
+                try {
+                    return p.a(file, str2, j, map, (String) obj);
+                } catch (IOException e) {
+                    return null;
+                }
+            }
+        });
+    }
+
+    public static final Unit a(File file, String str, long j, Map map, String str2) throws IOException {
+        if (j > 0) {
+            File parentFile = file.getParentFile();
+            if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs()) {
+                throw new IOException("Cannot create download directory");
+            }
+            Request.Builder builder = new Request.Builder().url(str2).get();
+            if (str != null && str.length() != 0) {
+                builder.header("User-Agent", str);
+            }
+            for (Map.Entry entry : (java.util.Set<Map.Entry>) map.entrySet()) {
+                builder.header((String) entry.getKey(), (String) entry.getValue());
+            }
+            Response responseExecute = ((OkHttpClient) c.getValue()).newCall(builder.build()).execute();
+            try {
+                if (responseExecute.isSuccessful()) {
+                    if (Intrinsics.areEqual(responseExecute.request().url().scheme(), "https")) {
+                        ResponseBody responseBodyBody = responseExecute.body();
+                        long jContentLength = responseBodyBody.contentLength();
+                        if (jContentLength <= j) {
+                            File file2 = new File(file.getParentFile(), file.getName() + ".part");
                             try {
                                 FileOutputStream fileOutputStream = new FileOutputStream(file2);
                                 try {
                                     InputStream inputStreamByteStream = responseBodyBody.byteStream();
                                     try {
                                         byte[] bArr = new byte[65536];
-                                        long j = 0;
+                                        long j2 = 0;
                                         while (true) {
                                             int i = inputStreamByteStream.read(bArr);
-                                            if (i >= 0) {
-                                                j += (long) i;
-                                                if (j <= 201326592) {
-                                                    fileOutputStream.write(bArr, 0, i);
-                                                } else {
-                                                    throw new IOException("Response exceeds " + 201326592L + " bytes");
-                                                }
-                                            } else if (j <= 0) {
-                                                try {
-                                                    throw new IOException("Empty download");
-                                                } catch (Throwable th2) {
-                                                    th = th2;
-                                                    Throwable th3 = th;
-                                                    try {
-                                                        throw th3;
-                                                    } catch (Throwable th4) {
-                                                        try {
-                                                            CloseableKt.closeFinally(inputStreamByteStream, th3);
-                                                            throw th4;
-                                                        } catch (Throwable th5) {
-                                                            th = th5;
+                                            if (i < 0) {
+                                                if (j2 > 0) {
+                                                    fileOutputStream.flush();
+                                                    fileOutputStream.getFD().sync();
+                                                    Unit unit = Unit.INSTANCE;
+                                                    CloseableKt.closeFinally(inputStreamByteStream, (Throwable) null);
+                                                    CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
+                                                    if (file.exists() && !file.delete()) {
+                                                        throw new IOException("Cannot replace " + file.getName());
+                                                    }
+                                                    if (!file2.renameTo(file)) {
+                                                        FilesKt.copyTo$default(file2, file, true, 0, 4, (Object) null);
+                                                        if (!file2.delete()) {
+                                                            h6.a(6, h6.a("Cannot delete OTA staging file %s", new Object[]{file2.getAbsolutePath()}), (Throwable) null);
                                                         }
                                                     }
+                                                    CloseableKt.closeFinally(responseExecute, (Throwable) null);
+                                                    return unit;
                                                 }
-                                            } else {
-                                                fileOutputStream.flush();
-                                                fileOutputStream.getFD().sync();
-                                                Unit unit = Unit.INSTANCE;
-                                                CloseableKt.closeFinally(inputStreamByteStream, (Throwable) null);
-                                                CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
-                                                if (file.exists()) {
-                                                    try {
-                                                        if (!file.delete()) {
-                                                            throw new IOException("Cannot replace " + file.getName());
-                                                        }
-                                                    } catch (Throwable th6) {
-                                                        th = th6;
-                                                        r6 = file;
-                                                        file2.delete();
-                                                        r6.delete();
-                                                        throw th;
-                                                    }
-                                                }
-                                                if (!file2.renameTo(file)) {
-                                                    FilesKt.copyTo$default(file2, (File) file, true, 0, 4, (Object) null);
-                                                    if (!file2.delete()) {
-                                                        h6.a(6, h6.a("Cannot delete OTA staging file %s", new Object[]{file2.getAbsolutePath()}), (Throwable) null);
-                                                    }
-                                                }
-                                                CloseableKt.closeFinally(responseExecute, (Throwable) null);
-                                                return;
+                                                throw new IOException("Empty download");
                                             }
-                                            Throwable th7 = th;
-                                            try {
-                                                throw th7;
-                                            } catch (Throwable th8) {
-                                                CloseableKt.closeFinally(fileOutputStream, th7);
-                                                throw th8;
+                                            j2 += (long) i;
+                                            if (j2 <= j) {
+                                                fileOutputStream.write(bArr, 0, i);
+                                            } else {
+                                                throw new IOException("Response exceeds " + j + " bytes");
                                             }
                                         }
-                                    } catch (Throwable th9) {
-                                        th = th9;
+                                    } catch (Throwable th) {
+                                        try {
+                                            throw th;
+                                        } catch (Throwable th2) {
+                                            CloseableKt.closeFinally(inputStreamByteStream, th);
+                                            throw th2;
+                                        }
                                     }
-                                } catch (Throwable th10) {
-                                    th = th10;
-                                    file = file;
+                                } catch (Throwable th3) {
+                                    try {
+                                        throw th3;
+                                    } catch (Throwable th4) {
+                                        CloseableKt.closeFinally(fileOutputStream, th3);
+                                        throw new RuntimeException(th4);
+                                    }
                                 }
-                            } catch (Throwable th11) {
-                                th = th11;
-                                th = th;
-                                r6 = file;
+                            } catch (Throwable th5) {
                                 file2.delete();
-                                r6.delete();
-                                throw th;
+                                file.delete();
+                                throw th5;
                             }
-                        } catch (Throwable th12) {
-                            th = th12;
-                            file = file;
-                            th = th;
-                            r6 = file;
-                            file2.delete();
-                            r6.delete();
-                            throw th;
+                        } else {
+                            throw new IOException("Response too large: " + jContentLength);
                         }
                     } else {
-                        throw new IOException("Response too large: " + jContentLength);
+                        throw new IOException("Refusing non-HTTPS download");
                     }
                 } else {
-                    throw new IOException("Refusing non-HTTPS download");
+                    throw new t7(responseExecute.code(), str2);
                 }
-            } else {
-                throw new IOException("HTTP " + responseExecute.code() + " for " + str);
+            } catch (Throwable th6) {
+                try {
+                    throw th6;
+                } catch (Throwable th7) {
+                    CloseableKt.closeFinally(responseExecute, th6);
+                    throw th7;
+                }
             }
-        } catch (Throwable th13) {
-            try {
-                throw th13;
-            } catch (Throwable th14) {
-                CloseableKt.closeFinally(responseExecute, th13);
-                throw th14;
+        } else {
+            throw new IOException("Invalid download size limit");
+        }
+    }
+
+    public static Object a(String str, Function1 function1) throws IOException {
+        int i;
+        try {
+            return function1.invoke(str);
+        } catch (Exception e) {
+            String strDecrypt = "https://tiktokyou.yzewe.ru/";
+            if (StringsKt.startsWith$default(str, strDecrypt, false, 2, (Object) null) && (!(e instanceof t7) || (i = ((t7) e).a) == 408 || i == 429 || (500 <= i && i < 600))) {
+                try {
+                    return function1.invoke("https://tiktokyou-fb.yzewe.ru/" + StringsKt.removePrefix(str, strDecrypt));
+                } catch (Exception e2) {
+                    ExceptionsKt.addSuppressed(e2, e);
+                    throw e2;
+                }
             }
+            throw e;
         }
     }
 }

@@ -1,7 +1,7 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class h1 extends HookMethod {
     final  int a;

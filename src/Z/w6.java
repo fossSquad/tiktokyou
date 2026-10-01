@@ -10,7 +10,11 @@ public final class w6 {
     }
 
     public final Class a() {
-        return Class.forName(this.b, false, w6.class.getClassLoader());
+        try {
+            return Class.forName(this.b, false, w6.class.getClassLoader());
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 
     public final String toString() {

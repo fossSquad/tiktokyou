@@ -41,6 +41,7 @@ public abstract class m0 {
     }
 
     public static String b(Context context, String str) {
+        Throwable th = null;
         if (context != null && !TextUtils.isEmpty(str)) {
             try {
                 InputStream inputStreamOpen = ResourceOverlay.open(context, str);
@@ -60,11 +61,12 @@ public abstract class m0 {
                             if (inputStreamOpen != null) {
                                 try {
                                     inputStreamOpen.close();
-                                } catch (Throwable th) {
+                                } catch (Throwable th_2) {
+                                    th = th_2;
                                     th.addSuppressed(th);
                                 }
                             }
-                            throw th;
+                            throw new RuntimeException(th);
                         }
                     } catch (Throwable th2) {
                         try {
@@ -78,7 +80,7 @@ public abstract class m0 {
                     if (inputStreamOpen != null) {
                         inputStreamOpen.close();
                     }
-                    throw th4;
+                    throw new RuntimeException(th4);
                 }
             } catch (IOException e) {
             } catch (Throwable th5) {
@@ -92,7 +94,12 @@ public abstract class m0 {
     public static String a(String str) {
         String strDecrypt = "TTMod-BadgeHooks/1.0";
         AtomicBoolean atomicBoolean = p.a;
-        byte[] bArr = p.a(str, strDecrypt, null, 16777216, MapsKt.emptyMap()).b;
+        byte[] bArr;
+        try {
+            bArr = p.a(str, strDecrypt, 16777216, MapsKt.emptyMap(), (String) null).b;
+        } catch (Exception ex9) {
+            bArr = null;
+        }
         if (bArr == null) {
             return null;
         }
@@ -100,6 +107,7 @@ public abstract class m0 {
     }
 
     public static String a(File file) {
+        Throwable th = null;
         if (!file.exists()) {
             return null;
         }
@@ -121,10 +129,11 @@ public abstract class m0 {
                         }
                         try {
                             fileInputStream.close();
-                        } catch (Throwable th) {
+                        } catch (Throwable th_2) {
+                            th = th_2;
                             th.addSuppressed(th);
                         }
-                        throw th;
+                        throw new RuntimeException(th);
                     }
                 } catch (Throwable th2) {
                     try {
@@ -136,7 +145,7 @@ public abstract class m0 {
                 }
             } catch (Throwable th4) {
                 fileInputStream.close();
-                throw th4;
+                throw new RuntimeException(th4);
             }
         } catch (IOException e) {
             h6.a(6, h6.a("Failed to read cache file %s: %s", new Object[]{file.getName(), e.getMessage()}), (Throwable) null);
@@ -174,9 +183,15 @@ public abstract class m0 {
     public static void a(File file, String str) {
         File parentFile = file.getParentFile();
         if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs() && !parentFile.exists()) {
-            throw new IOException("Failed to create " + parentFile.getAbsolutePath());
+            throw new RuntimeException("Failed to create " + parentFile.getAbsolutePath());
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+        FileOutputStream fileOutputStream;
+        try {
+            fileOutputStream = new FileOutputStream(file, false);
+        } catch (Exception e) {
+            h6.a(6, "Failed to create output stream for " + file.getAbsolutePath(), e);
+            return;
+        }
         try {
             fileOutputStream.write(str.getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
@@ -186,7 +201,7 @@ public abstract class m0 {
             } catch (Throwable th2) {
                 th.addSuppressed(th2);
             }
-            throw th;
+            throw new RuntimeException(th);
         }
     }
 
@@ -194,7 +209,7 @@ public abstract class m0 {
         try {
             File parentFile = file.getParentFile();
             if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs() && !parentFile.exists()) {
-                throw new IOException("Failed to create " + parentFile.getAbsolutePath());
+                throw new RuntimeException("Failed to create " + parentFile.getAbsolutePath());
             }
             if (!file.exists()) {
                 new FileOutputStream(file).close();

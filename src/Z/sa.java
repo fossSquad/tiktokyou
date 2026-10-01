@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import com.windukk.stable.ResourceOverlay;
 import java.io.InputStream;
 
@@ -31,6 +31,8 @@ public final class sa {
     public String c;
     public String d;
     public Runnable e;
+    public String g;
+    public Runnable h;
     public String a = "ic_mod_update";
     public long f = 0;
 
@@ -52,7 +54,7 @@ public final class sa {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public final void run() {
-                this.f$0.a(i);
+                sa.this.a(i);
             }
         }, i == 0 ? this.f : 1000L);
     }
@@ -64,6 +66,17 @@ public final class sa {
         } else if (i < 20) {
             b(i + 1);
         }
+    }
+
+    public final  void b(LinearLayout linearLayout, Dialog dialog, View view) {
+        try {
+            Runnable runnable = this.h;
+            if (runnable != null) {
+                runnable.run();
+            }
+        } catch (Throwable th) {
+        }
+        a(dialog, linearLayout);
     }
 
     public static  boolean a(LinearLayout linearLayout, Dialog dialog, DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
@@ -169,8 +182,9 @@ public final class sa {
     }
 
     public final void a(Activity activity) {
+        Throwable th = null;
         int i;
-        int color;
+        int color = 0;
         try {
             boolean z = (activity.getResources().getConfiguration().uiMode & 48) == 32;
             try {
@@ -179,7 +193,7 @@ public final class sa {
                 } else {
                     color = Color.parseColor("#FE2B54");
                 }
-            } catch (Throwable th) {
+            } catch (Throwable th_2) {
             }
             int i2 = z ? -14935010 : -1;
             int i3 = z ? -1 : -15329245;
@@ -187,39 +201,30 @@ public final class sa {
             int i5 = z ? -12961220 : -2434337;
             final LinearLayout linearLayout = new LinearLayout(activity);
             linearLayout.setOrientation(1);
-            float fA = Main.a(20.0f);
+            float fA = Main.dp(20.0f);
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setColor(i2);
-            float[] fArr = new float[8];
-            fArr[0] = fA;
-            fArr[1] = fA;
             i = 6;
             try {
-                fArr[2] = fA;
-                fArr[3] = fA;
-                fArr[4] = 0.0f;
-                fArr[5] = 0.0f;
-                fArr[6] = 0.0f;
-                fArr[7] = 0.0f;
-                gradientDrawable.setCornerRadii(fArr);
+                gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
                 linearLayout.setBackground(gradientDrawable);
-                linearLayout.setPadding(Main.a(20.0f), Main.a(10.0f), Main.a(20.0f), Main.a(22.0f));
+                linearLayout.setPadding(Main.dp(20.0f), Main.dp(10.0f), Main.dp(20.0f), Main.dp(22.0f));
                 linearLayout.setClickable(true);
                 View view = new View(activity);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.a(38.0f), Main.a(4.0f));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.dp(38.0f), Main.dp(4.0f));
                 layoutParams.gravity = 1;
-                layoutParams.bottomMargin = Main.a(18.0f);
+                layoutParams.bottomMargin = Main.dp(18.0f);
                 view.setLayoutParams(layoutParams);
-                float fA2 = Main.a(2.0f);
+                float fA2 = Main.dp(2.0f);
                 GradientDrawable gradientDrawable2 = new GradientDrawable();
                 gradientDrawable2.setColor(i5);
                 gradientDrawable2.setCornerRadius(fA2);
                 view.setBackground(gradientDrawable2);
                 linearLayout.addView(view);
                 ImageView imageView = new ImageView(activity);
-                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(Main.a(64.0f), Main.a(64.0f));
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(Main.dp(64.0f), Main.dp(64.0f));
                 layoutParams2.gravity = 1;
-                layoutParams2.bottomMargin = Main.a(16.0f);
+                layoutParams2.bottomMargin = Main.dp(16.0f);
                 imageView.setLayoutParams(layoutParams2);
                 BitmapDrawable bitmapDrawableA = a(activity, this.a);
                 if (bitmapDrawableA != null) {
@@ -241,11 +246,11 @@ public final class sa {
                     textView2.setGravity(17);
                     textView2.setTextSize(2, 13.5f);
                     textView2.setTextColor(i4);
-                    textView2.setLineSpacing(Main.a(2.0f), 1.0f);
+                    textView2.setLineSpacing(Main.dp(2.0f), 1.0f);
                     LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams3.topMargin = Main.a(6.0f);
-                    layoutParams3.leftMargin = Main.a(8.0f);
-                    layoutParams3.rightMargin = Main.a(8.0f);
+                    layoutParams3.topMargin = Main.dp(6.0f);
+                    layoutParams3.leftMargin = Main.dp(8.0f);
+                    layoutParams3.rightMargin = Main.dp(8.0f);
                     textView2.setLayoutParams(layoutParams3);
                     linearLayout.addView(textView2);
                 }
@@ -255,10 +260,10 @@ public final class sa {
                 textView3.setTextColor(-1);
                 textView3.setTextSize(2, 15.0f);
                 textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
-                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.a(50.0f));
-                layoutParams4.topMargin = Main.a(24.0f);
+                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, Main.dp(50.0f));
+                layoutParams4.topMargin = Main.dp(24.0f);
                 textView3.setLayoutParams(layoutParams4);
-                float fA3 = Main.a(13.0f);
+                float fA3 = Main.dp(13.0f);
                 GradientDrawable gradientDrawable3 = new GradientDrawable();
                 gradientDrawable3.setColor(color);
                 gradientDrawable3.setCornerRadius(fA3);
@@ -270,10 +275,34 @@ public final class sa {
                 textView3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public final void onClick(View view2) {
-                        this.f$0.a(linearLayout, dialogA, view2);
+                        sa.this.a(linearLayout, dialogA, view2);
                     }
                 });
                 linearLayout.addView(textView3);
+                String str2 = this.g;
+                if (str2 != null && !str2.isEmpty()) {
+                    TextView textView4 = new TextView(activity);
+                    textView4.setText(this.g);
+                    textView4.setGravity(17);
+                    textView4.setTextColor(i3);
+                    textView4.setTextSize(2, 15.0f);
+                    textView4.setTypeface(Typeface.create("sans-serif-medium", 0));
+                    LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, Main.dp(44.0f));
+                    layoutParams5.topMargin = Main.dp(6.0f);
+                    textView4.setLayoutParams(layoutParams5);
+                    float fA4 = Main.dp(13.0f);
+                    GradientDrawable gradientDrawable5 = new GradientDrawable();
+                    gradientDrawable5.setColor(-1);
+                    gradientDrawable5.setCornerRadius(fA4);
+                    textView4.setBackground(new RippleDrawable(ColorStateList.valueOf(z ? 587202559 : 335544320), null, gradientDrawable5));
+                    textView4.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public final void onClick(View view2) {
+                            sa.this.b(linearLayout, dialogA, view2);
+                        }
+                    });
+                    linearLayout.addView(textView4);
+                }
                 dialogA.setContentView(wa.a(activity, linearLayout, -2, new View.OnClickListener() {
                     @Override
                     public final void onClick(View view2) {

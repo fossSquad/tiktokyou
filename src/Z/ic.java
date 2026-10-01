@@ -2,7 +2,7 @@ package Z;
 
 import android.os.Handler;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.EdgeSpeedupHooks;
+import Z.EdgeSpeedupHooks;
 
 class ic extends HookMethod {
     final  String a;

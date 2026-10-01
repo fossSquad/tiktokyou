@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.bytedance.ies.foundation.activity.BaseActivity;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,7 +113,7 @@ public class ld extends BaseActivity {
         this.a.sort(new Comparator() {
             @Override
             public final int compare(Object obj, Object obj2) {
-                return this.f$0.a((Integer) obj, (Integer) obj2);
+                return ld.this.a((Integer) obj, (Integer) obj2);
             }
         });
     }
@@ -145,7 +145,6 @@ public class ld extends BaseActivity {
         boolean zIsEmpty = TextUtils.isEmpty(lowerCase);
         if (zIsEmpty) {
             LinearLayout linearLayout2 = this.e;
-            m6 m6Var = l6.a;
             String strA2 = l6.a("region_selected_country");
             TextView textView = new TextView(this);
             textView.setText(strA2);
@@ -168,8 +167,6 @@ public class ld extends BaseActivity {
             if (!zIsEmpty || iIntValue != i) {
                 ed edVar = fd.a[iIntValue];
                 if (!TextUtils.isEmpty(lowerCase)) {
-                    edVar.getClass();
-                    m6 m6Var2 = l6.a;
                     String strA3 = l6.a(edVar.b, edVar.c);
                     if (strA3 == null) {
                         lowerCase2 = "";
@@ -177,11 +174,9 @@ public class ld extends BaseActivity {
                         lowerCase2 = strA3.trim().toLowerCase(Locale.getDefault());
                     }
                     if (lowerCase2.contains(lowerCase) || edVar.c.trim().toLowerCase(Locale.getDefault()).contains(lowerCase)) {
-                        edVar.getClass();
-                        m6 m6Var3 = l6.a;
                         strA = l6.a(edVar.b, edVar.c);
                         str2 = "#";
-                        if (strA != null && !hd$$ExternalSyntheticBackport0.m(strA)) {
+                        if (strA != null) {
                             iCodePointAt = strA.codePointAt(0);
                             if (Character.isLetter(iCodePointAt)) {
                                 str2 = new String(Character.toChars(Character.toUpperCase(iCodePointAt)));
@@ -195,11 +190,9 @@ public class ld extends BaseActivity {
                         })).add(num);
                     }
                 } else {
-                    edVar.getClass();
-                    m6 m6Var4 = l6.a;
                     strA = l6.a(edVar.b, edVar.c);
                     str2 = "#";
-                    if (strA != null) {
+                    if (strA != null && !StringUtils.isBlank(strA)) {
                         iCodePointAt = strA.codePointAt(0);
                         if (Character.isLetter(iCodePointAt)) {
                             str2 = new String(Character.toChars(Character.toUpperCase(iCodePointAt)));
@@ -220,7 +213,6 @@ public class ld extends BaseActivity {
             }
             LinearLayout linearLayout3 = this.e;
             TextView textView2 = new TextView(this);
-            m6 m6Var5 = l6.a;
             textView2.setText(l6.a("region_search_empty"));
             textView2.setTextSize(2, 14.0f);
             textView2.setTextColor(s);
@@ -229,7 +221,7 @@ public class ld extends BaseActivity {
             linearLayout3.addView(textView2);
             return;
         }
-        for (Map.Entry entry : linkedHashMap.entrySet()) {
+        for (Map.Entry entry : (java.util.Set<Map.Entry>) linkedHashMap.entrySet()) {
             LinearLayout linearLayout4 = this.e;
             String str3 = (String) entry.getKey();
             TextView textView3 = new TextView(this);
@@ -256,7 +248,6 @@ public class ld extends BaseActivity {
         linearLayout.setPadding(a(8.0f), 0, a(8.0f), a(20.0f) + this.d);
         scrollView.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2));
         final TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("region_picker_title"));
         textView.setTextSize(2, 28.0f);
         textView.setTextColor(this.b ? -1 : -16777216);
@@ -304,13 +295,13 @@ public class ld extends BaseActivity {
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
             public final void onScrollChanged() {
-                this.f$0.a(scrollView, textView);
+                ld.this.b(scrollView, textView);
             }
         });
         scrollView.post(new Runnable() {
             @Override
             public final void run() {
-                this.f$0.b(scrollView, textView);
+                ld.this.b(scrollView, textView);
             }
         });
         b("");
@@ -321,11 +312,8 @@ public class ld extends BaseActivity {
         Collator collator = this.f;
         ed[] edVarArr = fd.a;
         ed edVar = edVarArr[num.intValue()];
-        edVar.getClass();
-        m6 m6Var = l6.a;
         String strA = l6.a(edVar.b, edVar.c);
         ed edVar2 = edVarArr[num2.intValue()];
-        edVar2.getClass();
         return collator.compare(strA, l6.a(edVar2.b, edVar2.c));
     }
 
@@ -360,7 +348,6 @@ public class ld extends BaseActivity {
         linearLayout.addView(imageView, new LinearLayout.LayoutParams(a(18.0f), a(18.0f)));
         EditText editText = new EditText(this);
         editText.setBackground(null);
-        m6 m6Var = l6.a;
         editText.setHint(l6.a("region_search_hint"));
         editText.setHintTextColor(i);
         editText.setTextColor(this.b ? -1 : -16777216);
@@ -381,7 +368,7 @@ public class ld extends BaseActivity {
         imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.b(view);
+                ld.this.b(view);
             }
         });
         LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(a(18.0f), a(18.0f));
@@ -448,15 +435,13 @@ public class ld extends BaseActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(i, view);
+                ld.this.a(i, view);
             }
         });
         ImageView imageView = new ImageView(this);
         imageView.setImageDrawable(hd.a(this, edVar, a(20.0f)));
         linearLayout.addView(imageView, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
         TextView textView = new TextView(this);
-        edVar.getClass();
-        m6 m6Var = l6.a;
         textView.setText(l6.a(edVar.b, edVar.c));
         textView.setTextSize(2, 16.0f);
         textView.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -503,7 +488,7 @@ public class ld extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(view);
+                ld.this.a(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(a(24.0f), a(24.0f));

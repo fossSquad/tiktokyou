@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import com.windukk.hook.HookMethod;
 
 class f extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         View view = (View) hookMethodParam.thisObject;
         n.a(view.getContext());
         int id = view.getId();

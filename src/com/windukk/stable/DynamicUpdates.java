@@ -1,8 +1,12 @@
 package com.windukk.stable;
 
-import a.e;
+import a.d;
+import a.g;
+import a.h;
 import android.content.Context;
 import android.net.Uri;
+import c.b;
+import c.e;
 import c.f;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -10,58 +14,48 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public final class DynamicUpdates {
     public static final long MAX_PACKAGE_BYTES = 201326592;
 
-    public static byte[] a(Context context) throws IOException {
-        InputStream inputStreamOpen = context.getAssets().open("tty/public_key.der");
+    public static void a(final Context context, g gVar, File file) throws IOException, Throwable {
+        File fileC = gVar.c();
         try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] bArr = new byte[4096];
-            while (true) {
-                int i = inputStreamOpen.read(bArr);
-                if (i == -1) {
-                    byte[] byteArray = byteArrayOutputStream.toByteArray();
-                    inputStreamOpen.close();
-                    return byteArray;
+            final e eVarA = f.a(file, fileC, "release", a(context));
+            gVar.a(fileC, eVarA.a.b, new d() {
+                @Override
+                public final void run() {
+                    try {
+                        h.a(context, eVarA.a.f);
+                    } catch (IOException io) {
+                        throw new RuntimeException(io);
+                    }
                 }
-                byteArrayOutputStream.write(bArr, 0, i);
-            }
+            });
         } catch (Throwable th) {
-            if (inputStreamOpen != null) {
-                try {
-                    inputStreamOpen.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-            }
+            g.c(fileC);
             throw th;
         }
     }
 
-    public static DynamicStatus getStatus(Context context) {
-        DynamicStatus dynamicStatus;
-        e eVar = new e(context);
-        synchronized (eVar) {
-            eVar.f();
-            String str = eVar.e().e;
-            List listE = e.e(eVar.a());
-            String strA = listE.isEmpty() ? null : e.a(listE);
-            List listE2 = e.e(eVar.i());
-            String strA2 = listE2.isEmpty() ? null : e.a(listE2);
-            List listE3 = e.e(eVar.h());
-            dynamicStatus = new DynamicStatus(str, strA, strA2, listE3.isEmpty() ? null : e.a(listE3), eVar.b().exists());
-        }
-        return dynamicStatus;
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> RuntimeException sneakyThrow(Throwable th) throws T {
+        throw (T) th;
+    }
+
+    public static DynamicStatus getStatus(Context context) throws IOException {
+        return new g(context).o();
     }
 
     public static long highestAcceptedVersion(Context context) {
-        return new e(context).g();
+        try {
+            return new g(context).g();
+        } catch (IOException e) {
+            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
+        }
     }
 
-    public static void importFile(Context context, Uri uri) throws IOException {
+    public static void importFile(Context context, Uri uri) throws IOException, Throwable {
         File fileCreateTempFile = File.createTempFile("tty-dynamic-import-", ".tmp", context.getCacheDir());
         try {
             InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(uri);
@@ -89,11 +83,11 @@ public final class DynamicUpdates {
         }
     }
 
-    public static void importPackage(Context context, File file) throws IOException {
+    public static void importPackage(Context context, File file) throws IOException, Throwable {
         if (file == null || !file.isFile()) {
             throw new IOException("Package does not exist");
         }
-        e eVar = new e(context);
+        g gVar = new g(context);
         boolean z = false;
         if (file.length() >= 4) {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -114,49 +108,116 @@ public final class DynamicUpdates {
         if (z) {
             throw new IOException("Raw dex import is disabled in release builds");
         }
-        File fileD = eVar.d();
+        a(context, gVar, file);
+    }
+
+    public static long otaVersionFloor(Context context) {
+        long jG;
+        g gVar = new g(context);
         try {
-            eVar.a(fileD, f.a(file, fileD, "release", a(context)).a.b);
-        } catch (Throwable th3) {
-            e.c(fileD);
-            throw th3;
+            synchronized (gVar) {
+                jG = gVar.g();
+                if (jG > 0 && gVar.a(jG)) {
+                    jG--;
+                }
+            }
+        } catch (IOException e) {
+            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
+        }
+        return jG;
+    }
+
+    public static void preview(Context context, Uri uri) throws IOException, Throwable {
+        InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(uri);
+        try {
+            if (inputStreamOpenInputStream == null) {
+                throw new IOException("Cannot open selected file");
+            }
+            b bVarA = f.a(inputStreamOpenInputStream);
+            f.a(bVarA, "release");
+            new g(context).b(bVarA.b);
+            inputStreamOpenInputStream.close();
+        } catch (Throwable th) {
+            if (inputStreamOpenInputStream != null) {
+                try {
+                    inputStreamOpenInputStream.close();
+                } catch (Throwable th2) {
+                    th.addSuppressed(th2);
+                }
+            }
+            throw th;
         }
     }
 
-    public static void scheduleBundled(Context context) {
-        e eVar = new e(context);
-        synchronized (eVar) {
-            eVar.f();
-            e.c(eVar.h());
-            e.b(new File(eVar.b, "force_bundled"), "1");
+    public static void scheduleBundled(Context context) throws IOException {
+        g gVar = new g(context);
+        synchronized (gVar) {
+            gVar.f();
+            g.c(gVar.k());
+            g.b(new File(gVar.bf, "force_bundled"), "1");
         }
     }
 
-    public static void scheduleRollback(Context context) {
-        e eVar = new e(context);
-        synchronized (eVar) {
-            if (!eVar.i(eVar.i())) {
+    public static void scheduleRollback(Context context) throws IOException {
+        g gVar = new g(context);
+        synchronized (gVar) {
+            if (!gVar.j(gVar.l())) {
                 throw new IOException("No previous compatible healthy dynamic dex");
             }
-            File fileD = eVar.d();
-            e.a(eVar.i(), fileD);
-            new File(fileD, "healthy").delete();
-            eVar.a(fileD);
+            File fileC = gVar.c();
+            g.a(gVar.l(), fileC);
+            new File(fileC, "healthy").delete();
+            gVar.a(fileC);
         }
     }
 
     public static int stableApiVersion() {
-        return 1788704106;
+        return 1790876728;
     }
 
     public static long workingDynamicVersion(Context context) {
-        long jC;
-        e eVar = new e(context);
-        synchronized (eVar) {
-            eVar.f();
-            jC = eVar.c();
+        long jI;
+        g gVar = new g(context);
+        try {
+            synchronized (gVar) {
+                gVar.f();
+                File fileA = gVar.a();
+                if (g.e(fileA).isEmpty() || !gVar.b(fileA)) {
+                    jI = gVar.j(gVar.l()) ? g.i(gVar.l()) : gVar.e();
+                } else {
+                    jI = g.i(gVar.a());
+                }
+            }
+        } catch (IOException e) {
+            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
         }
-        return jC;
+        return jI;
+    }
+
+    public static byte[] a(Context context) throws IOException {
+        InputStream inputStreamOpen = context.getAssets().open("tty/public_key.der");
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byte[] bArr = new byte[4096];
+            while (true) {
+                int i = inputStreamOpen.read(bArr);
+                if (i == -1) {
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+                    inputStreamOpen.close();
+                    return byteArray;
+                }
+                byteArrayOutputStream.write(bArr, 0, i);
+            }
+        } catch (Throwable th) {
+            if (inputStreamOpen != null) {
+                try {
+                    inputStreamOpen.close();
+                } catch (Throwable th2) {
+                    th.addSuppressed(th2);
+                }
+            }
+            throw th;
+        }
     }
 
     public static void a(InputStream inputStream, File file) throws IOException {

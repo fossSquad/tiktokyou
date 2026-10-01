@@ -30,7 +30,7 @@ public final class u5 {
 
     public static final t5 a(Context context) throws IOException {
         String strA;
-        boolean zDelete;
+        boolean zDelete = false;
         Context applicationContext = context.getApplicationContext();
         File cacheDir = applicationContext.getCacheDir();
         if (cacheDir == null) {
@@ -47,12 +47,20 @@ public final class u5 {
             long length = fileResolve2.length();
             if (Build.VERSION.SDK_INT >= 29) {
                 a.getClass();
-                strA = b(applicationContext, fileResolve2, strA2);
+                try {
+try {
+                        strA = b(applicationContext, fileResolve2, strA2);
+                    } catch (Throwable t) {
+                        strA = null;
+                    }
+                } catch (Throwable t) {
+                    strA = null;
+                }
             } else {
                 a.getClass();
                 strA = a(applicationContext, fileResolve2, strA2);
             }
-            t5 t5Var = new t5(strA, length);
+            t5 t5Var = new t5(length, strA);
             if (fileResolve2.exists()) {
                 if (!zDelete) {
                     String strDecrypt = "Failed to delete temporary heap dump: %s";
@@ -67,6 +75,7 @@ public final class u5 {
     }
 
     public static String b(Context context, File file, String str) throws Throwable {
+        Throwable th = null;
         ContentResolver contentResolver = context.getContentResolver();
         ContentValues contentValues = new ContentValues();
         contentValues.put("_display_name", str);
@@ -95,8 +104,8 @@ public final class u5 {
                     contentResolver.update(uriInsert, contentValues2, null, null);
                     try {
                         return Environment.DIRECTORY_DOWNLOADS + "/TikTokYou/" + str;
-                    } catch (Throwable th) {
-                        th = th;
+                    } catch (Throwable th_2) {
+                        th = th_2;
                     }
                 } catch (Throwable th2) {
                     try {

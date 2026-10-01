@@ -4,20 +4,20 @@ import android.content.Context;
 import com.ss.android.ugc.profile.business.ur.platform.business.BioUserWebSiteComponent;
 import com.windukk.hook.HookMethod;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.BrowserHooks;
+import Z.BrowserHooks;
 import java.util.concurrent.ConcurrentHashMap;
 
 class w1 extends HookMethod {
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Context contextA;
-        String str;
+        Context contextA = null;
+        String str = null;
         Object objInvoke;
         BioUserWebSiteComponent bioUserWebSiteComponent = (BioUserWebSiteComponent) hookMethodParam.thisObject;
         ConcurrentHashMap concurrentHashMap = BrowserHooks.a;
         try {
             Object objInvoke2 = dd.a(bioUserWebSiteComponent.getClass(), "getContext", new Class[0]).invoke(bioUserWebSiteComponent, null);
-            contextA = objInvoke2 instanceof Context ? (Context) objInvoke2 : Main.a();
+            contextA = objInvoke2 instanceof Context ? (Context) objInvoke2 : Main.getApplicationContext();
         } catch (Throwable th) {
         }
         try {

@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.style.DynamicDrawableSpan;
+
 public final class m1 extends DynamicDrawableSpan {
     public final BitmapDrawable a;
     public final n1 b;

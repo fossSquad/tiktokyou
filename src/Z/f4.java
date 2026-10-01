@@ -8,7 +8,7 @@ public final  class f4 extends FunctionReferenceImpl implements Function2 {
     }
 
     public final Object invoke(Object obj, Object obj2) {
-        ((g4) ((FunctionReferenceImpl) this).receiver).getClass();
+        ((g4) this.receiver).getClass();
         return Integer.valueOf(g4.a((b3) obj, (b3) obj2));
     }
 }

@@ -46,7 +46,7 @@ public final class pb {
     }
 
     public static final void b(boolean z, final nb nbVar) {
-        final ob obVarA;
+        ob obVarA;
         try {
             a.getClass();
             obVarA = a(z);
@@ -54,11 +54,12 @@ public final class pb {
             h6.a(6, h6.a("OTA check failed", new Object[0]), th);
             obVarA = ob.d;
         }
+        final ob obVarFinal = obVarA;
         if (nbVar != null) {
             c.post(new Runnable() {
                 @Override
                 public final void run() {
-                    pb.a(nbVar, obVarA);
+                    pb.a(nbVar, obVarFinal);
                 }
             });
         }
@@ -85,17 +86,21 @@ public final class pb {
         Long longOrNull;
         Long longOrNull2;
         String contentOrNull;
-        String string;
-        Context contextA = Main.a();
-        String strA = p.a("https://tiktokyou.yzewe.ru/api/v1/updates", "TTMod-Updates/1.0", null, 65536, MapsKt.plus(a(contextA), MapsKt.mapOf(TuplesKt.to("Cache-Control", "no-cache")))).a();
+        Context contextA = Main.getApplicationContext();
+        String strA;
+        try {
+            strA = p.a("https://tiktokyou.yzewe.ru/api/v1/updates", "TTMod-Updates/1.0", 65536, MapsKt.plus(a(contextA), MapsKt.mapOf(TuplesKt.to("Cache-Control", "no-cache"))), (String) null).a();
+        } catch (Exception e) {
+            strA = null;
+        }
         if (strA != null) {
-            String string2 = StringsKt.trim(strA).toString();
-            JsonArray jsonArrayB = f6.b(string2);
+            String string = StringsKt.trim(strA).toString();
+            JsonArray jsonArrayB = (JsonArray) f6.b(string);
             if (jsonArrayB != null) {
-                JsonArray<JsonObject> jsonArray = jsonArrayB instanceof JsonArray ? jsonArrayB : null;
+                JsonArray jsonArray = jsonArrayB instanceof JsonArray ? jsonArrayB : null;
                 if (jsonArray != null) {
                     ArrayList arrayList = new ArrayList(jsonArray.size());
-                    for (JsonObject jsonObject : jsonArray) {
+                    for (JsonObject jsonObject : (Iterable<JsonObject>) (Iterable) jsonArray) {
                         JsonObject jsonObject2 = jsonObject instanceof JsonObject ? jsonObject : null;
                         if (jsonObject2 != null) {
                             Object obj = jsonObject2.get("stable");
@@ -141,15 +146,11 @@ public final class pb {
                                     if (jsonPrimitive3 == null || (contentOrNull = JsonElementKt.getContentOrNull(jsonPrimitive3)) == null || contentOrNull.length() <= 0) {
                                         contentOrNull = null;
                                     }
-                                    if (contentOrNull == null) {
-                                        string = null;
-                                    } else {
-                                        string = StringsKt.trim(contentOrNull).toString();
+                                    String string2 = contentOrNull != null ? StringsKt.trim(contentOrNull).toString() : null;
+                                    if (string2 == null) {
+                                        string2 = "";
                                     }
-                                    if (string == null) {
-                                        string = "";
-                                    }
-                                    String str = string;
+                                    String str = string2;
                                     if (jLongValue >= 0 && jLongValue2 >= 0 && str.length() != 0) {
                                         arrayList.add(new mb(jLongValue, jLongValue2, str));
                                     }
@@ -160,8 +161,11 @@ public final class pb {
                     long jStableApiVersion = DynamicUpdates.stableApiVersion();
                     long jWorkingDynamicVersion = DynamicUpdates.workingDynamicVersion(contextA);
                     long jHighestAcceptedVersion = DynamicUpdates.highestAcceptedVersion(contextA);
-                    long jMax = Math.max(jWorkingDynamicVersion, jHighestAcceptedVersion);
-                    h6.a(4, h6.a("OTA catalog=%d stable=%d working=%d highest=%d floor=%d manual=%s", new Object[]{Integer.valueOf(arrayList.size()), Long.valueOf(jStableApiVersion), Long.valueOf(jWorkingDynamicVersion), Long.valueOf(jHighestAcceptedVersion), Long.valueOf(jMax), Boolean.valueOf(z)}), (Throwable) null);
+                    long jOtaVersionFloor = DynamicUpdates.otaVersionFloor(contextA);
+                    h6.a(4, h6.a("OTA catalog=%d stable=%d working=%d highest=%d floor=%d manual=%s", new Object[]{Integer.valueOf(arrayList.size()), Long.valueOf(jStableApiVersion), Long.valueOf(jWorkingDynamicVersion), Long.valueOf(jHighestAcceptedVersion), Long.valueOf(jOtaVersionFloor), Boolean.valueOf(z)}), (Throwable) null);
+                    if (jHighestAcceptedVersion > jOtaVersionFloor) {
+                        h6.a(4, h6.a("OTA: quarantined dynamic=%d can be installed again", new Object[]{Long.valueOf(jHighestAcceptedVersion)}), (Throwable) null);
+                    }
                     int size = arrayList.size();
                     for (int i = 0; i < size; i++) {
                         mb mbVar = (mb) arrayList.get(i);
@@ -175,7 +179,7 @@ public final class pb {
                         mb mbVar3 = (mb) arrayList.get(i2);
                         if (mbVar3.a != jStableApiVersion) {
                             j = jStableApiVersion;
-                        } else if (mbVar3.b <= jMax) {
+                        } else if (mbVar3.b <= jOtaVersionFloor) {
                             j = jStableApiVersion;
                         } else {
                             String str2 = mbVar3.c;
@@ -248,6 +252,11 @@ public final class pb {
         throw new IllegalStateException("Required value was null.".toString());
     }
 
+    @SuppressWarnings("unchecked")
+    private static <T extends Throwable> RuntimeException sneakyThrow(Throwable th) throws T {
+        throw (T) th;
+    }
+
     public static void a(Context context, mb mbVar, boolean z) throws IOException {
         File file = new File(context.getCacheDir(), "tty_ota");
         if (!file.isDirectory() && !file.mkdirs()) {
@@ -273,7 +282,7 @@ public final class pb {
             if (file2.exists() && !file2.delete()) {
                 h6.a(6, h6.a("OTA: cannot delete %s", new Object[]{file2.getAbsolutePath()}), (Throwable) null);
             }
-            throw th;
+            throw pb.<RuntimeException>sneakyThrow(th);
         }
     }
 

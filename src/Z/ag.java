@@ -3,7 +3,7 @@ package Z;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.lang.reflect.Method;
 
 class ag extends HookMethod {

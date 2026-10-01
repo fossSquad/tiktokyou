@@ -1,4 +1,67 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.a;
+import Z.b1;
+import Z.bb;
+import Z.c1;
+import Z.d1;
+import Z.d9;
+import Z.dd;
+import Z.e1;
+import Z.e9;
+import Z.f1;
+import Z.g1;
+import Z.g8;
+import Z.g9;
+import Z.h1;
+import Z.h4;
+import Z.h6;
+import Z.h9;
+import Z.i1;
+import Z.j1;
+import Z.l6;
+import Z.m0;
+import Z.n0;
+import Z.o;
+import Z.o0;
+import Z.o6;
+import Z.p0;
+import Z.q0;
+import Z.q1;
+import Z.qa;
+import Z.r0;
+import Z.r1;
+import Z.r2;
+import Z.s0;
+import Z.s1;
+import Z.t0;
+import Z.t6;
+import Z.ta;
+import Z.u0;
+import Z.u6;
+import Z.v0;
+import Z.v5;
+import Z.v6;
+import Z.w0;
+import Z.wa;
+import Z.x0;
+import Z.y0;
+import Z.z0;
+import Z.z7;
+import Z.StringUtils;
+
+import Z.a1;
+import Z.k1;
+import Z.l0;
+import Z.lc;
+import Z.m1;
+import Z.n1;
+import Z.p8;
+import Z.t1;
+import Z.v1;
+import Z.w6;
+import Z.z1;
+import Z.ze;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,6 +78,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -175,7 +240,7 @@ public abstract class BadgeHooks {
         try {
             m0.a(new File(m0.a(context), "supporters_cache.txt"), strB);
             m0.b(new File(m0.a(context), "supporters_fetch.stamp"));
-        } catch (IOException e2) {
+        } catch (Exception e2) {
             h6.a(6, h6.a("Failed to persist build fallback: %s", new Object[]{e2.getMessage()}), (Throwable) null);
         }
         e(context);
@@ -221,7 +286,7 @@ public abstract class BadgeHooks {
 
     public static void e(Context context) {
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet();
-        for (n1 n1Var : b.values()) {
+        for (n1 n1Var : (java.util.Collection<n1>) (java.util.Collection) b.values()) {
             if (n1Var != null && q1.a(n1Var.b)) {
                 linkedHashSet.add(c(context, n1Var.b));
             }
@@ -235,7 +300,7 @@ public abstract class BadgeHooks {
 
     public static void f() {
         try {
-            Context contextA = Main.a();
+            Context contextA = Main.getApplicationContext();
             a(contextA);
             h(contextA);
             if (contextA != null) {
@@ -299,7 +364,7 @@ public abstract class BadgeHooks {
 
     public static void g() {
         try {
-            Context contextA = Main.a();
+            Context contextA = Main.getApplicationContext();
             if (contextA != null) {
                 a(contextA, false, (k1) null);
                 f(contextA);
@@ -353,7 +418,7 @@ public abstract class BadgeHooks {
             Object objInvoke2 = dd.a(objInvoke.getClass(), "getCurUserId", new Class[0]).invoke(objInvoke, null);
             if (objInvoke2 instanceof String) {
                 String str = (String) objInvoke2;
-                if (!hd$$ExternalSyntheticBackport0.m(str)) {
+                if (!StringUtils.isBlank(str)) {
                     A = str.trim();
                     return A;
                 }
@@ -365,6 +430,7 @@ public abstract class BadgeHooks {
             Object obj2 = h6.a;
             h6.a(6, String.valueOf(strDecrypt), th);
         }
+        return null;
     }
 
     public static Bitmap a(Context context, n1 n1Var, int i2) {
@@ -469,7 +535,7 @@ public abstract class BadgeHooks {
             }
         } catch (Throwable th) {
         }
-        Context contextA = Main.a();
+        Context contextA = Main.getApplicationContext();
         if (contextA == null) {
             return -16524603;
         }
@@ -537,7 +603,7 @@ public abstract class BadgeHooks {
         if (q1.a(strB)) {
             if (context != null && r.compareAndSet(false, true)) {
                 try {
-                    for (Map.Entry entry : m0.b(context).entrySet()) {
+                    for (Map.Entry entry : (java.util.Set<Map.Entry>) m0.b(context).entrySet()) {
                         String strB2 = q1.b((String) entry.getKey());
                         String strB3 = q1.b((String) entry.getValue());
                         if (q1.a(strB2) && q1.a(strB3)) {
@@ -885,14 +951,14 @@ public abstract class BadgeHooks {
                     }
                     throw th;
                 }
-            } catch (IOException e2) {
+            } catch (Exception e2) {
             }
         }
         return null;
     }
 
     public static void b(Activity activity, FrameLayout frameLayout) {
-        WindowManager windowManager;
+        WindowManager windowManager = null;
         l.remove(activity);
         if (frameLayout == null) {
             return;
@@ -925,7 +991,7 @@ public abstract class BadgeHooks {
     }
 
     public static CharSequence a(TextView textView, CharSequence charSequence) {
-        ?? spannableStringBuilder;
+        SpannableStringBuilder spannableStringBuilder;
         int length;
         int iIndexOf;
         n1 n1Var;
@@ -968,7 +1034,7 @@ public abstract class BadgeHooks {
         }
         String string = charSequence2.toString();
         if (!string.contains("\ufdd0") || string.contains("⁣⁣⁤")) {
-            spannableStringBuilder = charSequence2;
+            spannableStringBuilder = new SpannableStringBuilder(charSequence2);
         } else {
             spannableStringBuilder = new SpannableStringBuilder(charSequence2);
             int iIndexOf3 = 0;
@@ -1170,72 +1236,62 @@ public abstract class BadgeHooks {
     }
 
     public static void a(Context context, File file, k1 k1Var) {
-        boolean z2;
-        ?? r3;
-        ?? r2 = 0;
+        Throwable th = null;
+        boolean success = false;
+        String statusMessage = null;
+        int count = 0;
         try {
             char[] cArr = m0.a;
             File file2 = new File(m0.a(context), "supporters_cache.etag");
             String strA = file.exists() ? m0.a(file2) : null;
             String strDecrypt = "https://tiktokyou.yzewe.ru/api/v1/badges";
             String strDecrypt2 = "TTMod-BadgeHooks/1.0";
-            AtomicBoolean atomicBoolean = p.a;
-            o oVarA = p.a(strDecrypt, strDecrypt2, strA, 2097152, MapsKt.emptyMap());
+            AtomicBoolean atomicBoolean = Z.p.a;
+            o oVarA;
+            try {
+                oVarA = Z.p.a(strDecrypt, strDecrypt2, 2097152, MapsKt.emptyMap(), strA);
+            } catch (Exception ex9) {
+                oVarA = null;
+            }
+            if (oVarA == null) {
+                throw new IOException("Failed to connect to badges server");
+            }
             int i2 = oVarA.a;
             String strA2 = oVarA.a();
             String str = oVarA.c;
-            z2 = true;
-            try {
-                try {
-                    if (i2 == 304) {
-                        m0.b(file);
-                        int size = b.size();
-                        String strDecrypt3 = "Supporters list not modified";
-                        q.set(false);
-                        b(k1Var, true, size, strDecrypt3);
-                        return;
-                    }
-                    if (TextUtils.isEmpty(strA2)) {
-                        throw new IOException("Empty supporters list");
-                    }
-                    LinkedHashMap linkedHashMapB = n0.b(strA2);
-                    if (linkedHashMapB.isEmpty()) {
-                        throw new IOException("Invalid supporters list");
-                    }
-                    m0.a(file, strA2);
-                    if (!TextUtils.isEmpty(str)) {
-                        m0.a(file2, str);
-                    } else if (file2.exists()) {
-                        file2.delete();
-                    }
-                    a(linkedHashMapB);
-                    e(context);
-                    int size2 = linkedHashMapB.size();
-                    r3 = "Loaded " + size2 + " supporter uid(s)";
-                    try {
-                        h6.a(4, h6.a("Loaded %d supporter uid(s) from GitHub", new Object[]{Integer.valueOf(linkedHashMapB.size())}), (Throwable) null);
-                        q.set(false);
-                        b(k1Var, true, size2, (String) r3);
-                        return;
-                    } catch (Throwable th) {
-                        r2 = size2;
-                        th = th;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
-                    r3 = r2;
-                    r2 = 0;
-                }
-            } catch (Throwable th3) {
-                r2 = file;
-                th = th3;
-                r3 = 0;
+            if (i2 == 304) {
+                m0.b(file);
+                int size = b.size();
+                String strDecrypt3 = "Supporters list not modified";
+                q.set(false);
+                b(k1Var, true, size, strDecrypt3);
+                return;
             }
+            if (TextUtils.isEmpty(strA2)) {
+                throw new IOException("Empty supporters list");
+            }
+            LinkedHashMap linkedHashMapB = n0.b(strA2);
+            if (linkedHashMapB.isEmpty()) {
+                throw new IOException("Invalid supporters list");
+            }
+            m0.a(file, strA2);
+            if (!TextUtils.isEmpty(str)) {
+                m0.a(file2, str);
+            } else if (file2.exists()) {
+                file2.delete();
+            }
+            a(linkedHashMapB);
+            e(context);
+            count = linkedHashMapB.size();
+            statusMessage = "Loaded " + count + " supporter uid(s)";
+            success = true;
+            h6.a(4, h6.a("Loaded %d supporter uid(s) from GitHub", new Object[]{Integer.valueOf(count)}), (Throwable) null);
+            q.set(false);
+            b(k1Var, true, count, statusMessage);
+            return;
         } catch (Throwable th4) {
             th = th4;
-            z2 = false;
-            r3 = 0;
-            r2 = 0;
+            success = false;
         }
         try {
             String strDecrypt4 = "Failed to load supporters list: %s";
@@ -1246,7 +1302,7 @@ public abstract class BadgeHooks {
             }
         } finally {
             q.set(false);
-            b(k1Var, z2, (int) r2, (String) r3);
+            b(k1Var, success, count, statusMessage);
         }
     }
 
@@ -1260,12 +1316,11 @@ public abstract class BadgeHooks {
         f.clear();
         g.clear();
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-        for (n1 n1Var : linkedHashMap.values()) {
+        for (n1 n1Var : (java.util.Collection<n1>) (java.util.Collection) linkedHashMap.values()) {
             if (n1Var != null && !TextUtils.isEmpty(n1Var.a) && !TextUtils.isEmpty(n1Var.f)) {
                 linkedHashMap2.put(n1Var.a, n1Var.f);
             }
         }
-        qc.a(linkedHashMap2);
     }
 
     public static void a(Class cls, p8 p8Var) {
@@ -1376,8 +1431,8 @@ public abstract class BadgeHooks {
     public static boolean a(TextView textView, MotionEvent motionEvent) {
         Spanned spanned;
         m1 m1Var;
-        Activity activity;
-        Fragment fragment;
+        Activity activity = null;
+        Fragment fragment = null;
         String str;
         CharSequence text = textView.getText();
         String str2 = null;
@@ -1447,12 +1502,14 @@ public abstract class BadgeHooks {
                         if (context instanceof ContextWrapper) {
                             if (context instanceof Activity) {
                                 activity = (Activity) context;
+                                break;
                             } else {
                                 context = ((ContextWrapper) context).getBaseContext();
                             }
                         } else {
                             activity = context instanceof Activity ? (Activity) context : null;
                         }
+                        break;
                     }
                     try {
                         Class<?> cls = Class.forName("androidx.fragment.app.FragmentManager", false, textView.getClass().getClassLoader());
@@ -1462,7 +1519,7 @@ public abstract class BadgeHooks {
                         while (true) {
                             if (i2 < length) {
                                 try {
-                                    Object objInvoke = dd.a(cls, strArr[i2], View.class).invoke(null, textView);
+                                    Object objInvoke = ((java.lang.reflect.Method) dd.a(cls, strArr[i2], View.class)).invoke(null, textView);
                                     if (objInvoke instanceof Fragment) {
                                         fragment = (Fragment) objInvoke;
                                     }
@@ -1585,27 +1642,8 @@ public abstract class BadgeHooks {
         return null;
     }
 
-    public static void a(w6 w6Var, p8 p8Var, z1 z1Var) {
-        try {
-            HookBridge.hookAllMethods(Class.forName(w6Var.b), p8Var.c[0], new t0(z1Var));
-        } catch (Throwable th) {
-            String strDecrypt = "Failed to hook ChatListNameModel#getName";
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(strDecrypt), th);
-        }
-    }
-
-    public static void a(Class cls, p8 p8Var, HookMethod hookMethod) {
-        for (String str : (String[]) p8Var.c.clone()) {
-            try {
-                HookBridge.hookAllMethods(cls, str, hookMethod);
-            } catch (Throwable th) {
-            }
-        }
-    }
-
     public static void a(Fragment fragment, n1 n1Var, View view) {
-        Activity activity;
+        Activity activity = null;
         Context context = view.getContext();
         while (true) {
             if (context instanceof ContextWrapper) {
@@ -1630,6 +1668,25 @@ public abstract class BadgeHooks {
             b(activity, frameLayout);
         }
         b(activity, fragment, n1Var);
+    }
+
+    public static void a(w6 w6Var, p8 p8Var, z1 z1Var) {
+        try {
+            HookBridge.hookAllMethods(Class.forName(w6Var.b), p8Var.c[0], new t0(z1Var));
+        } catch (Throwable th) {
+            String strDecrypt = "Failed to hook ChatListNameModel#getName";
+            Object obj = h6.a;
+            h6.a(6, String.valueOf(strDecrypt), th);
+        }
+    }
+
+    public static void a(Class cls, p8 p8Var, HookMethod hookMethod) {
+        for (String str : (String[]) p8Var.c.clone()) {
+            try {
+                HookBridge.hookAllMethods(cls, str, hookMethod);
+            } catch (Throwable th) {
+            }
+        }
     }
 
     public static void a(View view, a1 a1Var) {
@@ -1695,206 +1752,6 @@ public abstract class BadgeHooks {
         }
     }
 
-    public static v1 a(final Activity activity, final Dialog dialog, final Fragment fragment) {
-        String str;
-        String str2;
-        String str3;
-        String str4;
-        String str5;
-        String str6;
-        int color;
-        m6 m6Var = l6.a;
-        boolean z2 = activity != null && (activity.getResources().getConfiguration().uiMode & 48) == 32;
-        int color2 = z2 ? Color.parseColor("#1E1E1E") : -1;
-        int color3 = z2 ? -1 : Color.parseColor("#161823");
-        int color4 = Color.parseColor((z2 ? "#A7A9B0" : "#8A8B91"));
-        int color5 = Color.parseColor((z2 ? "#303030" : "#EFEFF0"));
-        int color6 = Color.parseColor((z2 ? "#303030" : "#F3F3F4"));
-        ta taVarA = ta.a();
-        if (taVarA == null || !taVarA.f()) {
-            color = Color.parseColor("#FE2B54");
-        } else {
-            color = ThemeHooks.a();
-        }
-        v1 v1Var = new v1(activity);
-        v1Var.setVerticalScrollBarEnabled(false);
-        v1Var.setOverScrollMode(2);
-        v1Var.a = Math.max(0, Math.max((int) r2.a(activity, 1, 320.0f), (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.85f)));
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(color2);
-        float fA = (int) r2.a(activity, 1, 24.0f);
-        gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
-        v1Var.setBackground(gradientDrawable);
-        v1Var.setClipToOutline(true);
-        LinearLayout linearLayout = new LinearLayout(activity);
-        linearLayout.setOrientation(1);
-        linearLayout.setPadding((int) r2.a(activity, 1, 20.0f), (int) r2.a(activity, 1, 18.0f), (int) r2.a(activity, 1, 20.0f), (int) r2.a(activity, 1, 18.0f));
-        v1Var.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2));
-        FrameLayout frameLayout = new FrameLayout(activity);
-        int iA = (int) r2.a(activity, 1, 32.0f);
-        frameLayout.setMinimumHeight(iA);
-        linearLayout.addView(frameLayout, new LinearLayout.LayoutParams(-1, -2));
-        TextView textView = new TextView(activity);
-        textView.setText(l6.a("badge_sheet_header", "Подробнее"));
-        textView.setTextColor(color3);
-        textView.setTextSize(2, 18.0f);
-        textView.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView.setGravity(17);
-        textView.setIncludeFontPadding(false);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, -2, 16);
-        layoutParams.leftMargin = iA;
-        layoutParams.rightMargin = iA;
-        frameLayout.addView(textView, layoutParams);
-        TextView textView2 = new TextView(activity);
-        textView2.setText("×");
-        textView2.setTextColor(color3);
-        textView2.setTextSize(2, 24.0f);
-        textView2.setGravity(17);
-        textView2.setIncludeFontPadding(false);
-        textView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        FrameLayout.LayoutParams layoutParams2 = new FrameLayout.LayoutParams(iA, iA);
-        layoutParams2.gravity = 8388629;
-        frameLayout.addView(textView2, layoutParams2);
-        ImageView imageView = new ImageView(activity);
-        Bitmap bitmapA = a(activity, n1.a(), (int) r2.a(activity, 1, 52.0f));
-        if (bitmapA != null) {
-            imageView.setImageBitmap(bitmapA);
-        }
-        LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-2, -2);
-        layoutParams3.gravity = 1;
-        layoutParams3.topMargin = (int) r2.a(activity, 1, 20.0f);
-        linearLayout.addView(imageView, layoutParams3);
-        TextView textView3 = new TextView(activity);
-        textView3.setText(l6.a("badge_sheet_title", "Поддержите разработку"));
-        textView3.setTextColor(color3);
-        textView3.setTextSize(2, 18.0f);
-        textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView3.setGravity(17);
-        LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams4.topMargin = (int) r2.a(activity, 1, 18.0f);
-        linearLayout.addView(textView3, layoutParams4);
-        TextView textView4 = new TextView(activity);
-        textView4.setText(l6.a("badge_sheet_subtitle", "Внесите вклад в развитие разработки и получите уникальный значок."));
-        textView4.setTextColor(color4);
-        textView4.setTextSize(2, 14.0f);
-        textView4.setGravity(17);
-        textView4.setLineSpacing(0.0f, 1.1f);
-        LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams5.topMargin = (int) r2.a(activity, 1, 10.0f);
-        linearLayout.addView(textView4, layoutParams5);
-        String strA = l6.a("badge_sheet_copy_uid", "Скопировать мой UID");
-        String strDecrypt = "ic_copy";
-        LinearLayout linearLayout2 = new LinearLayout(activity);
-        linearLayout2.setOrientation(0);
-        linearLayout2.setGravity(17);
-        linearLayout2.setPadding((int) r2.a(activity, 1, 14.0f), 0, (int) r2.a(activity, 1, 14.0f), 0);
-        GradientDrawable gradientDrawable2 = new GradientDrawable();
-        gradientDrawable2.setColor(color5);
-        gradientDrawable2.setCornerRadius((int) TypedValue.applyDimension(1, 999.0f, activity.getResources().getDisplayMetrics()));
-        linearLayout2.setBackground(gradientDrawable2);
-        Bitmap bitmapB = b(activity, strDecrypt);
-        if (bitmapB != null) {
-            ImageView imageView2 = new ImageView(activity);
-            imageView2.setImageBitmap(bitmapB);
-            imageView2.setColorFilter(color3, PorterDuff.Mode.SRC_IN);
-            LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams((int) r2.a(activity, 1, 13.0f), (int) r2.a(activity, 1, 13.0f));
-            layoutParams6.rightMargin = (int) r2.a(activity, 1, 8.0f);
-            linearLayout2.addView(imageView2, layoutParams6);
-        }
-        TextView textView5 = new TextView(activity);
-        textView5.setText(strA);
-        textView5.setTextColor(color3);
-        textView5.setTextSize(2, 15.0f);
-        textView5.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView5.setGravity(17);
-        linearLayout2.addView(textView5, new LinearLayout.LayoutParams(-2, -2));
-        linearLayout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                BadgeHooks.a(activity, view);
-            }
-        });
-        LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(-2, (int) r2.a(activity, 1, 36.0f));
-        layoutParams7.gravity = 1;
-        layoutParams7.topMargin = (int) r2.a(activity, 1, 18.0f);
-        linearLayout.addView(linearLayout2, layoutParams7);
-        LinearLayout linearLayout3 = new LinearLayout(activity);
-        linearLayout3.setOrientation(1);
-        LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams8.topMargin = (int) r2.a(activity, 1, 20.0f);
-        linearLayout.addView(linearLayout3, layoutParams8);
-        String strDecrypt2 = "ic_coin";
-        ze zeVar = B != null ? B : new ze("5", "500");
-        linearLayout3.addView(a(activity, strDecrypt2, String.format(l6.a("badge_sheet_step1_title_format", "Пожертвуйте не менее $%1$s (%2$s₽)"), zeVar.a, zeVar.b), l6.a("badge_sheet_step1_subtitle", "Переведите сумму по любым из наших реквизитов"), color6, color3, color4));
-        LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams9.topMargin = (int) r2.a(activity, 1, 8.0f);
-        String strDecrypt3 = "photo";
-        String strA2 = l6.a("badge_sheet_step2_title", "Пришлите подтверждение и ваш UID");
-        String strA3 = l6.a("badge_sheet_step2_contact", "@tt_u_bot");
-        String str7 = String.format(l6.a("badge_sheet_step2_subtitle", "Отправьте чек или скриншот в %s, а также ваш UID для выдачи"), strA3);
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str7);
-        int iIndexOf = str7.indexOf(strA3);
-        if (iIndexOf >= 0) {
-            spannableStringBuilder.setSpan(new b1(activity, color), iIndexOf, strA3.length() + iIndexOf, 33);
-        }
-        linearLayout3.addView(a(activity, strDecrypt3, strA2, spannableStringBuilder, color6, color3, color4), layoutParams9);
-        LinearLayout.LayoutParams layoutParams10 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams10.topMargin = (int) r2.a(activity, 1, 8.0f);
-        linearLayout3.addView(a(activity, "ic_mod_logo", l6.a("badge_sheet_step3_title", "Получите значок"), l6.a("badge_sheet_step3_subtitle", "После проверки он появится в вашем профиле и будет виден всем"), color6, color3, color4), layoutParams10);
-        LinearLayout linearLayout4 = new LinearLayout(activity);
-        linearLayout4.setOrientation(0);
-        LinearLayout.LayoutParams layoutParams11 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams11.topMargin = (int) r2.a(activity, 1, 28.0f);
-        linearLayout.addView(linearLayout4, layoutParams11);
-        String strA4 = l6.a("badge_sheet_cancel", "Отмена");
-        TextView textView6 = new TextView(activity);
-        textView6.setText(strA4);
-        textView6.setTextColor(color3);
-        textView6.setTextSize(2, 17.0f);
-        textView6.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView6.setGravity(17);
-        GradientDrawable gradientDrawable3 = new GradientDrawable();
-        gradientDrawable3.setColor(color5);
-        gradientDrawable3.setCornerRadius(s1.a(activity, 999.0f));
-        textView6.setBackground(gradientDrawable3);
-        textView6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        LinearLayout.LayoutParams layoutParams12 = new LinearLayout.LayoutParams(0, (int) r2.a(activity, 1, 48.0f));
-        layoutParams12.weight = 1.0f;
-        linearLayout4.addView(textView6, layoutParams12);
-        String strA5 = l6.a("badge_sheet_support", "Поддержать");
-        TextView textView7 = new TextView(activity);
-        textView7.setText(strA5);
-        textView7.setTextColor(-1);
-        textView7.setTextSize(2, 17.0f);
-        textView7.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView7.setGravity(17);
-        GradientDrawable gradientDrawable4 = new GradientDrawable();
-        gradientDrawable4.setColor(color);
-        gradientDrawable4.setCornerRadius(s1.a(activity, 999.0f));
-        textView7.setBackground(gradientDrawable4);
-        textView7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                BadgeHooks.a(fragment, activity, dialog, view);
-            }
-        });
-        LinearLayout.LayoutParams layoutParams13 = new LinearLayout.LayoutParams(0, (int) r2.a(activity, 1, 48.0f));
-        layoutParams13.weight = 1.0f;
-        layoutParams13.leftMargin = (int) r2.a(activity, 1, 10.0f);
-        linearLayout4.addView(textView7, layoutParams13);
-        return v1Var;
-    }
-
     public static  void a(Fragment fragment, Activity activity, Dialog dialog, View view) {
         if (fragment != null) {
         }
@@ -1948,7 +1805,6 @@ public abstract class BadgeHooks {
 
     public static void a(Activity activity, View view) {
         String strJ = j();
-        m6 m6Var = l6.a;
         if (TextUtils.isEmpty(strJ)) {
             Toast.makeText(activity, l6.a("copy_uid_unavailable"), 0).show();
             return;
@@ -1962,7 +1818,6 @@ public abstract class BadgeHooks {
             clipboardManager.setPrimaryClip(ClipData.newPlainText("uid", strJ));
             Toast.makeText(activity, l6.a("copy_uid_copied"), 0).show();
         } catch (Throwable th) {
-            m6 m6Var2 = l6.a;
             Toast.makeText(activity, l6.a("copy_uid_failed"), 0).show();
         }
     }
@@ -1999,7 +1854,6 @@ public abstract class BadgeHooks {
         layoutParams.rightMargin = (int) r2.a(activity, 1, 6.0f);
         linearLayout.addView(linearLayout2, layoutParams);
         TextView textView = new TextView(activity);
-        m6 m6Var = l6.a;
         String strA = !TextUtils.isEmpty(str) ? str : l6.a("badge_bulletin_unknown_name", "Этот человек");
         if (n1Var == null || TextUtils.isEmpty(n1Var.e)) {
             strReplace = (n1Var == null || !n1Var.d) ? String.format(l6.a("badge_bulletin_supporter_format", "%s поддержал разработку TikTok You"), strA) : String.format(l6.a("badge_bulletin_developer_format", "%s член команды разработки TikTok You"), strA);
@@ -2032,6 +1886,200 @@ public abstract class BadgeHooks {
         });
         linearLayout.addView(textView2, new LinearLayout.LayoutParams(-2, (int) r2.a(activity, 1, 32.0f)));
         return frameLayout;
+    }
+
+    public static v1 a(final Activity activity, final Dialog dialog, final Fragment fragment) {
+        String str;
+        String str2;
+        String str3;
+        String str4;
+        String str5;
+        String str6;
+        boolean z2 = activity != null && (activity.getResources().getConfiguration().uiMode & 48) == 32;
+        int color = z2 ? Color.parseColor("#1E1E1E") : -1;
+        int color2 = z2 ? -1 : Color.parseColor("#161823");
+        int color3 = Color.parseColor((z2 ? "#A7A9B0" : "#8A8B91"));
+        int color4 = Color.parseColor((z2 ? "#303030" : "#EFEFF0"));
+        int color5 = Color.parseColor((z2 ? "#303030" : "#F3F3F4"));
+        ta taVarA = ta.a();
+        int color6 = (taVarA == null || !taVarA.f()) ? Color.parseColor("#FE2B54") : ThemeHooks.a();
+        v1 v1Var = new v1(activity);
+        v1Var.setVerticalScrollBarEnabled(false);
+        v1Var.setOverScrollMode(2);
+        v1Var.a = Math.max(0, Math.max((int) r2.a(activity, 1, 320.0f), (int) (activity.getResources().getDisplayMetrics().heightPixels * 0.85f)));
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColor(color);
+        float fA = (int) r2.a(activity, 1, 24.0f);
+        gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
+        v1Var.setBackground(gradientDrawable);
+        v1Var.setClipToOutline(true);
+        LinearLayout linearLayout = new LinearLayout(activity);
+        linearLayout.setOrientation(1);
+        linearLayout.setPadding((int) r2.a(activity, 1, 20.0f), (int) r2.a(activity, 1, 18.0f), (int) r2.a(activity, 1, 20.0f), (int) r2.a(activity, 1, 18.0f));
+        v1Var.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2));
+        FrameLayout frameLayout = new FrameLayout(activity);
+        int iA = (int) r2.a(activity, 1, 32.0f);
+        frameLayout.setMinimumHeight(iA);
+        linearLayout.addView(frameLayout, new LinearLayout.LayoutParams(-1, -2));
+        TextView textView = new TextView(activity);
+        textView.setText(l6.a("badge_sheet_header", "Подробнее"));
+        textView.setTextColor(color2);
+        textView.setTextSize(2, 18.0f);
+        textView.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView.setGravity(17);
+        textView.setIncludeFontPadding(false);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, -2, 16);
+        layoutParams.leftMargin = iA;
+        layoutParams.rightMargin = iA;
+        frameLayout.addView(textView, layoutParams);
+        TextView textView2 = new TextView(activity);
+        textView2.setText("×");
+        textView2.setTextColor(color2);
+        textView2.setTextSize(2, 24.0f);
+        textView2.setGravity(17);
+        textView2.setIncludeFontPadding(false);
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        FrameLayout.LayoutParams layoutParams2 = new FrameLayout.LayoutParams(iA, iA);
+        layoutParams2.gravity = 8388629;
+        frameLayout.addView(textView2, layoutParams2);
+        ImageView imageView = new ImageView(activity);
+        Bitmap bitmapA = a(activity, n1.a(), (int) r2.a(activity, 1, 52.0f));
+        if (bitmapA != null) {
+            imageView.setImageBitmap(bitmapA);
+        }
+        LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-2, -2);
+        layoutParams3.gravity = 1;
+        layoutParams3.topMargin = (int) r2.a(activity, 1, 20.0f);
+        linearLayout.addView(imageView, layoutParams3);
+        TextView textView3 = new TextView(activity);
+        textView3.setText(l6.a("badge_sheet_title", "Поддержите разработку"));
+        textView3.setTextColor(color2);
+        textView3.setTextSize(2, 18.0f);
+        textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView3.setGravity(17);
+        LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams4.topMargin = (int) r2.a(activity, 1, 18.0f);
+        linearLayout.addView(textView3, layoutParams4);
+        TextView textView4 = new TextView(activity);
+        textView4.setText(l6.a("badge_sheet_subtitle", "Внесите вклад в развитие разработки и получите уникальный значок."));
+        textView4.setTextColor(color3);
+        textView4.setTextSize(2, 14.0f);
+        textView4.setGravity(17);
+        textView4.setLineSpacing(0.0f, 1.1f);
+        LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams5.topMargin = (int) r2.a(activity, 1, 10.0f);
+        linearLayout.addView(textView4, layoutParams5);
+        String strA = l6.a("badge_sheet_copy_uid", "Скопировать мой UID");
+        String strDecrypt = "ic_copy";
+        LinearLayout linearLayout2 = new LinearLayout(activity);
+        linearLayout2.setOrientation(0);
+        linearLayout2.setGravity(17);
+        linearLayout2.setPadding((int) r2.a(activity, 1, 14.0f), 0, (int) r2.a(activity, 1, 14.0f), 0);
+        GradientDrawable gradientDrawable2 = new GradientDrawable();
+        gradientDrawable2.setColor(color4);
+        gradientDrawable2.setCornerRadius((int) TypedValue.applyDimension(1, 999.0f, activity.getResources().getDisplayMetrics()));
+        linearLayout2.setBackground(gradientDrawable2);
+        Bitmap bitmapB = b(activity, strDecrypt);
+        if (bitmapB != null) {
+            ImageView imageView2 = new ImageView(activity);
+            imageView2.setImageBitmap(bitmapB);
+            imageView2.setColorFilter(color2, PorterDuff.Mode.SRC_IN);
+            LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams((int) r2.a(activity, 1, 13.0f), (int) r2.a(activity, 1, 13.0f));
+            layoutParams6.rightMargin = (int) r2.a(activity, 1, 8.0f);
+            linearLayout2.addView(imageView2, layoutParams6);
+        }
+        TextView textView5 = new TextView(activity);
+        textView5.setText(strA);
+        textView5.setTextColor(color2);
+        textView5.setTextSize(2, 15.0f);
+        textView5.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView5.setGravity(17);
+        linearLayout2.addView(textView5, new LinearLayout.LayoutParams(-2, -2));
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                BadgeHooks.a(activity, view);
+            }
+        });
+        LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(-2, (int) r2.a(activity, 1, 36.0f));
+        layoutParams7.gravity = 1;
+        layoutParams7.topMargin = (int) r2.a(activity, 1, 18.0f);
+        linearLayout.addView(linearLayout2, layoutParams7);
+        LinearLayout linearLayout3 = new LinearLayout(activity);
+        linearLayout3.setOrientation(1);
+        LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams8.topMargin = (int) r2.a(activity, 1, 20.0f);
+        linearLayout.addView(linearLayout3, layoutParams8);
+        String strDecrypt2 = "ic_coin";
+        ze zeVar = B != null ? B : new ze("5", "500");
+        linearLayout3.addView(a(activity, strDecrypt2, String.format(l6.a("badge_sheet_step1_title_format", "Пожертвуйте не менее $%1$s (%2$s₽)"), zeVar.a, zeVar.b), l6.a("badge_sheet_step1_subtitle", "Переведите сумму по любым из наших реквизитов"), color5, color2, color3));
+        LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams9.topMargin = (int) r2.a(activity, 1, 8.0f);
+        String strDecrypt3 = "photo";
+        String strA2 = l6.a("badge_sheet_step2_title", "Пришлите подтверждение и ваш UID");
+        String strA3 = l6.a("badge_sheet_step2_contact", "@tt_u_bot");
+        String str7 = String.format(l6.a("badge_sheet_step2_subtitle", "Отправьте чек или скриншот в %s, а также ваш UID для выдачи"), strA3);
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str7);
+        int iIndexOf = str7.indexOf(strA3);
+        if (iIndexOf >= 0) {
+            spannableStringBuilder.setSpan(new b1(activity, color6), iIndexOf, strA3.length() + iIndexOf, 33);
+        }
+        linearLayout3.addView(a(activity, strDecrypt3, strA2, spannableStringBuilder, color5, color2, color3), layoutParams9);
+        LinearLayout.LayoutParams layoutParams10 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams10.topMargin = (int) r2.a(activity, 1, 8.0f);
+        linearLayout3.addView(a(activity, "ic_mod_logo", l6.a("badge_sheet_step3_title", "Получите значок"), l6.a("badge_sheet_step3_subtitle", "После проверки он появится в вашем профиле и будет виден всем"), color5, color2, color3), layoutParams10);
+        LinearLayout linearLayout4 = new LinearLayout(activity);
+        linearLayout4.setOrientation(0);
+        LinearLayout.LayoutParams layoutParams11 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams11.topMargin = (int) r2.a(activity, 1, 28.0f);
+        linearLayout.addView(linearLayout4, layoutParams11);
+        String strA4 = l6.a("badge_sheet_cancel", "Отмена");
+        TextView textView6 = new TextView(activity);
+        textView6.setText(strA4);
+        textView6.setTextColor(color2);
+        textView6.setTextSize(2, 17.0f);
+        textView6.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView6.setGravity(17);
+        GradientDrawable gradientDrawable3 = new GradientDrawable();
+        gradientDrawable3.setColor(color4);
+        gradientDrawable3.setCornerRadius(s1.a(activity, 999.0f));
+        textView6.setBackground(gradientDrawable3);
+        textView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        LinearLayout.LayoutParams layoutParams12 = new LinearLayout.LayoutParams(0, (int) r2.a(activity, 1, 48.0f));
+        layoutParams12.weight = 1.0f;
+        linearLayout4.addView(textView6, layoutParams12);
+        String strA5 = l6.a("badge_sheet_support", "Поддержать");
+        TextView textView7 = new TextView(activity);
+        textView7.setText(strA5);
+        textView7.setTextColor(-1);
+        textView7.setTextSize(2, 17.0f);
+        textView7.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView7.setGravity(17);
+        GradientDrawable gradientDrawable4 = new GradientDrawable();
+        gradientDrawable4.setColor(color6);
+        gradientDrawable4.setCornerRadius(s1.a(activity, 999.0f));
+        textView7.setBackground(gradientDrawable4);
+        textView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                BadgeHooks.a(fragment, activity, dialog, view);
+            }
+        });
+        LinearLayout.LayoutParams layoutParams13 = new LinearLayout.LayoutParams(0, (int) r2.a(activity, 1, 48.0f));
+        layoutParams13.weight = 1.0f;
+        layoutParams13.leftMargin = (int) r2.a(activity, 1, 10.0f);
+        linearLayout4.addView(textView7, layoutParams13);
+        return v1Var;
     }
 
     public static boolean a(lc lcVar, String str) {
@@ -2198,7 +2246,7 @@ public abstract class BadgeHooks {
                     }
                     throw th;
                 }
-            } catch (IOException e2) {
+            } catch (Exception e2) {
                 h6.a(6, h6.a("Failed to load asset badge %s: %s", new Object[]{strDecrypt, e2}), (Throwable) null);
                 return null;
             }
@@ -2219,14 +2267,14 @@ public abstract class BadgeHooks {
                 return;
             }
             StringBuilder sb = new StringBuilder();
-            for (Map.Entry entry : concurrentHashMap.entrySet()) {
+            for (Map.Entry entry : (java.util.Set<Map.Entry>) concurrentHashMap.entrySet()) {
                 if (!TextUtils.isEmpty((CharSequence) entry.getKey()) && !TextUtils.isEmpty((CharSequence) entry.getValue())) {
                     sb.append((String) entry.getKey()).append('\t').append((String) entry.getValue()).append('\n');
                 }
             }
             try {
                 m0.a(new File(m0.a(context), "image_redirects.txt"), sb.toString());
-            } catch (IOException e2) {
+            } catch (Exception e2) {
                 h6.a(6, h6.a("Failed to write badge image redirects: %s", new Object[]{e2.getMessage()}), (Throwable) null);
             }
         }
@@ -2237,8 +2285,13 @@ public abstract class BadgeHooks {
         try {
             char[] cArr = m0.a;
             String strDecrypt = "TTMod-BadgeHooks/1.0";
-            AtomicBoolean atomicBoolean = p.a;
-            o oVarA = p.a(str, strDecrypt, null, 16777216, MapsKt.emptyMap());
+            AtomicBoolean atomicBoolean = Z.p.a;
+            o oVarA;
+            try {
+                oVarA = Z.p.a(str, strDecrypt, 16777216, MapsKt.emptyMap(), (String) null);
+            } catch (Exception ex9) {
+                oVarA = null;
+            }
             byte[] bArr = oVarA.b;
             String str2 = oVarA.d;
             if (bArr != null && bArr.length != 0) {

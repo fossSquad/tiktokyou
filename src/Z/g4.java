@@ -79,12 +79,12 @@ public final class g4 {
         }
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(urlModel.urlList);
+            obj = RCompat.m6constructorimpl(urlModel.urlList);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         List list = (List) obj;
@@ -102,12 +102,12 @@ public final class g4 {
         sb.append(urlModel.urlKey).append(' ').append(urlModel.uri);
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(urlModel.urlList);
+            obj = RCompat.m6constructorimpl(urlModel.urlList);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         List listEmptyList = (List) obj;
@@ -135,13 +135,13 @@ public final class g4 {
     public static UrlModel e(Object obj, String str) throws NoWhenBranchMatchedException {
         JsonObject jsonObject;
         UrlModel urlModelB;
-        JsonArray jsonArrayA = f6.a(obj);
+        JsonElement jsonArrayA = f6.a(obj);
         Long lValueOf = null;
         if (jsonArrayA == null) {
             return null;
         }
         if (jsonArrayA instanceof JsonObject) {
-            jsonObject = (JsonObject) jsonArrayA;
+            jsonObject = (JsonObject) (JsonElement) jsonArrayA;
         } else {
             if (jsonArrayA instanceof JsonArray) {
                 List listCreateListBuilder = CollectionsKt.createListBuilder();
@@ -199,12 +199,12 @@ public final class g4 {
         sb.append(urlModel != null ? urlModel.urlKey : null).append(' ').append(urlModel != null ? urlModel.uri : null);
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(urlModel != null ? urlModel.urlList : null);
+            obj = RCompat.m6constructorimpl(urlModel != null ? urlModel.urlList : null);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         List listEmptyList = (List) obj;
@@ -243,7 +243,7 @@ public final class g4 {
         if (StringsKt.equals(str, "suffix_scene", true)) {
             sgVarA = sg.b;
         } else {
-            sgVarA = a(str, urlModelE.urlKey, urlModelE.uri);
+            sgVarA = a(new String[] {str, urlModelE.urlKey, urlModelE.uri});
         }
         return a(video, urlModelE, new StringBuilder().append("video.miscDownloadAddrs[").append(str).append("]").toString(), d4.e, sgVarA, lb.b, 860, str);
     }
@@ -342,11 +342,11 @@ public final class g4 {
         Object next;
         UrlModel urlModelA;
         ArrayList arrayList2;
-        ?? r28;
+        int r28 = 0;
         String str;
         boolean z;
-        Object obj2;
-        ?? r29;
+        Object obj2 = null;
+        int r29 = 0;
         Throwable th;
         List listEmptyList;
         a3 a3VarA;
@@ -354,8 +354,8 @@ public final class g4 {
         Object obj3;
         Object next2;
         String str2;
-        List list;
-        List listEmptyList2;
+        List list = null;
+        List listEmptyList2 = null;
         ArrayList arrayList4 = new ArrayList();
         LinkedHashSet linkedHashSet = new LinkedHashSet();
         String str3 = "aes";
@@ -381,7 +381,7 @@ public final class g4 {
             String str5 = (String) obj4;
             try {
                 Result.Companion companion = Result.Companion;
-                JsonObject jsonObjectB = f6.b(str5);
+                JsonObject jsonObjectB = (JsonObject) f6.b(str5);
                 JsonObject jsonObject = jsonObjectB instanceof JsonObject ? jsonObjectB : null;
                 try {
                     if (jsonObject == null) {
@@ -401,7 +401,7 @@ public final class g4 {
                         strArr2[z2 ? 1 : 0] = "dynamic_video_list";
                         Object obj6 = jsonObject2.get(strArr2[z2 ? 1 : 0]);
                         JsonArray jsonArray = obj6 instanceof JsonArray ? (JsonArray) obj6 : null;
-                        JsonArray<JsonElement> jsonArray2 = jsonArray == null ? null : jsonArray;
+                        JsonArray jsonArray2 = jsonArray == null ? null : jsonArray;
                         if (jsonArray2 == null) {
                             AtomicLong atomicLong2 = c4.a;
                             c4.a(CollectionsKt.take(jsonObject.keySet(), 12));
@@ -410,7 +410,7 @@ public final class g4 {
                             String[] strArr3 = new String[i];
                             strArr3[z2 ? 1 : 0] = "dynamic_audio_list";
                             Object obj7 = jsonObject2.get(strArr3[z2 ? 1 : 0]);
-                            JsonArray<JsonObject> jsonArray3 = obj7 instanceof JsonArray ? (JsonArray) obj7 : null;
+                            JsonArray jsonArray3 = obj7 instanceof JsonArray ? (JsonArray) obj7 : null;
                             if (jsonArray3 == null) {
                                 jsonArray3 = null;
                             }
@@ -420,8 +420,8 @@ public final class g4 {
                             AtomicLong atomicLong3 = c4.a;
                             c4.a(Integer.valueOf(jsonArray2.size()), Integer.valueOf(jsonArray3.size()));
                             ArrayList arrayList5 = new ArrayList();
-                            for (JsonObject jsonObject3 : jsonArray3) {
-                                a3 a3VarA2 = a(jsonObject3 instanceof JsonObject ? jsonObject3 : null, (boolean) i);
+                            for (JsonObject jsonObject3 : (Iterable<JsonObject>) (Iterable) jsonArray3) {
+                                a3 a3VarA2 = a(jsonObject3 instanceof JsonObject ? jsonObject3 : null, (i != 0));
                                 if (a3VarA2 != null) {
                                     arrayList5.add(a3VarA2);
                                 }
@@ -429,7 +429,7 @@ public final class g4 {
                             ArrayList arrayList6 = new ArrayList();
                             int size = arrayList5.size();
                             int i2 = z2 ? 1 : 0;
-                            ?? r2 = i;
+                            int r2 = i;
                             while (i2 < size) {
                                 try {
                                     int i3 = i2 + 1;
@@ -451,14 +451,14 @@ public final class g4 {
                                             String str7 = a3Var.d;
                                             r28 = 1;
                                             arrayList2 = arrayList4;
-                                            z = z3 ? 1 : 0;
+                                            z = z3;
                                             str2 = str3;
                                             try {
                                                 b3 b3VarA = a(this, video, urlModel2, strDecrypt, d4Var, sgVar, lbVar, jgVar, i5, 0, 0, 0, strDecrypt2, str6, str7, 140, null, null, null, 229376);
                                                 if (b3VarA != null) {
                                                     arrayList6.add(b3VarA);
                                                 }
-                                                z2 = z ? 1 : 0;
+                                                z2 = z;
                                                 i2 = i3;
                                                 arrayList5 = arrayList7;
                                                 size = i4;
@@ -470,15 +470,15 @@ public final class g4 {
                                                 th = th2;
                                                 str = str2;
                                                 Result.Companion companion2 = Result.Companion;
-                                                obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                                                obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                                                 r29 = r28;
-                                                th = Result.exceptionOrNull-impl(obj2);
+                                                th = RCompat.m9exceptionOrNullimpl(obj2);
                                                 if (th != null) {
                                                     AtomicLong atomicLong4 = c4.a;
                                                     c4.a(th.getClass().getSimpleName());
                                                 }
                                                 listEmptyList = CollectionsKt.emptyList();
-                                                if (Result.isFailure-impl(obj2)) {
+                                                if (RCompat.m12isFailureimpl(obj2)) {
                                                     obj2 = listEmptyList;
                                                 }
                                                 ArrayList arrayList8 = arrayList2;
@@ -493,7 +493,7 @@ public final class g4 {
                                             th = th3;
                                             arrayList2 = arrayList4;
                                             str2 = str3;
-                                            z = z3 ? 1 : 0;
+                                            z = z3;
                                             r28 = 1;
                                         }
                                     } catch (Throwable th4) {
@@ -501,7 +501,7 @@ public final class g4 {
                                         arrayList2 = arrayList4;
                                         r28 = r2;
                                         str2 = str3;
-                                        z = z3 ? 1 : 0;
+                                        z = z3;
                                     }
                                 } catch (Throwable th5) {
                                     th = th5;
@@ -512,7 +512,7 @@ public final class g4 {
                                 }
                             }
                             arrayList2 = arrayList4;
-                            ?? r210 = r2;
+                            int r210 = r2;
                             String str8 = str3;
                             ArrayList arrayList9 = arrayList5;
                             z = z2;
@@ -577,15 +577,15 @@ public final class g4 {
                                         th = th6;
                                         r28 = r210;
                                         Result.Companion companion3 = Result.Companion;
-                                        obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                                        obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                                         r29 = r28;
-                                        th = Result.exceptionOrNull-impl(obj2);
+                                        th = RCompat.m9exceptionOrNullimpl(obj2);
                                         if (th != null) {
                                             AtomicLong atomicLong5 = c4.a;
                                             c4.a(th.getClass().getSimpleName());
                                         }
                                         listEmptyList = CollectionsKt.emptyList();
-                                        if (Result.isFailure-impl(obj2)) {
+                                        if (RCompat.m12isFailureimpl(obj2)) {
                                             obj2 = listEmptyList;
                                         }
                                         ArrayList arrayList10 = arrayList2;
@@ -601,15 +601,15 @@ public final class g4 {
                             str = str8;
                             list = arrayList6;
                             r28 = r210;
-                            obj2 = Result.constructor-impl(list);
+                            obj2 = RCompat.m6constructorimpl(list);
                             r29 = r28;
-                            th = Result.exceptionOrNull-impl(obj2);
+                            th = RCompat.m9exceptionOrNullimpl(obj2);
                             if (th != null) {
                                 AtomicLong atomicLong6 = c4.a;
                                 c4.a(th.getClass().getSimpleName());
                             }
                             listEmptyList = CollectionsKt.emptyList();
-                            if (Result.isFailure-impl(obj2)) {
+                            if (RCompat.m12isFailureimpl(obj2)) {
                                 obj2 = listEmptyList;
                             }
                             ArrayList arrayList11 = arrayList2;
@@ -621,33 +621,33 @@ public final class g4 {
                             c = 3;
                         }
                     }
-                    obj2 = Result.constructor-impl(list);
+                    obj2 = RCompat.m6constructorimpl(list);
                     r29 = r28;
                 } catch (Throwable th7) {
                     th = th7;
                     Result.Companion companion4 = Result.Companion;
-                    obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                    obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                     r29 = r28;
                 }
                 arrayList2 = arrayList4;
                 r28 = i;
                 str = str3;
-                z = z2 ? 1 : 0;
+                z = z2;
                 list = listEmptyList2;
             } catch (Throwable th8) {
                 th = th8;
                 arrayList2 = arrayList4;
                 r28 = i;
                 str = str3;
-                z = z2 ? 1 : 0;
+                z = z2;
             }
-            th = Result.exceptionOrNull-impl(obj2);
+            th = RCompat.m9exceptionOrNullimpl(obj2);
             if (th != null) {
                 AtomicLong atomicLong7 = c4.a;
                 c4.a(th.getClass().getSimpleName());
             }
             listEmptyList = CollectionsKt.emptyList();
-            if (Result.isFailure-impl(obj2)) {
+            if (RCompat.m12isFailureimpl(obj2)) {
                 obj2 = listEmptyList;
             }
             ArrayList arrayList12 = arrayList2;
@@ -658,16 +658,16 @@ public final class g4 {
             i = r29;
             c = 3;
         }
-        ?? r211 = i;
+        int r211 = i;
         String str9 = str3;
         ArrayList arrayList13 = arrayList4;
-        boolean z4 = z2 ? 1 : 0;
+        boolean z4 = z2;
         UrlModel urlModelD2 = d(video, "getPlayAddr");
         UrlModel urlModelD3 = d(video, "getPlayAddrH264");
         UrlModel urlModelD4 = d(video, "getPlayAddrBytevc1");
         UrlModel[] urlModelArr = new UrlModel[3];
         urlModelArr[z4 ? 1 : 0] = urlModelD2;
-        urlModelArr[r211 == true ? 1 : 0] = urlModelD3;
+        urlModelArr[r211] = urlModelD3;
         urlModelArr[2] = urlModelD4;
         List listListOf = CollectionsKt.listOf(urlModelArr);
         ArrayList arrayList14 = new ArrayList();
@@ -724,7 +724,7 @@ public final class g4 {
                     for (Object obj9 : listA2) {
                         Object objB5 = dd.b(obj9, "isDash");
                         Boolean bool = objB5 instanceof Boolean ? (Boolean) objB5 : null;
-                        if ((bool != null ? bool.booleanValue() : z4 ? 1 : 0) && (urlModelD = d(obj9, "getPlayAddr")) != null) {
+                        if ((bool != null ? bool.booleanValue() : z4) && (urlModelD = d(obj9, "getPlayAddr")) != null) {
                             String strC3 = c(obj9, "getUrlKey");
                             if (strC3 == null) {
                                 strC3 = urlModelD.urlKey;
@@ -789,7 +789,7 @@ public final class g4 {
                             String str14 = urlModelD.uri;
                             String[] strArr4 = new String[3];
                             strArr4[z4 ? 1 : 0] = strC7;
-                            strArr4[r211 == true ? 1 : 0] = str13;
+                            strArr4[r211] = str13;
                             strArr4[2] = str14;
                             arrayList19 = arrayList;
                             b3 b3VarA4 = a(this, video, urlModelD, string, d4Var2, a(strArr4), a(strC7, (String) null, (String) null) ? lb.a : lb.d, jg.c, a3Var6.e, a(obj9, "getQualityType"), iA, iA2, strC7, a3Var6.c, a3Var6.d, 800, null, null, new z2(a3Var6, a3Var8), 360448);
@@ -822,7 +822,7 @@ public final class g4 {
     }
 
     public static String c(JsonObject jsonObject, String str) {
-        JsonPrimitive jsonPrimitive = (JsonElement) jsonObject.get(str);
+        JsonPrimitive jsonPrimitive = (JsonPrimitive) jsonObject.get(str);
         if (jsonPrimitive == null || Intrinsics.areEqual(jsonPrimitive, JsonNull.INSTANCE)) {
             return null;
         }
@@ -945,7 +945,7 @@ public final class g4 {
             strC3 = null;
         }
         String strC4 = c(jsonObject, "logo_type");
-        b3 b3VarA = a(this, video, a3Var.a, new StringBuilder().append("video.videoModel[").append(strC).append("]").toString(), d4.i, a(strC4, strC, strC2), a(strC, strC2, strC3) ? lb.a : lb.d, jg.c, a3Var.e, a(jsonObject, "quality"), a(a(jsonObject, "vwidth"), a(jsonObject, "width"), f(a3Var.a)), a(a(jsonObject, "vheight"), a(jsonObject, "height"), e(a3Var.a)), strC, a3Var.c, a3Var.d, 820, null, strC4, new z2(a3Var, a3Var2), 294912);
+        b3 b3VarA = a(this, video, a3Var.a, new StringBuilder().append("video.videoModel[").append(strC).append("]").toString(), d4.i, a(new String[] {strC4, strC, strC2}), a(strC, strC2, strC3) ? lb.a : lb.d, jg.c, a3Var.e, a(jsonObject, "quality"), a(a(jsonObject, "vwidth"), a(jsonObject, "width"), f(a3Var.a)), a(a(jsonObject, "vheight"), a(jsonObject, "height"), e(a3Var.a)), strC, a3Var.c, a3Var.d, 820, null, strC4, new z2(a3Var, a3Var2), 294912);
         if (b3VarA == null || b3VarA.d()) {
             return null;
         }
@@ -1102,7 +1102,7 @@ public final class g4 {
                 return g4.b(f4Var, obj3, obj4);
             }
         });
-        CollectionsKt.removeAll(mutableList, new PropertyReference1Impl() {
+        CollectionsKt.removeAll(mutableList, new PropertyReference1Impl((Class) null, "", "", 0) {
             {
             }
 
@@ -1288,7 +1288,7 @@ public final class g4 {
         sg sgVar2;
         int iMax;
         int iIntValue;
-        Object obj2;
+        Object obj2 = null;
         String str7 = (i6 & 32768) != 0 ? null : str5;
         String str8 = (i6 & 65536) != 0 ? null : str6;
         z2 z2Var2 = (i6 & 131072) != 0 ? null : z2Var;
@@ -1299,12 +1299,12 @@ public final class g4 {
         }
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(urlModel.urlList);
+            obj = RCompat.m6constructorimpl(urlModel.urlList);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         List listEmptyList = (List) obj;
@@ -1345,7 +1345,7 @@ public final class g4 {
                             if (str10 == null || StringsKt.isBlank(str10)) {
                                 str10 = null;
                             }
-                            String strB = b(str9, str10);
+                            String strB = String.valueOf(b(str9, str10));
                             if (strB != null) {
                                 String lowerCase2 = strB.toLowerCase(locale);
                                 if (lowerCase2 == null) {
@@ -1389,7 +1389,7 @@ public final class g4 {
                                 arrayList.add(Integer.valueOf(i8));
                             }
                         }
-                        Integer num = (Integer) CollectionsKt.maxOrNull(arrayList);
+                        Integer num = CollectionsKt.maxOrNull((java.lang.Iterable<Integer>) arrayList);
                         if (num != null) {
                             iIntValue = num.intValue();
                         } else {
@@ -1399,12 +1399,12 @@ public final class g4 {
                     int iCoerceIn = (i / 10000) + RangesKt.coerceIn(i2, 0, 999) + (iIntValue * 1000);
                     try {
                         Result.Companion companion3 = Result.Companion;
-                        obj2 = Result.constructor-impl(Long.valueOf(urlModel.size));
+                        obj2 = RCompat.m6constructorimpl(Long.valueOf(urlModel.size));
                     } catch (Throwable th2) {
                         Result.Companion companion4 = Result.Companion;
-                        obj2 = Result.constructor-impl(ResultKt.createFailure(th2));
+                        obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
                     }
-                    if (Result.isFailure-impl(obj2)) {
+                    if (RCompat.m12isFailureimpl(obj2)) {
                         obj2 = 0L;
                     }
                     b3 b3Var = new b3(urlModel, str, d4Var, sgVar2, lbVar, jgVar, ((Number) obj2).longValue(), i, i2, iA, iA2, iIntValue, iCoerceIn, i5, str2, strC, str4, str7, str8, z2Var2);
@@ -1464,23 +1464,23 @@ public final class g4 {
 
     public static String a(UrlModel urlModel) {
         Object obj;
-        Object obj2;
+        Object obj2 = null;
         if (urlModel == null) {
             return "null";
         }
-        String strB = b(urlModel.urlKey, urlModel.uri);
+        String strB = String.valueOf(b(urlModel.urlKey, urlModel.uri));
         if (strB != null) {
             return strB;
         }
         try {
             Result.Companion companion = Result.Companion;
             List list = urlModel.urlList;
-            obj = Result.constructor-impl((String) CollectionsKt.firstOrNull(list));
+            obj = RCompat.m6constructorimpl((String) CollectionsKt.firstOrNull(list));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         String str = (String) obj;
@@ -1490,13 +1490,13 @@ public final class g4 {
         try {
             Result.Companion companion3 = Result.Companion;
             Uri uri = Uri.parse(str);
-            obj2 = Result.constructor-impl(uri.getScheme() + "://" + uri.getHost() + uri.getPath());
+            obj2 = RCompat.m6constructorimpl(uri.getScheme() + "://" + uri.getHost() + uri.getPath());
         } catch (Throwable th2) {
             Result.Companion companion4 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th2));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
         }
         String strSubstringBefore$default = StringsKt.substringBefore$default(str, '?', (String) null, 2, (Object) null);
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = strSubstringBefore$default;
         }
         return (String) obj2;
@@ -1508,12 +1508,12 @@ public final class g4 {
         String strB = b(urlModel);
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(Long.valueOf(urlModel != null ? urlModel.size : 0L));
+            obj = RCompat.m6constructorimpl(Long.valueOf(urlModel != null ? urlModel.size : 0L));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        c4.a(str, str2, strB, Result.isFailure-impl(obj) ? 0L : obj, Integer.valueOf(f(urlModel)), Integer.valueOf(e(urlModel)));
+        c4.a(str, str2, strB, RCompat.m12isFailureimpl(obj) ? 0L : obj, Integer.valueOf(f(urlModel)), Integer.valueOf(e(urlModel)));
     }
 
     public static int a(Object obj, String str) {

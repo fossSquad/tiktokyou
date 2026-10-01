@@ -1,6 +1,6 @@
 package Z;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.OfflineModeHooks;
+import Z.OfflineModeHooks;
 
 class cb extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

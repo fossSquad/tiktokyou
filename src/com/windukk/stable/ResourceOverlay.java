@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public final class ResourceOverlay {
-    public static volatile File a;
+
+    public static volatile File f5a;
 
     public static boolean exists(Context context, String str) {
         try {
@@ -30,7 +31,7 @@ public final class ResourceOverlay {
                 throw new IOException("Unsafe resource path");
             }
         }
-        File file = a;
+        File file = f5a;
         if (file != null) {
             File file2 = new File(file, str);
             if (!file2.getCanonicalPath().startsWith(file.getCanonicalPath() + File.separator)) {

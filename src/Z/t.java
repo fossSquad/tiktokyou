@@ -55,12 +55,12 @@ public final class t {
         Object obj;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(Main.a());
+            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context = (Context) obj;
@@ -78,12 +78,12 @@ public final class t {
         Object obj;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(Main.a());
+            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context = (Context) obj;
@@ -101,7 +101,7 @@ public final class t {
         try {
             try {
                 Result.Companion companion = Result.Companion;
-                obj = Result.constructor-impl(Main.a());
+                obj = RCompat.m6constructorimpl(Main.getApplicationContext());
             } catch (Throwable th) {
                 try {
                     h6.a(6, h6.a("Deferred run failed (" + str + ")", new Object[0]), th);
@@ -112,9 +112,9 @@ public final class t {
             }
         } catch (Throwable th2) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th2));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context2 = (Context) obj;
@@ -147,16 +147,14 @@ public final class t {
         Debug.getPss();
     }
 
-    public static void b(final Context context, final String str, long j) {
+    public static void b(Context context, final String str, long j) {
         if (d.compareAndSet(false, true)) {
             Context applicationContext = context.getApplicationContext();
-            if (applicationContext != null) {
-                context = applicationContext;
-            }
+            final Context ctxF = applicationContext != null ? applicationContext : context;
             b.postDelayed(new Runnable() {
                 @Override
                 public final void run() {
-                    t.b(context, str);
+                    t.b(ctxF, str);
                 }
             }, j);
         }
@@ -177,10 +175,11 @@ public final class t {
     }
 
     public static void b(Context context, String str, LocalDate localDate) {
-        boolean z;
-        String str2;
+        Throwable th = null;
+        boolean z = false;
+        String str2 = null;
         Object obj;
-        boolean z2;
+        boolean z2 = false;
         LocalDate localDate2;
         SharedPreferences sharedPreferences;
         boolean z3;
@@ -188,7 +187,7 @@ public final class t {
         long jElapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
         long jThreadCpuTimeNanos = Debug.threadCpuTimeNanos();
         Debug.getPss();
-        ?? r7 = 4;
+        String r7 = null;
         boolean z5 = false;
         try {
             c0 c0VarC = r.c();
@@ -197,8 +196,8 @@ public final class t {
                     h6.a(4, h6.a("Will retry later: failed to fetch streak data", new Object[0]), (Throwable) null);
                     a(jElapsedRealtimeNanos, jThreadCpuTimeNanos);
                     return;
-                } catch (Throwable th) {
-                    th = th;
+                } catch (Throwable th_2) {
+                    th = th_2;
                     str2 = str;
                     z = false;
                 }
@@ -313,7 +312,6 @@ public final class t {
                         }
                         if (localDate2 != null) {
                             break;
-                            break;
                         }
                         String str6 = vVar2.a;
                         taVar.getClass();
@@ -378,12 +376,14 @@ public final class t {
                     }
                     z5 = true;
                     Set setA = a(context, localDate);
+                    tBreak: {
                     if (arrayList4.isEmpty() || arrayList4.isEmpty()) {
                         ta taVar3 = ta.a;
                         String string = localDate.toString();
                         taVar3.getClass();
                         ta.d().a(string);
-                        break;
+                        break tBreak;
+                    }
                     }
                     int size4 = arrayList4.size();
                     int i6 = 0;
@@ -461,7 +461,7 @@ public final class t {
             ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
             taVar.getClass();
             ZonedDateTime zonedDateTimeWithNano = zonedDateTimeNow.withHour(ta.d().p).withMinute(ta.d().q).withSecond(0).withNano(0);
-            final LocalDate localDate2 = null;
+            LocalDate localDate2 = null;
             if (!zonedDateTimeNow.isBefore(zonedDateTimeWithNano) && zonedDateTimeNow.isBefore(zonedDateTimeWithNano.plusHours(12L))) {
                 localDate = zonedDateTimeWithNano.toLocalDate();
             } else {
@@ -480,10 +480,11 @@ public final class t {
                 }
             }
             if (localDate2 != null && e.compareAndSet(false, true)) {
-                f.execute(new Runnable() {
+                final LocalDate localDate2F = localDate2;
+            f.execute(new Runnable() {
                     @Override
                     public final void run() {
-                        t.a(context, str, localDate2);
+                        t.a(context, str, localDate2F);
                     }
                 });
             }

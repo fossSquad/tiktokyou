@@ -1,6 +1,6 @@
 package Z;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class t0 extends HookMethod {
     final  z1 a;

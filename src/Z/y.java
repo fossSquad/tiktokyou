@@ -43,12 +43,12 @@ public final class y {
         Object obj;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(Main.a());
+            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context = (Context) obj;
@@ -120,12 +120,12 @@ public final class y {
             if (!Intrinsics.areEqual(string, str5)) {
                 sharedPreferencesB.edit().putString(str, str5).apply();
             }
-            obj2 = Result.constructor-impl(Unit.INSTANCE);
+            obj2 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj2);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th2 != null) {
             h6.a(6, h6.a("Failed to remember recipient", new Object[0]), th2);
         }
@@ -192,17 +192,17 @@ public final class y {
                 }
                 listSortedWith = CollectionsKt.sortedWith(arrayList, new x());
             }
-            obj = Result.constructor-impl(listSortedWith);
+            obj = RCompat.m6constructorimpl(listSortedWith);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Failed to read recipients", new Object[0]), th2);
         }
         List listEmptyList = CollectionsKt.emptyList();
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = listEmptyList;
         }
         return (List) obj;
@@ -215,12 +215,12 @@ public final class y {
             Result.Companion companion = Result.Companion;
             yVar.getClass();
             c();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Recipient refresh failed", new Object[0]), th2);
         }
@@ -244,12 +244,12 @@ public final class y {
                         String str2 = strArr[i];
                         try {
                             Result.Companion companion2 = Result.Companion;
-                            obj2 = Result.constructor-impl(dd.a(objInvoke.getClass(), str2, String.class).invoke(objInvoke, str));
+                            obj2 = RCompat.m6constructorimpl(((java.lang.reflect.Method) dd.a(objInvoke.getClass(), str2, String.class)).invoke(objInvoke, str));
                         } catch (Throwable th2) {
                             Result.Companion companion3 = Result.Companion;
-                            obj2 = Result.constructor-impl(ResultKt.createFailure(th2));
+                            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
                         }
-                        if (Result.isFailure-impl(obj2)) {
+                        if (RCompat.m12isFailureimpl(obj2)) {
                             obj2 = null;
                         }
                         if (obj2 != null) {
@@ -258,27 +258,27 @@ public final class y {
                         i++;
                     }
                 }
-                obj = Result.constructor-impl(obj2);
-                th = Result.exceptionOrNull-impl(obj);
+                obj = RCompat.m6constructorimpl(obj2);
+                th = RCompat.m9exceptionOrNullimpl(obj);
                 if (th != null) {
                     h6.a(6, h6.a("IMUser lookup failed for uid=%s", new Object[]{str}), th);
                 }
-                if (Result.isFailure-impl(obj)) {
+                if (RCompat.m12isFailureimpl(obj)) {
                     return null;
                 }
                 return obj;
             }
             obj2 = null;
-            obj = Result.constructor-impl(obj2);
+            obj = RCompat.m6constructorimpl(obj2);
         } catch (Throwable th3) {
             Result.Companion companion4 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        th = Result.exceptionOrNull-impl(obj);
+        th = RCompat.m9exceptionOrNullimpl(obj);
         if (th != null) {
             h6.a(6, h6.a("IMUser lookup failed for uid=%s", new Object[]{str}), th);
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             return null;
         }
         return obj;
@@ -312,12 +312,12 @@ public final class y {
         try {
             Result.Companion companion = Result.Companion;
             Object obj5 = dd.a((Class) obj.getClass(), "userStreak").get(obj);
-            obj2 = Result.constructor-impl(obj5 instanceof List ? (List) obj5 : null);
+            obj2 = RCompat.m6constructorimpl(obj5 instanceof List ? (List) obj5 : null);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = null;
         }
         List list = (List) obj2;
@@ -334,13 +334,13 @@ public final class y {
             if (next != null) {
                 try {
                     Result.Companion companion3 = Result.Companion;
-                    obj4 = Result.constructor-impl(Boolean.valueOf(Intrinsics.areEqual(String.valueOf(dd.a((Class) next.getClass(), "uid").getLong(next)), str)));
+                    obj4 = RCompat.m6constructorimpl(Boolean.valueOf(Intrinsics.areEqual(String.valueOf(dd.a((Class) next.getClass(), "uid").getLong(next)), str)));
                 } catch (Throwable th2) {
                     Result.Companion companion4 = Result.Companion;
-                    obj4 = Result.constructor-impl(ResultKt.createFailure(th2));
+                    obj4 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
                 }
                 Boolean bool = Boolean.FALSE;
-                if (Result.isFailure-impl(obj4)) {
+                if (RCompat.m12isFailureimpl(obj4)) {
                     obj4 = bool;
                 }
                 if (((Boolean) obj4).booleanValue()) {
@@ -355,12 +355,12 @@ public final class y {
             try {
                 Result.Companion companion5 = Result.Companion;
                 Object obj6 = dd.a((Class) next.getClass(), str2).get(next);
-                obj3 = Result.constructor-impl(obj6 instanceof String ? (String) obj6 : null);
+                obj3 = RCompat.m6constructorimpl(obj6 instanceof String ? (String) obj6 : null);
             } catch (Throwable th3) {
                 Result.Companion companion6 = Result.Companion;
-                obj3 = Result.constructor-impl(ResultKt.createFailure(th3));
+                obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
             }
-            if (Result.isFailure-impl(obj3)) {
+            if (RCompat.m12isFailureimpl(obj3)) {
                 obj3 = null;
             }
             String str3 = (String) obj3;

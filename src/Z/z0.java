@@ -3,7 +3,7 @@ package Z;
 import android.view.MotionEvent;
 import android.widget.TextView;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class z0 extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

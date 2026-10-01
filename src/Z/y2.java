@@ -9,7 +9,6 @@ import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.webkit.CookieManager;
 import com.windukk.mod.Main;
@@ -83,7 +82,7 @@ public abstract class y2 {
             Object next = it.next();
             String str2 = (String) next;
             if (StringsKt.startsWith$default(str2, "https://", false, 2, (Object) null) || StringsKt.startsWith$default(str2, "http://", false, 2, (Object) null)) {
-                arrayList.add(next);
+                arrayList.add((String) next);
             }
         }
         if (arrayList.isEmpty()) {
@@ -177,7 +176,7 @@ public abstract class y2 {
             h3Var.a();
             return;
         }
-        final Context contextA = Main.a();
+        final Context contextA = Main.getApplicationContext();
         Lazy lazy = se.f;
         final se seVar = new se(a4Var);
         a.execute(new Runnable() {
@@ -202,6 +201,7 @@ public abstract class y2 {
     }
 
     public static void a(String str, File file, Function2 function2) throws IOException {
+        Throwable th = null;
         Object obj;
         URLConnection uRLConnectionOpenConnection = new URL(str).openConnection();
         HttpURLConnection httpURLConnection = (HttpURLConnection) uRLConnectionOpenConnection;
@@ -213,12 +213,13 @@ public abstract class y2 {
         httpURLConnection.setRequestProperty("Accept-Encoding", "identity");
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(CookieManager.getInstance().getCookie(str));
-        } catch (Throwable th) {
+            obj = RCompat.m6constructorimpl(CookieManager.getInstance().getCookie(str));
+        } catch (Throwable th_2) {
+            th = th_2;
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         String str2 = (String) obj;
@@ -270,17 +271,18 @@ public abstract class y2 {
                         }
                     }
                 } catch (Throwable th5) {
-                    throw th5;
+                    throw new RuntimeException(th5);
                 }
             }
             throw new IllegalStateException(("HTTP " + responseCode).toString());
         } catch (Throwable th6) {
             httpURLConnection.disconnect();
-            throw th6;
+            throw new RuntimeException(th6);
         }
     }
 
     public static void a(File file, File file2, File file3) throws Throwable {
+        Throwable th = null;
         MediaMuxer mediaMuxer;
         Unit unit;
         MediaExtractor mediaExtractor = new MediaExtractor();
@@ -313,18 +315,19 @@ public abstract class y2 {
                 try {
                     Result.Companion companion = Result.Companion;
                     mediaMuxer.stop();
-                    Result.constructor-impl(Unit.INSTANCE);
-                } catch (Throwable th) {
+                    RCompat.m6constructorimpl(Unit.INSTANCE);
+                } catch (Throwable th_2) {
+                    th = th_2;
                     Result.Companion companion2 = Result.Companion;
-                    Result.constructor-impl(ResultKt.createFailure(th));
+                    RCompat.m6constructorimpl(ResultKt.createFailure(th));
                 }
                 try {
                     Result.Companion companion3 = Result.Companion;
                     mediaMuxer.release();
-                    Result.constructor-impl(Unit.INSTANCE);
+                    RCompat.m6constructorimpl(Unit.INSTANCE);
                 } catch (Throwable th2) {
                     Result.Companion companion4 = Result.Companion;
-                    Result.constructor-impl(ResultKt.createFailure(th2));
+                    RCompat.m6constructorimpl(ResultKt.createFailure(th2));
                 }
                 mediaExtractor.release();
                 mediaExtractor2.release();
@@ -356,10 +359,10 @@ public abstract class y2 {
                     } else {
                         unit = null;
                     }
-                    Result.constructor-impl(unit);
+                    RCompat.m6constructorimpl(unit);
                 } catch (Throwable th5) {
                     Result.Companion companion6 = Result.Companion;
-                    Result.constructor-impl(ResultKt.createFailure(th5));
+                    RCompat.m6constructorimpl(ResultKt.createFailure(th5));
                 }
                 try {
                     Result.Companion companion7 = Result.Companion;
@@ -367,10 +370,10 @@ public abstract class y2 {
                         mediaMuxer.release();
                         unit2 = Unit.INSTANCE;
                     }
-                    Result.constructor-impl(unit2);
+                    RCompat.m6constructorimpl(unit2);
                 } catch (Throwable th6) {
                     Result.Companion companion8 = Result.Companion;
-                    Result.constructor-impl(ResultKt.createFailure(th6));
+                    RCompat.m6constructorimpl(ResultKt.createFailure(th6));
                 }
                 mediaExtractor.release();
                 mediaExtractor2.release();
@@ -448,7 +451,7 @@ public abstract class y2 {
         contentValues.put("mime_type", "video/mp4");
         int i = Build.VERSION.SDK_INT;
         if (i >= 29) {
-            contentValues.put("relative_path", new StringBuilder().append(Environment.DIRECTORY_MOVIES).append("/TikTok").toString());
+            contentValues.put("relative_path", tg.a());
             contentValues.put("is_pending", (Integer) 1);
         }
         if (i >= 29) {
@@ -496,7 +499,7 @@ public abstract class y2 {
                 throw new IllegalStateException("MediaStore output stream unavailable".toString());
             } catch (Throwable th5) {
                 contentResolver.delete(uriInsert, null, null);
-                throw th5;
+                throw new RuntimeException(th5);
             }
         }
         throw new IllegalStateException("MediaStore insert returned null".toString());

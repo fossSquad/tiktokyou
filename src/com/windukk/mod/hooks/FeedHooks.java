@@ -1,4 +1,32 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.d5;
+import Z.dd;
+import Z.g8;
+import Z.h6;
+import Z.i4;
+import Z.j4;
+import Z.k4;
+import Z.l4;
+import Z.m4;
+import Z.n4;
+import Z.o4;
+import Z.p4;
+import Z.p8;
+import Z.q4;
+import Z.r4;
+import Z.s4;
+import Z.t4;
+import Z.ta;
+import Z.u4;
+import Z.ua;
+import Z.v4;
+import Z.w4;
+import Z.x4;
+import Z.y4;
+import Z.z4;
+import Z.z7;
+import Z.zg;
 
 import android.text.TextUtils;
 import com.ss.android.ugc.aweme.commerce.AwemeCommerceStruct;
@@ -138,6 +166,7 @@ public abstract class FeedHooks {
             HookBridge.hookMethod(ACLCommonShare.class.getMethod("getTranscode", null), new m4());
             c();
             b();
+            zg.a();
         } catch (Exception e) {
             String strDecrypt = "Exception during init";
             Object obj = h6.a;
@@ -219,7 +248,7 @@ public abstract class FeedHooks {
     }
 
     public static List b(List list) {
-        Aweme aweme;
+        Aweme aweme = null;
         if (list.isEmpty()) {
             return list;
         }
@@ -266,18 +295,19 @@ public abstract class FeedHooks {
     }
 
     public static boolean a(Aweme aweme) {
-        boolean z;
-        boolean z2;
-        boolean z3;
-        boolean z4;
-        boolean z5;
+        Throwable th = null;
+        boolean z = false;
+        boolean z2 = false;
+        boolean z3 = false;
+        boolean z4 = false;
+        boolean z5 = false;
         long j;
         String str;
         List list;
         String desc;
         String title;
-        String str2;
-        Object objInvoke;
+        String str2 = null;
+        Object objInvoke = null;
         MixStatisStruct mixStatisStruct;
         if (aweme != null) {
             try {
@@ -285,10 +315,10 @@ public abstract class FeedHooks {
                 if (awemeType == 104 || awemeType == 105) {
                     return true;
                 }
-            } catch (Throwable th) {
+            } catch (Throwable th_2) {
             }
         }
-        boolean zA = a.a(aweme);
+        boolean zA = Z.a.a(aweme);
         try {
             if (aweme.getLiveId() != 0 || aweme.newLiveRoomData != null || aweme.getRoomFeedCellStruct() != null || ((aweme.getAuthorLive() != null && aweme.getAuthorLive().booleanValue()) || aweme.isLiveReplay() || aweme.getLiveExtraInfoStruct() != null)) {
                 z = true;
@@ -344,10 +374,10 @@ public abstract class FeedHooks {
             long j3 = ta.d().x;
             long j4 = ta.d().y;
             ua uaVarD = ta.d();
-            if (uaVarD.v == null) {
-                uaVarD.v = new LinkedHashSet();
+            if (uaVarD.D == null) {
+                uaVarD.D = new LinkedHashSet();
             }
-            LinkedHashSet<String> linkedHashSet = uaVarD.v;
+            LinkedHashSet<String> linkedHashSet = uaVarD.D;
             AwemeStatistics statistics = aweme.getStatistics();
             User author = aweme.getAuthor();
             if (author == null) {

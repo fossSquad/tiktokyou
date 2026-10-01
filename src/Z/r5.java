@@ -2,7 +2,7 @@ package Z;
 
 import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.FontHooks;
+import Z.FontHooks;
 
 class r5 extends HookMethod {
 
@@ -28,13 +28,13 @@ class r5 extends HookMethod {
                 } else {
                     style = 0;
                 }
-                typefaceA = FontHooks.a(strE, style);
+                typefaceA = FontHooks.a(style, strE);
                 if (typefaceA != null) {
                     hookMethodParam.args[0] = typefaceA;
                 }
             }
             style = ((Integer) objArr[1]).intValue();
-            typefaceA = FontHooks.a(strE, style);
+            typefaceA = FontHooks.a(style, strE);
             if (typefaceA != null) {
                 hookMethodParam.args[0] = typefaceA;
             }

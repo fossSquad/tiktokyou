@@ -227,7 +227,7 @@ public final class u2 implements Thread.UncaughtExceptionHandler {
         } else if (context instanceof Application) {
             application = (Application) context;
         } else {
-            application = Main.e;
+            application = Main.mainApplication;
             if (application == null) {
                 application = null;
             }
@@ -248,7 +248,7 @@ public final class u2 implements Thread.UncaughtExceptionHandler {
         sb.append("time=").append(ZonedDateTime.now()).append('\n');
         sb.append("thread=").append(thread != null ? thread.getName() : "unknown").append('\n');
         sb.append("pid=").append(Process.myPid()).append('\n');
-        sb.append("version=").append(Main.b).append(" (").append(Main.c).append(")\n");
+        sb.append("version=").append(Main.MOD_VERSION).append(" (").append(Main.versionCode).append(")\n");
         sb.append("android=").append(Build.VERSION.RELEASE).append(" sdk=").append(Build.VERSION.SDK_INT).append('\n');
         sb.append("device=").append(Build.MANUFACTURER).append(' ').append(Build.MODEL).append("\n\n");
         sb.append(stringWriter);

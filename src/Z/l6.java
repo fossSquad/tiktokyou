@@ -1,4 +1,5 @@
 package Z;
+
 public abstract class l6 {
     public static final m6 a = new m6();
 

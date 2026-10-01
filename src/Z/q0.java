@@ -2,7 +2,7 @@ package Z;
 
 import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class q0 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
