@@ -19,7 +19,7 @@ public final  class o1 implements GeneratedSerializer {
     static {
         o1 o1Var = new o1();
         a = o1Var;
-        PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = new PluginGeneratedSerialDescriptor("com.windukk.mod.hooks.badge.BadgePayload", o1Var, 7);
+        PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = new PluginGeneratedSerialDescriptor("Z.badge.BadgePayload", o1Var, 7);
         pluginGeneratedSerialDescriptor.addElement("uid", false);
         pluginGeneratedSerialDescriptor.addElement("isDeveloper", true);
         pluginGeneratedSerialDescriptor.addElement("status", true);

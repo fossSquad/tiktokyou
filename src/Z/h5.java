@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.bytedance.ies.foundation.activity.BaseActivity;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import java.util.LinkedHashSet;
 
 public class h5 extends BaseActivity {
@@ -51,7 +51,6 @@ public class h5 extends BaseActivity {
         linearLayout.setOrientation(1);
         scrollView.addView(linearLayout, new FrameLayout.LayoutParams(-1, -2));
         TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("filter_words"));
         textView.setTextSize(2, 28.0f);
         textView.setTextColor(this.a ? -1 : -16777216);
@@ -103,7 +102,7 @@ public class h5 extends BaseActivity {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(editText, view);
+                h5.this.a(editText, view);
             }
         });
         linearLayout2.addView(textView3, new LinearLayout.LayoutParams(-2, -2));
@@ -150,11 +149,11 @@ public class h5 extends BaseActivity {
         }
         this.e.removeAllViews();
         this.f.setText(String.valueOf(this.d.size()));
-        for (final String str : new LinkedHashSet(this.d)) {
+        for (final String str : (Iterable<String>) (Iterable) new LinkedHashSet(this.d)) {
             this.e.addView(a(str, new Runnable() {
                 @Override
                 public final void run() {
-                    this.f$0.a(str);
+                    h5.this.a(str);
                 }
             }));
         }
@@ -163,7 +162,6 @@ public class h5 extends BaseActivity {
     public final void c(FrameLayout frameLayout) {
         TextView textView = new TextView(this);
         this.h = textView;
-        m6 m6Var = l6.a;
         textView.setText(l6.a("filter_save"));
         textView.setGravity(17);
         textView.setTextColor(-1);
@@ -178,7 +176,7 @@ public class h5 extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.c(view);
+                h5.this.c(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, a(56.0f));
@@ -197,10 +195,10 @@ public class h5 extends BaseActivity {
         this.c = identifier2 > 0 ? getResources().getDimensionPixelSize(identifier2) : 0;
         LinkedHashSet linkedHashSet = this.d;
         ua uaVarA = d5.a();
-        if (uaVarA.v == null) {
-            uaVarA.v = new LinkedHashSet();
+        if (uaVarA.D == null) {
+            uaVarA.D = new LinkedHashSet();
         }
-        LinkedHashSet linkedHashSet2 = uaVarA.v;
+        LinkedHashSet linkedHashSet2 = uaVarA.D;
         linkedHashSet.addAll(linkedHashSet2);
         Window window = getWindow();
         window.setSoftInputMode(16);
@@ -224,7 +222,7 @@ public class h5 extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.b(view);
+                h5.this.b(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(a(24.0f), a(24.0f));
@@ -291,7 +289,6 @@ public class h5 extends BaseActivity {
         layoutParams.bottomMargin = a(16.0f);
         linearLayout.addView(imageView, layoutParams);
         TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("filter_words_clear_title"));
         textView.setGravity(17);
         textView.setTextSize(2, 18.0f);
@@ -346,7 +343,7 @@ public class h5 extends BaseActivity {
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.b(dialog, view);
+                h5.this.b(dialog, view);
             }
         });
         LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(0, a(52.0f), 1.0f);
@@ -427,7 +424,7 @@ public class h5 extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(view);
+                h5.this.a(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(a(24.0f), a(24.0f));

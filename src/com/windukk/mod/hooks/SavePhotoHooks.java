@@ -1,4 +1,12 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.dd;
+import Z.e;
+import Z.h6;
+import Z.l9;
+import Z.nd;
+import Z.p8;
+import Z.tg;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -6,7 +14,6 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import com.windukk.hook.HookBridge;
 import java.io.OutputStream;
@@ -29,7 +36,7 @@ public abstract class SavePhotoHooks {
             return;
         }
         try {
-            dd.a(obj.getClass(), "invoke", Object.class).invoke(obj, Boolean.valueOf(z));
+            ((java.lang.reflect.Method) dd.a(obj.getClass(), "invoke", Object.class)).invoke(obj, Boolean.valueOf(z));
         } catch (Exception e) {
             String strDecrypt = "Failed to invoke callback";
             Object obj2 = h6.a;
@@ -59,6 +66,8 @@ public abstract class SavePhotoHooks {
     }
 
     public static boolean a(Activity activity, Bitmap bitmap) {
+        Throwable th = null;
+        Exception e = null;
         OutputStream outputStreamOpenOutputStream;
         OutputStream outputStream = null;
         try {
@@ -70,7 +79,11 @@ public abstract class SavePhotoHooks {
                 contentValues.put("mime_type", "image/jpeg");
                 int i = Build.VERSION.SDK_INT;
                 if (i >= 29) {
-                    contentValues.put("relative_path", Environment.DIRECTORY_PICTURES + "/TikTok");
+                    String strDecrypt = "relative_path";
+                    tg tgVar = tg.a;
+                    String strDecrypt2 = "Photos";
+                    tgVar.getClass();
+                    contentValues.put(strDecrypt, tg.b(strDecrypt2));
                     contentValues.put("is_pending", (Integer) 1);
                 }
                 Uri uriInsert = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
@@ -90,14 +103,14 @@ public abstract class SavePhotoHooks {
                         try {
                             outputStreamOpenOutputStream.close();
                             return true;
-                        } catch (Exception e) {
+                        } catch (Exception e4) {
                             return true;
                         }
                     } catch (Exception e2) {
                         e = e2;
                         outputStream = outputStreamOpenOutputStream;
-                    } catch (Throwable th) {
-                        th = th;
+                    } catch (Throwable th_2) {
+                        th = th_2;
                         outputStream = outputStreamOpenOutputStream;
                         if (outputStream != null) {
                             try {
@@ -116,19 +129,20 @@ public abstract class SavePhotoHooks {
                     }
                     return false;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (Exception e5) {
+                e = e5;
             }
-        } catch (Exception e5) {
-            e = e5;
+            if (outputStream != null) {
+                outputStreamOpenOutputStream = outputStream;
+                outputStreamOpenOutputStream.close();
+            }
+            return false;
+        } catch (Throwable th2) {
+            th = th2;
         }
-        String strDecrypt = "Error saving bitmap";
+        String strDecrypt3 = "Error saving bitmap";
         Object obj = h6.a;
-        h6.a(6, String.valueOf(strDecrypt), e);
-        if (outputStream != null) {
-            outputStreamOpenOutputStream = outputStream;
-            outputStreamOpenOutputStream.close();
-        }
+        h6.a(6, String.valueOf(strDecrypt3), e);
         return false;
     }
 }

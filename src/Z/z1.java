@@ -7,17 +7,25 @@ public interface z1 {
     public static final z1 a = new z1() {
         @Override
         public final String b(Object obj) {
-            return z1.c(obj);
+            try {
+                return z1.c(obj);
+            } catch (Exception e) {
+                return null;
+            }
         }
     };
     public static final z1 b = new z1() {
         @Override
         public final String b(Object obj) {
-            return z1.a(obj);
+            try {
+                return z1.a(obj);
+            } catch (Exception e) {
+                return null;
+            }
         }
     };
 
-    static  String a(Object obj) throws IllegalAccessException, InvocationTargetException {
+    static  String a(Object obj) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Object objInvoke = dd.a(obj.getClass(), "getExtra", new Class[0]).invoke(obj, null);
         if (objInvoke == null) {
             return null;
@@ -29,7 +37,7 @@ public interface z1 {
         return null;
     }
 
-    static  String c(Object obj) throws IllegalAccessException, InvocationTargetException {
+    static  String c(Object obj) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         Object objInvoke = dd.a(obj.getClass(), "getUid", new Class[0]).invoke(obj, null);
         if (objInvoke instanceof String) {
             return (String) objInvoke;

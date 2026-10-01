@@ -1,4 +1,6 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
 
 import android.widget.TextView;
 import com.windukk.hook.HookMethod;

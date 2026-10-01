@@ -1,4 +1,17 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.c7;
+import Z.d7;
+import Z.h6;
+import Z.ia;
+import Z.k2;
+import Z.l2;
+import Z.l6;
+import Z.p8;
+import Z.tg;
+
+import Z.m2;
+import Z.n2;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -32,14 +45,9 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 public abstract class CommentStickerHooks {
-    public static final ThreadLocal a;
-    public static final Set b;
+    public static final ThreadLocal a = new ThreadLocal();
+    public static final Set b = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap()));
     public static Method c;
-
-    static {
-        a = new ThreadLocal();
-        b = Collections.synchronizedSet(Collections.newSetFromMap(new WeakHashMap()));
-    }
 
     public static void a() {
         try {
@@ -58,7 +66,7 @@ public abstract class CommentStickerHooks {
     }
 
     public static void b(final String str, Context context, final String str2) {
-        final Context applicationContext = context != null ? context.getApplicationContext() : Main.a();
+        final Context applicationContext = context != null ? context.getApplicationContext() : Main.getApplicationContext();
         if (str == null) {
             b(applicationContext, l6.a("sticker_unavailable"));
         } else {
@@ -74,6 +82,7 @@ public abstract class CommentStickerHooks {
 
     public static Object b(Object obj) throws NoSuchMethodException {
         if (c == null) {
+            try {
             for (Method method : Class.forName("X.10ja").getDeclaredMethods()) {
                 Class<?>[] parameterTypes = method.getParameterTypes();
                 if (parameterTypes.length == 1 && parameterTypes[0].getName().endsWith(".StickerItem") && method.getReturnType().getName().endsWith(".SetSticker")) {
@@ -82,10 +91,16 @@ public abstract class CommentStickerHooks {
                     break;
                 }
             }
+            } catch (Exception e) {
+            }
         }
         Method method2 = c;
         if (method2 != null) {
-            return method2.invoke(null, obj);
+            try {
+                return method2.invoke(null, obj);
+            } catch (Exception e) {
+                return null;
+            }
         }
         throw new NoSuchMethodException("SetSticker resolver");
     }
@@ -103,9 +118,9 @@ public abstract class CommentStickerHooks {
     }
 
     public static void a(View view, Object obj, n2 n2Var) {
-        View view2;
+        View view2 = null;
         ViewGroup viewGroup;
-        View view3;
+        View view3 = null;
         String str;
         ViewGroup.LayoutParams layoutParams;
         int marginStart;
@@ -130,7 +145,12 @@ public abstract class CommentStickerHooks {
             }
             Context context = view2.getContext();
             p8 p8Var = ia.a;
-            TextView textView = (TextView) Class.forName("X.0CCt").getConstructor(Context.class).newInstance(context);
+            TextView textView;
+            try {
+                textView = (TextView) Class.forName("X.0CCt").getConstructor(Context.class).newInstance(context);
+            } catch (Exception e) {
+                return;
+            }
             textView.setText(l6.a("sticker_download"));
             if (view3 != null) {
                 str = b7.c.c[0];
@@ -172,7 +192,7 @@ public abstract class CommentStickerHooks {
                 marginLayoutParams.setMarginStart(marginStart);
             }
             textView.setLayoutParams(layoutParams);
-            final String strA = a(n2Var.a);
+            String strA = a(n2Var.a);
             if (strA == null) {
                 try {
                     strA = a(a(obj, b7.a.c[0]));
@@ -180,11 +200,12 @@ public abstract class CommentStickerHooks {
                     strA = null;
                 }
             }
+            final String strAHookCopy = strA;
             final String str2 = n2Var.b;
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public final void onClick(View view5) {
-                    CommentStickerHooks.b(strA, view5.getContext(), str2);
+                    CommentStickerHooks.b(strAHookCopy, view5.getContext(), str2);
                 }
             });
             viewGroup.addView(textView, iIndexOfChild);
@@ -211,7 +232,13 @@ public abstract class CommentStickerHooks {
     }
 
     public static byte[] a(String str) {
-        HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(str).openConnection();
+        Throwable th = null;
+        HttpURLConnection httpURLConnection;
+        try {
+            httpURLConnection = (HttpURLConnection) new URL(str).openConnection();
+        } catch (Exception e) {
+            return new byte[0];
+        }
         httpURLConnection.setInstanceFollowRedirects(true);
         httpURLConnection.setConnectTimeout(15000);
         httpURLConnection.setReadTimeout(20000);
@@ -235,7 +262,8 @@ public abstract class CommentStickerHooks {
                         httpURLConnection.disconnect();
                         throw th;
                     }
-                } catch (Throwable th) {
+                } catch (Throwable th_2) {
+                    th = th_2;
                     if (inputStream != null) {
                         try {
                             inputStream.close();
@@ -249,7 +277,7 @@ public abstract class CommentStickerHooks {
             throw new Exception("http " + responseCode);
         } catch (Throwable th3) {
             httpURLConnection.disconnect();
-            throw th3;
+            throw new RuntimeException(th3);
         }
     }
 
@@ -294,7 +322,9 @@ public abstract class CommentStickerHooks {
 
     public static Uri a(Context context, byte[] bArr, m2 m2Var, String str) throws Exception {
         String strDecrypt;
+        File file;
         Uri uri;
+        String strB;
         if (str != null && !str.trim().isEmpty()) {
             strDecrypt = str.replaceAll("[^a-zA-Z0-9_\\-]", "_");
             if (strDecrypt.length() > 40) {
@@ -309,16 +339,24 @@ public abstract class CommentStickerHooks {
         String str2 = strDecrypt + "_" + System.currentTimeMillis() + "." + m2Var.a;
         if (Build.VERSION.SDK_INT >= 29) {
             ContentResolver contentResolver = context.getContentResolver();
-            if (m2Var.c) {
+            boolean z = m2Var.c;
+            if (z) {
                 uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
             } else {
                 uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
             }
-            String strA = new StringBuilder().append(m2Var.c ? Environment.DIRECTORY_MOVIES : Environment.DIRECTORY_PICTURES).append(File.separator).append("TikTok Stickers").toString();
+            if (z) {
+                strB = tg.a();
+            } else {
+                tg tgVar = tg.a;
+                String strDecrypt2 = "Photos";
+                tgVar.getClass();
+                strB = tg.b(strDecrypt2);
+            }
             ContentValues contentValues = new ContentValues();
             contentValues.put("_display_name", str2);
             contentValues.put("mime_type", m2Var.b);
-            contentValues.put("relative_path", strA);
+            contentValues.put("relative_path", strB);
             contentValues.put("is_pending", (Integer) 1);
             Uri uriInsert = contentResolver.insert(uri, contentValues);
             if (uriInsert != null) {
@@ -346,7 +384,19 @@ public abstract class CommentStickerHooks {
             }
             throw new Exception("insert returned null");
         }
-        File file = new File(Environment.getExternalStoragePublicDirectory(m2Var.c ? Environment.DIRECTORY_MOVIES : Environment.DIRECTORY_PICTURES), "TikTok Stickers");
+        if (m2Var.c) {
+            tg tgVar2 = tg.a;
+            String strDecrypt3 = "Videos";
+            tgVar2.getClass();
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), new StringBuilder().append("TikTokYou/").append(strDecrypt3).toString());
+            file.mkdirs();
+        } else {
+            tg tgVar3 = tg.a;
+            String strDecrypt4 = "Photos";
+            tgVar3.getClass();
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), new StringBuilder().append("TikTokYou/").append(strDecrypt4).toString());
+            file.mkdirs();
+        }
         file.mkdirs();
         File file2 = new File(file, str2);
         FileOutputStream fileOutputStream = new FileOutputStream(file2);
@@ -373,7 +423,11 @@ public abstract class CommentStickerHooks {
             try {
                 Field declaredField = superclass.getDeclaredField(str);
                 declaredField.setAccessible(true);
-                return declaredField.get(obj);
+                try {
+                    return declaredField.get(obj);
+                } catch (IllegalAccessException e2) {
+                    return null;
+                }
             } catch (NoSuchFieldException e) {
             }
         }

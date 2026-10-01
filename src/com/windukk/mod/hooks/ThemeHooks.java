@@ -1,4 +1,42 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.ag;
+import Z.bg;
+import Z.cf;
+import Z.cg;
+import Z.df;
+import Z.dg;
+import Z.ef;
+import Z.eg;
+import Z.ff;
+import Z.fg;
+import Z.gf;
+import Z.gg;
+import Z.h6;
+import Z.hf;
+import Z.hg;
+import Z.jf;
+import Z.kf;
+import Z.lf;
+import Z.m8;
+import Z.mf;
+import Z.n8;
+import Z.nf;
+import Z.of;
+import Z.p8;
+import Z.pf;
+import Z.qf;
+import Z.rf;
+import Z.sf;
+import Z.ta;
+import Z.tf;
+import Z.uf;
+import Z.vf;
+import Z.wf;
+import Z.xf;
+import Z.yf;
+import Z.z7;
+import Z.zf;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -39,7 +77,7 @@ public abstract class ThemeHooks {
         if (i2 != 0) {
             return i2;
         }
-        Context contextA = Main.a();
+        Context contextA = Main.getApplicationContext();
         if (contextA == null) {
             return -16524603;
         }

@@ -1,6 +1,5 @@
 package Z;
-import com.windukk.mod.hooks.EdgeSpeedupHooks;
-
+import Z.EdgeSpeedupHooks;
 
 public final class jc implements Runnable {
     public final Object a;

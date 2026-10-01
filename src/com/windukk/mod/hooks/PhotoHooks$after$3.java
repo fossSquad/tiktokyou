@@ -1,4 +1,6 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
 
 import com.ss.android.ugc.aweme.feed.model.PhotoModeImageUrlModel;
 import com.windukk.hook.HookMethod;

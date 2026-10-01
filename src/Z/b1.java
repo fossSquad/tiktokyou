@@ -5,7 +5,7 @@ import android.content.Context;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 public final class b1 extends ClickableSpan {
     public final  Context a;

@@ -4,12 +4,11 @@ import android.R;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ClipData;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -53,7 +52,6 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
@@ -65,10 +63,9 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.bytedance.ies.foundation.activity.BaseActivity;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.BadgeHooks;
-import com.windukk.mod.hooks.FontHooks;
-import com.windukk.mod.hooks.ThemeHooks;
-import com.windukk.stable.DynamicUpdates;
+import Z.BadgeHooks;
+import Z.FontHooks;
+import Z.ThemeHooks;
 import com.windukk.stable.ResourceOverlay;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -111,8 +108,6 @@ public class le extends BaseActivity {
     public ImageView l;
     public LinearLayout m;
     public LinearLayout n;
-    public boolean p;
-    public AlertDialog q;
     public TextView r;
     public TextView s;
     public TextView t;
@@ -138,9 +133,6 @@ public class le extends BaseActivity {
     }
 
     public final void A() {
-        if (this.p) {
-            return;
-        }
         Intent intent = new Intent("android.intent.action.OPEN_DOCUMENT");
         intent.addCategory("android.intent.category.OPENABLE");
         intent.setType("application/octet-stream");
@@ -152,7 +144,7 @@ public class le extends BaseActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public final void onTimeSet(TimePicker timePicker, int i, int i2) {
-                this.f$0.a(taVarA, timePicker, i, i2);
+                le.this.a(taVarA, timePicker, i, i2);
             }
         };
         taVarA.getClass();
@@ -199,7 +191,6 @@ public class le extends BaseActivity {
         linearLayout.setClickable(true);
         a(linearLayout, i3);
         TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("filter_date_sheet_title"));
         textView.setGravity(17);
         textView.setTextSize(2, 18.0f);
@@ -248,7 +239,7 @@ public class le extends BaseActivity {
         textView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(jArr, textView4, view);
+                le.this.a(jArr, textView4, view);
             }
         });
         linearLayout2.addView(textView4, new LinearLayout.LayoutParams(0, -2, 1.0f));
@@ -261,7 +252,7 @@ public class le extends BaseActivity {
         textView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.b(jArr, textView4, view);
+                le.this.b(jArr, textView4, view);
             }
         });
         linearLayout2.addView(textView5, new LinearLayout.LayoutParams(-2, -2));
@@ -311,28 +302,26 @@ public class le extends BaseActivity {
         textView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(jArr, dialogA, view);
+                le.this.a(jArr, dialogA, view);
             }
         });
         dialogA.show();
     }
 
     public final void E() {
-        m6 m6Var = l6.a;
         a(l6.a("filter_likes_sheet_title"), l6.a("filter_likes_sheet_desc"), d5.a().w, new he() {
             @Override
             public final void a(long j) {
-                this.f$0.a(j);
+                le.this.a(j);
             }
         });
     }
 
     public final void F() {
-        m6 m6Var = l6.a;
         a(l6.a("filter_views_sheet_title"), l6.a("filter_views_sheet_desc"), d5.a().x, new he() {
             @Override
             public final void a(long j) {
-                this.f$0.b(j);
+                le.this.b(j);
             }
         });
     }
@@ -378,31 +367,31 @@ public class le extends BaseActivity {
         linearLayout2.addView(a("ic_refresh", "Force refresh support list", (String) null, (String) null, 0, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.d(dialogA, view);
+                le.this.g(dialogA, view);
             }
         }));
         linearLayout2.addView(a("ic_refresh", "Clean support list cache", (String) null, (String) null, 3, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.e(dialogA, view);
+                le.this.h(dialogA, view);
             }
         }));
         linearLayout2.addView(a("ic_document", "Export logs (.zip)", (String) null, (String) null, 3, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.f(dialogA, view);
+                le.this.d(dialogA, view);
             }
         }));
         linearLayout2.addView(a("ic_document", "Export heap dump (.hprof)", (String) null, (String) null, 1, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.g(dialogA, view);
+                le.this.e(dialogA, view);
             }
         }));
         dialogA.setContentView(wa.a((Activity) this, (ViewGroup) linearLayout, -2, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                le.h(dialogA, view);
+                le.f(dialogA, view);
             }
         }));
         dialogA.setCancelable(true);
@@ -418,16 +407,13 @@ public class le extends BaseActivity {
         ta.a().getClass();
         SharedPreferences sharedPreferences = ta.b;
         if (sharedPreferences != null ? sharedPreferences.getBoolean("auto_streak_recipients_all", true) : true) {
-            TextView textView = this.k;
-            m6 m6Var = l6.a;
-            textView.setText(l6.a("auto_streak_recipients_all"));
+            this.k.setText(l6.a("auto_streak_recipients_all"));
             return;
         }
-        TextView textView2 = this.k;
+        TextView textView = this.k;
         Locale locale = Locale.getDefault();
-        m6 m6Var2 = l6.a;
         String strA = l6.a("auto_streak_recipients_selected");
-        List<w> listA = y.a();
+        List<w> listA = Z.y.a();
         int i = 0;
         if (!(listA instanceof Collection) || !listA.isEmpty()) {
             int i2 = 0;
@@ -442,7 +428,7 @@ public class le extends BaseActivity {
             }
             i = i2;
         }
-        textView2.setText(String.format(locale, strA, Integer.valueOf(i)));
+        textView.setText(String.format(locale, strA, Integer.valueOf(i)));
     }
 
     public final void I() {
@@ -471,10 +457,10 @@ public class le extends BaseActivity {
         if (textView != null) {
             taVarA.getClass();
             ua uaVarD = ta.d();
-            if (uaVarD.v == null) {
-                uaVarD.v = new LinkedHashSet();
+            if (uaVarD.D == null) {
+                uaVarD.D = new LinkedHashSet();
             }
-            LinkedHashSet linkedHashSet = uaVarD.v;
+            LinkedHashSet linkedHashSet = uaVarD.D;
             textView.setText(String.valueOf(linkedHashSet.size()));
         }
         TextView textView2 = this.s;
@@ -560,7 +546,6 @@ public class le extends BaseActivity {
     public final LinearLayout c() {
         LinearLayout linearLayoutG = g();
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-        m6 m6Var = l6.a;
         String strA = l6.a("antiburnout_show_on_main");
         String strDecrypt = "ic_antiburnin_show_on_main_page";
         boolean z2 = d5.a().g;
@@ -645,18 +630,16 @@ public class le extends BaseActivity {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         this.l.setClipToOutline(true);
         this.l.setOutlineProvider(new de(this));
-        String strDecrypt = "ic_autotease_order";
-        m6 m6Var = l6.a;
-        this.m = a(strDecrypt, l6.a("auto_streak_recipients"), this.k, new Runnable() {
+        this.m = a("ic_autotease_order", l6.a("auto_streak_recipients"), this.k, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.u();
+                le.this.u();
             }
         });
         LinearLayout linearLayoutA = a("ic_autotease_opt", l6.a("auto_streak_sticker"), (TextView) null, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.v();
+                le.this.v();
             }
         });
         this.n = linearLayoutA;
@@ -670,7 +653,7 @@ public class le extends BaseActivity {
         linearLayoutG.addView(a(l6.a("auto_streak_toggle"), "ic_autotease", z2, new je() {
             @Override
             public final void a(boolean z3) {
-                this.f$0.a(linearLayoutE, z3);
+                le.this.a(linearLayoutE, z3);
             }
         }, true));
         linearLayoutG.addView(linearLayoutE);
@@ -685,12 +668,10 @@ public class le extends BaseActivity {
 
     public final LinearLayout e() {
         this.j = new TextView(this);
-        String strDecrypt = "ic_clock";
-        m6 m6Var = l6.a;
-        LinearLayout linearLayoutA = a(strDecrypt, l6.a("auto_streak_nudge_time"), this.j, new Runnable() {
+        LinearLayout linearLayoutA = a("ic_clock", l6.a("auto_streak_nudge_time"), this.j, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.B();
+                le.this.B();
             }
         });
         TextView textView = this.j;
@@ -718,33 +699,31 @@ public class le extends BaseActivity {
         LinearLayout linearLayoutG = g();
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
         this.r = new TextView(this);
-        String strDecrypt = "ic_pencil";
-        m6 m6Var = l6.a;
-        linearLayoutG.addView(a(strDecrypt, l6.a("filter_words"), this.r, new Runnable() {
+        linearLayoutG.addView(a("ic_pencil", l6.a("filter_words"), this.r, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.w();
+                le.this.w();
             }
         }));
         this.s = new TextView(this);
         linearLayoutG.addView(a("ic_like", l6.a("filter_likes"), this.s, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.E();
+                le.this.E();
             }
         }));
         this.t = new TextView(this);
         linearLayoutG.addView(a("ic_views", l6.a("filter_views"), this.t, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.F();
+                le.this.F();
             }
         }));
         this.u = new TextView(this);
         linearLayoutG.addView(a("ic_clock", l6.a("filter_publish_date"), this.u, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.D();
+                le.this.D();
             }
         }));
         J();
@@ -754,7 +733,6 @@ public class le extends BaseActivity {
     public final LinearLayout j() {
         LinearLayout linearLayoutG = g();
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-        m6 m6Var = l6.a;
         String strA = l6.a("hide_lives");
         String strDecrypt = "ic_live";
         boolean z2 = d5.a().c;
@@ -807,7 +785,7 @@ public class le extends BaseActivity {
         String str2;
         int i;
         LinearLayout linearLayoutG = g();
-        ?? r4 = 0;
+        int r4 = 0;
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
         RadioGroup radioGroup = new RadioGroup(this);
         char c = 1;
@@ -815,10 +793,8 @@ public class le extends BaseActivity {
         ta.a().getClass();
         String strE = ta.e();
         final ArrayList arrayList = new ArrayList();
-        String strDecrypt = "default";
-        m6 m6Var = l6.a;
         int i2 = 2;
-        arrayList.add(new String[]{strDecrypt, l6.a("font_default"), "ic_font"});
+        arrayList.add(new String[]{"default", l6.a("font_default"), "ic_font"});
         arrayList.add(new String[]{"system", l6.a("font_system"), "ic_system_font"});
         int i3 = 0;
         int i4 = -1;
@@ -828,7 +804,7 @@ public class le extends BaseActivity {
             String str4 = strArr[i2];
             RadioButton radioButton = new RadioButton(this);
             radioButton.setId(i3);
-            radioButton.setSaveEnabled(r4);
+            radioButton.setSaveEnabled(r4 != 0);
             radioButton.setText(str3);
             radioButton.setTextSize(i2, 16.0f);
             radioButton.setTypeface(Typeface.create("sans-serif-medium", (int) r4));
@@ -840,9 +816,9 @@ public class le extends BaseActivity {
             int color = Color.parseColor((this.b ? "#555555" : "#BBBBBB"));
             StateListDrawable stateListDrawable = new StateListDrawable();
             int[] iArr = {R.attr.state_checked};
-            String strDecrypt2 = "ic_radio_active";
+            String strDecrypt = "ic_radio_active";
             int iT = t();
-            Bitmap bitmapB = b(strDecrypt2);
+            Bitmap bitmapB = b(strDecrypt);
             BitmapDrawable bitmapDrawable = bitmapB != null ? new BitmapDrawable(getResources(), bitmapB) : null;
             if (bitmapDrawable != null) {
                 bitmapDrawable.setColorFilter(iT, PorterDuff.Mode.SRC_IN);
@@ -888,7 +864,7 @@ public class le extends BaseActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public final void onCheckedChanged(RadioGroup radioGroup2, int i5) {
-                this.f$0.a(arrayList, radioGroup2, i5);
+                le.this.a(arrayList, radioGroup2, i5);
             }
         });
         return linearLayoutG;
@@ -896,12 +872,10 @@ public class le extends BaseActivity {
 
     public final LinearLayout l() {
         this.g = new TextView(this);
-        String strDecrypt = "ic_font_file";
-        m6 m6Var = l6.a;
-        LinearLayout linearLayoutA = a(strDecrypt, l6.a("font_pick_file"), this.g, new Runnable() {
+        LinearLayout linearLayoutA = a("ic_font_file", l6.a("font_pick_file"), this.g, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.x();
+                le.this.x();
             }
         });
         K();
@@ -911,7 +885,6 @@ public class le extends BaseActivity {
     public final LinearLayout m() {
         LinearLayout linearLayoutG = g();
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-        m6 m6Var = l6.a;
         String strA = l6.a("skip_quality_picker");
         String strDecrypt = "ic_skip_download_selector";
         boolean z2 = d5.a().u;
@@ -940,7 +913,6 @@ public class le extends BaseActivity {
     public final LinearLayout n() {
         LinearLayout linearLayoutG = g();
         linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-        m6 m6Var = l6.a;
         String strA = l6.a("startup_auto_updates");
         String strDecrypt = "ic_startup_download";
         boolean z2 = d5.a().A;
@@ -973,7 +945,6 @@ public class le extends BaseActivity {
         ta.a().getClass();
         ta.d();
         linearLayoutP.setVisibility(0);
-        m6 m6Var = l6.a;
         CheckBox checkBoxA = a(l6.a("region_spoof"), "ic_globe", true, null, true);
         checkBoxA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -984,7 +955,7 @@ public class le extends BaseActivity {
         checkBoxA.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.e(view);
+                le.this.e(view);
             }
         });
         linearLayoutG.addView(checkBoxA);
@@ -993,6 +964,7 @@ public class le extends BaseActivity {
     }
 
     public final void onActivityResult(int i, int i2, Intent intent) {
+        Throwable th = null;
         Uri data;
         String strDecrypt;
         int columnIndex;
@@ -1008,8 +980,6 @@ public class le extends BaseActivity {
                     }
                     TextView textView = this.h;
                     if (textView != null) {
-                        edVarC.getClass();
-                        m6 m6Var = l6.a;
                         textView.setText(l6.a(edVarC.b, edVarC.c));
                     }
                 }
@@ -1030,7 +1000,17 @@ public class le extends BaseActivity {
             if (i2 != -1 || intent == null || intent.getData() == null) {
                 return;
             }
-            a(intent.getData());
+            Uri data2 = intent.getData();
+            try {
+                getContentResolver().takePersistableUriPermission(data2, 1);
+            } catch (Throwable th_9) {
+            }
+            Intent intent2 = new Intent((Context) this, (Class<?>) gh.class);
+            intent2.setData(data2);
+            intent2.setClipData(ClipData.newRawUri("", data2));
+            intent2.addFlags(1);
+            intent2.putExtra("fromSettings", true);
+            startActivity(intent2);
             return;
         }
         if (i != 1001 || i2 != -1 || intent == null || (data = intent.getData()) == null) {
@@ -1045,13 +1025,13 @@ public class le extends BaseActivity {
                     } else {
                         strDecrypt = cursorQuery.getString(columnIndex);
                     }
-                } catch (Throwable th) {
+                } catch (Throwable th2) {
                     try {
                         cursorQuery.close();
-                        throw th;
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                        throw th;
+                        throw th2;
+                    } catch (Throwable th3) {
+                        th2.addSuppressed(th3);
+                        throw th2;
                     }
                 }
             } else {
@@ -1112,35 +1092,32 @@ public class le extends BaseActivity {
                             try {
                                 inputStreamOpenInputStream.close();
                                 throw th;
-                            } catch (Throwable th3) {
-                                th.addSuppressed(th3);
+                            } catch (Throwable th4) {
+                                th.addSuppressed(th4);
                                 throw th;
                             }
                         }
-                    } catch (Throwable th4) {
+                    } catch (Throwable th5) {
                         try {
                             fileOutputStream.close();
-                            throw th4;
-                        } catch (Throwable th5) {
-                            th4.addSuppressed(th5);
-                            throw th4;
+                            throw th5;
+                        } catch (Throwable th6) {
+                            th5.addSuppressed(th6);
+                            throw th5;
                         }
                     }
-                } catch (Throwable th6) {
+                } catch (Throwable th7) {
                     if (inputStreamOpenInputStream != null) {
-                        throw th6;
+                        throw new RuntimeException(th7);
                     }
                     inputStreamOpenInputStream.close();
-                    throw th6;
+                    throw new RuntimeException(th7);
                 }
             } catch (IOException e3) {
                 String strDecrypt2 = "Failed to copy font: %s";
                 Object obj = h6.a;
                 h6.a(6, String.valueOf(strDecrypt2), e3);
             }
-            String strDecrypt3 = "Failed to copy font: %s";
-            Object obj2 = h6.a;
-            h6.a(6, String.valueOf(strDecrypt3), e3);
         }
     }
 
@@ -1177,7 +1154,6 @@ public class le extends BaseActivity {
         scrollView.addView(linearLayout);
         this.e.addView(scrollView, new FrameLayout.LayoutParams(-1, -1));
         TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
         textView.setText(l6.a("settings_title"));
         textView.setTextSize(2, 28.0f);
         textView.setTextColor(this.b ? -1 : -16777216);
@@ -1193,12 +1169,6 @@ public class le extends BaseActivity {
         setContentView(this.e);
     }
 
-    public final void onDestroy() {
-        a(this.q);
-        this.q = null;
-        super.onDestroy();
-    }
-
     public final LinearLayout p() {
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(0);
@@ -1210,7 +1180,7 @@ public class le extends BaseActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.f(view);
+                le.this.f(view);
             }
         });
         linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(this.b ? 872415231 : 520093696), null, new ColorDrawable(-1)));
@@ -1233,8 +1203,6 @@ public class le extends BaseActivity {
         }
         TextView textView2 = this.h;
         if (textView2 != null) {
-            edVarC.getClass();
-            m6 m6Var = l6.a;
             textView2.setText(l6.a(edVarC.b, edVarC.c));
         }
         ImageView imageView3 = new ImageView(this);
@@ -1245,12 +1213,10 @@ public class le extends BaseActivity {
     }
 
     public final LinearLayout q() {
-        String strDecrypt = "ic_mod_update_gray";
-        m6 m6Var = l6.a;
-        return a(strDecrypt, l6.a("dynamic_import_signed"), (TextView) null, new Runnable() {
+        return a("ic_mod_update_gray", l6.a("dynamic_import_signed"), (TextView) null, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.A();
+                le.this.A();
             }
         });
     }
@@ -1263,7 +1229,7 @@ public class le extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public final void run() {
-                    this.f$0.y();
+                    le.this.y();
                 }
             }, "TTModHeapDumpExporter").start();
         }
@@ -1277,17 +1243,17 @@ public class le extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public final void run() {
-                    this.f$0.z();
+                    le.this.z();
                 }
             }, "TTModLogExporter").start();
         }
     }
 
     public final  void u() {
-        z.a(this, new Runnable() {
+        Z.z.a(this, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.H();
+                le.this.H();
             }
         });
     }
@@ -1296,7 +1262,7 @@ public class le extends BaseActivity {
         h0.a(this, new Runnable() {
             @Override
             public final void run() {
-                this.f$0.I();
+                le.this.I();
             }
         });
     }
@@ -1319,7 +1285,7 @@ public class le extends BaseActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public final void run() {
-                    this.f$0.a(t5VarA);
+                    le.this.a(t5VarA);
                 }
             });
             E.set(false);
@@ -1331,7 +1297,7 @@ public class le extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public final void run() {
-                        this.f$0.a(th);
+                        le.this.a(th);
                     }
                 });
             } finally {
@@ -1346,7 +1312,7 @@ public class le extends BaseActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public final void run() {
-                    this.f$0.a(g6VarA);
+                    le.this.a(g6VarA);
                 }
             });
             F.set(false);
@@ -1358,7 +1324,7 @@ public class le extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public final void run() {
-                        this.f$0.b(th);
+                        le.this.b(th);
                     }
                 });
             } finally {
@@ -1367,32 +1333,90 @@ public class le extends BaseActivity {
         }
     }
 
-    public final  void b(Uri uri) {
+    public static  void f(Dialog dialog, View view) {
         try {
-            DynamicUpdates.importFile(this, uri);
-            if (DynamicUpdates.getStatus(this).pendingSha256 == null) {
-                throw new IllegalStateException("Dynamic package was not committed to the pending slot");
+            if (dialog.isShowing()) {
+                dialog.dismiss();
             }
-            th = null;
         } catch (Throwable th) {
-            th = th;
         }
-        runOnUiThread(new Runnable() {
+    }
+
+    public final void b(long j) {
+        ta.a().getClass();
+        ta.d().c(j);
+        J();
+        C();
+    }
+
+    public final void g(Dialog dialog, View view) {
+        String str;
+        String str2;
+        Toast.makeText((Context) this, (CharSequence) (BadgeHooks.a(getApplicationContext(), true, new k1() {
             @Override
-            public final void run() {
-                this.f$0.c(th);
+            public final void a(boolean z2, int i, String str3) {
+                le.this.a(z2, i, str3);
+            }
+        }) ? "Support list refresh started" : "Support list refresh already running"), 0).show();
+        a(dialog);
+    }
+
+    public final FrameLayout f() {
+        FrameLayout frameLayout = new FrameLayout(this);
+        int iA = a(16.0f);
+        int iA2 = a(16.0f);
+        frameLayout.setPadding(iA, iA2, iA, iA2);
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColor(this.b ? -1 : Color.parseColor("#1E1E1E"));
+        gradientDrawable.setCornerRadius(a(8.0f));
+        frameLayout.setBackground(gradientDrawable);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, -2);
+        layoutParams.setMargins(a(8.0f), 0, a(8.0f), 0);
+        frameLayout.setLayoutParams(layoutParams);
+        TextView textView = new TextView(this);
+        String strA = l6.a("bulletin_button");
+        textView.setText(strA);
+        textView.setTextColor(-1);
+        textView.setTextSize(2, 14.0f);
+        textView.setTypeface(Typeface.create("sans-serif-medium", 0));
+        textView.setGravity(17);
+        textView.setPadding(a(20.0f), 0, a(20.0f), 0);
+        GradientDrawable gradientDrawable2 = new GradientDrawable();
+        gradientDrawable2.setColor(t());
+        gradientDrawable2.setCornerRadius(a(68.0f));
+        textView.setBackground(gradientDrawable2);
+        Paint paint = new Paint();
+        paint.setTextSize(TypedValue.applyDimension(2, 14.0f, getResources().getDisplayMetrics()));
+        int iA3 = a(16.0f) + a(40.0f) + ((int) paint.measureText(strA));
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(1);
+        TextView textView2 = new TextView(this);
+        textView2.setText(l6.a("bulletin_title"));
+        textView2.setTextSize(2, 14.0f);
+        textView2.setTextColor(this.b ? -16777216 : -1);
+        textView2.setTypeface(Typeface.create("sans-serif-medium", 1));
+        linearLayout.addView(textView2);
+        TextView textView3 = new TextView(this);
+        textView3.setText(l6.a("bulletin_subtitle"));
+        textView3.setTextSize(2, 12.0f);
+        textView3.setTextColor(Color.parseColor("#838383"));
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-2, -2);
+        layoutParams2.topMargin = a(2.0f);
+        linearLayout.addView(textView3, layoutParams2);
+        FrameLayout.LayoutParams layoutParams3 = new FrameLayout.LayoutParams(-1, -2);
+        layoutParams3.gravity = 19;
+        layoutParams3.rightMargin = iA3;
+        frameLayout.addView(linearLayout, layoutParams3);
+        FrameLayout.LayoutParams layoutParams4 = new FrameLayout.LayoutParams(-2, a(36.0f));
+        layoutParams4.gravity = 21;
+        frameLayout.addView(textView, layoutParams4);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                le.this.d(view);
             }
         });
-    }
-
-    public final  void f(Dialog dialog, View view) {
-        s();
-        a(dialog);
-    }
-
-    public final  void g(Dialog dialog, View view) {
-        r();
-        a(dialog);
+        return frameLayout;
     }
 
     public final LinearLayout h() {
@@ -1409,7 +1433,6 @@ public class le extends BaseActivity {
         boolean zF = ta.a().f();
         CheckBox checkBox = new CheckBox(this);
         checkBox.setSaveEnabled(false);
-        m6 m6Var = l6.a;
         checkBox.setText(l6.a("custom_colors"));
         checkBox.setTextSize(2, 16.0f);
         checkBox.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -1475,7 +1498,7 @@ public class le extends BaseActivity {
         int i = ta.d().m;
         ThemeHooks.d = false;
         if (z2) {
-            Context contextA = Main.a();
+            Context contextA = Main.getApplicationContext();
             FrameLayout frameLayoutA = a(contextA == null ? -16524603 : ThemeHooks.a(contextA), i == 0);
             ImageView imageView = new ImageView(this);
             imageView.setImageBitmap(b("ic_system_colors"));
@@ -1496,7 +1519,6 @@ public class le extends BaseActivity {
         horizontalScrollView.setVisibility(zF ? 0 : 8);
         linearLayoutG.addView(horizontalScrollView);
         final TextView textView = new TextView(this);
-        m6 m6Var2 = l6.a;
         textView.setText(l6.a("custom_colors_desc"));
         textView.setTextSize(2, 13.0f);
         textView.setTextColor(B);
@@ -1506,69 +1528,19 @@ public class le extends BaseActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z3) {
-                this.f$0.a(horizontalScrollView, textView, compoundButton, z3);
+                le.this.a(horizontalScrollView, textView, compoundButton, z3);
             }
         });
         return linearLayoutG;
     }
 
-    public final FrameLayout f() {
-        FrameLayout frameLayout = new FrameLayout(this);
-        int iA = a(16.0f);
-        int iA2 = a(16.0f);
-        frameLayout.setPadding(iA, iA2, iA, iA2);
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(this.b ? -1 : Color.parseColor("#1E1E1E"));
-        gradientDrawable.setCornerRadius(a(8.0f));
-        frameLayout.setBackground(gradientDrawable);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(-1, -2);
-        layoutParams.setMargins(a(8.0f), 0, a(8.0f), 0);
-        frameLayout.setLayoutParams(layoutParams);
-        TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
-        String strA = l6.a("bulletin_button");
-        textView.setText(strA);
-        textView.setTextColor(-1);
-        textView.setTextSize(2, 14.0f);
-        textView.setTypeface(Typeface.create("sans-serif-medium", 0));
-        textView.setGravity(17);
-        textView.setPadding(a(20.0f), 0, a(20.0f), 0);
-        GradientDrawable gradientDrawable2 = new GradientDrawable();
-        gradientDrawable2.setColor(t());
-        gradientDrawable2.setCornerRadius(a(68.0f));
-        textView.setBackground(gradientDrawable2);
-        Paint paint = new Paint();
-        paint.setTextSize(TypedValue.applyDimension(2, 14.0f, getResources().getDisplayMetrics()));
-        int iA3 = a(16.0f) + a(40.0f) + ((int) paint.measureText(strA));
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(1);
-        TextView textView2 = new TextView(this);
-        textView2.setText(l6.a("bulletin_title"));
-        textView2.setTextSize(2, 14.0f);
-        textView2.setTextColor(this.b ? -16777216 : -1);
-        textView2.setTypeface(Typeface.create("sans-serif-medium", 1));
-        linearLayout.addView(textView2);
-        TextView textView3 = new TextView(this);
-        textView3.setText(l6.a("bulletin_subtitle"));
-        textView3.setTextSize(2, 12.0f);
-        textView3.setTextColor(Color.parseColor("#838383"));
-        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-2, -2);
-        layoutParams2.topMargin = a(2.0f);
-        linearLayout.addView(textView3, layoutParams2);
-        FrameLayout.LayoutParams layoutParams3 = new FrameLayout.LayoutParams(-1, -2);
-        layoutParams3.gravity = 19;
-        layoutParams3.rightMargin = iA3;
-        frameLayout.addView(linearLayout, layoutParams3);
-        FrameLayout.LayoutParams layoutParams4 = new FrameLayout.LayoutParams(-2, a(36.0f));
-        layoutParams4.gravity = 21;
-        frameLayout.addView(textView, layoutParams4);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                this.f$0.d(view);
-            }
-        });
-        return frameLayout;
+    public final void b(long[] jArr, TextView textView, View view) {
+        jArr[0] = 0;
+        textView.setText("");
+        ta.a().getClass();
+        ta.d().b(0L);
+        J();
+        C();
     }
 
     public final LinearLayout g() {
@@ -1581,43 +1553,38 @@ public class le extends BaseActivity {
         return linearLayout;
     }
 
-    public final void b(long j) {
-        ta.a().getClass();
-        ta.d().c(j);
-        J();
-        C();
-    }
-
-    public final void b(long[] jArr, TextView textView, View view) {
-        jArr[0] = 0;
-        textView.setText("");
-        ta.a().getClass();
-        ta.d().b(0L);
-        J();
-        C();
-    }
-
-    public final void e(Dialog dialog, View view) {
-        int i;
-        Context applicationContext = getApplicationContext();
-        String[] strArr = BadgeHooks.a;
-        if (applicationContext == null) {
-            i = 0;
-        } else {
-            char[] cArr = m0.a;
-            File file = new File(m0.a(applicationContext), "supporters_cache.txt");
-            i = (file.exists() && file.delete()) ? 1 : 0;
-            File file2 = new File(m0.a(applicationContext), "supporters_fetch.stamp");
-            if (file2.exists() && file2.delete()) {
-                i++;
+    public static  void b(Dialog dialog) {
+        try {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
             }
-            File file3 = new File(m0.a(applicationContext), "supporters_cache.etag");
-            if (file3.exists() && file3.delete()) {
-                i++;
-            }
-            BadgeHooks.p.set(false);
+        } catch (Throwable th) {
         }
-        Toast.makeText((Context) this, (CharSequence) ("Support list cache cleaned: " + i), 0).show();
+    }
+
+    public final LinearLayout b() {
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(1);
+        FrameLayout frameLayoutA = a("ic_mod_logo", "TikTok You", l6.a("mod_version"), (String) null, 0, false, (View.OnClickListener) null);
+        frameLayoutA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                le.this.b(view);
+            }
+        });
+        frameLayoutA.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public final boolean onLongClick(View view) {
+                return le.this.c(view);
+            }
+        });
+        linearLayout.addView(frameLayoutA);
+        linearLayout.addView(a("ic_document", l6.a("privacy_information"), l6.a("privacy_information_legal"), "https://tiktokyou.ru/legal.html", 1, false, (View.OnClickListener) null));
+        return linearLayout;
+    }
+
+    public final  void e(Dialog dialog, View view) {
+        r();
         a(dialog);
     }
 
@@ -1628,7 +1595,6 @@ public class le extends BaseActivity {
         layoutParams.gravity = 48;
         frameLayout.addView(view, layoutParams);
         final TextView textView2 = new TextView(this);
-        m6 m6Var = l6.a;
         textView2.setText(l6.a("settings_title"));
         textView2.setTextSize(2, 16.0f);
         textView2.setTypeface(Typeface.create("sans-serif", 1));
@@ -1646,39 +1612,6 @@ public class le extends BaseActivity {
                 textView2.setVisibility(scrollView.getScrollY() >= textView3.getHeight() + textView3.getTop() ? 0 : 4);
             }
         });
-    }
-
-    public static  void b(Dialog dialog) {
-        try {
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-            }
-        } catch (Throwable th) {
-        }
-    }
-
-    public final LinearLayout b() {
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(1);
-        String strDecrypt = "ic_mod_logo";
-        String strDecrypt2 = "TikTok You";
-        m6 m6Var = l6.a;
-        FrameLayout frameLayoutA = a(strDecrypt, strDecrypt2, l6.a("mod_version"), (String) null, 0, false, (View.OnClickListener) null);
-        frameLayoutA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public final void onClick(View view) {
-                this.f$0.b(view);
-            }
-        });
-        frameLayoutA.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public final boolean onLongClick(View view) {
-                return this.f$0.c(view);
-            }
-        });
-        linearLayout.addView(frameLayoutA);
-        linearLayout.addView(a("ic_document", l6.a("privacy_information"), l6.a("privacy_information_legal"), "https://tiktokyou.ru/legal.html", 1, false, (View.OnClickListener) null));
-        return linearLayout;
     }
 
     public final void e(View view) {
@@ -1723,7 +1656,7 @@ public class le extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.a(view);
+                le.this.a(view);
             }
         });
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(a(24.0f), a(24.0f));
@@ -1734,26 +1667,19 @@ public class le extends BaseActivity {
         imageView.bringToFront();
     }
 
-    public final void d(Dialog dialog, View view) {
-        String str;
-        String str2;
-        Toast.makeText((Context) this, (CharSequence) (BadgeHooks.a(getApplicationContext(), true, new k1() {
-            @Override
-            public final void a(boolean z2, int i, String str3) {
-                this.f$0.a(z2, i, str3);
-            }
-        }) ? "Support list refresh started" : "Support list refresh already running"), 0).show();
-        a(dialog);
-    }
-
     public final  void a(View view) {
         finish();
     }
 
+    public final  void d(Dialog dialog, View view) {
+        s();
+        a(dialog);
+    }
+
     public final void a(LinearLayout linearLayout, TextView textView) {
-        int iA;
-        int color;
-        Bitmap bitmapDecodeStream;
+        int iA = 0;
+        int color = 0;
+        Bitmap bitmapDecodeStream = null;
         boolean z2;
         BitmapDrawable bitmapDrawable;
         int i;
@@ -1762,307 +1688,69 @@ public class le extends BaseActivity {
         int i2;
         j6 j6Var;
         j6 j6Var2;
-        InputStream inputStreamOpen;
+        InputStream inputStreamOpen = null;
         linearLayout.addView(textView);
         if (y) {
-            String strDecrypt = "ic_mod_update";
-            m6 m6Var = l6.a;
-            linearLayout.addView(a(strDecrypt, l6.a("mod_update"), (String) null, "https://t.me/tikyoutok", 0, true, (View.OnClickListener) null));
+            linearLayout.addView(a("ic_mod_update", l6.a("mod_update"), (String) null, "https://t.me/tikyoutok", 0, true, (View.OnClickListener) null));
         }
-        String strDecrypt2 = "ic_telegram";
-        m6 m6Var2 = l6.a;
-        linearLayout.addView(a(strDecrypt2, l6.a("telegram_channel"), (String) null, "https://t.me/tikyoutok", y ? 3 : 0, false, (View.OnClickListener) null));
+        linearLayout.addView(a("ic_telegram", l6.a("telegram_channel"), (String) null, "https://t.me/tikyoutok", y ? 3 : 0, false, (View.OnClickListener) null));
         linearLayout.addView(a("ic_refresh", l6.a("check_updates"), (String) null, (String) null, 3, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.g(view);
+                le.this.g(view);
             }
         }));
-        String strDecrypt3 = "developer.png";
-        try {
+        String strDecrypt = "developer.png";
+        if (ta.a() != null && ta.d().m == 0) {
             try {
-                if (ta.a() != null && ta.d().m == 0) {
-                    try {
-                        int identifier = getResources().getIdentifier("system_accent3_400", "color", "android");
-                        if (identifier != 0) {
-                            color = getResources().getColor(identifier, null);
-                        } else {
-                            Context contextA = Main.a();
-                            if (contextA == null) {
-                                color = -16524603;
-                            } else {
-                                iA = ThemeHooks.a(contextA);
-                            }
-                        }
-                    } catch (Throwable th) {
-                    }
-                    inputStreamOpen = ResourceOverlay.open(this, strDecrypt3);
-                    bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
-                    if (inputStreamOpen != null) {
-                        inputStreamOpen.close();
-                    }
-                    if (bitmapDecodeStream == null) {
-                        bitmapDrawable = null;
-                    } else {
-                        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(bitmapCreateBitmap);
-                        Paint paint = new Paint(3);
-                        z2 = ThemeHooks.d;
-                        ThemeHooks.d = false;
-                        try {
-                            paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-                            ThemeHooks.d = z2;
-                            canvas.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint);
-                            bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap);
-                        } catch (Throwable th2) {
-                            ThemeHooks.d = z2;
-                            throw th2;
-                        }
-                    }
-                    m6 m6Var3 = l6.a;
-                    linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
-                        @Override
-                        public final void onClick(View view) {
-                            this.f$0.h(view);
-                        }
-                    }));
-                    linearLayout.addView(a(l6.a("section_region")));
-                    linearLayout.addView(o());
-                    linearLayout.addView(a(l6.a("section_content_filter")));
-                    linearLayout.addView(i());
-                    linearLayout.addView(a(l6.a("section_feed")));
-                    linearLayout.addView(j());
-                    linearLayout.addView(a(l6.a("section_misc")));
-                    linearLayout.addView(m());
-                    linearLayout.addView(a(l6.a("section_autostreak")));
-                    linearLayout.addView(d());
-                    linearLayout.addView(a(l6.a("anti_burnout")));
-                    linearLayout.addView(c());
-                    linearLayout.addView(a(l6.a("section_font")));
-                    linearLayout.addView(k());
-                    linearLayout.addView(a(l6.a("section_appearance")));
-                    linearLayout.addView(h());
-                    LinearLayout linearLayoutG = g();
-                    linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-                    linearLayoutG.setClipToPadding(false);
-                    linearLayoutG.setClipChildren(false);
-                    LinearLayout linearLayout2 = new LinearLayout(this);
-                    linearLayout2.setOrientation(0);
-                    linearLayout2.setGravity(16);
-                    linearLayout2.setMinimumHeight(a(48.0f));
-                    linearLayout2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-                    ImageView imageView = new ImageView(this);
-                    imageView.setImageBitmap(b("ic_mod_logo"));
-                    linearLayout2.addView(imageView, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-                    TextView textView2 = new TextView(this);
-                    textView2.setText(l6.a("app_icon"));
-                    textView2.setTextSize(2, 16.0f);
-                    textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
-                    if (this.b) {
-                        i = -1;
-                    } else {
-                        i = -16777216;
-                    }
-                    textView2.setTextColor(i);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
-                    layoutParams.leftMargin = a(12.0f);
-                    linearLayout2.addView(textView2, layoutParams);
-                    linearLayoutG.addView(linearLayout2);
-                    HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this);
-                    horizontalScrollView.setHorizontalScrollBarEnabled(false);
-                    horizontalScrollView.setClipToPadding(false);
-                    horizontalScrollView.setClipChildren(false);
-                    horizontalScrollView.setOverScrollMode(2);
-                    horizontalScrollView.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-                    LinearLayout linearLayout3 = new LinearLayout(this);
-                    this.w = linearLayout3;
-                    linearLayout3.setOrientation(0);
-                    this.x = k6.a();
-                    boolean z3 = d5.a().s;
-                    arrayListA = k6.a((Context) this);
-                    size = arrayListA.size();
-                    i2 = 0;
-                    j6Var = null;
-                    while (i2 < size) {
-                        Object obj = arrayListA.get(i2);
-                        i2++;
-                        j6Var2 = (j6) obj;
-                        if ("md".equals(j6Var2.a)) {
-                            j6Var = j6Var2;
-                        } else {
-                            this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
-                        }
-                    }
-                    if (j6Var != null && z3) {
-                        this.w.addView(a(j6Var, "md".equals(this.x)));
-                    }
-                    horizontalScrollView.addView(this.w);
-                    linearLayoutG.addView(horizontalScrollView);
-                    LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams2.topMargin = a(10.0f);
-                    linearLayout.addView(linearLayoutG, layoutParams2);
-                    m6 m6Var4 = l6.a;
-                    linearLayout.addView(a(l6.a("section_other")));
-                    LinearLayout linearLayoutG2 = g();
-                    linearLayoutG2.setPadding(0, a(4.0f), 0, a(4.0f));
-                    linearLayoutG2.addView(q());
-                    linearLayout.addView(linearLayoutG2);
-                    View viewN = n();
-                    LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams3.topMargin = a(10.0f);
-                    linearLayout.addView(viewN, layoutParams3);
-                    linearLayout.addView(a(l6.a("section_about")));
-                    linearLayout.addView(b());
-                    linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
-                }
-                iA = -185258;
-                bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
-                if (inputStreamOpen != null) {
-                    inputStreamOpen.close();
-                }
-            } catch (Throwable th3) {
-                if (inputStreamOpen == null) {
-                    throw th3;
-                }
-                try {
-                    inputStreamOpen.close();
-                    throw th3;
-                } catch (Throwable th4) {
-                    th3.addSuppressed(th4);
-                    throw th3;
-                }
-                if (bitmapDecodeStream == null) {
-                    bitmapDrawable = null;
+                int identifier = getResources().getIdentifier("system_accent3_400", "color", "android");
+                if (identifier != 0) {
+                    color = getResources().getColor(identifier, null);
                 } else {
-                    Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas2 = new Canvas(bitmapCreateBitmap2);
-                    Paint paint2 = new Paint(3);
-                    z2 = ThemeHooks.d;
-                    ThemeHooks.d = false;
-                    paint2.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-                    ThemeHooks.d = z2;
-                    canvas2.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint2);
-                    bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap2);
-                }
-                m6 m6Var5 = l6.a;
-                linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
-                    @Override
-                    public final void onClick(View view) {
-                        this.f$0.h(view);
-                    }
-                }));
-                linearLayout.addView(a(l6.a("section_region")));
-                linearLayout.addView(o());
-                linearLayout.addView(a(l6.a("section_content_filter")));
-                linearLayout.addView(i());
-                linearLayout.addView(a(l6.a("section_feed")));
-                linearLayout.addView(j());
-                linearLayout.addView(a(l6.a("section_misc")));
-                linearLayout.addView(m());
-                linearLayout.addView(a(l6.a("section_autostreak")));
-                linearLayout.addView(d());
-                linearLayout.addView(a(l6.a("anti_burnout")));
-                linearLayout.addView(c());
-                linearLayout.addView(a(l6.a("section_font")));
-                linearLayout.addView(k());
-                linearLayout.addView(a(l6.a("section_appearance")));
-                linearLayout.addView(h());
-                LinearLayout linearLayoutG3 = g();
-                linearLayoutG3.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG3.setClipToPadding(false);
-                linearLayoutG3.setClipChildren(false);
-                LinearLayout linearLayout4 = new LinearLayout(this);
-                linearLayout4.setOrientation(0);
-                linearLayout4.setGravity(16);
-                linearLayout4.setMinimumHeight(a(48.0f));
-                linearLayout4.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-                ImageView imageView2 = new ImageView(this);
-                imageView2.setImageBitmap(b("ic_mod_logo"));
-                linearLayout4.addView(imageView2, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-                TextView textView3 = new TextView(this);
-                textView3.setText(l6.a("app_icon"));
-                textView3.setTextSize(2, 16.0f);
-                textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
-                if (this.b) {
-                    i = -1;
-                } else {
-                    i = -16777216;
-                }
-                textView3.setTextColor(i);
-                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(0, -2, 1.0f);
-                layoutParams4.leftMargin = a(12.0f);
-                linearLayout4.addView(textView3, layoutParams4);
-                linearLayoutG3.addView(linearLayout4);
-                HorizontalScrollView horizontalScrollView2 = new HorizontalScrollView(this);
-                horizontalScrollView2.setHorizontalScrollBarEnabled(false);
-                horizontalScrollView2.setClipToPadding(false);
-                horizontalScrollView2.setClipChildren(false);
-                horizontalScrollView2.setOverScrollMode(2);
-                horizontalScrollView2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-                LinearLayout linearLayout5 = new LinearLayout(this);
-                this.w = linearLayout5;
-                linearLayout5.setOrientation(0);
-                this.x = k6.a();
-                boolean z4 = d5.a().s;
-                arrayListA = k6.a((Context) this);
-                size = arrayListA.size();
-                i2 = 0;
-                j6Var = null;
-                while (i2 < size) {
-                    Object obj2 = arrayListA.get(i2);
-                    i2++;
-                    j6Var2 = (j6) obj2;
-                    if ("md".equals(j6Var2.a)) {
-                        j6Var = j6Var2;
+                    Context contextA = Main.getApplicationContext();
+                    if (contextA == null) {
+                        color = -16524603;
                     } else {
-                        this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
+                        color = ThemeHooks.a(contextA);
                     }
                 }
-                if (j6Var != null) {
-                    this.w.addView(a(j6Var, "md".equals(this.x)));
-                }
-                horizontalScrollView2.addView(this.w);
-                linearLayoutG3.addView(horizontalScrollView2);
-                LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams5.topMargin = a(10.0f);
-                linearLayout.addView(linearLayoutG3, layoutParams5);
-                m6 m6Var6 = l6.a;
-                linearLayout.addView(a(l6.a("section_other")));
-                LinearLayout linearLayoutG4 = g();
-                linearLayoutG4.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG4.addView(q());
-                linearLayout.addView(linearLayoutG4);
-                View viewN2 = n();
-                LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams6.topMargin = a(10.0f);
-                linearLayout.addView(viewN2, layoutParams6);
-                linearLayout.addView(a(l6.a("section_about")));
-                linearLayout.addView(b());
-                linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
+            } catch (Throwable th) {
+                color = -16524603;
             }
-            inputStreamOpen = ResourceOverlay.open(this, strDecrypt3);
-        } catch (IOException e) {
+        } else {
+            color = -185258;
+        }
+        try {
+            inputStreamOpen = ResourceOverlay.open(this, strDecrypt);
+            bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
+            if (inputStreamOpen != null) {
+                inputStreamOpen.close();
+            }
+        } catch (Throwable th) {
             bitmapDecodeStream = null;
         }
-        color = iA;
         if (bitmapDecodeStream == null) {
             bitmapDrawable = null;
         } else {
-            Bitmap bitmapCreateBitmap3 = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas3 = new Canvas(bitmapCreateBitmap3);
-            Paint paint3 = new Paint(3);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
+            Paint paint = new Paint(3);
             z2 = ThemeHooks.d;
             ThemeHooks.d = false;
-            paint3.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-            ThemeHooks.d = z2;
-            canvas3.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint3);
-            bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap3);
+            try {
+                paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+                ThemeHooks.d = z2;
+                canvas.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint);
+                bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap);
+            } catch (Throwable th2) {
+                ThemeHooks.d = z2;
+                throw th2;
+            }
         }
-        m6 m6Var7 = l6.a;
         linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
             @Override
             public final void onClick(View view) {
-                this.f$0.h(view);
+                le.this.h(view);
             }
         }));
         linearLayout.addView(a(l6.a("section_region")));
@@ -2081,51 +1769,50 @@ public class le extends BaseActivity {
         linearLayout.addView(k());
         linearLayout.addView(a(l6.a("section_appearance")));
         linearLayout.addView(h());
-        LinearLayout linearLayoutG5 = g();
-        linearLayoutG5.setPadding(0, a(4.0f), 0, a(4.0f));
-        linearLayoutG5.setClipToPadding(false);
-        linearLayoutG5.setClipChildren(false);
-        LinearLayout linearLayout6 = new LinearLayout(this);
-        linearLayout6.setOrientation(0);
-        linearLayout6.setGravity(16);
-        linearLayout6.setMinimumHeight(a(48.0f));
-        linearLayout6.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-        ImageView imageView3 = new ImageView(this);
-        imageView3.setImageBitmap(b("ic_mod_logo"));
-        linearLayout6.addView(imageView3, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-        TextView textView4 = new TextView(this);
-        textView4.setText(l6.a("app_icon"));
-        textView4.setTextSize(2, 16.0f);
-        textView4.setTypeface(Typeface.create("sans-serif-medium", 0));
+        LinearLayout linearLayoutG = g();
+        linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
+        linearLayoutG.setClipToPadding(false);
+        linearLayoutG.setClipChildren(false);
+        LinearLayout linearLayout2 = new LinearLayout(this);
+        linearLayout2.setOrientation(0);
+        linearLayout2.setGravity(16);
+        linearLayout2.setMinimumHeight(a(48.0f));
+        linearLayout2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
+        ImageView imageView = new ImageView(this);
+        imageView.setImageBitmap(b("ic_mod_logo"));
+        linearLayout2.addView(imageView, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
+        TextView textView2 = new TextView(this);
+        textView2.setText(l6.a("app_icon"));
+        textView2.setTextSize(2, 16.0f);
+        textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
         if (this.b) {
             i = -1;
         } else {
             i = -16777216;
         }
-        textView4.setTextColor(i);
-        LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(0, -2, 1.0f);
-        layoutParams7.leftMargin = a(12.0f);
-        linearLayout6.addView(textView4, layoutParams7);
-        linearLayoutG5.addView(linearLayout6);
-        HorizontalScrollView horizontalScrollView3 = new HorizontalScrollView(this);
-        horizontalScrollView3.setHorizontalScrollBarEnabled(false);
-        horizontalScrollView3.setClipToPadding(false);
-        horizontalScrollView3.setClipChildren(false);
-        horizontalScrollView3.setOverScrollMode(2);
-        horizontalScrollView3.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-        LinearLayout linearLayout7 = new LinearLayout(this);
-        this.w = linearLayout7;
-        linearLayout7.setOrientation(0);
+        textView2.setTextColor(i);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
+        layoutParams.leftMargin = a(12.0f);
+        linearLayout2.addView(textView2, layoutParams);
+        linearLayoutG.addView(linearLayout2);
+        HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
+        horizontalScrollView.setClipToPadding(false);
+        horizontalScrollView.setClipChildren(false);
+        horizontalScrollView.setOverScrollMode(2);
+        horizontalScrollView.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
+        LinearLayout linearLayout3 = new LinearLayout(this);
+        this.w = linearLayout3;
+        linearLayout3.setOrientation(0);
         this.x = k6.a();
-        boolean z5 = d5.a().s;
         arrayListA = k6.a((Context) this);
         size = arrayListA.size();
         i2 = 0;
         j6Var = null;
         while (i2 < size) {
-            Object obj3 = arrayListA.get(i2);
+            Object obj = arrayListA.get(i2);
             i2++;
-            j6Var2 = (j6) obj3;
+            j6Var2 = (j6) obj;
             if ("md".equals(j6Var2.a)) {
                 j6Var = j6Var2;
             } else {
@@ -2135,21 +1822,20 @@ public class le extends BaseActivity {
         if (j6Var != null) {
             this.w.addView(a(j6Var, "md".equals(this.x)));
         }
-        horizontalScrollView3.addView(this.w);
-        linearLayoutG5.addView(horizontalScrollView3);
-        LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams8.topMargin = a(10.0f);
-        linearLayout.addView(linearLayoutG5, layoutParams8);
-        m6 m6Var8 = l6.a;
+        horizontalScrollView.addView(this.w);
+        linearLayoutG.addView(horizontalScrollView);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams2.topMargin = a(10.0f);
+        linearLayout.addView(linearLayoutG, layoutParams2);
         linearLayout.addView(a(l6.a("section_other")));
-        LinearLayout linearLayoutG6 = g();
-        linearLayoutG6.setPadding(0, a(4.0f), 0, a(4.0f));
-        linearLayoutG6.addView(q());
-        linearLayout.addView(linearLayoutG6);
-        View viewN3 = n();
-        LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams9.topMargin = a(10.0f);
-        linearLayout.addView(viewN3, layoutParams9);
+        LinearLayout linearLayoutG2 = g();
+        linearLayoutG2.setPadding(0, a(4.0f), 0, a(4.0f));
+        linearLayoutG2.addView(q());
+        linearLayout.addView(linearLayoutG2);
+        View viewN = n();
+        LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams3.topMargin = a(10.0f);
+        linearLayout.addView(viewN, layoutParams3);
         linearLayout.addView(a(l6.a("section_about")));
         linearLayout.addView(b());
         linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
@@ -2164,39 +1850,33 @@ public class le extends BaseActivity {
         Runtime.getRuntime().exit(0);
     }
 
-    public final void c(Throwable th) {
-        this.p = false;
-        a(this.q);
-        this.q = null;
-        if (isFinishing() || isDestroyed()) {
-            return;
-        }
-        if (th == null) {
-            m6 m6Var = l6.a;
-            Toast.makeText((Context) this, (CharSequence) l6.a("dynamic_import_ready"), 1).show();
-            C();
-        } else {
-            String strDecrypt = "Signed dynamic package import failed";
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(strDecrypt), th);
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            m6 m6Var2 = l6.a;
-            builder.setTitle(l6.a("dynamic_import_error")).setMessage(th.getMessage() != null ? th.getMessage() : th.toString()).setPositiveButton(R.string.ok, (DialogInterface.OnClickListener) null).show();
-        }
-    }
-
-    public static  void h(Dialog dialog, View view) {
-        try {
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-            }
-        } catch (Throwable th) {
-        }
-    }
-
     public final  boolean c(View view) {
         G();
         return true;
+    }
+
+    public final void h(Dialog dialog, View view) {
+        int i;
+        Context applicationContext = getApplicationContext();
+        String[] strArr = BadgeHooks.a;
+        if (applicationContext == null) {
+            i = 0;
+        } else {
+            char[] cArr = m0.a;
+            File file = new File(m0.a(applicationContext), "supporters_cache.txt");
+            i = (file.exists() && file.delete()) ? 1 : 0;
+            File file2 = new File(m0.a(applicationContext), "supporters_fetch.stamp");
+            if (file2.exists() && file2.delete()) {
+                i++;
+            }
+            File file3 = new File(m0.a(applicationContext), "supporters_cache.etag");
+            if (file3.exists() && file3.delete()) {
+                i++;
+            }
+            BadgeHooks.p.set(false);
+        }
+        Toast.makeText((Context) this, (CharSequence) ("Support list cache cleaned: " + i), 0).show();
+        a(dialog);
     }
 
     public static  void a(CompoundButton compoundButton, boolean z2) {
@@ -2248,7 +1928,7 @@ public class le extends BaseActivity {
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view3) {
-                this.f$0.a(frameLayout, i, view3);
+                le.this.a(frameLayout, i, view3);
             }
         });
         return frameLayout;
@@ -2289,7 +1969,7 @@ public class le extends BaseActivity {
         view.setVisibility(z2 ? 0 : 8);
         this.n.setVisibility(z2 ? 0 : 8);
         this.m.setVisibility(z2 ? 0 : 8);
-        t.b();
+        Z.t.b();
     }
 
     public final LinearLayout a(final j6 j6Var, boolean z2) {
@@ -2352,7 +2032,7 @@ public class le extends BaseActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public final void onClick(View view2) {
-                this.f$0.a(j6Var, view2);
+                le.this.a(j6Var, view2);
             }
         });
         return linearLayout;
@@ -2365,7 +2045,7 @@ public class le extends BaseActivity {
         if (textView != null) {
             textView.setText(String.format(Locale.US, "%02d:%02d", Integer.valueOf(d5.a().p), Integer.valueOf(d5.a().q)));
         }
-        t.b();
+        Z.t.b();
     }
 
     public final void a(List list, RadioGroup radioGroup, int i) {
@@ -2380,36 +2060,6 @@ public class le extends BaseActivity {
         FontHooks.c.clear();
         K();
         C();
-    }
-
-    public final void a(final Uri uri) {
-        if (this.p) {
-            return;
-        }
-        this.p = true;
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(0);
-        linearLayout.setGravity(16);
-        linearLayout.setPadding(a(24.0f), a(8.0f), a(24.0f), a(8.0f));
-        linearLayout.addView(new ProgressBar(this), new LinearLayout.LayoutParams(a(32.0f), a(32.0f)));
-        TextView textView = new TextView(this);
-        m6 m6Var = l6.a;
-        textView.setText(l6.a("dynamic_import_progress_message"));
-        textView.setTextSize(2, 16.0f);
-        textView.setTextColor(this.b ? -1 : -16777216);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
-        layoutParams.leftMargin = a(16.0f);
-        linearLayout.addView(textView, layoutParams);
-        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setTitle(l6.a("dynamic_import_progress_title")).setView(linearLayout).setCancelable(false).create();
-        this.q = alertDialogCreate;
-        alertDialogCreate.setCanceledOnTouchOutside(false);
-        this.q.show();
-        new Thread(new Runnable() {
-            @Override
-            public final void run() {
-                this.f$0.b(uri);
-            }
-        }, "TTModSignedDynamicImport").start();
     }
 
     public final LinearLayout a(String str, String str2, TextView textView, final Runnable runnable) {
@@ -2501,7 +2151,6 @@ public class le extends BaseActivity {
         }
         try {
             if (Long.parseLong(strTrim) > 100000000000L) {
-                m6 m6Var = l6.a;
                 geVar.a(l6.a("filter_error_too_big"));
                 geVar.a(false);
             } else {
@@ -2509,7 +2158,6 @@ public class le extends BaseActivity {
                 geVar.a(true);
             }
         } catch (NumberFormatException e) {
-            m6 m6Var2 = l6.a;
             geVar.a(l6.a("filter_error_too_big"));
             geVar.a(false);
         }
@@ -2548,7 +2196,7 @@ public class le extends BaseActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public final void onDateSet(DatePicker datePicker, int i, int i2, int i3) {
-                this.f$0.a(jArr, textView, datePicker, i, i2, i3);
+                le.this.a(jArr, textView, datePicker, i, i2, i3);
             }
         }, calendar.get(1), calendar.get(2), calendar.get(5));
         datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
@@ -2628,7 +2276,6 @@ public class le extends BaseActivity {
         layoutParams2.topMargin = a(24.0f);
         linearLayout.addView(linearLayout2, layoutParams2);
         TextView textView3 = new TextView(this);
-        m6 m6Var = l6.a;
         textView3.setText(l6.a("filter_input_from"));
         textView3.setTextSize(2, 16.0f);
         textView3.setTextColor(i4);
@@ -2717,7 +2364,7 @@ public class le extends BaseActivity {
         geVar.e = new Runnable() {
             @Override
             public final void run() {
-                this.f$0.a(dialogA, editText);
+                le.this.a(dialogA, editText);
             }
         };
         textView7.setOnClickListener(new View.OnClickListener() {
@@ -2764,12 +2411,11 @@ public class le extends BaseActivity {
 
     public final void a() {
         if (this.a.compareAndSet(false, true)) {
-            m6 m6Var = l6.a;
             Toast.makeText((Context) this, (CharSequence) l6.a("check_updates_checking"), 0).show();
             nb nbVar = new nb() {
                 @Override
                 public final void a(ob obVar) {
-                    this.f$0.a(obVar);
+                    le.this.a(obVar);
                 }
             };
             pb pbVar = pb.a;
@@ -2784,10 +2430,8 @@ public class le extends BaseActivity {
             return;
         }
         if (obVar == ob.a) {
-            m6 m6Var = l6.a;
             Toast.makeText((Context) this, (CharSequence) l6.a("check_updates_up_to_date"), 0).show();
         } else if (obVar == ob.d) {
-            m6 m6Var2 = l6.a;
             Toast.makeText((Context) this, (CharSequence) l6.a("check_updates_failed"), 0).show();
         }
     }
@@ -2842,7 +2486,7 @@ public class le extends BaseActivity {
             frameLayout.setOnClickListener(onClickListener != null ? onClickListener : new View.OnClickListener() {
                 @Override
                 public final void onClick(View view) {
-                    this.f$0.a(str3, view);
+                    le.this.a(str3, view);
                 }
             });
             GradientDrawable gradientDrawable2 = new GradientDrawable();
@@ -2884,7 +2528,6 @@ public class le extends BaseActivity {
         if (z3) {
             if (z2) {
                 TextView textView3 = new TextView(this);
-                m6 m6Var = l6.a;
                 textView3.setText(l6.a("mod_update_download"));
                 textView3.setTextSize(2, 13.0f);
                 textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
@@ -2985,7 +2628,7 @@ public class le extends BaseActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z4) {
-                this.f$0.a(jeVar, z3, compoundButton, z4);
+                le.this.a(jeVar, z3, compoundButton, z4);
             }
         });
         checkBox.setBackground(new RippleDrawable(ColorStateList.valueOf(this.b ? 872415231 : 520093696), null, new ColorDrawable(-1)));

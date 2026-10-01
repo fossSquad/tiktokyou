@@ -1,4 +1,5 @@
 package Z;
+
 public final class n1 {
     public final String a;
     public final String b;

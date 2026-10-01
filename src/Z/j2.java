@@ -18,6 +18,7 @@ import java.util.Map;
 
 public abstract class j2 {
     public static void a() {
+        Throwable th = null;
         int i;
         int i2 = 2;
         int i3 = 0;
@@ -63,8 +64,8 @@ public abstract class j2 {
                             }
                             i7++;
                             i3 = i;
-                        } catch (Throwable th) {
-                            th = th;
+                        } catch (Throwable th_2) {
+                            th = th_2;
                             h6.a(6, h6.a("Direct gate hook error (%s)", new Object[]{w6Var.b}), th);
                             i4++;
                             i3 = i;
@@ -105,7 +106,7 @@ public abstract class j2 {
         linkedHashMap.put(i7.a, i7.b);
         linkedHashMap.put(j7.a, j7.b);
         linkedHashMap.put(f7.a, f7.b);
-        for (Map.Entry entry : linkedHashMap.entrySet()) {
+        for (Map.Entry entry : (java.util.Set<Map.Entry>) linkedHashMap.entrySet()) {
             w6 w6Var2 = (w6) entry.getKey();
             String[] strArr2 = (String[]) ((p8) entry.getValue()).c.clone();
             try {

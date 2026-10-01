@@ -1,4 +1,6 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
 import com.windukk.hook.HookMethod;
 import ni.shikatu.kotlin.Metadata;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;

@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import com.windukk.hook.HookMethod;
 import com.windukk.hook.ReplaceMethod;
-import com.windukk.mod.hooks.SavePhotoHooks;
+import Z.SavePhotoHooks;
 import ni.shikatu.kotlin.jvm.functions.Function1;
 
 class nd extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         String str;
         String str2;
         Bitmap bitmap = (Bitmap) hookMethodParam.args[0];
@@ -21,7 +21,6 @@ class nd extends ReplaceMethod {
         }
         boolean zA = SavePhotoHooks.a(activity, bitmap);
         SavePhotoHooks.a(objA, zA);
-        (zA ? "without" : "failed,");
         if (!zA) {
         }
         return null;

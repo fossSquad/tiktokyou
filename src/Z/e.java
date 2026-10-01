@@ -4,7 +4,7 @@ import android.view.View;
 import com.windukk.hook.HookMethod;
 
 class e extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) throws Throwable {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         m mVarD;
         View view = (View) hookMethodParam.args[0];
         n.a(view.getContext());

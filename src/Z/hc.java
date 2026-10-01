@@ -2,7 +2,7 @@ package Z;
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.EdgeSpeedupHooks;
+import Z.EdgeSpeedupHooks;
 
 class hc extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

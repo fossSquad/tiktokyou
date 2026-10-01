@@ -1,4 +1,9 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.a8;
+import Z.e8;
+import Z.h6;
+import Z.p8;
 
 import android.app.Activity;
 import android.os.BaseBundle;
@@ -42,7 +47,11 @@ public final class UnlockLimitsHooks {
     }
 
     public static void c() {
-        HookBridge.hookMethod(BaseBundle.class.getMethod("getInt", String.class, Integer.TYPE), new UnlockLimitsHooks$after$1());
+        try {
+            HookBridge.hookMethod(BaseBundle.class.getMethod("getInt", String.class, Integer.TYPE), new UnlockLimitsHooks$after$1());
+        } catch (NoSuchMethodException e) {
+            // method missing on this build; skip hook
+        }
     }
 
     public static final void d() {
@@ -54,12 +63,12 @@ public final class UnlockLimitsHooks {
             Result.Companion companion = Result.Companion;
             qgVar.getClass();
             b();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Pinned-chat limit hook failed", new Object[0]), th2);
         }
@@ -68,12 +77,12 @@ public final class UnlockLimitsHooks {
             Result.Companion companion3 = Result.Companion;
             qgVar2.getClass();
             c();
-            obj2 = Result.constructor-impl(Unit.INSTANCE);
+            obj2 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th3) {
             Result.Companion companion4 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        Throwable th4 = Result.exceptionOrNull-impl(obj2);
+        Throwable th4 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th4 != null) {
             h6.a(6, h6.a("Share-recipient bundle limit hook failed", new Object[0]), th4);
         }
@@ -82,12 +91,12 @@ public final class UnlockLimitsHooks {
             Result.Companion companion5 = Result.Companion;
             qgVar3.getClass();
             a();
-            obj3 = Result.constructor-impl(Unit.INSTANCE);
+            obj3 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th5) {
             Result.Companion companion6 = Result.Companion;
-            obj3 = Result.constructor-impl(ResultKt.createFailure(th5));
+            obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th5));
         }
-        Throwable th6 = Result.exceptionOrNull-impl(obj3);
+        Throwable th6 = RCompat.m9exceptionOrNullimpl(obj3);
         if (th6 != null) {
             h6.a(6, h6.a("Category share-recipient limit hook failed", new Object[0]), th6);
         }

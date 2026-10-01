@@ -7,7 +7,7 @@ import com.ss.android.ugc.aweme.base.model.UrlModel;
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.Video;
 import com.windukk.hook.HookBridge;
-import com.windukk.mod.hooks.download.DownloadMediaStoreHooks;
+import Z.DownloadMediaStoreHooks;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.nio.charset.Charset;
@@ -90,18 +90,18 @@ public abstract class i3 {
     public static final void d() {
         Object obj;
         Object obj2;
-        Object obj3;
+        Object obj3 = null;
         Object obj4;
         Object obj5;
         try {
             Result.Companion companion = Result.Companion;
             g();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Download model mappings unavailable", new Object[0]), th2);
             return;
@@ -109,49 +109,49 @@ public abstract class i3 {
         try {
             Result.Companion companion3 = Result.Companion;
             b();
-            obj2 = Result.constructor-impl(Unit.INSTANCE);
+            obj2 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th3) {
             Result.Companion companion4 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        Throwable th4 = Result.exceptionOrNull-impl(obj2);
+        Throwable th4 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th4 != null) {
             h6.a(6, h6.a("Download factory quality picker unavailable", new Object[0]), th4);
         }
         try {
             Result.Companion companion5 = Result.Companion;
             c();
-            obj3 = Result.constructor-impl(Unit.INSTANCE);
+            obj3 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th5) {
             Result.Companion companion6 = Result.Companion;
-            obj3 = Result.constructor-impl(ResultKt.createFailure(th5));
+            obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th5));
         }
-        Throwable th6 = Result.exceptionOrNull-impl(obj3);
+        Throwable th6 = RCompat.m9exceptionOrNullimpl(obj3);
         if (th6 != null) {
             h6.a(6, h6.a("Session watermark bypass unavailable", new Object[0]), th6);
         }
         try {
             Result.Companion companion7 = Result.Companion;
             a();
-            obj4 = Result.constructor-impl(Unit.INSTANCE);
+            obj4 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th7) {
             Result.Companion companion8 = Result.Companion;
-            obj4 = Result.constructor-impl(ResultKt.createFailure(th7));
+            obj4 = RCompat.m6constructorimpl(ResultKt.createFailure(th7));
         }
-        Throwable th8 = Result.exceptionOrNull-impl(obj4);
+        Throwable th8 = RCompat.m9exceptionOrNullimpl(obj4);
         if (th8 != null) {
             h6.a(6, h6.a("Download ability compatibility monitor unavailable", new Object[0]), th8);
         }
         try {
             Result.Companion companion9 = Result.Companion;
-            ThreadLocal threadLocal = DownloadMediaStoreHooks.a;
+            AtomicBoolean atomicBoolean = DownloadMediaStoreHooks.c;
             DownloadMediaStoreHooks.a();
-            obj5 = Result.constructor-impl(Unit.INSTANCE);
+            obj5 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th9) {
             Result.Companion companion10 = Result.Companion;
-            obj5 = Result.constructor-impl(ResultKt.createFailure(th9));
+            obj5 = RCompat.m6constructorimpl(ResultKt.createFailure(th9));
         }
-        Throwable th10 = Result.exceptionOrNull-impl(obj5);
+        Throwable th10 = RCompat.m9exceptionOrNullimpl(obj5);
         if (th10 != null) {
             h6.a(6, h6.a("Download MediaStore hook unavailable", new Object[0]), th10);
         }
@@ -213,12 +213,12 @@ public abstract class i3 {
         k = fieldA7;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(v7.c.a(cls3));
+            obj = RCompat.m6constructorimpl(v7.c.a(cls3));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        l = (Field) (Result.isFailure-impl(obj) ? null : obj);
+        l = (Field) (RCompat.m12isFailureimpl(obj) ? null : obj);
     }
 
     public static boolean a(a4 a4Var, b3 b3Var) throws IllegalAccessException {
@@ -270,12 +270,12 @@ public abstract class i3 {
                 if (str6 == null || StringsKt.isBlank(str6)) {
                     str6 = null;
                 }
-                obj = Result.constructor-impl(str6);
+                obj = RCompat.m6constructorimpl(str6);
             } catch (Throwable th) {
                 Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th));
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
-            if (Result.isFailure-impl(obj)) {
+            if (RCompat.m12isFailureimpl(obj)) {
                 obj = null;
             }
             strA = (String) obj;
@@ -321,7 +321,7 @@ public abstract class i3 {
             strDecrypt = (Intrinsics.areEqual(b3Var3.a(), ".mp3") ? "audio/mpeg" : "audio/mp4");
         }
         concurrentHashMap.put(strA, new b4(j2, strA, zB, strA2, strDecrypt));
-        c4.a(Long.valueOf(a4Var.a), b3Var.b, b3Var.d, b3Var.e, b3Var.f, strA);
+        Z.c4.a(Long.valueOf(a4Var.a), b3Var.b, b3Var.d, b3Var.e, b3Var.f, strA);
         UrlModel urlModel2 = a4Var.d;
         UrlModel urlModel3 = b3Var.a;
         if (urlModel3 != null && urlModel2 != null) {
@@ -340,7 +340,7 @@ public abstract class i3 {
     }
 
     public static final void c(a4 a4Var) {
-        c4.a(a4Var);
+        Z.c4.a(a4Var);
     }
 
     public static boolean a(Object obj, final Member member, final Object[] objArr) throws IllegalAccessException {
@@ -350,15 +350,15 @@ public abstract class i3 {
         Object obj2;
         boolean zAreEqual;
         char c2;
-        Object obj3;
-        boolean z;
+        Object obj3 = null;
+        boolean z = false;
         Throwable th;
         List listEmptyList;
         List listEmptyList2;
         boolean z2;
         List listEmptyList3;
         String string;
-        ?? r35;
+        boolean r35;
         g4 g4Var;
         ArrayList arrayList;
         char c3;
@@ -368,7 +368,7 @@ public abstract class i3 {
         Iterator it;
         Iterator it2;
         b3 b3VarA;
-        final List<b3> listA;
+        List<b3> listA;
         Object objB;
         Object objB2;
         Object obj4;
@@ -376,13 +376,13 @@ public abstract class i3 {
         List listA2;
         Iterator it3;
         Object objB3;
-        UrlModel urlModelA;
+        UrlModel urlModelA = null;
         Iterator it4;
         Iterator it5;
         b3 b3VarA2;
         Object objB4;
         UrlModel urlModelA2;
-        b3 b3VarA3;
+        b3 b3VarA3 = null;
         b3 b3VarA4;
         AtomicBoolean atomicBoolean;
         Map map = c4.b;
@@ -441,16 +441,16 @@ public abstract class i3 {
             if (strDecrypt == null) {
                 strDecrypt = "unknown";
             }
-            obj2 = Result.constructor-impl(strDecrypt);
+            obj2 = RCompat.m6constructorimpl(strDecrypt);
         } catch (Throwable th2) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th2));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
         }
         String strDecrypt2 = "unknown";
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = strDecrypt2;
         }
-        c4.a(lValueOf, (String) obj2, str, g4.b(urlModel2));
+        Z.c4.a(lValueOf, (String) obj2, str, g4.b(urlModel2));
         if (!a4Var2.f.compareAndSet(false, true)) {
             return false;
         }
@@ -490,11 +490,11 @@ public abstract class i3 {
         if (string2.length() == 0) {
             listEmptyList2 = CollectionsKt.emptyList();
             c2 = 0;
-            r35 = 1;
+            r35 = true;
         } else {
             try {
                 Result.Companion companion3 = Result.Companion;
-                JsonObject jsonObjectB = f6.b(string2);
+                JsonObject jsonObjectB = (JsonObject) f6.b(string2);
                 JsonObject jsonObject = jsonObjectB instanceof JsonObject ? jsonObjectB : null;
                 if (jsonObject == null) {
                     listEmptyList3 = CollectionsKt.emptyList();
@@ -520,7 +520,7 @@ public abstract class i3 {
                             th = th3;
                             z3 = true;
                             Result.Companion companion4 = Result.Companion;
-                            obj3 = Result.constructor-impl(ResultKt.createFailure(th));
+                            obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                             z = z3;
                         }
                     }
@@ -543,7 +543,7 @@ public abstract class i3 {
                                 it6 = it6;
                                 if (!linkedHashSetLinkedSetOf.contains(lowerCase2)) {
                                     AtomicLong atomicLong = c4.a;
-                                    c4.a(str2);
+                                    Z.c4.a(str2);
                                 } else {
                                     b3 b3VarA10 = g4Var3.a(video, jsonElement, str2);
                                     if (b3VarA10 != null) {
@@ -553,15 +553,15 @@ public abstract class i3 {
                             } catch (Throwable th4) {
                                 th = th4;
                                 Result.Companion companion5 = Result.Companion;
-                                obj3 = Result.constructor-impl(ResultKt.createFailure(th));
+                                obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                                 z = z3;
-                                th = Result.exceptionOrNull-impl(obj3);
+                                th = RCompat.m9exceptionOrNullimpl(obj3);
                                 if (th != null) {
                                     AtomicLong atomicLong2 = c4.a;
-                                    c4.a(th.getClass().getSimpleName());
+                                    Z.c4.a(th.getClass().getSimpleName());
                                 }
                                 listEmptyList = CollectionsKt.emptyList();
-                                if (Result.isFailure-impl(obj3)) {
+                                if (RCompat.m12isFailureimpl(obj3)) {
                                     obj3 = listEmptyList;
                                 }
                                 listEmptyList2 = (List) obj3;
@@ -576,7 +576,7 @@ public abstract class i3 {
                                 Triple triple4 = new Triple("getPlayAddrBytevc1", "video.playAddrBytevc1", 300);
                                 Triple[] tripleArr = new Triple[4];
                                 tripleArr[c2] = triple;
-                                tripleArr[r35] = triple2;
+                                tripleArr[r35 ? 1 : 0] = triple2;
                                 c3 = 2;
                                 tripleArr[2] = triple3;
                                 tripleArr[3] = triple4;
@@ -608,7 +608,7 @@ public abstract class i3 {
                                 UrlModel urlModelD4 = g4.d(video, "getPlayAddrBytevc1");
                                 UrlModel[] urlModelArr = new UrlModel[3];
                                 urlModelArr[c2] = urlModelD2;
-                                urlModelArr[r35] = urlModelD3;
+                                urlModelArr[r35 ? 1 : 0] = urlModelD3;
                                 urlModelArr[c4] = urlModelD4;
                                 it2 = CollectionsKt.listOf(urlModelArr).iterator();
                                 while (it2.hasNext()) {
@@ -648,15 +648,15 @@ public abstract class i3 {
                                 } else {
                                     objB2 = objB;
                                 }
-                                AtomicLong atomicLong3 = c4.a;
+                                AtomicLong atomicLong3 = Z.c4.a;
                                 Result.Companion companion6 = Result.Companion;
-                                obj4 = Result.constructor-impl(aweme2.aid);
-                                if (Result.isFailure-impl(obj4)) {
+                                obj4 = RCompat.m6constructorimpl(aweme2.aid);
+                                if (RCompat.m12isFailureimpl(obj4)) {
                                     obj5 = null;
                                 } else {
                                     obj5 = obj4;
                                 }
-                                c4.a(obj5, str, objB2, Integer.valueOf(listA.size()));
+                                Z.c4.a(obj5, str, objB2, Integer.valueOf(listA.size()));
                                 g4.a("final", listA);
                                 if (!listA.isEmpty()) {
                                     for (b3 b3Var : listA) {
@@ -668,14 +668,15 @@ public abstract class i3 {
                                     a(a4Var2, aweme2, video, listA, member, objArr);
                                     return r35;
                                 }
-                                z3 z3Var = z3.a;
+                                z3 z3Var = Z.z3.a;
+                                final List listAF = listA;
                                 Function1 function1 = new Function1() {
                                     public final Object invoke(Object obj10) {
-                                        return i3.a(listA, a4Var2, member, objArr, (List) obj10);
+                                        return i3.a(listAF, a4Var2, member, objArr, (List) obj10);
                                     }
                                 };
                                 z3Var.getClass();
-                                z3.a(aweme2, video, function1);
+                                Z.z3.a(aweme2, video, function1);
                                 return r35;
                             }
                         }
@@ -684,19 +685,19 @@ public abstract class i3 {
                     listEmptyList3 = arrayList4;
                     z3 = z2;
                 }
-                obj3 = Result.constructor-impl(listEmptyList3);
+                obj3 = RCompat.m6constructorimpl(listEmptyList3);
                 z = z3;
             } catch (Throwable th5) {
                 th = th5;
                 c2 = 0;
             }
-            th = Result.exceptionOrNull-impl(obj3);
+            th = RCompat.m9exceptionOrNullimpl(obj3);
             if (th != null) {
                 AtomicLong atomicLong4 = c4.a;
-                c4.a(th.getClass().getSimpleName());
+                Z.c4.a(th.getClass().getSimpleName());
             }
             listEmptyList = CollectionsKt.emptyList();
-            if (Result.isFailure-impl(obj3)) {
+            if (RCompat.m12isFailureimpl(obj3)) {
                 obj3 = listEmptyList;
             }
             listEmptyList2 = (List) obj3;
@@ -712,11 +713,11 @@ public abstract class i3 {
         Triple triple9 = new Triple("getPlayAddrBytevc1", "video.playAddrBytevc1", 300);
         Triple[] tripleArr2 = new Triple[4];
         tripleArr2[c2] = triple6;
-        tripleArr2[r35] = triple7;
+        tripleArr2[r35 ? 1 : 0] = triple7;
         c3 = 2;
         tripleArr2[2] = triple8;
         tripleArr2[3] = triple9;
-        while (r4.hasNext()) {
+        for (Triple triple5 : CollectionsKt.listOf(tripleArr2)) {
             b3VarA4 = g4Var.a(video, g4.d(video, (String) triple5.component1()), (String) triple5.component2(), d4.h, sg.c, lb.c, ((Number) triple5.component3()).intValue(), null);
             if (b3VarA4 != null) {
                 arrayList.add(b3VarA4);
@@ -744,7 +745,7 @@ public abstract class i3 {
         UrlModel urlModelD8 = g4.d(video, "getPlayAddrBytevc1");
         UrlModel[] urlModelArr2 = new UrlModel[3];
         urlModelArr2[c2] = urlModelD6;
-        urlModelArr2[r35] = urlModelD7;
+        urlModelArr2[r35 ? 1 : 0] = urlModelD7;
         urlModelArr2[c5] = urlModelD8;
         it2 = CollectionsKt.listOf(urlModelArr2).iterator();
         while (it2.hasNext()) {
@@ -787,20 +788,20 @@ public abstract class i3 {
         AtomicLong atomicLong5 = c4.a;
         try {
             Result.Companion companion7 = Result.Companion;
-            obj4 = Result.constructor-impl(aweme2.aid);
+            obj4 = RCompat.m6constructorimpl(aweme2.aid);
         } catch (Throwable th6) {
             Result.Companion companion8 = Result.Companion;
-            obj4 = Result.constructor-impl(ResultKt.createFailure(th6));
+            obj4 = RCompat.m6constructorimpl(ResultKt.createFailure(th6));
         }
-        if (Result.isFailure-impl(obj4)) {
+        if (RCompat.m12isFailureimpl(obj4)) {
             obj5 = null;
         } else {
             obj5 = obj4;
         }
-        c4.a(obj5, str, objB2, Integer.valueOf(listA.size()));
+        Z.c4.a(obj5, str, objB2, Integer.valueOf(listA.size()));
         g4.a("final", listA);
         if (!listA.isEmpty()) {
-            while (r0.hasNext()) {
+            for (b3 b3Var : listA) {
                 if (b3Var.b() && b3Var.l >= 1080) {
                     a(a4Var2, listA, member, objArr);
                     return r35;
@@ -811,14 +812,15 @@ public abstract class i3 {
             a(a4Var2, aweme2, video, listA, member, objArr);
             return r35;
         }
-        z3 z3Var2 = z3.a;
+        z3 z3Var2 = Z.z3.a;
+        final List listAF = listA;
         Function1 function2 = new Function1() {
             public final Object invoke(Object obj10) {
-                return i3.a(listA, a4Var2, member, objArr, (List) obj10);
+                return i3.a(listAF, a4Var2, member, objArr, (List) obj10);
             }
         };
         z3Var2.getClass();
-        z3.a(aweme2, video, function2);
+        Z.z3.a(aweme2, video, function2);
         return r35;
     }
 
@@ -826,7 +828,7 @@ public abstract class i3 {
         Object obj = null;
         if (b3Var.c == d4.g) {
             AtomicLong atomicLong = c4.a;
-            c4.a(Long.valueOf(a4Var.a), b3Var.b);
+            Z.c4.a(Long.valueOf(a4Var.a), b3Var.b);
             for (Object obj2 : list) {
                 b3 b3Var2 = (b3) obj2;
                 if (b3Var2.c != d4.g && !b3Var2.c() && !b3Var2.b()) {
@@ -841,7 +843,7 @@ public abstract class i3 {
         }
         if (b3Var.c()) {
             AtomicLong atomicLong2 = c4.a;
-            c4.a(Long.valueOf(a4Var.a));
+            Z.c4.a(Long.valueOf(a4Var.a));
             for (Object obj3 : list) {
                 b3 b3Var4 = (b3) obj3;
                 if (b3Var4.c != d4.g && !b3Var4.c() && !b3Var4.b()) {
@@ -873,7 +875,7 @@ public abstract class i3 {
     public static void a(a4 a4Var, final List list, Member member, Object[] objArr) {
         if (list.isEmpty()) {
             AtomicLong atomicLong = c4.a;
-            c4.a(Long.valueOf(a4Var.a));
+            Z.c4.a(Long.valueOf(a4Var.a));
             a((b3) null, a4Var, member, objArr);
             return;
         }
@@ -915,7 +917,7 @@ public abstract class i3 {
     }
 
     public static final void a(Aweme aweme, Video video, final Ref.ObjectRef objectRef, final List list, final o3 o3Var) {
-        z3 z3Var = z3.a;
+        z3 z3Var = Z.z3.a;
         Function1 function1 = new Function1() {
             public final Object invoke(Object obj) {
                 return i3.a(objectRef, list, o3Var, (List) obj);
@@ -948,12 +950,12 @@ public abstract class i3 {
                 field = null;
             }
             Object obj2 = field.get(a4Var.b);
-            obj = Result.constructor-impl(obj2 instanceof Context ? (Context) obj2 : null);
+            obj = RCompat.m6constructorimpl(obj2 instanceof Context ? (Context) obj2 : null);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        return (Context) (Result.isFailure-impl(obj) ? null : obj);
+        return (Context) (RCompat.m12isFailureimpl(obj) ? null : obj);
     }
 
     public static void a(b3 b3Var, a4 a4Var, final Member member, final Object[] objArr) {
@@ -964,21 +966,21 @@ public abstract class i3 {
                 h6.a(4, h6.a("Download selection rejected; restoring official flow", new Object[0]), (Throwable) null);
             }
             AtomicLong atomicLong = c4.a;
-            obj = Result.constructor-impl(c4.a(a4Var, new Function0() {
+            obj = RCompat.m6constructorimpl(Z.c4.a(a4Var, new Function0() {
                 public final Object invoke() {
                     return i3.a(member, objArr);
                 }
             }));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Selected download start failed", new Object[0]), th2);
-            c4.a(a4Var);
+            Z.c4.a(a4Var);
         }
-        if (Result.isSuccess-impl(obj)) {
+        if (RCompat.m13isSuccessimpl(obj)) {
             b(a4Var);
         }
     }
@@ -986,7 +988,11 @@ public abstract class i3 {
     public static final Object a(Member member, Object[] objArr) {
         a.set(Boolean.TRUE);
         try {
-            return HookBridge.invokeOriginalMethod(member, (Object) null, Arrays.copyOf(objArr, objArr.length));
+            try {
+                return HookBridge.invokeOriginalMethod(member, (Object) null, Arrays.copyOf(objArr, objArr.length));
+            } catch (IllegalAccessException | java.lang.reflect.InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
         } finally {
             a.remove();
         }
@@ -1014,16 +1020,16 @@ public abstract class i3 {
             Charset charset = StandardCharsets.UTF_8;
             byte[] bytes = str.getBytes(charset);
             byte[] bArrDigest = messageDigest.digest(bytes);
-            obj = Result.constructor-impl(ArraysKt.joinToString$default(bArrDigest, "", (CharSequence) null, (CharSequence) null, 0, (CharSequence) null, new Function1() {
+            obj = RCompat.m6constructorimpl(ArraysKt.joinToString$default(bArrDigest, "", (CharSequence) null, (CharSequence) null, 0, (CharSequence) null, new Function1() {
                 public final Object invoke(Object obj2) {
                     return i3.a(((Byte) obj2).byteValue());
                 }
             }, 30, (Object) null));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         return (String) obj;

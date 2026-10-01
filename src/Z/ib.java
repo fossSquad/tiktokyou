@@ -1,10 +1,10 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.OfflineModeHooks;
+import Z.OfflineModeHooks;
 
 abstract class ib extends HookMethod {
-    private ib() {
+    ib() {
     }
 
     public abstract int a(jb jbVar);

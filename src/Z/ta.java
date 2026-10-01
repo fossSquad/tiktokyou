@@ -104,6 +104,10 @@ public final class ta {
         return d().l;
     }
 
+    public final void c(boolean z) {
+        d().d(z);
+    }
+
     public static void b(String str) {
         SharedPreferences.Editor editorEdit;
         SharedPreferences.Editor editorPutString;
@@ -112,10 +116,6 @@ public final class ta {
             return;
         }
         editorPutString.apply();
-    }
-
-    public final void c(boolean z) {
-        d().d(z);
     }
 
     public static void c(String str) {

@@ -1,18 +1,11 @@
 package Z;
+import java.io.IOException;
 
-public abstract class t7 {
-    public static final p8 a;
-    public static final p8 b;
-    public static final p8 c;
-    public static final p8 d;
-    public static final p8 e;
+public final class t7 extends IOException {
+    public final int a;
 
-    static {
-        w6 w6Var = new w6("DOWNLOAD_DIALOG_PROVIDER", "com.ss.android.ugc.trill.download.ui.DownloadDialogProvider");
-        a = new p8(w6Var, "SHOW", new String[]{"LIZ"});
-        b = new p8(w6Var, "PROGRESS", new String[]{"onProgress"});
-        c = new p8(w6Var, "SUCCESS", new String[]{"onSuccess"});
-        d = new p8(w6Var, "FAILED", new String[]{"onFailed"});
-        e = new p8(w6Var, "CANCEL", new String[]{"onCancel"});
+    public t7(int i, String str) {
+        super(new StringBuilder().append("HTTP ").append(i).append(" for ").append(str).toString());
+        this.a = i;
     }
 }

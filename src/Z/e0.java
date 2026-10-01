@@ -64,7 +64,7 @@ public final class e0 {
         }
         h0.a(leVar, linearLayout2, list, strDecrypt, this.d, this.e, new Function2() {
             public final Object invoke(Object obj, Object obj2) {
-                return e0.a(this.f$0, (View) obj, (d0) obj2);
+                return e0.a(e0.this, (View) obj, (d0) obj2);
             }
         });
         if (z) {

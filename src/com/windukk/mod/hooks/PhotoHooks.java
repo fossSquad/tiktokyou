@@ -1,4 +1,23 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.a;
+import Z.d8;
+import Z.h6;
+import Z.l8;
+import Z.la;
+import Z.ma;
+import Z.na;
+import Z.q8;
+import Z.v8;
+import Z.w7;
+import Z.w8;
+import Z.x9;
+import Z.y8;
+import Z.y9;
+import Z.z7;
+import Z.z8;
+
+import Z.p8;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +26,7 @@ import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.PhotoModeImageInfo;
 import com.ss.android.ugc.aweme.feed.model.PhotoModeImageUrlModel;
 import com.windukk.hook.HookBridge;
+import Z.DownloadMediaStoreHooks;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,6 +42,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.WeakHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 import ni.shikatu.kotlin.Result;
 import ni.shikatu.kotlin.ResultKt;
@@ -175,17 +196,18 @@ public final class PhotoHooks {
         Object obj2;
         Object obj3;
         Object obj4;
+        Object obj5;
         try {
             Result.Companion companion = Result.Companion;
             l();
             e();
             d();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Photo URL hooks unavailable", new Object[0]), th2);
         }
@@ -193,12 +215,12 @@ public final class PhotoHooks {
             Result.Companion companion3 = Result.Companion;
             k();
             c();
-            obj2 = Result.constructor-impl(Unit.INSTANCE);
+            obj2 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th3) {
             Result.Companion companion4 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        Throwable th4 = Result.exceptionOrNull-impl(obj2);
+        Throwable th4 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th4 != null) {
             h6.a(6, h6.a("Photo VVIC conversion hook unavailable", new Object[0]), th4);
         }
@@ -207,26 +229,39 @@ public final class PhotoHooks {
             m();
             f();
             g();
-            obj3 = Result.constructor-impl(Unit.INSTANCE);
+            obj3 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th5) {
             Result.Companion companion6 = Result.Companion;
-            obj3 = Result.constructor-impl(ResultKt.createFailure(th5));
+            obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th5));
         }
-        Throwable th6 = Result.exceptionOrNull-impl(obj3);
+        Throwable th6 = RCompat.m9exceptionOrNullimpl(obj3);
         if (th6 != null) {
             h6.a(6, h6.a("Photo watermark hooks unavailable", new Object[0]), th6);
         }
         try {
             Result.Companion companion7 = Result.Companion;
             b();
-            obj4 = Result.constructor-impl(Unit.INSTANCE);
+            obj4 = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th7) {
             Result.Companion companion8 = Result.Companion;
-            obj4 = Result.constructor-impl(ResultKt.createFailure(th7));
+            obj4 = RCompat.m6constructorimpl(ResultKt.createFailure(th7));
         }
-        Throwable th8 = Result.exceptionOrNull-impl(obj4);
+        Throwable th8 = RCompat.m9exceptionOrNullimpl(obj4);
         if (th8 != null) {
             h6.a(6, h6.a("Edit-save watermark gate hook unavailable", new Object[0]), th8);
+        }
+        try {
+            Result.Companion companion9 = Result.Companion;
+            AtomicBoolean atomicBoolean = DownloadMediaStoreHooks.c;
+            DownloadMediaStoreHooks.a();
+            obj5 = RCompat.m6constructorimpl(Unit.INSTANCE);
+        } catch (Throwable th9) {
+            Result.Companion companion10 = Result.Companion;
+            obj5 = RCompat.m6constructorimpl(ResultKt.createFailure(th9));
+        }
+        Throwable th10 = RCompat.m9exceptionOrNullimpl(obj5);
+        if (th10 != null) {
+            h6.a(6, h6.a("Photo MediaStore path hook unavailable", new Object[0]), th10);
         }
     }
 
@@ -366,66 +401,70 @@ public final class PhotoHooks {
     }
 
     public static final String a(Aweme aweme, int i2, boolean z) throws IllegalAccessException {
-        PhotoModeImageUrlModel photoModeImageUrlModel;
-        String str;
-        UrlModel urlModelA;
-        UrlModel urlModelA2;
-        PhotoModeImageInfo photoModeImageInfo = aweme.photoModeImageInfo;
-        List list = photoModeImageInfo != null ? photoModeImageInfo.imageList : null;
-        if (list != null && i2 >= 0 && i2 < list.size()) {
-            photoModeImageUrlModel = (PhotoModeImageUrlModel) list.get(i2);
-        } else {
-            photoModeImageUrlModel = photoModeImageInfo != null ? photoModeImageInfo.imagePostCover : null;
-        }
-        if (photoModeImageUrlModel == null) {
-            return null;
-        }
-        ArrayList arrayList = new ArrayList(4);
-        if (z && (urlModelA2 = a(photoModeImageUrlModel, true)) != null) {
-            arrayList.add(urlModelA2);
-        }
-        UrlModel urlModelA3 = a(photoModeImageUrlModel);
-        if (urlModelA3 != null) {
-            arrayList.add(urlModelA3);
-        }
-        if (z && (urlModelA = a(photoModeImageUrlModel, false)) != null) {
-            arrayList.add(urlModelA);
-        }
-        int size = arrayList.size();
-        int i3 = 0;
-        loop0: while (true) {
-            if (i3 >= size) {
-                str = null;
-                break;
+        try {
+            PhotoModeImageUrlModel photoModeImageUrlModel;
+            String str;
+            UrlModel urlModelA;
+            UrlModel urlModelA2;
+            PhotoModeImageInfo photoModeImageInfo = aweme.photoModeImageInfo;
+            List list = photoModeImageInfo != null ? photoModeImageInfo.imageList : null;
+            if (list != null && i2 >= 0 && i2 < list.size()) {
+                photoModeImageUrlModel = (PhotoModeImageUrlModel) list.get(i2);
+            } else {
+                photoModeImageUrlModel = photoModeImageInfo != null ? photoModeImageInfo.imagePostCover : null;
             }
-            Object obj = arrayList.get(i3);
-            i3++;
-            ArrayList arrayListA = a((UrlModel) obj);
-            int size2 = arrayListA.size();
-            int i4 = 0;
-            while (i4 < size2) {
-                Object obj2 = arrayListA.get(i4);
-                i4++;
-                str = (String) obj2;
-                if (!c(str)) {
-                    break loop0;
+            if (photoModeImageUrlModel == null) {
+                return null;
+            }
+            ArrayList arrayList = new ArrayList(4);
+            if (z && (urlModelA2 = a(photoModeImageUrlModel, true)) != null) {
+                arrayList.add(urlModelA2);
+            }
+            UrlModel urlModelA3 = a(photoModeImageUrlModel);
+            if (urlModelA3 != null) {
+                arrayList.add(urlModelA3);
+            }
+            if (z && (urlModelA = a(photoModeImageUrlModel, false)) != null) {
+                arrayList.add(urlModelA);
+            }
+            int size = arrayList.size();
+            int i3 = 0;
+            loop0: while (true) {
+                if (i3 >= size) {
+                    str = null;
+                    break;
+                }
+                Object obj = arrayList.get(i3);
+                i3++;
+                ArrayList arrayListA = a((UrlModel) obj);
+                int size2 = arrayListA.size();
+                int i4 = 0;
+                while (i4 < size2) {
+                    Object obj2 = arrayListA.get(i4);
+                    i4++;
+                    str = (String) obj2;
+                    if (!c(str)) {
+                        break loop0;
+                    }
                 }
             }
-        }
-        if (str != null) {
-            return str;
-        }
-        int size3 = arrayList.size();
-        int i5 = 0;
-        while (i5 < size3) {
-            Object obj3 = arrayList.get(i5);
-            i5++;
-            ArrayList arrayListA2 = a((UrlModel) obj3);
-            if (arrayListA2.size() > 0) {
-                return (String) arrayListA2.get(0);
+            if (str != null) {
+                return str;
             }
+            int size3 = arrayList.size();
+            int i5 = 0;
+            while (i5 < size3) {
+                Object obj3 = arrayList.get(i5);
+                i5++;
+                ArrayList arrayListA2 = a((UrlModel) obj3);
+                if (arrayListA2.size() > 0) {
+                    return (String) arrayListA2.get(0);
+                }
+            }
+            return null;
+        } catch (Throwable t) {
+            return null;
         }
-        return null;
     }
 
     public static void b(PhotoModeImageUrlModel photoModeImageUrlModel) throws IllegalAccessException {
@@ -532,126 +571,126 @@ public final class PhotoHooks {
     }
 
     public static final boolean a(String str) {
-        boolean zContains;
-        Object obj;
-        Bitmap bitmap;
-        PhotoHooks ccVar = a;
-        File file = new File(str);
-        if (!file.isFile() || file.length() < 12) {
-            return false;
-        }
-        byte[] bArr = new byte[16];
-        FileInputStream fileInputStream = new FileInputStream(file);
         try {
-            if (fileInputStream.read(bArr) < 12) {
+            boolean zContains;
+            Object obj;
+            Bitmap bitmap = null;
+            PhotoHooks ccVar = a;
+            File file = new File(str);
+            if (!file.isFile() || file.length() < 12) {
+                return false;
+            }
+            byte[] bArr = new byte[16];
+            FileInputStream fileInputStream = new FileInputStream(file);
+            try {
+                if (fileInputStream.read(bArr) < 12) {
+                    CloseableKt.closeFinally(fileInputStream, (Throwable) null);
+                    return false;
+                }
+                Unit unit = Unit.INSTANCE;
                 CloseableKt.closeFinally(fileInputStream, (Throwable) null);
-                return false;
-            }
-            Unit unit = Unit.INSTANCE;
-            CloseableKt.closeFinally(fileInputStream, (Throwable) null);
-            if (Arrays.equals(ArraysKt.copyOfRange(bArr, 4, 8), new byte[]{102, 116, 121, 112})) {
-                Charset charset = StandardCharsets.US_ASCII;
-                String str2 = new String(bArr, 8, 4, charset);
-                Locale locale = Locale.ROOT;
-                String lowerCase = str2.toLowerCase(locale);
-                zContains = v.contains(lowerCase);
-            } else {
-                zContains = false;
-            }
-            if (!zContains) {
-                return false;
-            }
-            byte[] bytes = FilesKt.readBytes(file);
-            try {
-                Result.Companion companion = Result.Companion;
-                ccVar.a();
-                Object obj2 = u;
-                if (obj2 == null) {
-                    bitmap = null;
+                if (Arrays.equals(ArraysKt.copyOfRange(bArr, 4, 8), new byte[]{102, 116, 121, 112})) {
+                    Charset charset = StandardCharsets.US_ASCII;
+                    String str2 = new String(bArr, 8, 4, charset);
+                    Locale locale = Locale.ROOT;
+                    String lowerCase = str2.toLowerCase(locale);
+                    zContains = v.contains(lowerCase);
                 } else {
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                    Method method = t;
-                    if (method == null) {
-                        method = null;
-                    }
-                    Object objInvoke = method.invoke(obj2, bytes, 0, Integer.valueOf(bytes.length), options);
-                    obj = Result.constructor-impl(objInvoke instanceof Bitmap ? (Bitmap) objInvoke : null);
-                    Throwable th = Result.exceptionOrNull-impl(obj);
-                    if (th != null) {
-                        h6.a(6, h6.a("HeifBitmapFactory decode failed", new Object[0]), th);
-                    }
-                    if (Result.isFailure-impl(obj)) {
-                        obj = null;
-                    }
-                    bitmap = (Bitmap) obj;
+                    zContains = false;
                 }
-            } catch (Throwable th2) {
-                Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th2));
-            }
-            if (bitmap == null) {
-                return false;
-            }
-            File file2 = new File(file.getParentFile(), new StringBuilder().append(file.getName()).append(".conv.tmp").toString());
-            try {
-                FileOutputStream fileOutputStream = new FileOutputStream(file2);
+                if (!zContains) {
+                    return false;
+                }
+                byte[] bytes = FilesKt.readBytes(file);
                 try {
-                    if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream)) {
-                        CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
-                        bitmap.recycle();
-                        return false;
+                    Result.Companion companion = Result.Companion;
+                    ccVar.a();
+                    Object obj2 = u;
+                    if (obj2 == null) {
+                        bitmap = null;
+                    } else {
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        Method method = t;
+                        if (method == null) {
+                            method = null;
+                        }
+                        Object objInvoke = method.invoke(obj2, bytes, 0, Integer.valueOf(bytes.length), options);
+                        obj = RCompat.m6constructorimpl(objInvoke instanceof Bitmap ? (Bitmap) objInvoke : null);
+                        Throwable th = RCompat.m9exceptionOrNullimpl(obj);
+                        if (th != null) {
+                            h6.a(6, h6.a("HeifBitmapFactory decode failed", new Object[0]), th);
+                        }
+                        if (RCompat.m12isFailureimpl(obj)) {
+                            obj = null;
+                        }
+                        bitmap = (Bitmap) obj;
                     }
-                    Unit unit2 = Unit.INSTANCE;
-                    CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
-                    if (!file2.renameTo(file)) {
-                        FilesKt.copyTo$default(file2, file, true, 0, 4, (Object) null);
-                        file2.delete();
-                    }
-                    bitmap.recycle();
-                    return true;
-                } catch (Throwable th3) {
-                    try {
-                        throw th3;
-                    } catch (Throwable th4) {
-                        CloseableKt.closeFinally(fileOutputStream, th3);
-                        throw th4;
-                    }
+                } catch (Throwable th2) {
+                    Result.Companion companion2 = Result.Companion;
+                    obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
                 }
-            } catch (Throwable th5) {
-                h6.a(6, h6.a("VVIC conversion failed for " + file.getName(), new Object[0]), th5);
-                file2.delete();
-                return false;
+                if (bitmap == null) {
+                    return false;
+                }
+                File file2 = new File(file.getParentFile(), new StringBuilder().append(file.getName()).append(".conv.tmp").toString());
+                try {
+                    FileOutputStream fileOutputStream = new FileOutputStream(file2);
+                    try {
+                        if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream)) {
+                            CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
+                            bitmap.recycle();
+                            return false;
+                        }
+                        Unit unit2 = Unit.INSTANCE;
+                        CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
+                        if (!file2.renameTo(file)) {
+                            FilesKt.copyTo$default(file2, file, true, 0, 4, (Object) null);
+                            file2.delete();
+                        }
+                        bitmap.recycle();
+                        return true;
+                    } catch (Throwable th3) {
+                        try {
+                            throw th3;
+                        } catch (Throwable th4) {
+                            CloseableKt.closeFinally(fileOutputStream, th3);
+                            throw th4;
+                        }
+                    }
+                } catch (Throwable th5) {
+                    h6.a(6, h6.a("VVIC conversion failed for " + file.getName(), new Object[0]), th5);
+                    file2.delete();
+                    return false;
+                }
+            } catch (Throwable th6) {
+                try {
+                    throw th6;
+                } catch (Throwable th7) {
+                    CloseableKt.closeFinally(fileInputStream, th6);
+                    throw th7;
+                }
             }
-            try {
-                h6.a(6, h6.a("VVIC conversion failed for " + file.getName(), new Object[0]), th5);
-                file2.delete();
-                return false;
-            } finally {
-                bitmap.recycle();
-            }
-        } catch (Throwable th6) {
-            try {
-                throw th6;
-            } catch (Throwable th7) {
-                CloseableKt.closeFinally(fileInputStream, th6);
-                throw th7;
-            }
+        } catch (Throwable t) {
+            return false;
         }
     }
 
     public final synchronized void a() {
-        if (u != null) {
-            return;
+        try {
+            if (u != null) {
+                return;
+            }
+            Class.forName("com.bytedance.fresco.nativeheif.Heif");
+            p8 p8Var = d8.a;
+            Class<?> cls = Class.forName("com.bytedance.fresco.heif.HeifBitmapFactoryImpl");
+            p8 p8Var2 = d8.a;
+            Class cls2 = Integer.TYPE;
+            Method methodA = p8Var2.a(cls, byte[].class, cls2, cls2, BitmapFactory.Options.class);
+            t = methodA;
+            u = cls.getDeclaredConstructor(null).newInstance(null);
+        } catch (Throwable t) {
         }
-        Class.forName("com.bytedance.fresco.nativeheif.Heif");
-        p8 p8Var = d8.a;
-        Class<?> cls = Class.forName("com.bytedance.fresco.heif.HeifBitmapFactoryImpl");
-        p8 p8Var2 = d8.a;
-        Class cls2 = Integer.TYPE;
-        Method methodA = p8Var2.a(cls, byte[].class, cls2, cls2, BitmapFactory.Options.class);
-        t = methodA;
-        u = cls.getDeclaredConstructor(null).newInstance(null);
     }
 
     public static final boolean a(Object obj, String str, String str2) throws IllegalAccessException {
@@ -710,39 +749,46 @@ public final class PhotoHooks {
     }
 
     public static void a(Object obj, p8 p8Var, Object... objArr) throws IllegalAccessException, InvocationTargetException {
-        Class<?> cls;
-        int length = objArr.length;
-        Class[] clsArr = new Class[length];
-        for (int i2 = 0; i2 < length; i2++) {
-            Object obj2 = objArr[i2];
-            if (obj2 instanceof Integer) {
-                cls = Integer.TYPE;
-            } else {
-                cls = obj2 != null ? obj2.getClass() : String.class;
+        try {
+            Class<?> cls;
+            int length = objArr.length;
+            Class[] clsArr = new Class[length];
+            for (int i2 = 0; i2 < length; i2++) {
+                Object obj2 = objArr[i2];
+                if (obj2 instanceof Integer) {
+                    cls = Integer.TYPE;
+                } else {
+                    cls = obj2 != null ? obj2.getClass() : String.class;
+                }
+                clsArr[i2] = cls;
             }
-            clsArr[i2] = cls;
+            p8Var.a(obj.getClass(), (Class[]) Arrays.copyOf(clsArr, length)).invoke(obj, Arrays.copyOf(objArr, objArr.length));
+        } catch (Throwable t) {
         }
-        p8Var.a(obj.getClass(), (Class[]) Arrays.copyOf(clsArr, length)).invoke(obj, Arrays.copyOf(objArr, objArr.length));
     }
 
     public static boolean a(String str, String str2) {
-        File file = new File(str);
-        File file2 = new File(str2);
-        if (!file.isFile()) {
-            return false;
-        }
-        if (Intrinsics.areEqual(file.getCanonicalPath(), file2.getCanonicalPath())) {
-            return true;
-        }
-        File parentFile = file2.getParentFile();
-        if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs() && !parentFile.isDirectory()) {
-            return false;
-        }
         try {
-            FilesKt.copyTo$default(file, file2, true, 0, 4, (Object) null);
-            return true;
-        } catch (Throwable th) {
-            h6.a(6, h6.a(new StringBuilder().append("Failed to copy ").append(str).append(" -> ").append(str2).toString(), new Object[0]), th);
+            File file = new File(str);
+            File file2 = new File(str2);
+            if (!file.isFile()) {
+                return false;
+            }
+            if (Intrinsics.areEqual(file.getCanonicalPath(), file2.getCanonicalPath())) {
+                return true;
+            }
+            File parentFile = file2.getParentFile();
+            if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs() && !parentFile.isDirectory()) {
+                return false;
+            }
+            try {
+                FilesKt.copyTo$default(file, file2, true, 0, 4, (Object) null);
+                return true;
+            } catch (Throwable th) {
+                h6.a(6, h6.a(new StringBuilder().append("Failed to copy ").append(str).append(" -> ").append(str2).toString(), new Object[0]), th);
+                return false;
+            }
+        } catch (Throwable t) {
             return false;
         }
     }

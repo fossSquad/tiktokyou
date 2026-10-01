@@ -1,6 +1,6 @@
 package Z;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.CommentStickerHooks;
+import Z.CommentStickerHooks;
 import java.lang.reflect.Method;
 
 class k2 extends HookMethod {

@@ -2,7 +2,7 @@ package Z;
 
 import android.content.res.ColorStateList;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 
 class wf extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

@@ -1,4 +1,12 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.ba;
+import Z.h6;
+import Z.p8;
+import Z.te;
+import Z.ue;
+import Z.ve;
+import Z.we;
 
 import android.graphics.Typeface;
 import android.os.Looper;
@@ -70,17 +78,17 @@ public abstract class StoryEngagementHooks {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         int i = layoutParams != null ? layoutParams.width : 0;
         float f = 44;
-        int iA = Main.a(f);
+        int iA = Main.dp(f);
         if (i <= 0) {
             i = iA;
         }
         int i2 = layoutParams != null ? layoutParams.height : 0;
-        int iA2 = Main.a(f);
+        int iA2 = Main.dp(f);
         if (i2 <= 0) {
             i2 = iA2;
         }
         if (layoutParams == null) {
-            layoutParams = new ViewGroup.LayoutParams(Main.a(f), Main.a(f));
+            layoutParams = new ViewGroup.LayoutParams(Main.dp(f), Main.dp(f));
         }
         viewGroup.removeViewAt(iIndexOfChild);
         FrameLayout frameLayout = new FrameLayout(view.getContext());
@@ -88,9 +96,9 @@ public abstract class StoryEngagementHooks {
         frameLayout.setClipToPadding(false);
         frameLayout.setLayoutParams(layoutParams);
         frameLayout.addView(view, new FrameLayout.LayoutParams(i, i2, 17));
-        view.setTranslationY(Main.a(-8));
+        view.setTranslationY(Main.dp(-8));
         TextView textViewA = a(view);
-        frameLayout.addView(textViewA, new FrameLayout.LayoutParams(-1, Main.a(16), 81));
+        frameLayout.addView(textViewA, new FrameLayout.LayoutParams(-1, Main.dp(16), 81));
         viewGroup.addView(frameLayout, iIndexOfChild);
         map.put(obj, textViewA);
         b(textViewA, (String) d.get(obj));
@@ -100,8 +108,8 @@ public abstract class StoryEngagementHooks {
         if (view instanceof TuxIconView) {
             TuxIconView tuxIconView = (TuxIconView) view;
             float f = 24;
-            tuxIconView.setIconWidth(Main.a(f));
-            tuxIconView.setIconHeight(Main.a(f));
+            tuxIconView.setIconWidth(Main.dp(f));
+            tuxIconView.setIconHeight(Main.dp(f));
         }
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
@@ -143,10 +151,10 @@ public abstract class StoryEngagementHooks {
                 if (frameLayout.getChildCount() > 0) {
                     View childAt = frameLayout.getChildAt(0);
                     b(childAt);
-                    childAt.setTranslationY(Main.a(-8));
+                    childAt.setTranslationY(Main.dp(-8));
                 }
                 TextView textViewA = a(view);
-                frameLayout.addView(textViewA, new FrameLayout.LayoutParams(-1, Main.a(16), 81));
+                frameLayout.addView(textViewA, new FrameLayout.LayoutParams(-1, Main.dp(16), 81));
                 map.put(obj, textViewA);
                 b(textViewA, (String) c.get(obj));
                 return;
@@ -181,11 +189,11 @@ public abstract class StoryEngagementHooks {
         textView.setSingleLine(true);
         textView.setIncludeFontPadding(false);
         float f = 1;
-        textView.setShadowLayer(Main.a(f), 0.0f, Main.a(f), -1728053248);
+        textView.setShadowLayer(Main.dp(f), 0.0f, Main.dp(f), -1728053248);
         textView.setImportantForAccessibility(2);
         textView.setClickable(false);
         textView.setFocusable(false);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, Main.a(16));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, Main.dp(16));
         layoutParams.gravity = 1;
         textView.setLayoutParams(layoutParams);
         return textView;

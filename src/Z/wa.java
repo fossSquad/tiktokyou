@@ -13,9 +13,10 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
 public abstract class wa {
     public static Dialog a(Activity activity) {
-        Dialog dialog = new Dialog(activity, R.style.Theme.Translucent.NoTitleBar);
+        Dialog dialog = new Dialog(activity, R.style.Theme_Translucent_NoTitleBar);
         try {
             dialog.requestWindowFeature(1);
             return dialog;

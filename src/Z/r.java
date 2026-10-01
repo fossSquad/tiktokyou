@@ -83,7 +83,12 @@ public abstract class r {
         if (arrayList.isEmpty()) {
             return null;
         }
-        Object objInvoke = da.a.a(obj2.getClass(), List.class).invoke(obj2, arrayList);
+        Object objInvoke;
+        try {
+            objInvoke = da.a.a(obj2.getClass(), List.class).invoke(obj2, arrayList);
+        } catch (Throwable t) {
+            objInvoke = null;
+        }
         if (objInvoke instanceof List) {
             return (List) objInvoke;
         }
@@ -121,12 +126,12 @@ public abstract class r {
                     a0Var = new a0(arrayList);
                 }
             }
-            b0Var = Result.constructor-impl(a0Var);
+            b0Var = RCompat.m6constructorimpl(a0Var);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            b0Var = Result.constructor-impl(ResultKt.createFailure(th));
+            b0Var = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(b0Var);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(b0Var);
         if (th2 != null) {
             h6.a(6, h6.a("Streak snapshot failed", new Object[0]), th2);
             String message = th2.getMessage();
@@ -142,13 +147,13 @@ public abstract class r {
         Object obj2;
         try {
             Result.Companion companion = Result.Companion;
-            obj2 = Result.constructor-impl(Boolean.valueOf(Intrinsics.areEqual(fa.a.a(Class.forName("X.0H7z"), obj.getClass()).invoke(null, obj), Boolean.TRUE)));
+            obj2 = RCompat.m6constructorimpl(Boolean.valueOf(Intrinsics.areEqual(fa.a.a(Class.forName("X.0H7z"), obj.getClass()).invoke(null, obj), Boolean.TRUE)));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
         Boolean bool = Boolean.FALSE;
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = bool;
         }
         return ((Boolean) obj2).booleanValue();
@@ -156,7 +161,12 @@ public abstract class r {
 
     public static String a(Object obj, String str) throws IllegalAccessException {
         Object obj2;
-        Object obj3 = dd.a((Class) obj.getClass(), "userStreak").get(obj);
+        Object obj3;
+        try {
+            obj3 = dd.a((Class) obj.getClass(), "userStreak").get(obj);
+        } catch (Throwable t) {
+            obj3 = null;
+        }
         List list = obj3 instanceof List ? (List) obj3 : null;
         if (list == null) {
             return null;
@@ -166,12 +176,12 @@ public abstract class r {
             if (obj4 != null) {
                 try {
                     Result.Companion companion = Result.Companion;
-                    obj2 = Result.constructor-impl(String.valueOf(dd.a((Class) obj4.getClass(), "uid").getLong(obj4)));
+                    obj2 = RCompat.m6constructorimpl(String.valueOf(dd.a((Class) obj4.getClass(), "uid").getLong(obj4)));
                 } catch (Throwable th) {
                     Result.Companion companion2 = Result.Companion;
-                    obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+                    obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                 }
-                if (Result.isFailure-impl(obj2)) {
+                if (RCompat.m12isFailureimpl(obj2)) {
                     obj2 = null;
                 }
                 String str3 = (String) obj2;

@@ -1,7 +1,7 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.OfflineModeHooks;
+import Z.OfflineModeHooks;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;

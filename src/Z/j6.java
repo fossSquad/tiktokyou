@@ -1,10 +1,9 @@
 package Z;
 
 import android.content.ComponentName;
-import com.android.tools.r8.RecordTag;
 import java.util.Objects;
 
-public final class j6 extends RecordTag {
+public final class j6 {
     public final String a;
     public final ComponentName b;
     public final int c;
@@ -28,7 +27,6 @@ public final class j6 extends RecordTag {
     }
 
     public final String a() {
-        m6 m6Var = l6.a;
         String strA = l6.a("launcher_icon_" + this.a, null);
         if (strA != null) {
             return strA;
@@ -41,10 +39,21 @@ public final class j6 extends RecordTag {
     }
 
     public final int hashCode() {
-        return j6$$ExternalSyntheticRecord1.m(this.c, this.a, this.b);
+        return ((this.c * 31) + Objects.hashCode(this.a)) * 31 + Objects.hashCode(this.b);
     }
 
     public final String toString() {
-        return j6$$ExternalSyntheticRecord0.m($record$getFieldsAsObjects(), j6.class, "a;b;c");
+        Object[] fields = $record$getFieldsAsObjects();
+        String[] names = "a;b;c".split(";");
+        StringBuilder sb = new StringBuilder();
+        sb.append(j6.class.getSimpleName()).append("[");
+        for (int i = 0; i < names.length; i++) {
+            sb.append(names[i]).append("=").append(fields[i]);
+            if (i != names.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

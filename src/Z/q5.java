@@ -2,7 +2,7 @@ package Z;
 
 import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.FontHooks;
+import Z.FontHooks;
 
 class q5 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
@@ -25,7 +25,7 @@ class q5 extends HookMethod {
             } else if (iIntValue < 600) {
                 i = zBooleanValue ? 2 : 0;
             }
-            Typeface typefaceA = FontHooks.a(strE, i);
+            Typeface typefaceA = FontHooks.a(i, strE);
             if (typefaceA != null) {
                 hookMethodParam.setResult(typefaceA);
             }

@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.windukk.mod.Main;
-import com.windukk.mod.hooks.ThemeHooks;
+import Z.ThemeHooks;
 import com.windukk.stable.ResourceOverlay;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -68,8 +68,9 @@ public final class qe {
     }
 
     public final void a(final Activity activity) {
+        Throwable th = null;
         int i;
-        Object obj;
+        Object obj = null;
         View view;
         View view2;
         ta.a.getClass();
@@ -94,21 +95,21 @@ public final class qe {
                     final Dialog dialogA = wa.a(activity);
                     final LinearLayout linearLayout = new LinearLayout(activity);
                     linearLayout.setOrientation(1);
-                    float fA = Main.a(24.0f);
+                    float fA = Main.dp(24.0f);
                     GradientDrawable gradientDrawable = new GradientDrawable();
                     gradientDrawable.setColor(i2);
                     gradientDrawable.setCornerRadii(new float[]{fA, fA, fA, fA, 0.0f, 0.0f, 0.0f, 0.0f});
                     linearLayout.setBackground(gradientDrawable);
-                    linearLayout.setPadding(Main.a(16.0f), Main.a(12.0f), Main.a(16.0f), Main.a(16.0f));
+                    linearLayout.setPadding(Main.dp(16.0f), Main.dp(12.0f), Main.dp(16.0f), Main.dp(16.0f));
                     linearLayout.setClickable(true);
                     linearLayout.setClipToOutline(true);
                     View view3 = new View(activity);
-                    float fA2 = Main.a(50.0f);
+                    float fA2 = Main.dp(50.0f);
                     GradientDrawable gradientDrawable2 = new GradientDrawable();
                     gradientDrawable2.setColor(i5);
                     gradientDrawable2.setCornerRadius(fA2);
                     view3.setBackground(gradientDrawable2);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.a(48.0f), Main.a(4.0f));
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Main.dp(48.0f), Main.dp(4.0f));
                     layoutParams.gravity = 1;
                     Unit unit = Unit.INSTANCE;
                     linearLayout.addView(view3, layoutParams);
@@ -119,15 +120,14 @@ public final class qe {
                     imageView.setImageDrawable(a((Context) activity, "ic_startup_logo"));
                     imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     imageView.setAdjustViewBounds(true);
-                    LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(Main.a(86.0f), Main.a(86.0f));
+                    LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(Main.dp(86.0f), Main.dp(86.0f));
                     layoutParams2.gravity = 1;
-                    layoutParams2.topMargin = Main.a(24.0f);
+                    layoutParams2.topMargin = Main.dp(24.0f);
                     linearLayout2.addView(imageView, layoutParams2);
                     LinearLayout linearLayout3 = new LinearLayout(activity);
                     linearLayout3.setOrientation(1);
                     linearLayout3.setGravity(1);
                     TextView textView = new TextView(activity);
-                    m6 m6Var = l6.a;
                     textView.setText(l6.a("startup_title", "TikTok You"));
                     textView.setGravity(17);
                     textView.setTextColor(i4);
@@ -143,10 +143,10 @@ public final class qe {
                     textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
                     textView2.setIncludeFontPadding(false);
                     LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams3.topMargin = Main.a(16.0f);
+                    layoutParams3.topMargin = Main.dp(16.0f);
                     linearLayout3.addView(textView2, layoutParams3);
                     LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams4.topMargin = Main.a(24.0f);
+                    layoutParams4.topMargin = Main.dp(24.0f);
                     linearLayout2.addView(linearLayout3, layoutParams4);
                     LinearLayout linearLayout4 = new LinearLayout(activity);
                     linearLayout4.setOrientation(1);
@@ -158,17 +158,17 @@ public final class qe {
                     int i8 = i4;
                     linearLayout5.addView(a(activity, "ic_startup_faq", l6.a("startup_faq", "Ознакомьтесь с нашим FAQ"), i3, i8, i6, 12.0f, new Function0() {
                         public final Object invoke() {
-                            return qe.a(this.f$0, activity);
+                            return qe.a(qe.this, activity);
                         }
                     }), new LinearLayout.LayoutParams(-1, -2));
                     LinearLayout linearLayoutA = a(activity, "ic_startup_legal", l6.a("privacy_information", "Правовая информация"), i3, i8, i6, 16.0f, new Function0() {
                         public final Object invoke() {
-                            return qe.b(this.f$0, activity);
+                            return qe.b(qe.this, activity);
                         }
                     });
                     int i9 = i3;
                     LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams5.topMargin = Main.a(4.0f);
+                    layoutParams5.topMargin = Main.dp(4.0f);
                     linearLayout5.addView(linearLayoutA, layoutParams5);
                     linearLayout4.addView(linearLayout5, new LinearLayout.LayoutParams(-1, -2));
                     LinearLayout linearLayout6 = new LinearLayout(activity);
@@ -179,12 +179,12 @@ public final class qe {
                     final int i10 = -5723992;
                     objectRef.element = a(activity, "ic_startup_download", l6.a("startup_auto_updates", "Автоматические обновления"), l6.a("startup_auto_updates_desc", "Получать и устанавливать их"), i9, i8, i6, new Function0() {
                         public final Object invoke() {
-                            return qe.a(booleanRef, this, activity, objectRef, i10, objectRef2, booleanRef2);
+                            return qe.a(booleanRef, qe.this, activity, objectRef, i10, objectRef2, booleanRef2);
                         }
                     });
                     objectRef2.element = a(activity, "ic_startup_stats", l6.a("startup_statistics", "Делиться анонимной статистикой"), l6.a("startup_statistics_desc", "Помогите улучшить приложение"), i9, i8, i6, new Function0() {
                         public final Object invoke() {
-                            return qe.a(booleanRef2, this, activity, objectRef, booleanRef, i10, objectRef2);
+                            return qe.a(booleanRef2, qe.this, activity, objectRef, booleanRef, i10, objectRef2);
                         }
                     });
                     Object obj2 = objectRef.element;
@@ -201,14 +201,14 @@ public final class qe {
                         view2 = (View) obj3;
                     }
                     LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams6.topMargin = Main.a(4.0f);
+                    layoutParams6.topMargin = Main.dp(4.0f);
                     linearLayout6.addView(view2, layoutParams6);
                     LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams7.topMargin = Main.a(12.0f);
+                    layoutParams7.topMargin = Main.dp(12.0f);
                     linearLayout4.addView(linearLayout6, layoutParams7);
                     b(booleanRef, this, activity, objectRef, -5723992, objectRef2, booleanRef2);
                     LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams8.topMargin = Main.a(24.0f);
+                    layoutParams8.topMargin = Main.dp(24.0f);
                     linearLayout2.addView(linearLayout4, layoutParams8);
                     TextView textView3 = new TextView(activity);
                     textView3.setGravity(17);
@@ -222,13 +222,13 @@ public final class qe {
                     textView3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public final void onClick(View view4) {
-                            qe.a(intRef, this, booleanRef, booleanRef2, linearLayout, dialogA, view4);
+                            qe.a(intRef, qe.this, booleanRef, booleanRef2, linearLayout, dialogA, view4);
                         }
                     });
                     a(intRef, textView3, this, iA);
                     LinearLayout linearLayout7 = new LinearLayout(activity);
                     linearLayout7.setOrientation(1);
-                    linearLayout7.addView(textView3, new LinearLayout.LayoutParams(-1, Main.a(48.0f)));
+                    linearLayout7.addView(textView3, new LinearLayout.LayoutParams(-1, Main.dp(48.0f)));
                     TextView textView4 = new TextView(activity);
                     textView4.setText(l6.a("startup_close", "Закрыть приложение"));
                     textView4.setGravity(17);
@@ -238,7 +238,7 @@ public final class qe {
                     textView4.setIncludeFontPadding(false);
                     textView4.setClickable(true);
                     textView4.setFocusable(true);
-                    float fA3 = Main.a(68.0f);
+                    float fA3 = Main.dp(68.0f);
                     ColorStateList colorStateListValueOf = ColorStateList.valueOf(i6);
                     GradientDrawable gradientDrawable3 = new GradientDrawable();
                     gradientDrawable3.setColor(0);
@@ -250,14 +250,14 @@ public final class qe {
                     textView4.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public final void onClick(View view4) {
-                            qe.a(this.f$0, activity, view4);
+                            qe.a(qe.this, activity, view4);
                         }
                     });
-                    LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, Main.a(48.0f));
-                    layoutParams9.topMargin = Main.a(12.0f);
+                    LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, Main.dp(48.0f));
+                    layoutParams9.topMargin = Main.dp(12.0f);
                     linearLayout7.addView(textView4, layoutParams9);
                     LinearLayout.LayoutParams layoutParams10 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams10.topMargin = Main.a(24.0f);
+                    layoutParams10.topMargin = Main.dp(24.0f);
                     linearLayout2.addView(linearLayout7, layoutParams10);
                     ScrollView scrollView = new ScrollView(activity);
                     scrollView.setFillViewport(false);
@@ -292,23 +292,23 @@ public final class qe {
                     linearLayout.getViewTreeObserver().addOnPreDrawListener(new pe(linearLayout));
                     b.postDelayed(oeVar, 1000L);
                     h6.a(4, h6.a("Shown", new Object[0]), (Throwable) null);
-                    obj = Result.constructor-impl(Boolean.TRUE);
-                } catch (Throwable th) {
-                    th = th;
+                    obj = RCompat.m6constructorimpl(Boolean.TRUE);
+                } catch (Throwable th_2) {
+                    th = th_2;
                     Result.Companion companion2 = Result.Companion;
-                    obj = Result.constructor-impl(ResultKt.createFailure(th));
+                    obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                 }
             } catch (Throwable th2) {
                 th = th2;
                 i = 6;
             }
-            Throwable th3 = Result.exceptionOrNull-impl(obj);
+            Throwable th3 = RCompat.m9exceptionOrNullimpl(obj);
             if (th3 != null) {
                 c.set(false);
                 h6.a(i, h6.a("Show failed", new Object[0]), th3);
             }
             Boolean bool = Boolean.FALSE;
-            if (Result.isFailure-impl(obj)) {
+            if (RCompat.m12isFailureimpl(obj)) {
                 obj = bool;
             }
             ((Boolean) obj).getClass();
@@ -385,13 +385,11 @@ public final class qe {
             textView.setEnabled(false);
             textView.setClickable(false);
             StringCompanionObject stringCompanionObject = StringCompanionObject.INSTANCE;
-            Locale locale = Locale.getDefault();
-            m6 m6Var = l6.a;
-            CharSequence charSequence = String.format(locale, l6.a("startup_accept_countdown", "Принять через %d..."), Arrays.copyOf(new Object[]{Integer.valueOf(intRef.element)}, 1));
+            CharSequence charSequence = String.format(Locale.getDefault(), l6.a("startup_accept_countdown", "Принять через %d..."), Arrays.copyOf(new Object[]{Integer.valueOf(intRef.element)}, 1));
             textView.setText(charSequence);
             qeVar.getClass();
             int iArgb = Color.argb(128, Color.red(i), Color.green(i), Color.blue(i));
-            float fA = Main.a(68.0f);
+            float fA = Main.dp(68.0f);
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setColor(iArgb);
             gradientDrawable.setCornerRadius(fA);
@@ -401,10 +399,9 @@ public final class qe {
         textView.setEnabled(true);
         textView.setClickable(true);
         textView.setFocusable(true);
-        m6 m6Var2 = l6.a;
         textView.setText(l6.a("startup_accept", "Принимаю"));
         qeVar.getClass();
-        float fA2 = Main.a(68.0f);
+        float fA2 = Main.dp(68.0f);
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setColor(i);
         gradientDrawable2.setCornerRadius(fA2);
@@ -437,10 +434,10 @@ public final class qe {
         try {
             Result.Companion companion = Result.Companion;
             activity.finishAffinity();
-            Result.constructor-impl(Unit.INSTANCE);
+            RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            Result.constructor-impl(ResultKt.createFailure(th));
+            RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
         Process.killProcess(Process.myPid());
     }
@@ -461,16 +458,16 @@ public final class qe {
     }
 
     public static void a(Activity activity, String str) {
-        Object obj;
+        Object obj = null;
         try {
             Result.Companion companion = Result.Companion;
             activity.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(str)));
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Open url failed", new Object[0]), th2);
         }
@@ -482,8 +479,8 @@ public final class qe {
         linearLayout.setGravity(16);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
         a.getClass();
-        linearLayout.setPadding(Main.a(16.0f), Main.a(16.0f), Main.a(16.0f), Main.a(16.0f));
-        float fA = Main.a(16.0f);
+        linearLayout.setPadding(Main.dp(16.0f), Main.dp(16.0f), Main.dp(16.0f), Main.dp(16.0f));
+        float fA = Main.dp(16.0f);
         ColorStateList colorStateListValueOf = ColorStateList.valueOf(i3);
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(i);
@@ -504,7 +501,7 @@ public final class qe {
         imageView.setImageDrawable(a((Context) activity, str));
         ImageView.ScaleType scaleType = ImageView.ScaleType.FIT_CENTER;
         imageView.setScaleType(scaleType);
-        linearLayout.addView(imageView, new LinearLayout.LayoutParams(Main.a(20.0f), Main.a(20.0f)));
+        linearLayout.addView(imageView, new LinearLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f)));
         TextView textView = new TextView(activity);
         textView.setText(str2);
         textView.setTextColor(i2);
@@ -514,14 +511,14 @@ public final class qe {
         textView.setMaxLines(2);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
-        layoutParams.setMarginStart(Main.a(f));
-        layoutParams.setMarginEnd(Main.a(12.0f));
+        layoutParams.setMarginStart(Main.dp(f));
+        layoutParams.setMarginEnd(Main.dp(12.0f));
         Unit unit = Unit.INSTANCE;
         linearLayout.addView(textView, layoutParams);
         ImageView imageView2 = new ImageView(activity);
         imageView2.setImageDrawable(a((Context) activity, "ic_startup_chevron"));
         imageView2.setScaleType(scaleType);
-        linearLayout.addView(imageView2, new LinearLayout.LayoutParams(Main.a(20.0f), Main.a(20.0f)));
+        linearLayout.addView(imageView2, new LinearLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f)));
         return linearLayout;
     }
 
@@ -535,8 +532,8 @@ public final class qe {
         linearLayout.setGravity(16);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
         a.getClass();
-        linearLayout.setPadding(Main.a(16.0f), Main.a(16.0f), Main.a(16.0f), Main.a(16.0f));
-        float fA = Main.a(16.0f);
+        linearLayout.setPadding(Main.dp(16.0f), Main.dp(16.0f), Main.dp(16.0f), Main.dp(16.0f));
+        float fA = Main.dp(16.0f);
         ColorStateList colorStateListValueOf = ColorStateList.valueOf(i3);
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(i);
@@ -557,7 +554,7 @@ public final class qe {
         imageView.setImageDrawable(a((Context) activity, str));
         ImageView.ScaleType scaleType = ImageView.ScaleType.FIT_CENTER;
         imageView.setScaleType(scaleType);
-        linearLayout.addView(imageView, new LinearLayout.LayoutParams(Main.a(20.0f), Main.a(20.0f)));
+        linearLayout.addView(imageView, new LinearLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f)));
         LinearLayout linearLayout2 = new LinearLayout(activity);
         linearLayout2.setOrientation(1);
         TextView textView = new TextView(activity);
@@ -579,17 +576,17 @@ public final class qe {
         textView2.setMaxLines(2);
         textView2.setEllipsize(truncateAt);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
-        layoutParams.topMargin = Main.a(4.0f);
+        layoutParams.topMargin = Main.dp(4.0f);
         Unit unit = Unit.INSTANCE;
         linearLayout2.addView(textView2, layoutParams);
         LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, -2, 1.0f);
-        layoutParams2.setMarginStart(Main.a(16.0f));
-        layoutParams2.setMarginEnd(Main.a(12.0f));
+        layoutParams2.setMarginStart(Main.dp(16.0f));
+        layoutParams2.setMarginEnd(Main.dp(12.0f));
         linearLayout.addView(linearLayout2, layoutParams2);
         ImageView imageView2 = new ImageView(activity);
         imageView2.setTag("startup_check");
         imageView2.setScaleType(scaleType);
-        linearLayout.addView(imageView2, new LinearLayout.LayoutParams(Main.a(20.0f), Main.a(20.0f)));
+        linearLayout.addView(imageView2, new LinearLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f)));
         return linearLayout;
     }
 
@@ -607,28 +604,28 @@ public final class qe {
         gradientDrawable.setShape(1);
         gradientDrawable.setColor(0);
         a.getClass();
-        gradientDrawable.setStroke(Main.a(1.5f), i);
-        gradientDrawable.setSize(Main.a(20.0f), Main.a(20.0f));
+        gradientDrawable.setStroke(Main.dp(1.5f), i);
+        gradientDrawable.setSize(Main.dp(20.0f), Main.dp(20.0f));
         imageView.setImageDrawable(gradientDrawable);
         imageView.setImageTintList(null);
     }
 
     public final void a(LinearLayout linearLayout, final Dialog dialog, final Function0 function0) {
-        Object obj;
+        Object obj = null;
         try {
             Result.Companion companion = Result.Companion;
             linearLayout.animate().translationY(linearLayout.getHeight()).setDuration(220L).withEndAction(new Runnable() {
                 @Override
                 public final void run() {
-                    qe.a(this.f$0, dialog, function0);
+                    qe.a(qe.this, dialog, function0);
                 }
             }).start();
-            obj = Result.constructor-impl(Unit.INSTANCE);
+            obj = RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.exceptionOrNull-impl(obj) != null) {
+        if (RCompat.m9exceptionOrNullimpl(obj) != null) {
             a.getClass();
             a(dialog);
             if (function0 != null) {
@@ -651,15 +648,15 @@ public final class qe {
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-            Result.constructor-impl(Unit.INSTANCE);
+            RCompat.m6constructorimpl(Unit.INSTANCE);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            Result.constructor-impl(ResultKt.createFailure(th));
+            RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
     }
 
     public static int a() {
-        Object obj;
+        Object obj = null;
         int color;
         try {
             Result.Companion companion = Result.Companion;
@@ -668,20 +665,20 @@ public final class qe {
             } else {
                 color = ThemeHooks.a();
             }
-            obj = Result.constructor-impl(Integer.valueOf(color));
+            obj = RCompat.m6constructorimpl(Integer.valueOf(color));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
         Integer numValueOf = Integer.valueOf(Color.parseColor("#FD2C56"));
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = numValueOf;
         }
         return ((Number) obj).intValue();
     }
 
     public static Drawable a(Context context, String str) {
-        Object obj;
+        Object obj = null;
         BitmapDrawable bitmapDrawable;
         try {
             Result.Companion companion = Result.Companion;
@@ -694,7 +691,7 @@ public final class qe {
                     bitmapDrawable = new BitmapDrawable(context.getResources(), bitmapDecodeStream);
                 }
                 CloseableKt.closeFinally(inputStreamOpen, (Throwable) null);
-                obj = Result.constructor-impl(bitmapDrawable);
+                obj = RCompat.m6constructorimpl(bitmapDrawable);
             } catch (Throwable th) {
                 try {
                     throw th;
@@ -705,8 +702,8 @@ public final class qe {
             }
         } catch (Throwable th3) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th3));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
         }
-        return (Drawable) (Result.isFailure-impl(obj) ? null : obj);
+        return (Drawable) (RCompat.m12isFailureimpl(obj) ? null : obj);
     }
 }

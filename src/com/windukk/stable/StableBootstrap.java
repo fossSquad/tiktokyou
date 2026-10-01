@@ -1,9 +1,9 @@
 package com.windukk.stable;
 
-import a.d;
 import a.e;
-import a.f;
 import a.g;
+import a.i;
+import a.j;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
@@ -15,56 +15,59 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public final class StableBootstrap {
-    public static boolean a;
+
+    public static boolean f6a;
 
     static {
     }
 
-    public static void a(final e eVar, final d dVar) {
+    public static void a(final g gVar, final e eVar) {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public final void run() {
-                StableBootstrap.b(eVar, dVar);
+                StableBootstrap.b(gVar, eVar);
             }
         }, 10000L);
     }
 
-    public static  void b(e eVar, d dVar) {
+    public static  void b(g gVar, e eVar) {
         try {
-            eVar.a(dVar);
-            Log.i("TTModBootstrap", "Dynamic module health confirmed (" + dVar.e + ")");
+            gVar.a(eVar);
+            Log.i("TTModBootstrap", "Dynamic module health confirmed (" + eVar.e + ")");
         } catch (IOException e) {
             Log.e("TTModBootstrap", "Cannot confirm dynamic module health", e);
         }
     }
 
     public static synchronized void start(Application application, Context context) {
-        if (!a) {
-            a = true;
-            g.a = context.getApplicationContext() != null ? context.getApplicationContext() : context;
-            e eVar = new e(context);
+        Throwable th = null;
+        if (!f6a) {
+            f6a = true;
+            j.f4a = context.getApplicationContext() != null ? context.getApplicationContext() : context;
+            g gVar = new g(context);
+            e eVar = null;
             File file = null;
             try {
-                File fileJ = eVar.j();
+                e eVarM = gVar.m();
                 try {
                     HookBridge.disableHiddenApiRestrictions();
                     ClassLoader classLoader = application.getClassLoader();
-                    f.a(context, classLoader, ((d) fileJ).b);
-                    File file2 = ((d) fileJ).c == null ? null : new File(((d) fileJ).c, "resources");
+                    i.a(context, classLoader, eVarM.b);
+                    File file2 = eVarM.c == null ? null : new File(eVarM.c, "resources");
                     if (file2 != null && file2.isDirectory()) {
                         file = file2;
                     }
-                    ResourceOverlay.a = file;
+                    ResourceOverlay.f5a = file;
                     a(application, context, classLoader);
-                    if (((d) fileJ).d) {
-                        a(eVar, fileJ);
+                    if (eVarM.d) {
+                        a(gVar, eVarM);
                     } else {
-                        eVar.a(fileJ);
+                        gVar.a(eVarM);
                     }
-                    Log.i("TTModBootstrap", "Dynamic module started from " + ((d) fileJ).a + " (" + ((d) fileJ).e + ")");
-                } catch (Throwable th) {
-                    th = th;
-                    file = fileJ;
+                    Log.i("TTModBootstrap", "Dynamic module started from " + eVarM.f1a + " (" + eVarM.e + ")");
+                } catch (Throwable th_c) {
+                    th = th_c;
+                    eVar = eVarM;
                     if (th instanceof InvocationTargetException) {
                         InvocationTargetException invocationTargetException = (InvocationTargetException) th;
                         if (invocationTargetException.getCause() != null) {
@@ -72,8 +75,8 @@ public final class StableBootstrap {
                         }
                     }
                     Log.e("TTModBootstrap", "Dynamic module startup failed", th);
-                    if (file != null) {
-                        eVar.a(file, th);
+                    if (eVar != null) {
+                        gVar.a(eVar, th);
                     }
                 }
             } catch (Throwable th2) {
@@ -82,7 +85,7 @@ public final class StableBootstrap {
         }
     }
 
-    public static void a(Application application, Context context, ClassLoader classLoader) throws IllegalAccessException, InvocationTargetException {
+    public static void a(Application application, Context context, ClassLoader classLoader) throws IllegalAccessException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException {
         Class.forName("com.windukk.mod.Main", true, classLoader).getMethod("start", Application.class, Context.class).invoke(null, application, context);
     }
 }

@@ -45,12 +45,12 @@ public abstract class f6 {
         Object obj;
         try {
             Result.Companion companion = Result.Companion;
-            obj = Result.constructor-impl(a.parseToJsonElement(str));
+            obj = RCompat.m6constructorimpl(a.parseToJsonElement(str));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         return (JsonElement) obj;
@@ -86,7 +86,7 @@ public abstract class f6 {
                 Object value = entry.getValue();
                 String str2 = key instanceof String ? (String) key : null;
                 if (str2 != null) {
-                    JsonNull jsonNullA = a(value);
+                    JsonNull jsonNullA = (JsonNull) a(value);
                     if (jsonNullA == null) {
                         jsonNullA = JsonNull.INSTANCE;
                     }
@@ -105,7 +105,7 @@ public abstract class f6 {
             ArrayList arrayList2 = new ArrayList(CollectionsKt.collectionSizeOrDefault(iterable, 10));
             Iterator it = iterable.iterator();
             while (it.hasNext()) {
-                JsonNull jsonNullA2 = a(it.next());
+                JsonNull jsonNullA2 = (JsonNull) a(it.next());
                 if (jsonNullA2 == null) {
                     jsonNullA2 = JsonNull.INSTANCE;
                 }
@@ -118,7 +118,7 @@ public abstract class f6 {
             ArrayList arrayList3 = new ArrayList(CollectionsKt.collectionSizeOrDefault(intRangeUntil, 10));
             IntIterator it2 = intRangeUntil.iterator();
             while (it2.hasNext()) {
-                JsonNull jsonNullA3 = a(Array.get(obj, it2.nextInt()));
+                JsonNull jsonNullA3 = (JsonNull) a(Array.get(obj, it2.nextInt()));
                 if (jsonNullA3 == null) {
                     jsonNullA3 = JsonNull.INSTANCE;
                 }
@@ -144,7 +144,7 @@ public abstract class f6 {
         if (jsonObject != null) {
             for (Map.Entry entry : jsonObject.entrySet()) {
                 String str2 = (String) entry.getKey();
-                JsonPrimitive jsonPrimitive = (JsonElement) entry.getValue();
+                JsonPrimitive jsonPrimitive = (JsonPrimitive) entry.getValue();
                 JsonPrimitive jsonPrimitive2 = jsonPrimitive instanceof JsonPrimitive ? jsonPrimitive : null;
                 if (jsonPrimitive2 == null || jsonPrimitive2 == JsonNull.INSTANCE) {
                     doubleOrNull = null;

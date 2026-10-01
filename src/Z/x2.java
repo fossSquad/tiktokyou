@@ -10,7 +10,7 @@ public final  class x2 extends FunctionReferenceImpl implements Function0 {
     }
 
     public final Object invoke() {
-        h3 h3Var = (h3) ((FunctionReferenceImpl) this).receiver;
+        h3 h3Var = (h3) this.receiver;
         h3Var.getClass();
         AtomicLong atomicLong = c4.a;
         c4.a(h3Var.a);

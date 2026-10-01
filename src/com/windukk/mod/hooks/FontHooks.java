@@ -1,4 +1,12 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
+import Z.m5;
+import Z.n5;
+import Z.o5;
+import Z.p5;
+import Z.q5;
+import Z.r5;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -58,7 +66,7 @@ public abstract class FontHooks {
                 typefaceCreateFromFile = Typeface.DEFAULT;
             } else {
                 if (str.startsWith("file:")) {
-                    File file = new File(Main.a().getFilesDir(), "fonts/" + str.substring("file:".length()));
+                    File file = new File(Main.getApplicationContext().getFilesDir(), "fonts/" + str.substring("file:".length()));
                     if (file.exists()) {
                         typefaceCreateFromFile = Typeface.createFromFile(file);
                     }
@@ -67,7 +75,7 @@ public abstract class FontHooks {
                     ThreadLocal threadLocal = d;
                     threadLocal.set(Boolean.TRUE);
                     try {
-                        Typeface typefaceCreateFromAsset = Typeface.createFromAsset(Main.a().getAssets(), "mod_fonts/" + strSubstring);
+                        Typeface typefaceCreateFromAsset = Typeface.createFromAsset(Main.getApplicationContext().getAssets(), "mod_fonts/" + strSubstring);
                         threadLocal.set(Boolean.FALSE);
                         typefaceCreateFromFile = typefaceCreateFromAsset;
                     } catch (Throwable th) {
@@ -92,7 +100,7 @@ public abstract class FontHooks {
         }
     }
 
-    public static Typeface a(String str, int i) {
+    public static Typeface a(int i, String str) {
         Typeface typefaceA = a(str);
         if (typefaceA == null) {
             return null;

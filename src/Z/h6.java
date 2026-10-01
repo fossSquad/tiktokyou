@@ -43,7 +43,7 @@ public abstract class h6 {
         if (c == null) {
             return;
         }
-        a("========== begin of log ==========\nTime: " + d.format(new Date()) + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL + "\nAndroid OS: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")\nDisplay: " + Build.DISPLAY + "\nBoard: " + Build.BOARD + "\nHardware: " + Build.HARDWARE + "\nABIs: " + Arrays.toString(Build.SUPPORTED_ABIS) + "\nVersion: " + Main.b + "\nVersion code: 1788704106\n");
+        a("========== begin of log ==========\nTime: " + d.format(new Date()) + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL + "\nAndroid OS: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")\nDisplay: " + Build.DISPLAY + "\nBoard: " + Build.BOARD + "\nHardware: " + Build.HARDWARE + "\nABIs: " + Arrays.toString(Build.SUPPORTED_ABIS) + "\nVersion: " + Main.MOD_VERSION + "\nVersion code: 1790876728\n");
     }
 
     public static void b(final File file) {
@@ -114,6 +114,7 @@ public abstract class h6 {
     }
 
     public static String b(Context context, File file, String str) throws Throwable {
+        Throwable th = null;
         ContentValues contentValues = new ContentValues();
         contentValues.put("_display_name", str);
         contentValues.put("mime_type", "application/zip");
@@ -141,8 +142,8 @@ public abstract class h6 {
                                     context.getContentResolver().update(uriInsert, contentValues2, null, null);
                                     try {
                                         return Environment.DIRECTORY_DOWNLOADS + "/TikTokYou/" + str;
-                                    } catch (Throwable th) {
-                                        th = th;
+                                    } catch (Throwable th_2) {
+                                        th = th_2;
                                     }
                                 }
                                 try {
@@ -297,17 +298,23 @@ public abstract class h6 {
             if (file2.exists() && !file2.delete()) {
                 Log.e("TTU_L", "Failed to delete temporary log archive: " + file2.getAbsolutePath());
             }
-            throw th2;
+            throw new RuntimeException(th2);
         }
     }
 
     public static int a(File file) {
+        Throwable th = null;
         int length;
         synchronized (a) {
             File[] fileArrD = d(b);
             if (fileArrD.length != 0) {
                 byte[] bArr = new byte[65536];
-                ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(file));
+                ZipOutputStream zipOutputStream;
+                try {
+                    zipOutputStream = new ZipOutputStream(new FileOutputStream(file));
+                } catch (Exception e) {
+                    return 0;
+                }
                 try {
                     for (File file2 : fileArrD) {
                         ZipEntry zipEntry = new ZipEntry(file2.getName());
@@ -321,7 +328,8 @@ public abstract class h6 {
                                     break;
                                 }
                                 zipOutputStream.write(bArr, 0, i);
-                            } catch (Throwable th) {
+                            } catch (Throwable th_2) {
+                                th = th_2;
                                 try {
                                     fileInputStream.close();
                                 } catch (Throwable th2) {
@@ -339,14 +347,18 @@ public abstract class h6 {
                         fileInputStream.close();
                         zipOutputStream.closeEntry();
                     }
-                    zipOutputStream.close();
+                    try {
+                        zipOutputStream.close();
+                    } catch (Throwable t9) { }
                     length = fileArrD.length;
                 } catch (Throwable th4) {
-                    zipOutputStream.close();
-                    throw th4;
+                    try {
+                        zipOutputStream.close();
+                    } catch (Throwable t9) { }
+                    throw new RuntimeException(th4);
                 }
             } else {
-                throw new IOException("No log files found");
+                throw new RuntimeException("No log files found");
             }
         }
         return length;
@@ -357,6 +369,7 @@ public abstract class h6 {
     }
 
     public static String a(Context context, File file, String str) throws IOException {
+        Throwable th = null;
         File externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         if (externalFilesDir == null) {
             externalFilesDir = context.getFilesDir();
@@ -382,7 +395,8 @@ public abstract class h6 {
                     }
                     try {
                         fileInputStream.close();
-                    } catch (Throwable th) {
+                    } catch (Throwable th_2) {
+                        th = th_2;
                         th.addSuppressed(th);
                     }
                     throw th;
@@ -393,11 +407,11 @@ public abstract class h6 {
                 } catch (Throwable th3) {
                     th2.addSuppressed(th3);
                 }
-                throw th2;
+                throw new RuntimeException(th2);
             }
         } catch (Throwable th4) {
             fileInputStream.close();
-            throw th4;
+            throw new RuntimeException(th4);
         }
     }
 }

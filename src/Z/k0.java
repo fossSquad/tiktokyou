@@ -63,18 +63,18 @@ public final class k0 {
         try {
             Result.Companion companion = Result.Companion;
             k0Var.getClass();
-            obj = Result.constructor-impl(c());
+            obj = RCompat.m6constructorimpl(c());
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Failed to load streak stickers", new Object[0]), th2);
         }
         a.getClass();
         List listListOf = CollectionsKt.listOf(new d0("spark_v1", null, null, "https://p16-tiktokcdn-com.akamaized.net/obj/im-resource-tiktok/fire.webp", true));
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = listListOf;
         }
         function1.invoke((List) obj);
@@ -130,17 +130,17 @@ public final class k0 {
                     arrayList.add(d0Var);
                 }
             }
-            obj = Result.constructor-impl(arrayList);
+            obj = RCompat.m6constructorimpl(arrayList);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Favorite stickers lookup failed", new Object[0]), th2);
         }
         List listEmptyList2 = CollectionsKt.emptyList();
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = listEmptyList2;
         }
         ArrayList arrayList2 = new ArrayList();
@@ -164,12 +164,12 @@ public final class k0 {
             Method methodA = dd.a(cls, strDecrypt, cls2, cls2, String.class);
             String strDecrypt2 = "favourite_tab";
             Boolean bool = Boolean.TRUE;
-            obj2 = Result.constructor-impl(methodA.invoke(obj, bool, bool, strDecrypt2));
+            obj2 = RCompat.m6constructorimpl(methodA.invoke(obj, bool, bool, strDecrypt2));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj2);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th2 != null) {
             h6.a(6, h6.a("Favorite refresh failed", new Object[0]), th2);
         }
@@ -188,16 +188,16 @@ public final class k0 {
             Result.Companion companion = Result.Companion;
             Constructor<?> declaredConstructor = Class.forName("X.0GLu").getDeclaredConstructor(null);
             declaredConstructor.setAccessible(true);
-            obj = Result.constructor-impl(declaredConstructor.newInstance(null));
+            obj = RCompat.m6constructorimpl(declaredConstructor.newInstance(null));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Sticker store unavailable", new Object[0]), th2);
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             return null;
         }
         return obj;
@@ -282,12 +282,12 @@ public final class k0 {
             } else {
                 objInvoke = null;
             }
-            obj2 = Result.constructor-impl(objInvoke);
+            obj2 = RCompat.m6constructorimpl(objInvoke);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             return null;
         }
         return obj2;
@@ -303,12 +303,12 @@ public final class k0 {
         }
         try {
             Result.Companion companion = Result.Companion;
-            obj2 = Result.constructor-impl(y7.a.a(obj.getClass(), new Class[0]).invoke(obj, null));
+            obj2 = RCompat.m6constructorimpl(y7.a.a(obj.getClass(), new Class[0]).invoke(obj, null));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        if (Result.isFailure-impl(obj2)) {
+        if (RCompat.m12isFailureimpl(obj2)) {
             obj2 = null;
         }
         List list = obj2 instanceof List ? (List) obj2 : null;
@@ -427,7 +427,6 @@ public final class k0 {
                                         obj3 = enumConstants[i];
                                         if (Intrinsics.areEqual(((Enum) obj3).name(), "DM_STICKER_PANEL")) {
                                             break;
-                                            break;
                                         }
                                         i++;
                                     }
@@ -506,28 +505,28 @@ public final class k0 {
                 Object objInvoke = o7.b.a(cls, new Class[0]).invoke(null, null);
                 context = objInvoke instanceof Context ? (Context) objInvoke : null;
             }
-            obj = Result.constructor-impl(context);
+            obj = RCompat.m6constructorimpl(context);
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Host application context lookup failed", new Object[0]), th2);
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = null;
         }
         Context context2 = (Context) obj;
-        if (context2 == null && (context2 = Main.e) == null) {
+        if (context2 == null && (context2 = Main.mainApplication) == null) {
             try {
                 Result.Companion companion3 = Result.Companion;
-                obj2 = Result.constructor-impl(Main.a());
+                obj2 = RCompat.m6constructorimpl(Main.getApplicationContext());
             } catch (Throwable th3) {
                 Result.Companion companion4 = Result.Companion;
-                obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+                obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th3));
             }
-            if (Result.isFailure-impl(obj2)) {
+            if (RCompat.m12isFailureimpl(obj2)) {
                 obj2 = null;
             }
             context2 = (Context) obj2;
@@ -563,16 +562,16 @@ public final class k0 {
             Field fieldA = h8.a.a(Class.forName("com.ss.android.ugc.aweme.im.sticker.api.IMStickerApi"));
             fieldA.setAccessible(true);
             Object obj2 = fieldA.get(null);
-            obj = Result.constructor-impl(obj2 == null ? null : i8.a.a(obj2.getClass(), new Class[0]).invoke(obj2, null));
+            obj = RCompat.m6constructorimpl(obj2 == null ? null : i8.a.a(obj2.getClass(), new Class[0]).invoke(obj2, null));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("IMStickerApi unavailable", new Object[0]), th2);
         }
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             return null;
         }
         return obj;
@@ -672,7 +671,7 @@ public final class k0 {
                             listCreateListBuilder.addAll(listA);
                             List listBuild2 = CollectionsKt.build(listCreateListBuilder);
                             arrayList = new ArrayList();
-                            while (r4.hasNext()) {
+                            for (Object obj2 : listBuild2) {
                                 a.getClass();
                                 strF = f(obj2);
                                 if (strF != null) {
@@ -710,7 +709,7 @@ public final class k0 {
                             listCreateListBuilder.addAll(listA);
                             List listBuild3 = CollectionsKt.build(listCreateListBuilder);
                             arrayList = new ArrayList();
-                            while (r4.hasNext()) {
+                            for (Object obj2 : listBuild3) {
                                 a.getClass();
                                 strF = f(obj2);
                                 if (strF != null) {
@@ -730,7 +729,7 @@ public final class k0 {
                     listCreateListBuilder.addAll(listA);
                     List listBuild4 = CollectionsKt.build(listCreateListBuilder);
                     arrayList = new ArrayList();
-                    while (r4.hasNext()) {
+                    for (Object obj2 : listBuild4) {
                         a.getClass();
                         strF = f(obj2);
                         if (strF != null) {
@@ -760,7 +759,12 @@ public final class k0 {
         ClassLoader classLoader = cls.getClassLoader();
         z7 z7Var = x7.a;
         Class<?> cls2 = Class.forName("X.03We", false, classLoader);
-        Object obj2 = x7.a.a(cls2).get(null);
+        Object obj2;
+        try {
+            obj2 = x7.a.a(cls2).get(null);
+        } catch (Throwable t) {
+            obj2 = null;
+        }
         if (obj2 != null) {
             f = obj2;
             return obj2;
@@ -817,13 +821,13 @@ public final class k0 {
                             if (listFilterNotNull == null) {
                                 listEmptyList2 = CollectionsKt.emptyList();
                             }
-                            obj = Result.constructor-impl(listFilterNotNull);
-                            th = Result.exceptionOrNull-impl(obj);
+                            obj = RCompat.m6constructorimpl(listFilterNotNull);
+                            th = RCompat.m9exceptionOrNullimpl(obj);
                             if (th != null) {
                                 h6.a(6, h6.a("Favorites API lookup failed", new Object[0]), th);
                             }
                             listEmptyList = CollectionsKt.emptyList();
-                            if (Result.isFailure-impl(obj)) {
+                            if (RCompat.m12isFailureimpl(obj)) {
                                 obj = listEmptyList;
                             }
                             return (List) obj;
@@ -834,17 +838,17 @@ public final class k0 {
                 }
             }
             listFilterNotNull = listEmptyList2;
-            obj = Result.constructor-impl(listFilterNotNull);
+            obj = RCompat.m6constructorimpl(listFilterNotNull);
         } catch (Throwable th2) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th2));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
         }
-        th = Result.exceptionOrNull-impl(obj);
+        th = RCompat.m9exceptionOrNullimpl(obj);
         if (th != null) {
             h6.a(6, h6.a("Favorites API lookup failed", new Object[0]), th);
         }
         listEmptyList = CollectionsKt.emptyList();
-        if (Result.isFailure-impl(obj)) {
+        if (RCompat.m12isFailureimpl(obj)) {
             obj = listEmptyList;
         }
         return (List) obj;

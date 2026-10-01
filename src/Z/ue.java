@@ -2,7 +2,7 @@ package Z;
 
 import com.ss.android.ugc.aweme.story.feed.immersive.digg.ImmersiveStoryDiggAssem;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.StoryEngagementHooks;
+import Z.StoryEngagementHooks;
 
 class ue extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

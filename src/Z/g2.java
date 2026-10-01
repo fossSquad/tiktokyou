@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 
 public final class g2 implements InvocationHandler {
-    public final  LinkedHashMap a;
-    public final  Object b;
+    public final LinkedHashMap a;
+    public final Object b;
 
     public g2(LinkedHashMap linkedHashMap, Object obj) {
         this.a = linkedHashMap;
@@ -22,6 +22,10 @@ public final class g2 implements InvocationHandler {
         if (objArr == null) {
             objArr = new Object[0];
         }
-        return method.invoke(obj2, objArr);
+        try {
+            return method.invoke(obj2, objArr);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

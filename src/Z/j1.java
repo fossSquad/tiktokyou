@@ -3,7 +3,7 @@ package Z;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.BadgeHooks;
+import Z.BadgeHooks;
 
 class j1 extends HookMethod {
     final  int a;

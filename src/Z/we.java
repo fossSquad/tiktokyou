@@ -5,7 +5,7 @@ import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.AwemeStatistics;
 import com.ss.android.ugc.aweme.feed.model.VideoItemParams;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.StoryEngagementHooks;
+import Z.StoryEngagementHooks;
 import java.util.Map;
 
 class we extends HookMethod {

@@ -1,4 +1,10 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.h6;
+import Z.p8;
+import Z.w1;
+import Z.x1;
+import Z.z9;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -81,7 +87,7 @@ public abstract class BrowserHooks {
 
     public static boolean a(Context context, String str, boolean z) {
         if (context == null) {
-            context = Main.a();
+            context = Main.getApplicationContext();
         }
         Uri uriA = a(str, z);
         if (uriA == null) {
@@ -103,7 +109,7 @@ public abstract class BrowserHooks {
             a(context, intent);
             context.startActivity(intent);
             if (concurrentHashMap.size() >= 32) {
-                for (Map.Entry entry : concurrentHashMap.entrySet()) {
+                for (Map.Entry entry : (java.util.Set<Map.Entry>) concurrentHashMap.entrySet()) {
                     if (jCurrentTimeMillis - ((Long) entry.getValue()).longValue() > 1500) {
                         a.remove(entry.getKey(), entry.getValue());
                     }

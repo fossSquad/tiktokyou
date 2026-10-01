@@ -7,6 +7,7 @@ import android.os.Looper;
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.mod.Main;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,6 +18,7 @@ import ni.shikatu.kotlin.Result;
 import ni.shikatu.kotlin.ResultKt;
 import ni.shikatu.kotlin.jvm.functions.Function0;
 import ni.shikatu.kotlin.ranges.RangesKt;
+import ni.shikatu.kotlin.text.StringsKt;
 
 public final class se {
     public static final Lazy f = LazyKt.lazy(new Function0() {
@@ -26,7 +28,11 @@ public final class se {
     });
     public static final Lazy g = LazyKt.lazy(new Function0() {
         public final Object invoke() {
-            return se.f();
+            try {
+                return se.f();
+            } catch (NoSuchMethodException e) {
+                return null;
+            }
         }
     });
     public static final Lazy h = LazyKt.lazy(new Function0() {
@@ -54,6 +60,16 @@ public final class se {
             return se.a();
         }
     });
+    public static final Lazy m = LazyKt.lazy(new Function0() {
+        public final Object invoke() {
+            return se.i();
+        }
+    });
+    public static final Lazy n = LazyKt.lazy(new Function0() {
+        public final Object invoke() {
+            return se.h();
+        }
+    });
     public final a4 a;
     public final Handler b;
     public final AtomicInteger c;
@@ -69,79 +85,190 @@ public final class se {
         handler.post(new Runnable() {
             @Override
             public final void run() {
-                se.a(this.f$0);
+                se.a(se.this);
             }
         });
     }
 
-    public static final void a(se seVar) {
+    public static String a(a4 a4Var) {
         Object obj;
-        Object obj2;
-        seVar.getClass();
-        try {
-            Result.Companion companion = Result.Companion;
-            Constructor constructor = (Constructor) g.getValue();
-            String strDecrypt = seVar.a.e;
-            if (strDecrypt == null) {
-                strDecrypt = "download";
-            }
-            obj = Result.constructor-impl(constructor.newInstance(strDecrypt, "download", seVar.a.c));
-        } catch (Throwable th) {
-            Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
-        }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
-        if (th2 != null) {
-            h6.a(6, h6.a("Stock download progress provider unavailable", new Object[0]), th2);
-        }
-        if (Result.isFailure-impl(obj)) {
-            obj = null;
-        }
-        seVar.e = obj;
-        if (obj != null) {
+        Field field = (Field) n.getValue();
+        String str = null;
+        if (field != null) {
             try {
-                Result.Companion companion3 = Result.Companion;
-                Method method = (Method) h.getValue();
-                Activity activity = (Activity) u2.f.get();
-                method.invoke(obj, (activity == null || activity.isFinishing() || activity.isDestroyed()) ? Main.a() : activity);
-                obj2 = Result.constructor-impl(((Method) i.getValue()).invoke(obj, Integer.valueOf(RangesKt.coerceAtLeast(seVar.c.get(), 0))));
-            } catch (Throwable th3) {
-                Result.Companion companion4 = Result.Companion;
-                obj2 = Result.constructor-impl(ResultKt.createFailure(th3));
+                Result.Companion companion = Result.Companion;
+                Object obj2 = field.get(a4Var.b);
+                obj = RCompat.m6constructorimpl(obj2 instanceof String ? (String) obj2 : null);
+            } catch (Throwable th) {
+                Result.Companion companion2 = Result.Companion;
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
-            Throwable th4 = Result.exceptionOrNull-impl(obj2);
-            if (th4 != null) {
-                h6.a(6, h6.a("Stock download progress could not be shown", new Object[0]), th4);
-                seVar.e = null;
+            if (RCompat.m12isFailureimpl(obj)) {
+                obj = null;
+            }
+            String str2 = (String) obj;
+            if (str2 != null) {
+                if (StringsKt.isBlank(str2)) {
+                    str2 = null;
+                }
+                if (str2 != null) {
+                    return str2;
+                }
             }
         }
+        String str3 = a4Var.e;
+        if (str3 != null && !StringsKt.isBlank(str3)) {
+            str = str3;
+        }
+        return str == null ? "download" : str;
     }
 
     public static final Method b() {
-        return t7.d.a((Class) f.getValue(), Integer.TYPE);
+        try {
+            return com.windukk.mod.a.d.a((Class) f.getValue(), Integer.TYPE);
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
     public static final Method c() {
-        return t7.b.a((Class) f.getValue(), Integer.TYPE);
+        try {
+            return com.windukk.mod.a.b.a((Class) f.getValue(), Integer.TYPE);
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
     public static final Method d() {
-        return t7.c.a((Class) f.getValue(), new Class[0]);
+        try {
+            return com.windukk.mod.a.c.a((Class) f.getValue(), new Class[0]);
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
     public static final Class e() {
-        p8 p8Var = t7.a;
-        return Class.forName("com.ss.android.ugc.trill.download.ui.DownloadDialogProvider", false, se.class.getClassLoader());
+        try {
+            p8 p8Var = com.windukk.mod.a.a;
+            return Class.forName("X.164V", false, se.class.getClassLoader());
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
     public static final Constructor f() throws NoSuchMethodException {
-        Constructor declaredConstructor = ((Class) f.getValue()).getDeclaredConstructor(String.class, String.class, Aweme.class);
+        Constructor declaredConstructor = ((Class) f.getValue()).getDeclaredConstructor(Integer.TYPE, Aweme.class, String.class);
         declaredConstructor.setAccessible(true);
         return declaredConstructor;
     }
 
     public static final Method g() {
-        return t7.a.a((Class) f.getValue(), Context.class);
+        try {
+            return com.windukk.mod.a.a.a((Class) f.getValue(), Context.class);
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    public static final Field h() {
+        Object obj;
+        try {
+            Result.Companion companion = Result.Companion;
+            z7 z7Var = r7.b;
+            z7 z7Var2 = r7.a;
+            obj = RCompat.m6constructorimpl(z7Var.a(Class.forName("X.167M", false, se.class.getClassLoader())));
+        } catch (Throwable th) {
+            Result.Companion companion2 = Result.Companion;
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
+        }
+        if (RCompat.m12isFailureimpl(obj)) {
+            obj = null;
+        }
+        return (Field) obj;
+    }
+
+    public static final Field i() {
+        Object obj;
+        try {
+            Result.Companion companion = Result.Companion;
+            z7 z7Var = r7.c;
+            z7 z7Var2 = r7.a;
+            obj = RCompat.m6constructorimpl(z7Var.a(Class.forName("X.167M", false, se.class.getClassLoader())));
+        } catch (Throwable th) {
+            Result.Companion companion2 = Result.Companion;
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
+        }
+        if (RCompat.m12isFailureimpl(obj)) {
+            obj = null;
+        }
+        return (Field) obj;
+    }
+
+    public static final void a(se seVar) {
+        Object obj;
+        Object obj2;
+        Object obj3;
+        int iIntValue;
+        seVar.getClass();
+        try {
+            Result.Companion companion = Result.Companion;
+            Constructor constructor = (Constructor) g.getValue();
+            a4 a4Var = seVar.a;
+            Field field = (Field) m.getValue();
+            if (field != null) {
+                try {
+                    obj3 = RCompat.m6constructorimpl(Integer.valueOf(field.getInt(a4Var.b)));
+                } catch (Throwable th) {
+                    Result.Companion companion2 = Result.Companion;
+                    obj3 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
+                }
+                if (RCompat.m12isFailureimpl(obj3)) {
+                    obj3 = null;
+                }
+                Integer num = (Integer) obj3;
+                if (num != null) {
+                    iIntValue = num.intValue();
+                } else {
+                    iIntValue = 0;
+                }
+                Integer numValueOf = Integer.valueOf(iIntValue);
+                a4 a4Var2 = seVar.a;
+                obj = RCompat.m6constructorimpl(constructor.newInstance(numValueOf, a4Var2.c, a(a4Var2)));
+            } else {
+                iIntValue = 0;
+                Integer numValueOf2 = Integer.valueOf(iIntValue);
+                a4 a4Var3 = seVar.a;
+                obj = RCompat.m6constructorimpl(constructor.newInstance(numValueOf2, a4Var3.c, a(a4Var3)));
+            }
+        } catch (Throwable th2) {
+            Result.Companion companion3 = Result.Companion;
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
+        }
+        Throwable th3 = RCompat.m9exceptionOrNullimpl(obj);
+        if (th3 != null) {
+            h6.a(6, h6.a("Stock download progress provider unavailable", new Object[0]), th3);
+        }
+        if (RCompat.m12isFailureimpl(obj)) {
+            obj = null;
+        }
+        seVar.e = obj;
+        if (obj != null) {
+            try {
+                Result.Companion companion4 = Result.Companion;
+                Method method = (Method) h.getValue();
+                Activity activity = (Activity) u2.f.get();
+                method.invoke(obj, (activity == null || activity.isFinishing() || activity.isDestroyed()) ? Main.getApplicationContext() : activity);
+                obj2 = RCompat.m6constructorimpl(((Method) i.getValue()).invoke(obj, Integer.valueOf(RangesKt.coerceAtLeast(seVar.c.get(), 0))));
+            } catch (Throwable th4) {
+                Result.Companion companion5 = Result.Companion;
+                obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th4));
+            }
+            Throwable th5 = RCompat.m9exceptionOrNullimpl(obj2);
+            if (th5 != null) {
+                h6.a(6, h6.a("Stock download progress could not be shown", new Object[0]), th5);
+                seVar.e = null;
+            }
+        }
     }
 
     public final void a(int i2) {
@@ -155,7 +282,7 @@ public final class se {
         this.b.post(new Runnable() {
             @Override
             public final void run() {
-                se.a(this.f$0, iCoerceIn);
+                se.a(se.this, iCoerceIn);
             }
         });
     }
@@ -168,12 +295,12 @@ public final class se {
         }
         try {
             Result.Companion companion = Result.Companion;
-            obj2 = Result.constructor-impl(((Method) i.getValue()).invoke(obj, Integer.valueOf(i2)));
+            obj2 = RCompat.m6constructorimpl(((Method) i.getValue()).invoke(obj, Integer.valueOf(i2)));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj2 = Result.constructor-impl(ResultKt.createFailure(th));
+            obj2 = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj2);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj2);
         if (th2 != null) {
             h6.a(6, h6.a("Stock download progress update failed", new Object[0]), th2);
         }
@@ -184,7 +311,7 @@ public final class se {
             this.b.post(new Runnable() {
                 @Override
                 public final void run() {
-                    se.a(this.f$0, function0, reVar);
+                    se.a(se.this, function0, reVar);
                 }
             });
         }
@@ -207,22 +334,26 @@ public final class se {
                 } else {
                     throw new NoWhenBranchMatchedException();
                 }
-                obj = Result.constructor-impl(objInvoke);
+                obj = RCompat.m6constructorimpl(objInvoke);
             } catch (Throwable th) {
                 Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th));
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
-            Throwable th2 = Result.exceptionOrNull-impl(obj);
+            Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
             if (th2 != null) {
                 h6.a(6, h6.a("Stock download progress completion failed", new Object[0]), th2);
             }
-            Result.box-impl(obj);
+            RCompat.m5boximpl(obj);
         }
         seVar.e = null;
         function0.invoke();
     }
 
     public static final Method a() {
-        return t7.e.a((Class) f.getValue(), new Class[0]);
+        try {
+            return com.windukk.mod.a.e.a((Class) f.getValue(), new Class[0]);
+        } catch (Throwable t) {
+            return null;
+        }
     }
 }

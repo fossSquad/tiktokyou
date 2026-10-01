@@ -14,12 +14,12 @@ public final class s implements Runnable {
         try {
             try {
                 Result.Companion companion = Result.Companion;
-                obj = Result.constructor-impl(Main.a());
+                obj = RCompat.m6constructorimpl(Main.getApplicationContext());
             } catch (Throwable th) {
                 Result.Companion companion2 = Result.Companion;
-                obj = Result.constructor-impl(ResultKt.createFailure(th));
+                obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
             }
-            if (Result.isFailure-impl(obj)) {
+            if (RCompat.m12isFailureimpl(obj)) {
                 obj = null;
             }
             Context context = (Context) obj;

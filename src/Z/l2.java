@@ -2,7 +2,7 @@ package Z;
 
 import android.view.View;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.CommentStickerHooks;
+import Z.CommentStickerHooks;
 
 class l2 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

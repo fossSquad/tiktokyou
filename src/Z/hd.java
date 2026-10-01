@@ -53,12 +53,12 @@ public abstract class hd {
         }
         String str = edVar.d;
         Bitmap bitmapA = null;
-        Bitmap bitmapA2 = hd$$ExternalSyntheticBackport0.m(str) ? null : a(baseActivity, "mod_icons/flags_new/ic_flag_" + str.toLowerCase(Locale.ROOT) + ".png");
+        Bitmap bitmapA2 = StringUtils.isBlank(str) ? null : a(baseActivity, "mod_icons/flags_new/ic_flag_" + str.toLowerCase(Locale.ROOT) + ".png");
         if (bitmapA2 != null) {
             bitmapA = bitmapA2;
         } else {
             String str2 = edVar.b;
-            if (!hd$$ExternalSyntheticBackport0.m(str2)) {
+            if (!StringUtils.isBlank(str2)) {
                 switch (str2.hashCode()) {
                     case -1990164040:
                         strDecrypt = !str2.equals("region_usa") ? null : "ic_flag_usa";

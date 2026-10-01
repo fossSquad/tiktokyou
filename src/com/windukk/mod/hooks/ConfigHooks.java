@@ -1,4 +1,10 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.e;
+import Z.f6;
+import Z.h6;
+import Z.oa;
+import Z.p2;
 
 import android.content.Context;
 import com.windukk.hook.HookBridge;
@@ -85,12 +91,15 @@ public abstract class ConfigHooks {
         map.put("tablet_enable_landscape_profile", bool2);
         map.put("repost_text_max_length", 99999);
         map.put("long_press_quick_comment", 1);
-        map.put("feed_right_use_large_icon_exp", 2);
+        map.put("feed_right_use_large_icon_exp", 0);
         map.put("feed_title_timestamp_trial", "v3");
         map.put("pugc_template_create_options", 1);
         map.put("my_music_ui_style_version", 1);
         map.put("repost_guide_button_opt_group", 1);
         map.put("tt_repost_element_bg_opt", 2);
+        map.put("repost_support_reply", 1);
+        map.put("repost_support_digg", 1);
+        map.put("tt_comment_repost_interaction", 1);
         map.put("photo_comment_new_anim", 0);
         map.put("comment_enable_live_photo", 1);
         map.put("comment_by_shooting", 1);
@@ -105,9 +114,29 @@ public abstract class ConfigHooks {
         map.put("feed_right_area_extend_ohr_exp", 0);
         map.put("feed_right_area_extend_ohr_small_screen_exp", 0);
         map.put("feed_right_area_extend_long_hand_exp", bool);
+        map.put("profile_bg_in_allow_list", 1);
+        map.put("profile_left_align", 1);
+        map.put("profile_left_align_ab_group", 11);
+        map.put("profile_left_align_avatar_opt", bool2);
+        map.put("profile_left_align_avatar_at_right_opt", bool2);
+        map.put("profile_left_align_avatar_and_info_merge", 1);
+        map.put("profile_left_align_right_avatar_nickname_opt_v2", bool2);
+        map.put("enable_profile_left_align_second_line_two_lines_show", bool2);
+        map.put("profile_left_align_relation_info_font_size_opt", bool2);
+        map.put("profile_left_align_right_avatar_large_font_opt", bool2);
+        map.put("profile_left_align_small_avatar", 0);
+        map.put("profile_left_align_bio_style_opt", bool2);
+        map.put("profile_left_align_cta_style_opt", bool2);
+        map.put("profile_left_align_advance_feature_style_opt", bool2);
+        map.put("profile_left_align_right_avatar_nickname_wordbreak_opt", bool2);
+        map.put("profile_left_align_pronouns", 1);
+        map.put("profile_left_align_recommend_card", 1);
+        map.put("profile_left_align_show_avatar_frame_opt", bool2);
+        map.put("profile_bg_enable_consumption_group", 3);
     }
 
     public static void a() {
+        Exception e = null;
         boolean z;
         int i;
         int i2 = 0;
@@ -115,7 +144,7 @@ public abstract class ConfigHooks {
         if (!b) {
             b = true;
             try {
-                Context contextA = Main.a();
+                Context contextA = Main.getApplicationContext();
                 if (contextA == null) {
                     String strDecrypt = "Context is null!";
                     Object obj = h6.a;
@@ -129,14 +158,14 @@ public abstract class ConfigHooks {
                     Object obj2 = h6.a;
                     h6.a(4, String.valueOf(str), (Throwable) null);
                 }
-            } catch (Exception e) {
-                String str2 = "Failed to load overrides: " + e;
+            } catch (Exception e2) {
+                String str2 = "Failed to load overrides: " + e2;
                 Object obj3 = h6.a;
                 h6.a(6, String.valueOf(str2), (Throwable) null);
             }
         }
         try {
-            for (Map.Entry entry : d.entrySet()) {
+            for (Map.Entry entry : (java.util.Set<Map.Entry>) d.entrySet()) {
                 HashMap map2 = a;
                 if (!map2.containsKey(entry.getKey())) {
                     map2.put((String) entry.getKey(), entry.getValue());
@@ -152,7 +181,7 @@ public abstract class ConfigHooks {
         if (map3.isEmpty()) {
             return;
         }
-        for (Map.Entry entry2 : map3.entrySet()) {
+        for (Map.Entry entry2 : (java.util.Set<Map.Entry>) map3.entrySet()) {
             Objects.toString(entry2.getValue());
             if (entry2.getValue() != null) {
                 entry2.getValue().getClass();
@@ -187,19 +216,10 @@ public abstract class ConfigHooks {
                                 } else {
                                     i6++;
                                 }
-                            } catch (ClassNotFoundException e3) {
+                            } catch (Exception e3) {
                                 String strA = new StringBuilder().append("Class not found: ").append(str4).append(" (skipping)").toString();
                                 Object obj5 = h6.a;
                                 h6.a(6, String.valueOf(strA), (Throwable) null);
-                                i4 += i;
-                                i3++;
-                                z2 = z;
-                                i2 = 0;
-                            } catch (Exception e4) {
-                                e = e4;
-                                String strA2 = new StringBuilder().append("Failed to hook ").append(str4).toString();
-                                Object obj6 = h6.a;
-                                h6.a(6, String.valueOf(strA2), e);
                                 i4 += i;
                                 i3++;
                                 z2 = z;
@@ -212,10 +232,7 @@ public abstract class ConfigHooks {
                         }
                         i5++;
                         z2 = z;
-                    } catch (ClassNotFoundException e5) {
-                        z = z2;
-                    } catch (Exception e6) {
-                        e = e6;
+                    } catch (Exception e5) {
                         z = z2;
                     }
                 }

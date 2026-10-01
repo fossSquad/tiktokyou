@@ -26,7 +26,7 @@ public final class ne implements ViewTreeObserver.OnGlobalLayoutListener {
         this.a.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         int i = (int) (this.b.getResources().getDisplayMetrics().heightPixels * 0.92f);
         qe.a.getClass();
-        int iCoerceAtLeast = RangesKt.coerceAtLeast(i - (Main.a(16.0f) + (Main.a(4.0f) + Main.a(12.0f))), Main.a(200.0f));
+        int iCoerceAtLeast = RangesKt.coerceAtLeast(i - (Main.dp(16.0f) + (Main.dp(4.0f) + Main.dp(12.0f))), Main.dp(200.0f));
         if (this.c.getHeight() > iCoerceAtLeast) {
             ScrollView scrollView = this.d;
             ViewGroup.LayoutParams layoutParams = scrollView.getLayoutParams();

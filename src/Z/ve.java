@@ -2,7 +2,7 @@ package Z;
 
 import android.view.View;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.StoryEngagementHooks;
+import Z.StoryEngagementHooks;
 import java.util.Map;
 
 class ve extends HookMethod {
@@ -18,7 +18,7 @@ class ve extends HookMethod {
     }
 
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        final View view;
+        View view = null;
         try {
             Object[] objArr = hookMethodParam.args;
             Map map = StoryEngagementHooks.a;
@@ -40,23 +40,24 @@ class ve extends HookMethod {
                 }
                 StoryEngagementHooks.b(view);
                 final Object obj2 = hookMethodParam.thisObject;
+                final View viewF1 = view;
                 view.post(new Runnable() {
                     @Override
                     public final void run() {
-                        ve.a(obj2, view);
+                        ve.a(obj2, viewF1);
                     }
                 });
             }
-            view = null;
             if (view == null) {
                 return;
             }
             StoryEngagementHooks.b(view);
             final Object obj3 = hookMethodParam.thisObject;
+            final View viewF3 = view;
             view.post(new Runnable() {
                 @Override
                 public final void run() {
-                    ve.a(obj3, view);
+                    ve.a(obj3, viewF3);
                 }
             });
         } catch (Throwable th) {

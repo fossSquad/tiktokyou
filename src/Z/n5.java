@@ -2,7 +2,7 @@ package Z;
 
 import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
-import com.windukk.mod.hooks.FontHooks;
+import Z.FontHooks;
 
 class n5 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {

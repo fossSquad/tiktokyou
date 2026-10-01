@@ -23,16 +23,16 @@ public abstract class n0 {
             String string = StringsKt.trim(str).toString();
             json.getSerializersModule();
             bf bfVar = (bf) json.decodeFromString(af.a, string);
-            obj = Result.constructor-impl(new ze(a(bfVar.b), String.valueOf((long) Math.ceil(bfVar.a))));
+            obj = RCompat.m6constructorimpl(new ze(a(bfVar.b), String.valueOf((long) Math.ceil(bfVar.a))));
         } catch (Throwable th) {
             Result.Companion companion2 = Result.Companion;
-            obj = Result.constructor-impl(ResultKt.createFailure(th));
+            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
         }
-        Throwable th2 = Result.exceptionOrNull-impl(obj);
+        Throwable th2 = RCompat.m9exceptionOrNullimpl(obj);
         if (th2 != null) {
             h6.a(6, h6.a("Failed to parse support price JSON: %s", new Object[]{th2.getMessage()}), (Throwable) null);
         }
-        return (ze) (Result.isFailure-impl(obj) ? null : obj);
+        return (ze) (RCompat.m12isFailureimpl(obj) ? null : obj);
     }
 
     public static final LinkedHashMap b(String str) {
@@ -45,20 +45,20 @@ public abstract class n0 {
         String str3;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         if (str != null && !StringsKt.isBlank(str)) {
-            JsonArray jsonArrayB = f6.b(StringsKt.trim(str).toString());
-            JsonArray<JsonElement> jsonArray = jsonArrayB instanceof JsonArray ? jsonArrayB : null;
+            JsonArray jsonArrayB = (JsonArray) f6.b(StringsKt.trim(str).toString());
+            JsonArray jsonArray = jsonArrayB instanceof JsonArray ? jsonArrayB : null;
             if (jsonArray != null) {
                 for (JsonElement jsonElement : jsonArray) {
                     try {
                         Result.Companion companion = Result.Companion;
                         Json json = f6.a;
                         json.getSerializersModule();
-                        obj = Result.constructor-impl((p1) json.decodeFromJsonElement(o1.a, jsonElement));
+                        obj = RCompat.m6constructorimpl((p1) json.decodeFromJsonElement(o1.a, jsonElement));
                     } catch (Throwable th) {
                         Result.Companion companion2 = Result.Companion;
-                        obj = Result.constructor-impl(ResultKt.createFailure(th));
+                        obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
                     }
-                    if (Result.isFailure-impl(obj)) {
+                    if (RCompat.m12isFailureimpl(obj)) {
                         obj = null;
                     }
                     p1 p1Var = (p1) obj;

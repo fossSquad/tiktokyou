@@ -1,4 +1,16 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.d5;
+import Z.h6;
+import Z.pd;
+import Z.qd;
+import Z.rd;
+import Z.sd;
+import Z.td;
+import Z.ud;
+import Z.vd;
+import Z.wd;
+import Z.xd;
 
 import com.ss.android.ugc.aweme.discover.model.Banner;
 import com.ss.android.ugc.aweme.discover.model.BannerList;

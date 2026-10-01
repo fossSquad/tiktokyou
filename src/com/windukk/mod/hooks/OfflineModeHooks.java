@@ -1,4 +1,13 @@
-package com.windukk.mod.hooks;
+package Z;
+
+import Z.cb;
+import Z.db;
+import Z.eb;
+import Z.fb;
+import Z.gb;
+import Z.h6;
+import Z.hb;
+import Z.jb;
 import com.windukk.hook.HookBridge;
 import java.lang.reflect.Method;
 import java.util.LinkedHashMap;

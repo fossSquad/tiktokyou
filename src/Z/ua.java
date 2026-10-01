@@ -10,6 +10,8 @@ public final class ua {
     public static final int C;
     public boolean A;
     public boolean B;
+    public LinkedHashSet D;
+    public long E;
     public final SharedPreferences a;
     public int b;
     public boolean c;
@@ -31,7 +33,7 @@ public final class ua {
     public final boolean s;
     public String t;
     public boolean u;
-    public LinkedHashSet v;
+    public final boolean v;
     public long w;
     public long x;
     public long y;
@@ -122,6 +124,7 @@ public final class ua {
         this.i = this.a.getBoolean("hide_stories", false);
         this.a.getBoolean("hide_series", false);
         this.a.getBoolean("hide_paid", false);
+        this.v = this.a.getBoolean("simple_mode", false);
         this.j = this.a.getString("selected_font", "default");
         this.k = this.a.getBoolean("always_show_progress_bar", false);
         this.l = this.a.getBoolean("custom_colors_enabled", false);
@@ -150,12 +153,13 @@ public final class ua {
         this.u = this.a.getBoolean("skip_quality_picker", false);
         this.a.getString("spoofed_device_id", null);
         this.a.getString("random_android_id", null);
-        this.v = new LinkedHashSet(this.a.getStringSet("hide_by_words_filter", Collections.EMPTY_SET));
+        this.D = new LinkedHashSet(this.a.getStringSet("hide_by_words_filter", Collections.EMPTY_SET));
         this.w = this.a.getLong("hide_by_likes", 0L);
         this.x = this.a.getLong("hide_by_views", 0L);
         this.y = this.a.getLong("hide_by_publish_date", 0L);
         this.z = this.a.getBoolean("statistics_enable", false);
         this.A = this.a.getBoolean("auto_updates_enable", true);
+        this.E = this.a.getLong("update_notice_snooze_until", 0L);
         this.B = this.a.getBoolean("startup_consent_accepted", false);
     }
 
@@ -242,6 +246,11 @@ public final class ua {
         this.a.edit().putInt("feed_overlay_transparency", this.n).apply();
     }
 
+    public final void d(long j) {
+        this.E = j;
+        this.a.edit().putLong("update_notice_snooze_until", this.E).apply();
+    }
+
     public final void a(int i, int i2) {
         if (i < 0 || i > 23) {
             i = 12;
@@ -291,8 +300,8 @@ public final class ua {
     }
 
     public final void a(Set set) {
-        this.v = new LinkedHashSet(set);
-        this.a.edit().putStringSet("hide_by_words_filter", new HashSet(this.v)).apply();
+        this.D = new LinkedHashSet(set);
+        this.a.edit().putStringSet("hide_by_words_filter", new HashSet(this.D)).apply();
     }
 
     public final void a(long j) {

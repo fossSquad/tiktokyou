@@ -17,7 +17,7 @@ public final  class af implements GeneratedSerializer {
     static {
         af afVar = new af();
         a = afVar;
-        PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = new PluginGeneratedSerialDescriptor("com.windukk.mod.hooks.badge.SupportPricePayload", afVar, 2);
+        PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = new PluginGeneratedSerialDescriptor("Z.badge.SupportPricePayload", afVar, 2);
         pluginGeneratedSerialDescriptor.addElement("ruble", false);
         pluginGeneratedSerialDescriptor.addElement("usd", false);
         b = pluginGeneratedSerialDescriptor;
