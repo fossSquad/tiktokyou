@@ -98,8 +98,9 @@ def build_stable(args, lib_jar: pathlib.Path) -> pathlib.Path:
         sources += sorted(str(p) for p in (PROJECT / root).rglob("*.java"))
     cp = [str(args.android_jar), str(args.host_jar), str(lib_jar)]
     print(f"stable javac: {len(sources)} files")
-    run([args.javac, "-nowarn", "-encoding", "UTF-8", "-cp",
-         ":".join(cp), "-d", str(classes)] + sources)
+    run([args.javac, "-nowarn", "-encoding", "UTF-8",
+         "-source", "21", "-target", "21",
+         "-cp", ":".join(cp), "-d", str(classes)] + sources)
 
     inputs = [str(p) for p in classes.rglob("*.class")
               if "/dalvik/system/" not in str(p)]
