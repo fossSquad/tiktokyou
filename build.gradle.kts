@@ -16,16 +16,19 @@ val shadedDeps by configurations.creating
 val aarDeps by configurations.creating
 
 // Extract classes.jar from HiddenApiBypass AAR into build/lib/
-val extractHiddenApiBypass by tasks.registering(Sync::class) {
+val extractHiddenApiBypass by tasks.registering(Copy::class) {
     from(aarDeps.map { aar -> zipTree(aar) }) {
         include("classes.jar")
         rename { "hiddenapibypass-classes.jar" }
     }
     into(layout.buildDirectory.dir("lib"))
+    mustRunAfter(patchShadedJar)
 }
 
 // Produce build/lib/ni-shikatu-shaded.jar (raw, with ACC_SYNTHETIC on $default methods)
-tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+// Use a standalone ShadowJar task (not the plugin-managed one) to avoid the
+// implicit classes -> compileJava circular dependency that the plugin injects.
+val shadeDeps by tasks.registering(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class) {
     configurations = listOf(shadedDeps)
     archiveFileName.set("ni-shikatu-shaded.jar")
     destinationDirectory.set(layout.buildDirectory.dir("lib"))
@@ -33,11 +36,13 @@ tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJ
     relocate("kotlinx.serialization", "ni.shikatu.kotlinx.serialization")
     relocate("okhttp3", "ni.shikatu.okhttp3")
     relocate("okio", "ni.shikatu.okio")
+    // No project sources — only shaded Maven deps
+    from(emptyList<Any>())
 }
 
 // Strip ACC_SYNTHETIC from Kotlin $default bridge methods so javac can call them
 val patchShadedJar by tasks.registering(Exec::class) {
-    dependsOn("shadowJar")
+    dependsOn(shadeDeps)
     val shadedJar  = layout.buildDirectory.file("lib/ni-shikatu-shaded.jar")
     val patchedJar = layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")
     inputs.file(shadedJar)
@@ -248,8 +253,6 @@ tasks.register<Exec>("supportJar") {
             "com/ss/android/ugc/aweme/utils/**")
     })
     inputs.file(toolScript("build_support_jar.py"))
-    inputs.file(layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar"))
-    inputs.file(layout.buildDirectory.file("lib/hiddenapibypass-classes.jar"))
     outputs.file(layout.buildDirectory.file("lib/hook.jar"))
     val niJar  = layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")
     val hapJar = layout.buildDirectory.file("lib/hiddenapibypass-classes.jar")
