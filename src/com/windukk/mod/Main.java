@@ -192,6 +192,6 @@ public final class Main {
     }
 
     public static final void verifySignature(Context context) {
-        CommonUtils.verifySignatureNative(context);
+        // Disabled: bypass native mod author signature check for repacked builds
     }
 }
