@@ -62,6 +62,8 @@ def fix_class(data: bytes) -> tuple[bytes, int]:
             off += 2
         elif tag == 8:   # String
             off += 2
+        elif tag in (3, 4):   # Integer / Float
+            off += 4
         elif tag in (9, 10, 11):   # Fieldref, Methodref, InterfaceMethodref
             off += 4
         elif tag == 12:  # NameAndType
