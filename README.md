@@ -16,6 +16,11 @@ made in 2 days with deepseek v4.1 flash & gemini 3.8 flash
 4. run `./gradlew buildDex`, it'll build the mod, output will be in `build/mod`
 5. and finally run `./gradlew patch com.zhiliaoapp.musically*.apk` to patch vanilla tiktok
 
+### run status
+it boots! tested on ASUS Zenfone 3 (2017), Android 9
+
+<img height="400px" src="img/Screenshot_20260928-143302_TikTok.png">
+
 ### note about sources
 some things like mod core are impossible to fully restore to the original code structure.. you can reconstruct it, but with unofficial names that mismatch the original structure used by tty devs..
 
