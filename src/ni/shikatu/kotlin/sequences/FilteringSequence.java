@@ -1,0 +1,106 @@
+package ni.shikatu.kotlin.sequences;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import ni.shikatu.kotlin.Metadata;
+import ni.shikatu.kotlin.jvm.functions.Function1;
+import ni.shikatu.kotlin.jvm.internal.DefaultConstructorMarker;
+import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import ni.shikatu.kotlin.jvm.internal.markers.KMappedMarker;
+import ni.shikatu.okhttp3.internal.url._UrlKt;
+
+@Metadata(d1 = {"\u0000\"\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0010\u000b\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010(\n\u0000\b\u0000\u0018\u0000*\u0004\b\u0000\u0010\u00012\b\u0012\u0004\u0012\u0002H\u00010\u0002B5\bF\u0012\f\u0010\u0003\u001a\b\u0012\u0004\u0012\u00028\u00000\u0002\u0012\b\b\u0002\u0010\u0004\u001a\u00020\u0005\u0012\u0012\u0010\u0006\u001a\u000e\u0012\u0004\u0012\u00028\u0000\u0012\u0004\u0012\u00020\u00050\u0007¢\u0006\u0004\b\b\u0010\tJ\u0010\u0010\n\u001a\b\u0012\u0004\u0012\u00028\u00000\u000bH\u0096\u0082\u0004R\u0015\u0010\u0003\u001a\b\u0012\u0004\u0012\u00028\u00000\u0002X\u0082\u0084\b¢\u0006\u0002\n\u0000R\u000f\u0010\u0004\u001a\u00020\u0005X\u0082\u0084\b¢\u0006\u0002\n\u0000R\u001b\u0010\u0006\u001a\u000e\u0012\u0004\u0012\u00028\u0000\u0012\u0004\u0012\u00020\u00050\u0007X\u0082\u0084\b¢\u0006\u0002\n\u0000¨\u0006\f"}, d2 = {"Lni/shikatu/kotlin/sequences/FilteringSequence;", "T", "Lni/shikatu/kotlin/sequences/Sequence;", "sequence", "sendWhen", _UrlKt.FRAGMENT_ENCODE_SET, "predicate", "Lni/shikatu/kotlin/Function1;", "<init>", "(Lkotlin/sequences/Sequence;ZLkotlin/jvm/functions/Function1;)V", "iterator", _UrlKt.FRAGMENT_ENCODE_SET, "ni.shikatu.kotlin-stdlib"}, k = 1, mv = {2, 4, 0}, xi = 48)
+public final class FilteringSequence<T> implements Sequence<T> {
+    private final Function1<T, Boolean> predicate;
+    private final boolean sendWhen;
+    private final Sequence<T> sequence;
+
+    public FilteringSequence(Sequence<? extends T> sequence, boolean sendWhen, Function1<? super T, Boolean> function1) {
+        Intrinsics.checkNotNullParameter(sequence, "sequence");
+        Intrinsics.checkNotNullParameter(function1, "predicate");
+        this.sequence = sequence;
+        this.sendWhen = sendWhen;
+        this.predicate = function1;
+    }
+
+    public  FilteringSequence(Sequence sequence, boolean z, Function1 function1, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this(sequence, (i & 2) != 0 ? true : z, function1);
+    }
+
+    @Metadata(d1 = {"\u0000#\n\u0000\n\u0002\u0010(\n\u0002\b\u0004\n\u0002\u0010\b\n\u0002\b\u000b\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0010\u000b\n\u0000*\u0001\u0000\b\n\u0018\u00002\b\u0012\u0004\u0012\u00028\u00000\u0001J\n\u0010\u0011\u001a\u00020\u0012H\u0082\u0080\u0004J\u000f\u0010\u0013\u001a\u00028\u0000H\u0096\u0082\u0004¢\u0006\u0002\u0010\rJ\n\u0010\u0014\u001a\u00020\u0015H\u0096\u0082\u0004R\u001b\u0010\u0002\u001a\b\u0012\u0004\u0012\u00028\u00000\u0001X\u0086\u0084\b¢\u0006\b\n\u0000\u001a\u0004\b\u0003\u0010\u0004R\u001b\u0010\u0005\u001a\u00020\u0006X\u0086\u008e\b¢\u0006\u000e\n\u0000\u001a\u0004\b\u0007\u0010\b\"\u0004\b\t\u0010\nR\u001f\u0010\u000b\u001a\u0004\u0018\u00018\u0000X\u0086\u008e\b¢\u0006\u0010\n\u0002\u0010\u0010\u001a\u0004\b\f\u0010\r\"\u0004\b\u000e\u0010\u000f¨\u0006\u0016"}, d2 = {"ni/shikatu/kotlin/sequences/FilteringSequence$iterator$1", _UrlKt.FRAGMENT_ENCODE_SET, "iterator", "getIterator", "()Ljava/util/Iterator;", "nextState", _UrlKt.FRAGMENT_ENCODE_SET, "getNextState", "()I", "setNextState", "(I)V", "nextItem", "getNextItem", "()Ljava/lang/Object;", "setNextItem", "(Ljava/lang/Object;)V", "Ljava/lang/Object;", "calcNext", _UrlKt.FRAGMENT_ENCODE_SET, "next", "hasNext", _UrlKt.FRAGMENT_ENCODE_SET, "ni.shikatu.kotlin-stdlib"}, k = 1, mv = {2, 4, 0}, xi = 48)
+    public static final class AnonymousClass1 <T> implements Iterator<T>, KMappedMarker {
+        private final Iterator<T> iterator;
+        private T nextItem;
+        private int nextState = -1;
+        final  FilteringSequence<T> this$0;
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        AnonymousClass1(FilteringSequence<T> filteringSequence) {
+            this.this$0 = filteringSequence;
+            this.iterator = ((FilteringSequence) filteringSequence).sequence.iterator();
+        }
+
+        public final Iterator<T> getIterator() {
+            return this.iterator;
+        }
+
+        public final int getNextState() {
+            return this.nextState;
+        }
+
+        public final void setNextState(int i) {
+            this.nextState = i;
+        }
+
+        public final T getNextItem() {
+            return this.nextItem;
+        }
+
+        public final void setNextItem(T t) {
+            this.nextItem = t;
+        }
+
+        private final void calcNext() {
+            while (this.iterator.hasNext()) {
+                T next = this.iterator.next();
+                if (((Boolean) ((FilteringSequence) this.this$0).predicate.invoke(next)).booleanValue() == ((FilteringSequence) this.this$0).sendWhen) {
+                    this.nextItem = next;
+                    this.nextState = 1;
+                    return;
+                }
+            }
+            this.nextState = 0;
+        }
+
+        @Override
+        public T next() {
+            if (this.nextState == -1) {
+                calcNext();
+            }
+            if (this.nextState == 0) {
+                throw new NoSuchElementException();
+            }
+            T t = this.nextItem;
+            this.nextItem = null;
+            this.nextState = -1;
+            return t;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (this.nextState == -1) {
+                calcNext();
+            }
+            return this.nextState == 1;
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new AnonymousClass1(this);
+    }
+}

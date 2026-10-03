@@ -1,0 +1,42 @@
+package Z;
+
+import android.view.View;
+import com.windukk.hook.HookMethod;
+import Z.StoryEngagementHooks;
+import java.util.Map;
+
+class te extends HookMethod {
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        View view;
+        try {
+            Object[] objArr = hookMethodParam.args;
+            Map map = StoryEngagementHooks.a;
+            if (objArr != null) {
+                int length = objArr.length;
+                int i = 0;
+                while (true) {
+                    if (i < length) {
+                        Object obj = objArr[i];
+                        if (obj instanceof View) {
+                            view = (View) obj;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                if (view != null) {
+                    StoryEngagementHooks.a(hookMethodParam.thisObject, view);
+                }
+            }
+            view = null;
+            if (view != null) {
+                StoryEngagementHooks.a(hookMethodParam.thisObject, view);
+            }
+        } catch (Throwable th) {
+            String strDecrypt = "Story digg count view failed";
+            Object obj2 = h6.a;
+            h6.a(6, String.valueOf(strDecrypt), th);
+        }
+    }
+}

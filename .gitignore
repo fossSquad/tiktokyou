@@ -1,0 +1,25 @@
+# Build outputs
+build/
+.gradle/
+*.class
+
+# Machine-specific / local config
+local.properties
+.idea/
+*.iml
+.vscode/
+*.swp
+*.bak
+*~
+
+# Generated host libraries
+libs/tiktok.jar
+libs/mod-support.jar
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local binaries / logs
+*.apk
+*.log

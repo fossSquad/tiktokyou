@@ -1,0 +1,245 @@
+import java.io.File
+import java.util.Properties
+import org.gradle.api.GradleException
+
+plugins {
+    `java-library`
+}
+
+// JDK for source compilation (toolchain). Override with -PjavaToolchain=<n>.
+val javaToolchain = (findProperty("javaToolchain") as String?)?.toIntOrNull() ?: 21
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(javaToolchain))
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("src"))
+            exclude("**/*.kt")
+            // Mod payload + compile-time stubs only; everything else comes
+            // from libs jars (host classes, shim, stable layer).
+            include(
+                "Z/**",
+                "com/windukk/mod/**",
+                "androidx/**",
+                "com/bytedance/ies/foundation/activity/BaseActivity.java",
+            )
+        }
+    }
+}
+
+// --------------------------------------------------------------------------
+// Portable toolchain/SDK discovery. No machine-specific paths here.
+// Override via environment (ANDROID_HOME, ANDROID_SDK_ROOT,
+// ANDROID_BUILD_TOOLS, ANDROID_JAR, JAVA_HOME, DEX2JAR, JADX),
+// local.properties (sdk.dir), or Gradle properties (-PandroidJar=,
+// -PandroidBuildTools=, -Pjavac=, -Ppython=, -Pjadx=, -Pstages=, -Pmode=,
+// -PrefMod=, -Papk=).
+// --------------------------------------------------------------------------
+
+fun envVar(name: String): String? = System.getenv(name)?.takeIf { it.isNotBlank() }
+
+fun localProperty(name: String): String? {
+    val f = file("local.properties")
+    if (!f.isFile) return null
+    val props = Properties()
+    f.inputStream().use { props.load(it) }
+    return props.getProperty(name)?.takeIf { it.isNotBlank() }
+}
+
+fun androidSdkDir(): String? {
+    localProperty("sdk.dir")?.let { return it }
+    val home = System.getProperty("user.home") ?: ""
+    return listOfNotNull(
+        envVar("ANDROID_HOME"),
+        envVar("ANDROID_SDK_ROOT"),
+        "$home/Android/Sdk",
+        "$home/Library/Android/sdk",
+        "/opt/android-sdk",
+        "/usr/lib/android-sdk",
+        "/var/lib/android-sdk",
+    ).firstOrNull { File(it).isDirectory }
+}
+
+fun androidJarPath(): String? {
+    (findProperty("androidJar") as String?)?.let { return it }
+    envVar("ANDROID_JAR")?.let { return it }
+    val sdk = androidSdkDir() ?: return null
+    val best = File(sdk, "platforms").listFiles()
+        ?.filter { it.isDirectory && it.name.startsWith("android-") }
+        ?.maxByOrNull { it.name } ?: return null
+    val jar = File(best, "android.jar")
+    return if (jar.isFile) jar.absolutePath else null
+}
+
+fun buildToolsDir(): String? {
+    (findProperty("androidBuildTools") as String?)?.let { return it }
+    envVar("ANDROID_BUILD_TOOLS")?.let { return it }
+    val sdk = androidSdkDir() ?: return null
+    return File(sdk, "build-tools").listFiles()
+        ?.filter { it.isDirectory }
+        ?.maxByOrNull { it.name }
+        ?.absolutePath
+}
+
+fun requireAndroidJar(): String = androidJarPath() ?: throw GradleException(
+    "Android SDK not found: set ANDROID_HOME / ANDROID_SDK_ROOT, add sdk.dir " +
+        "to local.properties, or pass -PandroidJar=/path/to/android.jar"
+)
+
+dependencies {
+    // Android platform APIs (compile-only; the device provides them at runtime).
+    compileOnly(files(providers.provider { requireAndroidJar() }))
+    // Host classes from a vanilla APK (see the libGen task).
+    compileOnly(files("libs/tiktok.jar"))
+    // Mod-owned support classes (com.windukk.*, ni.shikatu.*, com.vapro.*, a.*).
+    compileOnly(files("build/lib/hook.jar"))
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.isIncremental = false
+    options.encoding = "UTF-8"
+    options.compilerArgs.addAll(listOf("-nowarn", "-Xlint:none", "-Xmaxerrs", "10000"))
+}
+
+// --------------------------------------------------------------------------
+// Pipeline tasks. APK argument: ./gradlew <task> <file>.apk (or -Papk=<file>).
+// --------------------------------------------------------------------------
+
+val pythonExe: String = (findProperty("python") as String?) ?: "python3"
+
+fun toolScript(name: String): String = file("tools/$name").absolutePath
+
+fun apkArgument(): String? =
+    (findProperty("apk") as String?)
+        ?: gradle.startParameter.taskNames.firstOrNull {
+            it.endsWith(".apk", ignoreCase = true)
+        }
+
+fun requireApk(): File {
+    val name = apkArgument() ?: throw GradleException(
+        "Pass the APK as an argument (e.g. ./gradlew patch TikTok-4.4.apk) " +
+            "or -Papk=<file>"
+    )
+    val f = file(name)
+    if (!f.isFile) throw GradleException("APK not found: ${f.absolutePath}")
+    return f
+}
+
+tasks.addRule(
+    "Pattern: <file>.apk - APK argument for extract / libGen / patch",
+    object : Action<String> {
+        override fun execute(taskName: String) {
+            if (taskName.endsWith(".apk", ignoreCase = true)) {
+                tasks.register(taskName) {
+                    group = "tiktokyou"
+                    description = "APK argument placeholder consumed by extract/libGen/patch"
+                }
+            }
+        }
+    }
+)
+
+tasks.register<Exec>("extract") {
+    group = "tiktokyou"
+    description = "Extract + normalize mod sources from an APK (./gradlew extract mod.apk)"
+    workingDir = project.projectDir
+    doFirst {
+        val apk = requireApk()
+        val outDir = (findProperty("out") as String?)?.let { file(it) }
+            ?: layout.buildDirectory.dir("extract/${apk.nameWithoutExtension}").get().asFile
+        val args = mutableListOf(
+            pythonExe, toolScript("extract_tty.py"),
+            "--apk", apk.absolutePath,
+            "--out", outDir.absolutePath,
+        )
+        (findProperty("jadx") as String?)?.let { args += listOf("--jadx", it) }
+        (findProperty("stages") as String?)?.let { args += listOf("--stages", it) }
+        if (project.hasProperty("keepGoing")) args += "--keep-going"
+        commandLine(args)
+    }
+}
+
+tasks.register<Exec>("libGen") {
+    group = "tiktokyou"
+    description = "Generate libs/tiktok.jar from a vanilla TikTok APK " +
+        "(./gradlew libGen TikTok.apk)"
+    workingDir = project.projectDir
+    doFirst {
+        val apk = requireApk()
+        val args = mutableListOf(
+            pythonExe, toolScript("gen_lib.py"), apk.absolutePath,
+            "--out", file("libs/tiktok.jar").absolutePath,
+        )
+        (findProperty("dex2jar") as String?)?.let { args += listOf("--dex2jar", it) }
+        commandLine(args)
+    }
+}
+
+tasks.register<Exec>("supportJar") {
+    group = "tiktokyou"
+    description = "Build build/lib/hook.jar from sources (vendored residue for failing files)"
+    workingDir = project.projectDir
+    inputs.files(fileTree("src") {
+        include("a/**", "b/**", "c/**", "org/**", "util/**", "ni/**",
+            "com/windukk/stable/**", "com/windukk/hook/**", "com/vapro/**",
+            "com/ss/android/ugc/aweme/utils/**")
+    })
+    inputs.file(toolScript("build_support_jar.py"))
+    outputs.file(layout.buildDirectory.file("lib/hook.jar"))
+    val args = mutableListOf(
+        pythonExe, toolScript("build_support_jar.py"),
+        "--out", layout.buildDirectory.file("lib/hook.jar").get().asFile.absolutePath,
+    )
+    (findProperty("vendored") as String?)?.let { args += listOf("--vendored", it) }
+    commandLine(args)
+}
+
+tasks.named<JavaCompile>("compileJava") {
+    dependsOn("supportJar")
+}
+
+tasks.register<Exec>("buildDex") {
+    group = "tiktokyou"
+    description = "Compile support + payload sources into build/mod/*.dex"
+    dependsOn(tasks.named("classes"))
+    workingDir = project.projectDir
+    val args = mutableListOf(
+        pythonExe, toolScript("build_dex.py"),
+        "--out", layout.buildDirectory.dir("mod").get().asFile.absolutePath,
+    )
+    (findProperty("javac") as String?)?.let { args += listOf("--javac", it) }
+    androidJarPath()?.let { args += listOf("--android-jar", it) }
+    buildToolsDir()?.let { bt ->
+        File(bt, "d8").takeIf { it.isFile }?.let { args += listOf("--d8", it.absolutePath) }
+    }
+    (findProperty("stages") as String?)?.let { args += listOf("--stages", it) }
+    commandLine(args)
+}
+
+tasks.register<Exec>("patch") {
+    group = "tiktokyou"
+    description = "Patch an APK with the rebuilt mod (./gradlew patch TikTok.apk)"
+    dependsOn("buildDex")
+    workingDir = project.projectDir
+    doFirst {
+        val apk = requireApk()
+        val dexDir = layout.buildDirectory.dir("mod").get().asFile
+        val args = mutableListOf(
+            pythonExe, toolScript("patch_apk.py"), apk.absolutePath,
+            "--stable", dexDir.resolve("stable.dex").absolutePath,
+            "--payload", dexDir.resolve("payload.dex").absolutePath,
+            "--out", layout.buildDirectory.dir("patch/${apk.nameWithoutExtension}-patched.apk")
+                .get().asFile.absolutePath,
+        )
+        (findProperty("refMod") as String?)?.let { args += listOf("--ref", it) }
+        (findProperty("mode") as String?)?.let { args += listOf("--mode", it) }
+        buildToolsDir()?.let { args += listOf("--build-tools", it) }
+        if (project.hasProperty("noSign")) args += "--no-sign"
+        commandLine(args)
+    }
+}
