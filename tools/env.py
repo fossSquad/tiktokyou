@@ -133,14 +133,14 @@ def java_home(hint=None) -> Path | None:
             p = Path(cand).expanduser()
             if (p / "bin" / "javac").is_file():
                 return p
+    for base in _jdk_candidates():
+        if (base / "bin" / "javac").is_file():
+            return base
     java = shutil.which("java")
     if java:
         home = Path(java).resolve().parent.parent
         if (home / "bin" / "javac").is_file():
             return home
-    for base in _jdk_candidates():
-        if (base / "bin" / "javac").is_file():
-            return base
     return None
 
 

@@ -87,7 +87,7 @@ public final class Main {
         h6.b(FilesKt.resolve(filesDir, "tiktokyoulogs"));
         u2.a((ContextWrapper) application);
         u2.a((Context) application);
-        CommonUtils.init(context);
+        // CommonUtils.init(context);
         try {
             HookBridge.disableHiddenApiRestrictions();
         } catch (Throwable th) {

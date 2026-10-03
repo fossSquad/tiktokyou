@@ -255,6 +255,25 @@ def main() -> int:
                     continue
                 plan[name] = ("ref", name)
 
+        # Overlay local source assets, res, and proprietary files if present
+        local_assets = PROJECT / "src" / "assets"
+        if local_assets.is_dir():
+            for p in sorted(local_assets.rglob("*")):
+                if p.is_file():
+                    rel = f"assets/{p.relative_to(local_assets).as_posix()}"
+                    plan[rel] = ("file", p)
+
+        local_res = PROJECT / "src" / "res"
+        if local_res.is_dir():
+            for p in sorted(local_res.rglob("*")):
+                if p.is_file():
+                    rel = f"res/{p.relative_to(local_res).as_posix()}"
+                    plan[rel] = ("file", p)
+
+        local_ttmod = PROJECT / "src" / "proprietary" / "libttmod.so"
+        if local_ttmod.is_file():
+            plan["lib/arm64-v8a/libttmod.so"] = ("file", local_ttmod)
+
         mode = args.mode
         if mode == "auto":
             mode = "shift" if has_mod else "append"
@@ -304,8 +323,14 @@ def main() -> int:
 
         old_manifest = b""
         if MANIFEST_ENTRY in plan:
-            origin, name = plan[MANIFEST_ENTRY][0], plan[MANIFEST_ENTRY][1]
-            old_manifest = (zr if origin == "ref" else zt).read(name)
+            origin = plan[MANIFEST_ENTRY][0]
+            if origin == "file":
+                old_manifest = pathlib.Path(plan[MANIFEST_ENTRY][1]).read_bytes()
+            elif origin == "bytes":
+                old_manifest = plan[MANIFEST_ENTRY][1]
+            else:
+                src = zr if origin == "ref" else zt
+                old_manifest = src.read(plan[MANIFEST_ENTRY][1])
         elif MANIFEST_ENTRY in ref_names:
             old_manifest = zr.read(MANIFEST_ENTRY)
         manifest = json.loads(old_manifest.decode("utf-8")) if old_manifest else {
@@ -334,6 +359,10 @@ def main() -> int:
                 value = plan[name]
                 if value[0] == "bytes":
                     zo.writestr(zipfile.ZipInfo(name), value[1], compress_type=value[2])
+                    continue
+                if value[0] == "file":
+                    p = value[1]
+                    zo.write(str(p), arcname=name, compress_type=zipfile.ZIP_DEFLATED)
                     continue
                 src = zt if value[0] == "target" else zr
                 info = src.getinfo(value[1])
