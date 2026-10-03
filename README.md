@@ -12,7 +12,7 @@ made in 2 days with deepseek v4.1 flash & gemini 3.8 flash
 0. if you want to update tiktokyou sources, run `./gradlew extract TikTok_You*.apk`
 1. download vanilla tiktok apk from apkmirror/apkpure.. _(if the TikTok You apk you downloaded is based on 46.8.3, download 46.8.3 (arm7+arm8 ver!!!))_
 2. run `./gradlew libGen com.zhiliaoapp.musically*.apk`, it'll generate `tiktok.jar` in `libs/`
-3. run `./gradlew supportJar` to compile hook lib from proprietary stuff _(they're in src but have tons of decompilation artifacts, and no one is gonna make them compilable because why??)_
+3. run `./gradlew supportJar` to compile the support layer (stable hooks, HookBridge, etc.) — dependencies fetched from Maven automatically
 4. run `./gradlew buildDex`, it'll build the mod, output will be in `build/mod`
 5. and finally run `./gradlew patch com.zhiliaoapp.musically*.apk` to patch vanilla tiktok
 
