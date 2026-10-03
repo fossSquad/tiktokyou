@@ -144,6 +144,8 @@ def stage_assets(apk: pathlib.Path, out: pathlib.Path):
             if not name.startswith("assets/") or name.endswith("/"):
                 continue
             rel = name[len("assets/"):]
+            if rel.endswith(".dex"):
+                continue
             if (rel.startswith("tty") or rel.startswith("mod_icons") or
                 rel in ("developer.png", "supporter.png",
                         "tiktok_customized_tone.mp3", "ic_mod_logo_status.png")):
