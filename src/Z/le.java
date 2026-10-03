@@ -1701,376 +1701,144 @@ public class le extends BaseActivity {
             }
         }));
         String strDecrypt = "developer.png";
-        try {
+        if (ta.a() != null && ta.d().m == 0) {
             try {
-                if (ta.a() != null && ta.d().m == 0) {
-                    try {
-                        int identifier = getResources().getIdentifier("system_accent3_400", "color", "android");
-                        if (identifier != 0) {
-                            color = getResources().getColor(identifier, null);
-                        } else {
-                            Context contextA = Main.getApplicationContext();
-                            if (contextA == null) {
-                                color = -16524603;
-                            } else {
-                                iA = ThemeHooks.a(contextA);
-                            }
-                        }
-                    } catch (Throwable th) {
-                    }
-                    inputStreamOpen = ResourceOverlay.open(this, strDecrypt);
-                    bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
-                    if (inputStreamOpen != null) {
-                        inputStreamOpen.close();
-                    }
-                    if (bitmapDecodeStream == null) {
-                        bitmapDrawable = null;
-                    } else {
-                        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(bitmapCreateBitmap);
-                        Paint paint = new Paint(3);
-                        z2 = ThemeHooks.d;
-                        ThemeHooks.d = false;
-                        try {
-                            paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-                            ThemeHooks.d = z2;
-                            canvas.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint);
-                            bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap);
-                        } catch (Throwable th2) {
-                            ThemeHooks.d = z2;
-                            throw th2;
-                        }
-                    }
-                    linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
-                        @Override
-                        public final void onClick(View view) {
-                            le.this.h(view);
-                        }
-                    }));
-                    linearLayout.addView(a(l6.a("section_region")));
-                    linearLayout.addView(o());
-                    linearLayout.addView(a(l6.a("section_content_filter")));
-                    linearLayout.addView(i());
-                    linearLayout.addView(a(l6.a("section_feed")));
-                    linearLayout.addView(j());
-                    linearLayout.addView(a(l6.a("section_misc")));
-                    linearLayout.addView(m());
-                    linearLayout.addView(a(l6.a("section_autostreak")));
-                    linearLayout.addView(d());
-                    linearLayout.addView(a(l6.a("anti_burnout")));
-                    linearLayout.addView(c());
-                    linearLayout.addView(a(l6.a("section_font")));
-                    linearLayout.addView(k());
-                    linearLayout.addView(a(l6.a("section_appearance")));
-                    linearLayout.addView(h());
-                    LinearLayout linearLayoutG = g();
-                    linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
-                    linearLayoutG.setClipToPadding(false);
-                    linearLayoutG.setClipChildren(false);
-                    LinearLayout linearLayout2 = new LinearLayout(this);
-                    linearLayout2.setOrientation(0);
-                    linearLayout2.setGravity(16);
-                    linearLayout2.setMinimumHeight(a(48.0f));
-                    linearLayout2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-                    ImageView imageView = new ImageView(this);
-                    imageView.setImageBitmap(b("ic_mod_logo"));
-                    linearLayout2.addView(imageView, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-                    TextView textView2 = new TextView(this);
-                    textView2.setText(l6.a("app_icon"));
-                    textView2.setTextSize(2, 16.0f);
-                    textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
-                    if (this.b) {
-                        i = -1;
-                    } else {
-                        i = -16777216;
-                    }
-                    textView2.setTextColor(i);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
-                    layoutParams.leftMargin = a(12.0f);
-                    linearLayout2.addView(textView2, layoutParams);
-                    linearLayoutG.addView(linearLayout2);
-                    HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this);
-                    horizontalScrollView.setHorizontalScrollBarEnabled(false);
-                    horizontalScrollView.setClipToPadding(false);
-                    horizontalScrollView.setClipChildren(false);
-                    horizontalScrollView.setOverScrollMode(2);
-                    horizontalScrollView.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-                    LinearLayout linearLayout3 = new LinearLayout(this);
-                    this.w = linearLayout3;
-                    linearLayout3.setOrientation(0);
-                    this.x = k6.a();
-                    arrayListA = k6.a((Context) this);
-                    size = arrayListA.size();
-                    i2 = 0;
-                    j6Var = null;
-                    while (i2 < size) {
-                        Object obj = arrayListA.get(i2);
-                        i2++;
-                        j6Var2 = (j6) obj;
-                        if ("md".equals(j6Var2.a)) {
-                            j6Var = j6Var2;
-                        } else {
-                            this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
-                        }
-                    }
-                    if (j6Var != null) {
-                        this.w.addView(a(j6Var, "md".equals(this.x)));
-                    }
-                    horizontalScrollView.addView(this.w);
-                    linearLayoutG.addView(horizontalScrollView);
-                    LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams2.topMargin = a(10.0f);
-                    linearLayout.addView(linearLayoutG, layoutParams2);
-                    linearLayout.addView(a(l6.a("section_other")));
-                    LinearLayout linearLayoutG2 = g();
-                    linearLayoutG2.setPadding(0, a(4.0f), 0, a(4.0f));
-                    linearLayoutG2.addView(q());
-                    linearLayout.addView(linearLayoutG2);
-                    View viewN = n();
-                    LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
-                    layoutParams3.topMargin = a(10.0f);
-                    linearLayout.addView(viewN, layoutParams3);
-                    linearLayout.addView(a(l6.a("section_about")));
-                    linearLayout.addView(b());
-                    linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
-                    return;
-                }
-                iA = -185258;
-                bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
-                if (inputStreamOpen != null) {
-                    inputStreamOpen.close();
-                }
-                if (bitmapDecodeStream == null) {
-                    bitmapDrawable = null;
+                int identifier = getResources().getIdentifier("system_accent3_400", "color", "android");
+                if (identifier != 0) {
+                    color = getResources().getColor(identifier, null);
                 } else {
-                    Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas2 = new Canvas(bitmapCreateBitmap2);
-                    Paint paint2 = new Paint(3);
-                    z2 = ThemeHooks.d;
-                    ThemeHooks.d = false;
-                    paint2.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-                    ThemeHooks.d = z2;
-                    canvas2.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint2);
-                    bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap2);
-                }
-                linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
-                    @Override
-                    public final void onClick(View view) {
-                        le.this.h(view);
-                    }
-                }));
-                linearLayout.addView(a(l6.a("section_region")));
-                linearLayout.addView(o());
-                linearLayout.addView(a(l6.a("section_content_filter")));
-                linearLayout.addView(i());
-                linearLayout.addView(a(l6.a("section_feed")));
-                linearLayout.addView(j());
-                linearLayout.addView(a(l6.a("section_misc")));
-                linearLayout.addView(m());
-                linearLayout.addView(a(l6.a("section_autostreak")));
-                linearLayout.addView(d());
-                linearLayout.addView(a(l6.a("anti_burnout")));
-                linearLayout.addView(c());
-                linearLayout.addView(a(l6.a("section_font")));
-                linearLayout.addView(k());
-                linearLayout.addView(a(l6.a("section_appearance")));
-                linearLayout.addView(h());
-                LinearLayout linearLayoutG3 = g();
-                linearLayoutG3.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG3.setClipToPadding(false);
-                linearLayoutG3.setClipChildren(false);
-                LinearLayout linearLayout4 = new LinearLayout(this);
-                linearLayout4.setOrientation(0);
-                linearLayout4.setGravity(16);
-                linearLayout4.setMinimumHeight(a(48.0f));
-                linearLayout4.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-                ImageView imageView2 = new ImageView(this);
-                imageView2.setImageBitmap(b("ic_mod_logo"));
-                linearLayout4.addView(imageView2, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-                TextView textView3 = new TextView(this);
-                textView3.setText(l6.a("app_icon"));
-                textView3.setTextSize(2, 16.0f);
-                textView3.setTypeface(Typeface.create("sans-serif-medium", 0));
-                if (this.b) {
-                    i = -1;
-                } else {
-                    i = -16777216;
-                }
-                textView3.setTextColor(i);
-                LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(0, -2, 1.0f);
-                layoutParams4.leftMargin = a(12.0f);
-                linearLayout4.addView(textView3, layoutParams4);
-                linearLayoutG3.addView(linearLayout4);
-                HorizontalScrollView horizontalScrollView2 = new HorizontalScrollView(this);
-                horizontalScrollView2.setHorizontalScrollBarEnabled(false);
-                horizontalScrollView2.setClipToPadding(false);
-                horizontalScrollView2.setClipChildren(false);
-                horizontalScrollView2.setOverScrollMode(2);
-                horizontalScrollView2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-                LinearLayout linearLayout5 = new LinearLayout(this);
-                this.w = linearLayout5;
-                linearLayout5.setOrientation(0);
-                this.x = k6.a();
-                arrayListA = k6.a((Context) this);
-                size = arrayListA.size();
-                i2 = 0;
-                j6Var = null;
-                while (i2 < size) {
-                    Object obj2 = arrayListA.get(i2);
-                    i2++;
-                    j6Var2 = (j6) obj2;
-                    if ("md".equals(j6Var2.a)) {
-                        j6Var = j6Var2;
+                    Context contextA = Main.getApplicationContext();
+                    if (contextA == null) {
+                        color = -16524603;
                     } else {
-                        this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
+                        color = ThemeHooks.a(contextA);
                     }
                 }
-                if (j6Var != null) {
-                    this.w.addView(a(j6Var, "md".equals(this.x)));
-                }
-                horizontalScrollView2.addView(this.w);
-                linearLayoutG3.addView(horizontalScrollView2);
-                LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams5.topMargin = a(10.0f);
-                linearLayout.addView(linearLayoutG3, layoutParams5);
-                linearLayout.addView(a(l6.a("section_other")));
-                LinearLayout linearLayoutG4 = g();
-                linearLayoutG4.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG4.addView(q());
-                linearLayout.addView(linearLayoutG4);
-                View viewN2 = n();
-                LinearLayout.LayoutParams layoutParams6 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams6.topMargin = a(10.0f);
-                linearLayout.addView(viewN2, layoutParams6);
-                linearLayout.addView(a(l6.a("section_about")));
-                linearLayout.addView(b());
-                linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
-                return;
-            } catch (Throwable th3) {
-                if (inputStreamOpen == null) {
-                    throw th3;
-                }
-                try {
-                    inputStreamOpen.close();
-                    throw th3;
-                } catch (Throwable th4) {
-                    th3.addSuppressed(th4);
-                    if (th3 != null) {
-                        throw new RuntimeException(th3);
-                    }
-                }
-                if (bitmapDecodeStream == null) {
-                    bitmapDrawable = null;
-                } else {
-                    Bitmap bitmapCreateBitmap3 = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas3 = new Canvas(bitmapCreateBitmap3);
-                    Paint paint3 = new Paint(3);
-                    z2 = ThemeHooks.d;
-                    ThemeHooks.d = false;
-                    paint3.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-                    ThemeHooks.d = z2;
-                    canvas3.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint3);
-                    bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap3);
-                }
-                linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
-                    @Override
-                    public final void onClick(View view) {
-                        le.this.h(view);
-                    }
-                }));
-                linearLayout.addView(a(l6.a("section_region")));
-                linearLayout.addView(o());
-                linearLayout.addView(a(l6.a("section_content_filter")));
-                linearLayout.addView(i());
-                linearLayout.addView(a(l6.a("section_feed")));
-                linearLayout.addView(j());
-                linearLayout.addView(a(l6.a("section_misc")));
-                linearLayout.addView(m());
-                linearLayout.addView(a(l6.a("section_autostreak")));
-                linearLayout.addView(d());
-                linearLayout.addView(a(l6.a("anti_burnout")));
-                linearLayout.addView(c());
-                linearLayout.addView(a(l6.a("section_font")));
-                linearLayout.addView(k());
-                linearLayout.addView(a(l6.a("section_appearance")));
-                linearLayout.addView(h());
-                LinearLayout linearLayoutG5 = g();
-                linearLayoutG5.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG5.setClipToPadding(false);
-                linearLayoutG5.setClipChildren(false);
-                LinearLayout linearLayout6 = new LinearLayout(this);
-                linearLayout6.setOrientation(0);
-                linearLayout6.setGravity(16);
-                linearLayout6.setMinimumHeight(a(48.0f));
-                linearLayout6.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
-                ImageView imageView3 = new ImageView(this);
-                imageView3.setImageBitmap(b("ic_mod_logo"));
-                linearLayout6.addView(imageView3, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
-                TextView textView4 = new TextView(this);
-                textView4.setText(l6.a("app_icon"));
-                textView4.setTextSize(2, 16.0f);
-                textView4.setTypeface(Typeface.create("sans-serif-medium", 0));
-                if (this.b) {
-                    i = -1;
-                } else {
-                    i = -16777216;
-                }
-                textView4.setTextColor(i);
-                LinearLayout.LayoutParams layoutParams7 = new LinearLayout.LayoutParams(0, -2, 1.0f);
-                layoutParams7.leftMargin = a(12.0f);
-                linearLayout6.addView(textView4, layoutParams7);
-                linearLayoutG5.addView(linearLayout6);
-                HorizontalScrollView horizontalScrollView3 = new HorizontalScrollView(this);
-                horizontalScrollView3.setHorizontalScrollBarEnabled(false);
-                horizontalScrollView3.setClipToPadding(false);
-                horizontalScrollView3.setClipChildren(false);
-                horizontalScrollView3.setOverScrollMode(2);
-                horizontalScrollView3.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
-                LinearLayout linearLayout7 = new LinearLayout(this);
-                this.w = linearLayout7;
-                linearLayout7.setOrientation(0);
-                this.x = k6.a();
-                arrayListA = k6.a((Context) this);
-                size = arrayListA.size();
-                i2 = 0;
-                j6Var = null;
-                while (i2 < size) {
-                    Object obj3 = arrayListA.get(i2);
-                    i2++;
-                    j6Var2 = (j6) obj3;
-                    if ("md".equals(j6Var2.a)) {
-                        j6Var = j6Var2;
-                    } else {
-                        this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
-                    }
-                }
-                if (j6Var != null) {
-                    this.w.addView(a(j6Var, "md".equals(this.x)));
-                }
-                horizontalScrollView3.addView(this.w);
-                linearLayoutG5.addView(horizontalScrollView3);
-                LinearLayout.LayoutParams layoutParams8 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams8.topMargin = a(10.0f);
-                linearLayout.addView(linearLayoutG5, layoutParams8);
-                linearLayout.addView(a(l6.a("section_other")));
-                LinearLayout linearLayoutG6 = g();
-                linearLayoutG6.setPadding(0, a(4.0f), 0, a(4.0f));
-                linearLayoutG6.addView(q());
-                linearLayout.addView(linearLayoutG6);
-                View viewN3 = n();
-                LinearLayout.LayoutParams layoutParams9 = new LinearLayout.LayoutParams(-1, -2);
-                layoutParams9.topMargin = a(10.0f);
-                linearLayout.addView(viewN3, layoutParams9);
-                linearLayout.addView(a(l6.a("section_about")));
-                linearLayout.addView(b());
-                linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
-                if (false) { return; }
+            } catch (Throwable th) {
+                color = -16524603;
             }
+        } else {
+            color = -185258;
+        }
+        try {
             inputStreamOpen = ResourceOverlay.open(this, strDecrypt);
-        } catch (IOException e) {
+            bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpen);
+            if (inputStreamOpen != null) {
+                inputStreamOpen.close();
+            }
+        } catch (Throwable th) {
             bitmapDecodeStream = null;
         }
-        color = iA;
+        if (bitmapDecodeStream == null) {
+            bitmapDrawable = null;
+        } else {
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
+            Paint paint = new Paint(3);
+            z2 = ThemeHooks.d;
+            ThemeHooks.d = false;
+            try {
+                paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+                ThemeHooks.d = z2;
+                canvas.drawBitmap(bitmapDecodeStream, 0.0f, 0.0f, paint);
+                bitmapDrawable = new BitmapDrawable(getResources(), bitmapCreateBitmap);
+            } catch (Throwable th2) {
+                ThemeHooks.d = z2;
+                throw th2;
+            }
+        }
+        linearLayout.addView(a(bitmapDrawable, l6.a("support_project"), (String) null, (String) null, 1, false, new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                le.this.h(view);
+            }
+        }));
+        linearLayout.addView(a(l6.a("section_region")));
+        linearLayout.addView(o());
+        linearLayout.addView(a(l6.a("section_content_filter")));
+        linearLayout.addView(i());
+        linearLayout.addView(a(l6.a("section_feed")));
+        linearLayout.addView(j());
+        linearLayout.addView(a(l6.a("section_misc")));
+        linearLayout.addView(m());
+        linearLayout.addView(a(l6.a("section_autostreak")));
+        linearLayout.addView(d());
+        linearLayout.addView(a(l6.a("anti_burnout")));
+        linearLayout.addView(c());
+        linearLayout.addView(a(l6.a("section_font")));
+        linearLayout.addView(k());
+        linearLayout.addView(a(l6.a("section_appearance")));
+        linearLayout.addView(h());
+        LinearLayout linearLayoutG = g();
+        linearLayoutG.setPadding(0, a(4.0f), 0, a(4.0f));
+        linearLayoutG.setClipToPadding(false);
+        linearLayoutG.setClipChildren(false);
+        LinearLayout linearLayout2 = new LinearLayout(this);
+        linearLayout2.setOrientation(0);
+        linearLayout2.setGravity(16);
+        linearLayout2.setMinimumHeight(a(48.0f));
+        linearLayout2.setPadding(a(16.0f), a(4.0f), a(16.0f), a(4.0f));
+        ImageView imageView = new ImageView(this);
+        imageView.setImageBitmap(b("ic_mod_logo"));
+        linearLayout2.addView(imageView, new LinearLayout.LayoutParams(a(20.0f), a(20.0f)));
+        TextView textView2 = new TextView(this);
+        textView2.setText(l6.a("app_icon"));
+        textView2.setTextSize(2, 16.0f);
+        textView2.setTypeface(Typeface.create("sans-serif-medium", 0));
+        if (this.b) {
+            i = -1;
+        } else {
+            i = -16777216;
+        }
+        textView2.setTextColor(i);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
+        layoutParams.leftMargin = a(12.0f);
+        linearLayout2.addView(textView2, layoutParams);
+        linearLayoutG.addView(linearLayout2);
+        HorizontalScrollView horizontalScrollView = new HorizontalScrollView(this);
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
+        horizontalScrollView.setClipToPadding(false);
+        horizontalScrollView.setClipChildren(false);
+        horizontalScrollView.setOverScrollMode(2);
+        horizontalScrollView.setPadding(a(16.0f), a(4.0f), a(16.0f), a(12.0f));
+        LinearLayout linearLayout3 = new LinearLayout(this);
+        this.w = linearLayout3;
+        linearLayout3.setOrientation(0);
+        this.x = k6.a();
+        arrayListA = k6.a((Context) this);
+        size = arrayListA.size();
+        i2 = 0;
+        j6Var = null;
+        while (i2 < size) {
+            Object obj = arrayListA.get(i2);
+            i2++;
+            j6Var2 = (j6) obj;
+            if ("md".equals(j6Var2.a)) {
+                j6Var = j6Var2;
+            } else {
+                this.w.addView(a(j6Var2, j6Var2.a.equals(this.x)));
+            }
+        }
+        if (j6Var != null) {
+            this.w.addView(a(j6Var, "md".equals(this.x)));
+        }
+        horizontalScrollView.addView(this.w);
+        linearLayoutG.addView(horizontalScrollView);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams2.topMargin = a(10.0f);
+        linearLayout.addView(linearLayoutG, layoutParams2);
+        linearLayout.addView(a(l6.a("section_other")));
+        LinearLayout linearLayoutG2 = g();
+        linearLayoutG2.setPadding(0, a(4.0f), 0, a(4.0f));
+        linearLayoutG2.addView(q());
+        linearLayout.addView(linearLayoutG2);
+        View viewN = n();
+        LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(-1, -2);
+        layoutParams3.topMargin = a(10.0f);
+        linearLayout.addView(viewN, layoutParams3);
+        linearLayout.addView(a(l6.a("section_about")));
+        linearLayout.addView(b());
+        linearLayout.addView(new Space(this), new LinearLayout.LayoutParams(-1, a(20.0f)));
     }
 
     public final void d(View view) {
