@@ -64,7 +64,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=pathlib.Path,
                     default=PROJECT / "build" / "lib" / "hook.jar")
-    ap.add_argument("--vendored", type=pathlib.Path, default=None)
+    ap.add_argument("--vendored", type=pathlib.Path, default=None,
+                    help="Legacy vendored jar (fallback for classes that still fail to compile)")
+    ap.add_argument("--ni-shikatu-jar", type=pathlib.Path,
+                    default=PROJECT / "build" / "lib" / "ni-shikatu-shaded-patched.jar")
+    ap.add_argument("--hiddenapibypass-jar", type=pathlib.Path,
+                    default=PROJECT / "build" / "lib" / "hiddenapibypass-classes.jar")
     args = ap.parse_args()
 
     javac = env.javac_path()
@@ -75,28 +80,43 @@ def main() -> int:
     host_jar = PROJECT / "libs" / "tiktok.jar"
     work = PROJECT / "build" / "support-jar"
     work.mkdir(parents=True, exist_ok=True)
-    vendored_src = args.vendored
-    if vendored_src is None:
-        committed = PROJECT / "src" / "proprietary" / "hook.jar"
-        vendored_src = (committed if committed.is_file()
-                        else (args.out if args.out.is_file()
-                              else work / "vendored-mod-support.jar"))
-    print(f"vendored base: {vendored_src}")
-    for p in (android_jar, host_jar, vendored_src):
+
+    # Maven jars provide ni.shikatu.* and org.lsposed.*
+    maven_jars = [args.ni_shikatu_jar, args.hiddenapibypass_jar]
+    for p in [android_jar, host_jar] + maven_jars:
         if not p or not pathlib.Path(p).is_file():
             print(f"ERROR: missing {p}")
             return 1
-    vendored = vendored_src
-    cp_jar = work / "hook-cp.jar"
-    with zipfile.ZipFile(vendored) as zin, \
-            zipfile.ZipFile(cp_jar, "w", zipfile.ZIP_DEFLATED) as zout:
-        for item in zin.infolist():
-            n = item.filename
-            if n == "a/a.class" or n.startswith("a/a$"):
-                continue
-            zout.writestr(item, zin.read(n))
 
-    cp = f"{android_jar}:{host_jar}:{cp_jar}"
+    # Legacy vendored jar fallback (used only if classes still fail)
+    vendored_src = args.vendored
+    if vendored_src is None:
+        committed = PROJECT / "src" / "proprietary" / "hook.jar"
+        if committed.is_file():
+            vendored_src = committed
+    use_vendored = vendored_src is not None and pathlib.Path(vendored_src).is_file()
+    print(f"vendored base: {vendored_src if use_vendored else '(none - Maven only)'}")
+
+    # Build classpath: android + host + Maven shaded jars
+    cp_parts = [str(android_jar), str(host_jar)] + [str(j) for j in maven_jars]
+
+    # If legacy vendored jar exists, merge it (minus a/a entries) for classpath
+    if use_vendored:
+        cp_jar = work / "hook-cp.jar"
+        with zipfile.ZipFile(vendored_src) as zin, \
+                zipfile.ZipFile(cp_jar, "w", zipfile.ZIP_DEFLATED) as zout:
+            for item in zin.infolist():
+                n = item.filename
+                if n == "a/a.class" or n.startswith("a/a$"):
+                    continue
+                # Skip ni.shikatu.* and org.lsposed.* - Maven provides them now
+                if (n.startswith("ni/shikatu/") or
+                        n.startswith("org/lsposed/")):
+                    continue
+                zout.writestr(item, zin.read(n))
+        cp_parts.append(str(cp_jar))
+
+    cp = ":".join(cp_parts)
     sources = all_sources()
     excluded = set()
     classes_out = work / "classes"
@@ -137,16 +157,19 @@ def main() -> int:
             seen.add(rel)
             source_count += 1
         residue = 0
-        with zipfile.ZipFile(vendored) as zin:
-            for item in zin.infolist():
-                rel = item.filename
-                if (not rel.endswith(".class") or rel in seen
-                        or rel.startswith(EXCLUDE_PREFIXES)
-                        or rel == "a/a.class" or rel.startswith("a/a$")):
-                    continue
-                zout.writestr(item, zin.read(rel))
-                seen.add(rel)
-                residue += 1
+        if use_vendored:
+            with zipfile.ZipFile(vendored_src) as zin:
+                for item in zin.infolist():
+                    rel = item.filename
+                    if (not rel.endswith(".class") or rel in seen
+                            or rel.startswith(EXCLUDE_PREFIXES)
+                            or rel == "a/a.class" or rel.startswith("a/a$")
+                            or rel.startswith("ni/shikatu/")
+                            or rel.startswith("org/lsposed/")):
+                        continue
+                    zout.writestr(item, zin.read(rel))
+                    seen.add(rel)
+                    residue += 1
     report = work / "vendored-files.txt"
     report.write_text("\n".join(sorted(excluded)) + "\n")
     print(f"jar: {out_jar}")

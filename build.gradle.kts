@@ -4,6 +4,58 @@ import org.gradle.api.GradleException
 
 plugins {
     `java-library`
+    id("com.gradleup.shadow") version "8.3.6"
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+val shadedDeps by configurations.creating
+val aarDeps by configurations.creating
+
+// Extract classes.jar from HiddenApiBypass AAR into build/lib/
+val extractHiddenApiBypass by tasks.registering(Sync::class) {
+    from(aarDeps.map { aar -> zipTree(aar) }) {
+        include("classes.jar")
+        rename { "hiddenapibypass-classes.jar" }
+    }
+    into(layout.buildDirectory.dir("lib"))
+}
+
+// Produce build/lib/ni-shikatu-shaded.jar (raw, with ACC_SYNTHETIC on $default methods)
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    configurations = listOf(shadedDeps)
+    archiveFileName.set("ni-shikatu-shaded.jar")
+    destinationDirectory.set(layout.buildDirectory.dir("lib"))
+    relocate("kotlin", "ni.shikatu.kotlin")
+    relocate("kotlinx.serialization", "ni.shikatu.kotlinx.serialization")
+    relocate("okhttp3", "ni.shikatu.okhttp3")
+    relocate("okio", "ni.shikatu.okio")
+}
+
+// Strip ACC_SYNTHETIC from Kotlin $default bridge methods so javac can call them
+val patchShadedJar by tasks.registering(Exec::class) {
+    dependsOn("shadowJar")
+    val shadedJar  = layout.buildDirectory.file("lib/ni-shikatu-shaded.jar")
+    val patchedJar = layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")
+    inputs.file(shadedJar)
+    inputs.file(file("tools/strip_synthetic.py"))
+    outputs.file(patchedJar)
+    commandLine(
+        "python3", file("tools/strip_synthetic.py").absolutePath,
+        "--in",  shadedJar.get().asFile.absolutePath,
+        "--out", patchedJar.get().asFile.absolutePath,
+    )
+}
+
+dependencies {
+    shadedDeps("com.squareup.okhttp3:okhttp:5.3.0")
+    shadedDeps("com.squareup.okio:okio:3.10.2")
+    shadedDeps("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    shadedDeps("org.jetbrains.kotlin:kotlin-stdlib:2.0.21")
+    aarDeps("org.lsposed.hiddenapibypass:hiddenapibypass:6.1@aar")
 }
 
 // JDK for source compilation (toolchain). Override with -PjavaToolchain=<n>.
@@ -96,8 +148,13 @@ dependencies {
     compileOnly(files(providers.provider { requireAndroidJar() }))
     // Host classes from a vanilla APK (see the libGen task).
     compileOnly(files("libs/tiktok.jar"))
-    // Mod-owned support classes (com.windukk.*, ni.shikatu.*, com.vapro.*, a.*).
-    compileOnly(files("build/lib/hook.jar"))
+    // Maven-shaded ni.shikatu.* libraries (patched: ACC_SYNTHETIC stripped).
+    compileOnly(files(layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")))
+    // HiddenApiBypass from LSPosed AAR.
+    compileOnly(files(layout.buildDirectory.file("lib/hiddenapibypass-classes.jar")))
+    // Mod-owned support classes compiled by the supportJar task.
+    compileOnly(files(layout.buildDirectory.file("lib/hook.jar")))
+    compileOnly(files(layout.buildDirectory.file("lib/hook.jar")))
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -183,6 +240,7 @@ tasks.register<Exec>("libGen") {
 tasks.register<Exec>("supportJar") {
     group = "tiktokyou"
     description = "Build build/lib/hook.jar from sources (vendored residue for failing files)"
+    dependsOn("patchShadedJar", "extractHiddenApiBypass")
     workingDir = project.projectDir
     inputs.files(fileTree("src") {
         include("a/**", "b/**", "c/**", "org/**", "util/**", "ni/**",
@@ -190,17 +248,23 @@ tasks.register<Exec>("supportJar") {
             "com/ss/android/ugc/aweme/utils/**")
     })
     inputs.file(toolScript("build_support_jar.py"))
+    inputs.file(layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar"))
+    inputs.file(layout.buildDirectory.file("lib/hiddenapibypass-classes.jar"))
     outputs.file(layout.buildDirectory.file("lib/hook.jar"))
+    val niJar  = layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")
+    val hapJar = layout.buildDirectory.file("lib/hiddenapibypass-classes.jar")
     val args = mutableListOf(
         pythonExe, toolScript("build_support_jar.py"),
         "--out", layout.buildDirectory.file("lib/hook.jar").get().asFile.absolutePath,
+        "--ni-shikatu-jar", niJar.get().asFile.absolutePath,
+        "--hiddenapibypass-jar", hapJar.get().asFile.absolutePath,
     )
     (findProperty("vendored") as String?)?.let { args += listOf("--vendored", it) }
     commandLine(args)
 }
 
 tasks.named<JavaCompile>("compileJava") {
-    dependsOn("supportJar")
+    dependsOn("supportJar", "patchShadedJar", "extractHiddenApiBypass")
 }
 
 tasks.register<Exec>("buildDex") {
@@ -208,9 +272,13 @@ tasks.register<Exec>("buildDex") {
     description = "Compile support + payload sources into build/mod/*.dex"
     dependsOn(tasks.named("classes"))
     workingDir = project.projectDir
+    val niJar  = layout.buildDirectory.file("lib/ni-shikatu-shaded-patched.jar")
+    val hapJar = layout.buildDirectory.file("lib/hiddenapibypass-classes.jar")
     val args = mutableListOf(
         pythonExe, toolScript("build_dex.py"),
         "--out", layout.buildDirectory.dir("mod").get().asFile.absolutePath,
+        "--ni-shikatu-jar", niJar.get().asFile.absolutePath,
+        "--hiddenapibypass-jar", hapJar.get().asFile.absolutePath,
     )
     (findProperty("javac") as String?)?.let { args += listOf("--javac", it) }
     androidJarPath()?.let { args += listOf("--android-jar", it) }

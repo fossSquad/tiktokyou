@@ -87,7 +87,7 @@ def run_d8(args, name, inputs, libs, out_dir) -> pathlib.Path:
     return target
 
 
-def build_stable(args, lib_jar: pathlib.Path) -> pathlib.Path:
+def build_stable(args, lib_jar: pathlib.Path, ni_jar: pathlib.Path, hap_jar: pathlib.Path) -> pathlib.Path:
     classes = args.out / "stable-classes"
     if classes.exists():
         shutil.rmtree(classes)
@@ -96,7 +96,7 @@ def build_stable(args, lib_jar: pathlib.Path) -> pathlib.Path:
     sources = []
     for root in SUPPORT_ROOTS:
         sources += sorted(str(p) for p in (PROJECT / root).rglob("*.java"))
-    cp = [str(args.android_jar), str(args.host_jar), str(lib_jar)]
+    cp = [str(args.android_jar), str(args.host_jar), str(lib_jar), str(ni_jar), str(hap_jar)]
     print(f"stable javac: {len(sources)} files")
     run([args.javac, "-nowarn", "-encoding", "UTF-8",
          "-source", "21", "-target", "21",
@@ -108,7 +108,7 @@ def build_stable(args, lib_jar: pathlib.Path) -> pathlib.Path:
                   [str(args.android_jar), str(args.host_jar)], args.out)
 
 
-def build_payload(args, lib_jar: pathlib.Path) -> pathlib.Path:
+def build_payload(args, lib_jar: pathlib.Path, ni_jar: pathlib.Path, hap_jar: pathlib.Path) -> pathlib.Path:
     if not args.payload_classes.is_dir():
         raise SystemExit(f"ERROR: payload classes not found: {args.payload_classes} "
                          "(run ./gradlew classes first, or use the buildDex task)")
@@ -126,7 +126,8 @@ def build_payload(args, lib_jar: pathlib.Path) -> pathlib.Path:
             continue
         inputs.append(str(p))
     return run_d8(args, "payload", inputs,
-                  [str(args.android_jar), str(args.host_jar), str(lib_jar)], args.out)
+                  [str(args.android_jar), str(args.host_jar), str(lib_jar),
+                   str(ni_jar), str(hap_jar)], args.out)
 
 
 def main() -> int:
@@ -140,24 +141,31 @@ def main() -> int:
                     default=PROJECT / "libs" / "tiktok.jar")
     ap.add_argument("--support-jar", type=pathlib.Path,
                     default=PROJECT / "build" / "lib" / "hook.jar")
+    ap.add_argument("--ni-shikatu-jar", type=pathlib.Path,
+                    default=PROJECT / "build" / "lib" / "ni-shikatu-shaded-patched.jar")
+    ap.add_argument("--hiddenapibypass-jar", type=pathlib.Path,
+                    default=PROJECT / "build" / "lib" / "hiddenapibypass-classes.jar")
     ap.add_argument("--payload-classes", type=pathlib.Path,
                     default=PROJECT / "build" / "classes" / "java" / "main")
     ap.add_argument("--stages", default="stable,payload")
     args = ap.parse_args()
 
-    for p in (args.android_jar, args.host_jar, args.support_jar):
+    for p in (args.android_jar, args.host_jar, args.support_jar,
+              args.ni_shikatu_jar, args.hiddenapibypass_jar):
         if p is None or not p.is_file():
             print(f"ERROR: missing {p} "
                   "(set ANDROID_HOME/ANDROID_JAR/JAVA_HOME or pass flags)")
             return 1
     args.out.mkdir(parents=True, exist_ok=True)
     lib_jar = filtered_support_jar(args.support_jar, args.out / "hook.jar")
+    ni_jar = args.ni_shikatu_jar
+    hap_jar = args.hiddenapibypass_jar
 
     stages = set(args.stages.split(","))
     if "stable" in stages:
-        build_stable(args, lib_jar)
+        build_stable(args, lib_jar, ni_jar, hap_jar)
     if "payload" in stages:
-        build_payload(args, lib_jar)
+        build_payload(args, lib_jar, ni_jar, hap_jar)
     return 0
 
 
