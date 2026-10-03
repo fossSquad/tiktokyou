@@ -1,0 +1,127 @@
+package ni.shikatu.kotlin;
+
+import java.io.Serializable;
+import ni.shikatu.kotlin.jvm.JvmInline;
+import ni.shikatu.kotlin.jvm.internal.DefaultConstructorMarker;
+import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import ni.shikatu.okhttp3.internal.url._UrlKt;
+
+@Metadata(d1 = {"\u0000R\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u000b\n\u0002\b\u0006\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0003\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0002\b\u0005\n\u0002\u0010\b\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\b\u0087@\u0018\u0000  *\u0006\b\u0000\u0010\u0001 \u00012\u00060\u0002j\u0002`\u0003:\u0002 !B\u0017\bA\u0012\b\u0010\u0004\u001a\u0004\u0018\u00010\u0005\u001a\u0002\b\b¢\u0006\u0004\b\u0006\u0010\u0007J\u0017\u0010\u0011\u001a\u0004\u0018\u00018\u0000H\u0087\u0088\u0004b\u0002\b\u0013¢\u0006\u0004\b\u0012\u0010\u0007J\u0013\u0010\u0014\u001a\u0004\u0018\u00010\u0015H\u0086\u0080\u0004¢\u0006\u0004\b\u0016\u0010\u0017J\u0011\u0010\u0018\u001a\u00020\u0019H\u0096\u0080\u0004¢\u0006\u0004\b\u001a\u0010\u001bJ\u0014\u0010\u001c\u001a\u00020\f2\b\u0010\u001d\u001a\u0004\u0018\u00010\u0005HÖ\u0083\u0004J\n\u0010\u001e\u001a\u00020\u001fHÖ\u0081\u0004R\u001d\u0010\u0004\u001a\u0004\u0018\u00010\u00058\u0000X\u0081\u0084\br\u0002\b\b¢\u0006\b\n\u0000\u0012\u0004\b\t\u0010\nR\u0015\u0010\u000b\u001a\u00020\f8FX\u0086\u0084\b¢\u0006\u0006\u001a\u0004\b\r\u0010\u000eR\u0015\u0010\u000f\u001a\u00020\f8FX\u0086\u0084\b¢\u0006\u0006\u001a\u0004\b\u0010\u0010\u000e\u0088\u0001\u0004\u0092\u0001\u0004\u0018\u00010\u0005Ê\u0001\f\b#\u0012\b\b$\u0012\u0004\b\b(%Ê\u0001\u0002\b&¨\u0006\""}, d2 = {"Lni/shikatu/kotlin/Result;", "T", "Ljava/io/Serializable;", "Lni/shikatu/kotlin/io/Serializable;", "value", _UrlKt.FRAGMENT_ENCODE_SET, "constructor-impl", "(Ljava/lang/Object;)Ljava/lang/Object;", "Lni/shikatu/kotlin/PublishedApi;", "getValue$annotations", "()V", "isSuccess", _UrlKt.FRAGMENT_ENCODE_SET, "isSuccess-impl", "(Ljava/lang/Object;)Z", "isFailure", "isFailure-impl", "getOrNull", "getOrNull-impl", "Lni/shikatu/kotlin/internal/InlineOnly;", "exceptionOrNull", _UrlKt.FRAGMENT_ENCODE_SET, "exceptionOrNull-impl", "(Ljava/lang/Object;)Ljava/lang/Throwable;", "toString", _UrlKt.FRAGMENT_ENCODE_SET, "toString-impl", "(Ljava/lang/Object;)Ljava/lang/String;", "equals", "other", "hashCode", _UrlKt.FRAGMENT_ENCODE_SET, "Companion", "Failure", "ni.shikatu.kotlin-stdlib", "Lni/shikatu/kotlin/SinceKotlin;", "version", "1.3", "Lni/shikatu/kotlin/jvm/JvmInline;"}, k = 1, mv = {2, 4, 0}, xi = 48)
+@JvmInline
+public final class Result<T> implements Serializable {
+    public static final Companion Companion = new Companion(null);
+    private final Object value;
+
+    public static final  Result m5boximpl(Object obj) {
+        return new Result(obj);
+    }
+
+    public static <T> Object m6constructorimpl(Object obj) {
+        return obj;
+    }
+
+    public static boolean m7equalsimpl(Object obj, Object obj2) {
+        return (obj2 instanceof Result) && Intrinsics.areEqual(obj, ((Result) obj2).m15unboximpl());
+    }
+
+    public static final boolean m8equalsimpl0(Object obj, Object obj2) {
+        return Intrinsics.areEqual(obj, obj2);
+    }
+
+    public static  void getValue$annotations() {
+    }
+
+    public static int m11hashCodeimpl(Object obj) {
+        if (obj == null) {
+            return 0;
+        }
+        return obj.hashCode();
+    }
+
+    public boolean equals(Object obj) {
+        return m7equalsimpl(this.value, obj);
+    }
+
+    public int hashCode() {
+        return m11hashCodeimpl(this.value);
+    }
+
+    public final  Object m15unboximpl() {
+        return this.value;
+    }
+
+    private  Result(Object value) {
+        this.value = value;
+    }
+
+    public static final boolean m13isSuccessimpl(Object arg0) {
+        return !(arg0 instanceof Failure);
+    }
+
+    public static final boolean m12isFailureimpl(Object arg0) {
+        return arg0 instanceof Failure;
+    }
+
+    private static final <T> T m10getOrNullimpl(Object obj) {
+        if (m12isFailureimpl(obj)) {
+            return null;
+        }
+        return (T) obj;
+    }
+
+    public static final Throwable m9exceptionOrNullimpl(Object arg0) {
+        if (arg0 instanceof Failure) {
+            return ((Failure) arg0).exception;
+        }
+        return null;
+    }
+
+    public String toString() {
+        return m14toStringimpl(this.value);
+    }
+
+    public static String m14toStringimpl(Object arg0) {
+        return arg0 instanceof Failure ? ((Failure) arg0).toString() : "Success(" + arg0 + ')';
+    }
+
+    @Metadata(d1 = {"\u0000(\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0010\u0003\n\u0002\b\u0002\b\u0086\u0003\u0018\u00002\u00020\u0001B\t\bB¢\u0006\u0004\b\u0002\u0010\u0003J5\u0010\u0004\u001a\b\u0012\u0004\u0012\u0002H\u00060\u0005\"\u0004\b\u0001\u0010\u00062\u0006\u0010\u0007\u001a\u0002H\u0006H\u0087\u0088\u0004b\u0002\b\tb\f\b\n\u0012\b\b\u000b\u0012\u0004\b\b(\u0004¢\u0006\u0002\u0010\bJ5\u0010\f\u001a\b\u0012\u0004\u0012\u0002H\u00060\u0005\"\u0004\b\u0001\u0010\u00062\u0006\u0010\r\u001a\u00020\u000eH\u0087\u0088\u0004b\u0002\b\tb\f\b\n\u0012\b\b\u000b\u0012\u0004\b\b(\f¢\u0006\u0002\u0010\u000f¨\u0006\u0010"}, d2 = {"Lni/shikatu/kotlin/Result$Companion;", _UrlKt.FRAGMENT_ENCODE_SET, "<init>", "()V", "success", "Lni/shikatu/kotlin/Result;", "T", "value", "(Ljava/lang/Object;)Ljava/lang/Object;", "Lni/shikatu/kotlin/internal/InlineOnly;", "Lni/shikatu/kotlin/jvm/JvmName;", "name", "failure", "exception", _UrlKt.FRAGMENT_ENCODE_SET, "(Ljava/lang/Throwable;)Ljava/lang/Object;", "ni.shikatu.kotlin-stdlib"}, k = 1, mv = {2, 4, 0}, xi = 48)
+    public static final class Companion {
+        public  Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+
+        private final <T> Object success(T t) {
+            return ni.shikatu.kotlin.Result.m6constructorimpl(t);
+        }
+
+        private final <T> Object failure(Throwable exception) {
+            Intrinsics.checkNotNullParameter(exception, "exception");
+            return ni.shikatu.kotlin.Result.m6constructorimpl(ResultKt.createFailure(exception));
+        }
+    }
+
+    @Metadata(d1 = {"\u00004\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0003\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u000b\n\u0000\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u000e\n\u0000\b\u0000\u0018\u00002\u00060\u0001j\u0002`\u0002B\u0011\bF\u0012\u0006\u0010\u0003\u001a\u00020\u0004¢\u0006\u0004\b\u0005\u0010\u0006J\u0014\u0010\b\u001a\u00020\t2\b\u0010\n\u001a\u0004\u0018\u00010\u000bH\u0096\u0082\u0004J\n\u0010\f\u001a\u00020\rH\u0096\u0080\u0004J\n\u0010\u000e\u001a\u00020\u000fH\u0096\u0080\u0004R\u0016\u0010\u0003\u001a\u00020\u00048\u0006X\u0087\u0084\b\u0092\u0002\u0002\b\u0007¢\u0006\u0002\n\u0000¨\u0006\u0010"}, d2 = {"Lni/shikatu/kotlin/Result$Failure;", "Ljava/io/Serializable;", "Lni/shikatu/kotlin/io/Serializable;", "exception", _UrlKt.FRAGMENT_ENCODE_SET, "<init>", "(Ljava/lang/Throwable;)V", "Lni/shikatu/kotlin/jvm/JvmField;", "equals", _UrlKt.FRAGMENT_ENCODE_SET, "other", _UrlKt.FRAGMENT_ENCODE_SET, "hashCode", _UrlKt.FRAGMENT_ENCODE_SET, "toString", _UrlKt.FRAGMENT_ENCODE_SET, "ni.shikatu.kotlin-stdlib"}, k = 1, mv = {2, 4, 0}, xi = 48)
+    public static final class Failure implements Serializable {
+        public final Throwable exception;
+
+        public Failure(Throwable exception) {
+            Intrinsics.checkNotNullParameter(exception, "exception");
+            this.exception = exception;
+        }
+
+        public boolean equals(Object other) {
+            return (other instanceof Failure) && Intrinsics.areEqual(this.exception, ((Failure) other).exception);
+        }
+
+        public int hashCode() {
+            return this.exception.hashCode();
+        }
+
+        public String toString() {
+            return "Failure(" + this.exception + ')';
+        }
+    }
+}
