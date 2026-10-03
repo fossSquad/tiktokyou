@@ -1236,9 +1236,9 @@ public abstract class BadgeHooks {
 
     public static void a(Context context, File file, k1 k1Var) {
         Throwable th = null;
-        boolean z2;
-        Object r3;
-        Object r2 = 0;
+        boolean success = false;
+        String statusMessage = null;
+        int count = 0;
         try {
             char[] cArr = m0.a;
             File file2 = new File(m0.a(context), "supporters_cache.etag");
@@ -1252,61 +1252,45 @@ public abstract class BadgeHooks {
             } catch (Exception ex9) {
                 oVarA = null;
             }
+            if (oVarA == null) {
+                throw new IOException("Failed to connect to badges server");
+            }
             int i2 = oVarA.a;
             String strA2 = oVarA.a();
             String str = oVarA.c;
-            z2 = true;
-            try {
-                try {
-                    if (i2 == 304) {
-                        m0.b(file);
-                        int size = b.size();
-                        String strDecrypt3 = "Supporters list not modified";
-                        q.set(false);
-                        b(k1Var, true, size, strDecrypt3);
-                        return;
-                    }
-                    if (TextUtils.isEmpty(strA2)) {
-                        throw new IOException("Empty supporters list");
-                    }
-                    LinkedHashMap linkedHashMapB = n0.b(strA2);
-                    if (linkedHashMapB.isEmpty()) {
-                        throw new IOException("Invalid supporters list");
-                    }
-                    m0.a(file, strA2);
-                    if (!TextUtils.isEmpty(str)) {
-                        m0.a(file2, str);
-                    } else if (file2.exists()) {
-                        file2.delete();
-                    }
-                    a(linkedHashMapB);
-                    e(context);
-                    int size2 = linkedHashMapB.size();
-                    r3 = "Loaded " + size2 + " supporter uid(s)";
-                    try {
-                        h6.a(4, h6.a("Loaded %d supporter uid(s) from GitHub", new Object[]{Integer.valueOf(linkedHashMapB.size())}), (Throwable) null);
-                        q.set(false);
-                        b(k1Var, true, size2, (String) r3);
-                        return;
-                    } catch (Throwable th_2) {
-                        r2 = size2;
-                        th = th_2;
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
-                    r3 = r2;
-                    r2 = 0;
-                }
-            } catch (Throwable th3) {
-                r2 = file;
-                th = th3;
-                r3 = 0;
+            if (i2 == 304) {
+                m0.b(file);
+                int size = b.size();
+                String strDecrypt3 = "Supporters list not modified";
+                q.set(false);
+                b(k1Var, true, size, strDecrypt3);
+                return;
             }
+            if (TextUtils.isEmpty(strA2)) {
+                throw new IOException("Empty supporters list");
+            }
+            LinkedHashMap linkedHashMapB = n0.b(strA2);
+            if (linkedHashMapB.isEmpty()) {
+                throw new IOException("Invalid supporters list");
+            }
+            m0.a(file, strA2);
+            if (!TextUtils.isEmpty(str)) {
+                m0.a(file2, str);
+            } else if (file2.exists()) {
+                file2.delete();
+            }
+            a(linkedHashMapB);
+            e(context);
+            count = linkedHashMapB.size();
+            statusMessage = "Loaded " + count + " supporter uid(s)";
+            success = true;
+            h6.a(4, h6.a("Loaded %d supporter uid(s) from GitHub", new Object[]{Integer.valueOf(count)}), (Throwable) null);
+            q.set(false);
+            b(k1Var, true, count, statusMessage);
+            return;
         } catch (Throwable th4) {
             th = th4;
-            z2 = false;
-            r3 = 0;
-            r2 = 0;
+            success = false;
         }
         try {
             String strDecrypt4 = "Failed to load supporters list: %s";
@@ -1317,7 +1301,7 @@ public abstract class BadgeHooks {
             }
         } finally {
             q.set(false);
-            b(k1Var, z2, (int) r2, (String) r3);
+            b(k1Var, success, count, statusMessage);
         }
     }
 

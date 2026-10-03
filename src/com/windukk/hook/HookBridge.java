@@ -278,7 +278,7 @@ public final class HookBridge {
     }
 
     public static final class HookInfo {
-        private Method backup;
+        private Member backup;
         final CopyOnWriteSortedSet<HookMethod> callbacks = new CopyOnWriteSortedSet<>();
         private final boolean isStatic;
         private final Member method;
@@ -304,7 +304,7 @@ public final class HookBridge {
         }
 
         public Method getBackupMethod() {
-            return this.backup;
+            return (Method) this.backup;
         }
 
         public CopyOnWriteSortedSet<HookMethod> getCallbacks() {
@@ -324,11 +324,13 @@ public final class HookBridge {
         }
 
         public void setBackup(Member member) {
-            Method method = (Method) member;
-            if (!method.isAccessible()) {
-                method.setAccessible(true);
+            if (member instanceof AccessibleObject) {
+                AccessibleObject ao = (AccessibleObject) member;
+                if (!ao.isAccessible()) {
+                    ao.setAccessible(true);
+                }
             }
-            this.backup = method;
+            this.backup = member;
         }
     }
 
@@ -487,11 +489,11 @@ public final class HookBridge {
             if (hookInfo == null) {
                 return invokeMember(member, obj, objArr);
             }
-            Method backupMethod = hookInfo.getBackupMethod();
-            if (objArr == null) {
-                objArr = EMPTY_ARRAY;
+            Member backup = hookInfo.getBackup();
+            if (backup == null) {
+                return invokeMember(member, obj, objArr);
             }
-            return backupMethod.invoke(obj, objArr);
+            return invokeMember(backup, obj, objArr);
         } catch (InstantiationException e) {
             throw new IllegalArgumentException("Constructor invocation failed", e);
         }

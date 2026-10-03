@@ -255,7 +255,7 @@ def main() -> int:
                     continue
                 plan[name] = ("ref", name)
 
-        # Overlay local source assets, res, and proprietary files if present
+        # Overlay local source assets and proprietary files if present
         local_assets = PROJECT / "src" / "assets"
         if local_assets.is_dir():
             for p in sorted(local_assets.rglob("*")):
@@ -263,10 +263,11 @@ def main() -> int:
                     rel = f"assets/{p.relative_to(local_assets).as_posix()}"
                     plan[rel] = ("file", p)
 
+        # Overlay local non-XML resources (binary drawables/bitmaps only; plain-text XMLs cannot be inflated by Android)
         local_res = PROJECT / "src" / "res"
         if local_res.is_dir():
             for p in sorted(local_res.rglob("*")):
-                if p.is_file():
+                if p.is_file() and not p.name.endswith(".xml"):
                     rel = f"res/{p.relative_to(local_res).as_posix()}"
                     plan[rel] = ("file", p)
 
