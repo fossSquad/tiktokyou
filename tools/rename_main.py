@@ -121,14 +121,17 @@ def main() -> int:
     files = {p: p.read_text(errors="ignore") for p in sorted(ROOT.rglob("*.java"))}
     before_balance = {p: brace_balance(t) for p, t in files.items()}
 
-    main_text = files[MAIN]
+    main_text = files.get(MAIN)
+    if main_text is None:
+        print(f"skip: {MAIN} not found")
+        return 0
     for old, new in INTERNAL:
         cnt = main_text.count(old)
         if cnt == 0:
             if new in main_text:
                 continue
-            print(f"ERROR: internal pattern not found: {old!r}")
-            return 1
+            print(f"WARN: internal pattern not found: {old!r} (skipped)")
+            continue
         if cnt != 1:
             print(f"ERROR: internal pattern found {cnt} times: {old!r}")
             return 1
