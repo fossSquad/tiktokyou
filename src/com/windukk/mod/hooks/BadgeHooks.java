@@ -48,6 +48,7 @@ import Z.x0;
 import Z.y0;
 import Z.z0;
 import Z.z7;
+import Z.StringUtils;
 
 import Z.a1;
 import Z.k1;
@@ -417,7 +418,7 @@ public abstract class BadgeHooks {
             Object objInvoke2 = dd.a(objInvoke.getClass(), "getCurUserId", new Class[0]).invoke(objInvoke, null);
             if (objInvoke2 instanceof String) {
                 String str = (String) objInvoke2;
-                if (!hd$$ExternalSyntheticBackport0.m(str)) {
+                if (!StringUtils.isBlank(str)) {
                     A = str.trim();
                     return A;
                 }

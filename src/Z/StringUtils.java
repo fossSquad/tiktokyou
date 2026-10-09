@@ -1,7 +1,10 @@
 package Z;
 
-public final  class hd$$ExternalSyntheticBackport0 {
-    public static  boolean m(String str) {
+public final class StringUtils {
+    private StringUtils() {
+    }
+
+    public static boolean isBlank(String str) {
         int length = str.length();
         int iCharCount = 0;
         while (iCharCount < length) {
