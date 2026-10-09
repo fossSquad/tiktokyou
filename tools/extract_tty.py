@@ -98,6 +98,7 @@ def dexes_of(found):
         out.append(found["payload"])
     out.extend(found.get("stable", []))
     out.extend(found.get("shim", []))
+    out.extend(found.get("explicit", []))
     seen = set()
     result = []
     for d in out:
@@ -114,7 +115,14 @@ def stage_jadx(dexes, out: pathlib.Path, jadx: str):
         if target.exists():
             print(f"jadx: {target} exists, skipping")
             continue
-        run([jadx, "-d", target, "--no-res", dex])
+        try:
+            run([jadx, "-d", target, "--no-res", dex])
+        except subprocess.CalledProcessError as e:
+            if target.exists() and any(target.rglob("*.java")):
+                print(f"WARN: jadx exit {e.returncode} for {dex.name}; "
+                      "partial output kept")
+            else:
+                raise
         print(f"jadx done: {dex.name} -> {target}")
 
 
@@ -277,6 +285,8 @@ def main() -> int:
                     default=str(env.jadx_path(project=PROJECT) or ""))
     ap.add_argument("--stages", default="all")
     ap.add_argument("--keep-going", action="store_true")
+    ap.add_argument("--dexes", default="",
+                    help="comma-separated classes*.dex names instead of marker locate")
     args = ap.parse_args()
 
     if not args.jadx:
@@ -290,7 +300,11 @@ def main() -> int:
     if "unzip" in stages:
         apkdir = stage_unzip(args.apk, args.out)
     found = {}
-    if "locate" in stages:
+    if args.dexes:
+        found = {"explicit": [apkdir / n for n in args.dexes.split(",")]}
+        for p in found["explicit"]:
+            print(f"using {p}")
+    elif "locate" in stages:
         found = stage_locate(apkdir)
         if not found:
             print("ERROR: no mod-related dexes found")
