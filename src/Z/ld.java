@@ -192,7 +192,7 @@ public class ld extends BaseActivity {
                 } else {
                     strA = l6.a(edVar.b, edVar.c);
                     str2 = "#";
-                    if (strA != null && !hd$$ExternalSyntheticBackport0.m(strA)) {
+                    if (strA != null && !StringUtils.isBlank(strA)) {
                         iCodePointAt = strA.codePointAt(0);
                         if (Character.isLetter(iCodePointAt)) {
                             str2 = new String(Character.toChars(Character.toUpperCase(iCodePointAt)));
