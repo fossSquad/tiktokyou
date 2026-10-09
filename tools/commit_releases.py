@@ -19,6 +19,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 
 TOOLS = pathlib.Path(__file__).resolve().parent
 PROJECT = TOOLS.parent
@@ -94,12 +95,21 @@ def main() -> int:
                cwd=args.repo).stdout.strip()
     print(f"repo: {args.repo} (current branch: {orig})")
 
+    snapshots = {}
+    for ver, path in OVERRIDES.items():
+        if path.is_dir():
+            snap = pathlib.Path(tempfile.mkdtemp(prefix=f"hist-{ver}-"))
+            shutil.copytree(path, snap / "src")
+            snapshots[ver] = snap / "src"
+            print(f"snapshot {ver}: {path} -> {snapshots[ver]}")
+
     run(["git", "checkout", "--orphan", args.branch], cwd=args.repo)
     run(["git", "rm", "-r", "--cached", "."], cwd=args.repo, check=False)
 
     committed = 0
     for ver in wanted:
-        src = OVERRIDES.get(ver, args.releases / ver / "src")
+        src = snapshots.get(ver) or OVERRIDES.get(ver,
+                                                  args.releases / ver / "src")
         if not src.is_dir():
             print(f"[skip] {ver}: no sources")
             continue
