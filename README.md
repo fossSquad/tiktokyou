@@ -23,15 +23,6 @@ it boots! tested on ASUS Zenfone 3 (2017), Android 9
 
 ### before calling me a bad guy for "leaking" sources
 
-tiktok you is distributed as a closed-source apk with **no license attached**. the author's own [legal notice](https://tiktokyou.ru/legal.html) explicitly cites art. 1280 of the russian civil code, which permits decompilation for studying the ideas and principles underlying a program - the exact same legal basis i used here.
+tty dev approved lol
 
-their terms of service and privacy policy cover only the telegram bot and supporter badges. there is no license, no redistribution clause, and no restriction on reverse engineering anywhere in their public documentation.
-
-also - no pre-built apks are distributed here. you still need the original vanilla tiktok apk to build anything.
-
-### note about sources
-some things like mod core are impossible to fully restore to the original code structure.. you can reconstruct it, but with unofficial names that mismatch the original structure used by tty devs..
-
-also i'm not a professional reverser who knows everything, so i asked ai to reverse it
-
-and this repo is lowkey made for code skidding/pasting, exploring, etc., not for forks yknow
+<img height="200px" src="img/paravozik.png">
