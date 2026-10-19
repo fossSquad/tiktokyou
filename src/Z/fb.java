@@ -1,12 +1,12 @@
 package Z;
 
-class fb extends ib {
-    public fb() {
-        super();
-    }
+public abstract class fb {
+    public static final v9 a;
+    public static final v9 b;
 
-    @Override
-    public int a(jb jbVar) {
-        return jbVar.a;
+    static {
+        w7 w7Var = new w7("SOCIAL_DOWNLOAD_INFO", "com.ss.android.socialbase.downloader.model.DownloadInfo");
+        a = new v9(w7Var, "GET_SAVE_PATH", new String[]{"getSavePath"});
+        b = new v9(w7Var, "GET_NAME", new String[]{"getName"});
     }
 }

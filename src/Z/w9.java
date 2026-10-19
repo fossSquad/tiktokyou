@@ -1,12 +1,9 @@
 package Z;
 
 public abstract class w9 {
-    public static final w6 a;
-    public static final p8 b;
+    public static final e9 a = new e9(new w7("MULTI_IMAGE_URL_INFO", "com.ss.android.ugc.aweme.feed.model.MultiImageUrlInfo"), "IMAGE", new String[]{"image"});
 
     static {
-        w6 w6Var = new w6("SHARE_PANEL_FEATURE_GATE", "X.02r1");
-        a = w6Var;
-        b = new p8(w6Var, "SHARE_PANEL_FEATURE_ENABLED", new String[]{"LJ"});
+        wb.a("field", "NAME", (String[]) new String[]{"name"}.clone());
     }
 }

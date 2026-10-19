@@ -1,5 +1,5 @@
 package Z;
 
 public abstract class m9 {
-    public static final p8 a = new p8(new w6("SEEKBAR_CONTROLLER", "X.06jj"), "SHOULD_SHOW", new String[]{"LJI", "LIZJ", "LJII", "LIZLLL"});
+    public static final e9 a = new e9(new w7("IM_STICKER_API", "com.ss.android.ugc.aweme.im.sticker.api.IMStickerApi"), "COMPANION", new String[]{"LIZ"});
 }

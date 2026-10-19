@@ -1,21 +1,12 @@
 package Z;
 
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
+public abstract class ra {
+    public static final w7 a;
+    public static final v9 b;
 
-public final class ra implements ViewTreeObserver.OnPreDrawListener {
-    public final  LinearLayout a;
-
-    public ra(LinearLayout linearLayout) {
-        this.a = linearLayout;
-    }
-
-    @Override
-    public final boolean onPreDraw() {
-        this.a.getViewTreeObserver().removeOnPreDrawListener(this);
-        LinearLayout linearLayout = this.a;
-        linearLayout.setTranslationY(linearLayout.getHeight());
-        this.a.animate().translationY(0.0f).setDuration(280L).start();
-        return true;
+    static {
+        w7 w7Var = new w7("REFACTOR_PLAYER_CONTROLLER_CLASS", "com.ss.android.ugc.aweme.feed.controller.RefactorPlayerController");
+        a = w7Var;
+        b = new v9(w7Var, "REFACTOR_PLAYER_CONTROLLER_APPLY_SPEED", new String[]{"LJIILL", "I"});
     }
 }

@@ -1,19 +1,15 @@
 package Z;
 
-import com.windukk.hook.HookMethod;
-import Z.OfflineModeHooks;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+public abstract class eb {
+    public static final e9 a;
+    public static final v9 b;
 
-class eb extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        LinkedHashMap linkedHashMap = OfflineModeHooks.a;
-        ArrayList arrayList = new ArrayList(linkedHashMap.size());
-        Iterator it = linkedHashMap.values().iterator();
-        while (it.hasNext()) {
-            arrayList.add(Integer.valueOf(((jb) it.next()).a));
-        }
-        hookMethodParam.setResult(arrayList);
+    static {
+        w7 w7Var = new w7("SINGLE_PHOTO_VIDEO_WATERMARK_TASK", "X.1IFX");
+        wb.a("field", "AWEME", (String[]) new String[]{"LIZ"}.clone());
+        a = new e9(w7Var, "BUILDER", new String[]{"LJIIIZ"});
+        wb.a("method", "PREPARE", (String[]) new String[]{"LIZJ"}.clone());
+        b = new v9(w7Var, "APPLY_WATERMARK", new String[]{"LIZIZ"});
+        wb.a("method", "CONFIGURE_PATHS", (String[]) new String[]{"LJ"}.clone());
     }
 }

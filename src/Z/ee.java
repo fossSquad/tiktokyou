@@ -1,18 +1,13 @@
 package Z;
 
-import android.graphics.Outline;
-import android.view.View;
-import android.view.ViewOutlineProvider;
+public enum ee {
+    d,
+    e;
 
-public final class ee extends ViewOutlineProvider {
-    public final  int a;
+    public final int a = Math.round(51.0f);
+    public final float b = 0.4234f;
+    public final float c = 0.6937f;
 
-    public ee(int i) {
-        this.a = i;
-    }
-
-    @Override
-    public final void getOutline(View view, Outline outline) {
-        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), this.a);
+    ee() {
     }
 }

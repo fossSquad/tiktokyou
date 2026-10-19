@@ -1,5 +1,12 @@
 package Z;
 
 public abstract class n8 {
-    public static final z7 a = new z7(new w6("LOTTIE_PROPERTY", "X.00Qz"), "COLOR_FILTER", new String[]{"LJJIJL"});
+    public static final e9 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("CONTEXT_PROVIDER", "X.02pe");
+        a = new e9(w7Var, "APPLICATION", new String[]{"LIZIZ"});
+        b = new v9(w7Var, "GET", new String[]{"LIZ"});
+    }
 }

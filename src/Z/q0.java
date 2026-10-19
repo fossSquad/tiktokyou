@@ -1,11 +1,15 @@
 package Z;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
-import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
+import android.app.Activity;
+import android.widget.FrameLayout;
 
-class q0 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(BadgeHooks.a(BadgeHooks.a((IMConversation) hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+public final class q0 extends FrameLayout {
+    public q0(Activity activity) {
+        super(activity);
+    }
+
+    @Override
+    public final void onMeasure(int i, int i2) {
+        super.onMeasure(i, i);
     }
 }

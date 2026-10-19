@@ -1,59 +1,27 @@
 package Z;
 
-import android.content.ComponentName;
-import java.util.Objects;
+import android.graphics.Typeface;
+import com.windukk.hook.HookMethod;
 
-public final class j6 {
-    public final String a;
-    public final ComponentName b;
-    public final int c;
-
-    private  boolean $record$equals(Object obj) {
-        if (!(obj instanceof j6)) {
-            return false;
+class j6 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = n6.d;
+        if (((Boolean) threadLocal.get()).booleanValue()) {
+            return;
         }
-        j6 j6Var = (j6) obj;
-        return this.c == j6Var.c && Objects.equals(this.a, j6Var.a) && Objects.equals(this.b, j6Var.b);
-    }
-
-    private  Object[] $record$getFieldsAsObjects() {
-        return new Object[]{this.a, this.b, Integer.valueOf(this.c)};
-    }
-
-    public j6(String str, ComponentName componentName, int i) {
-        this.a = str;
-        this.b = componentName;
-        this.c = i;
-    }
-
-    public final String a() {
-        String strA = l6.a("launcher_icon_" + this.a, null);
-        if (strA != null) {
-            return strA;
+        ac.a().getClass();
+        String strF = ac.f();
+        if ("default".equals(strF)) {
+            return;
         }
-        return "default".equals(this.a) ? l6.a("launcher_icon_default", "Default") : k6.a(this.a);
-    }
-
-    public final boolean equals(Object obj) {
-        return $record$equals(obj);
-    }
-
-    public final int hashCode() {
-        return ((this.c * 31) + Objects.hashCode(this.a)) * 31 + Objects.hashCode(this.b);
-    }
-
-    public final String toString() {
-        Object[] fields = $record$getFieldsAsObjects();
-        String[] names = "a;b;c".split(";");
-        StringBuilder sb = new StringBuilder();
-        sb.append(j6.class.getSimpleName()).append("[");
-        for (int i = 0; i < names.length; i++) {
-            sb.append(names[i]).append("=").append(fields[i]);
-            if (i != names.length - 1) {
-                sb.append(", ");
+        threadLocal.set(Boolean.TRUE);
+        try {
+            Typeface typefaceA = n6.a(((Integer) hookMethodParam.args[1]).intValue(), strF);
+            if (typefaceA != null) {
+                hookMethodParam.setResult(typefaceA);
             }
+        } finally {
+            n6.d.set(Boolean.FALSE);
         }
-        sb.append("]");
-        return sb.toString();
     }
 }

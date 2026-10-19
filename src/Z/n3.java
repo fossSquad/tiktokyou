@@ -1,33 +1,29 @@
 package Z;
-import java.util.List;
-import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 
-public final class n3 {
-    public final String a;
-    public final List b;
-
-    public n3(String str, List list) {
-        this.a = str;
-        this.b = list;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Process;
+import android.os.SystemClock;
+import com.bytedance.ies.foundation.activity.BaseActivity;
+public abstract class n3 extends BaseActivity {
+    static {
+        Color.parseColor("#F5F5F5");
+        Color.parseColor("#777778");
     }
 
-    public final boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+    public static void a(Activity activity) {
+        Intent launchIntentForPackage = activity.getPackageManager().getLaunchIntentForPackage(activity.getPackageName());
+        if (launchIntentForPackage == null) {
+            activity.finishAffinity();
+            Process.killProcess(Process.myPid());
+            return;
         }
-        if (!(obj instanceof n3)) {
-            return false;
-        }
-        n3 n3Var = (n3) obj;
-        return Intrinsics.areEqual(this.a, n3Var.a) && Intrinsics.areEqual(this.b, n3Var.b);
-    }
-
-    public final int hashCode() {
-        return this.b.hashCode() + (this.a.hashCode() * 31);
-    }
-
-    public final String toString() {
-        String str = this.a;
-        return new StringBuilder().append("ChoiceGroup(title=").append(str).append(", choices=").append(this.b).append(")").toString();
+        launchIntentForPackage.addFlags(268468224);
+        ((AlarmManager) activity.getSystemService("alarm")).set(3, SystemClock.elapsedRealtime() + 300, PendingIntent.getActivity(activity, 21593, launchIntentForPackage, 335544320));
+        activity.finishAffinity();
+        Process.killProcess(Process.myPid());
     }
 }

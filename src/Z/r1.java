@@ -1,10 +1,15 @@
 package Z;
 
-public final class r1 {
-    public final m1 a;
-    public boolean b;
+import com.windukk.hook.HookMethod;
 
-    public r1(m1 m1Var) {
-        this.a = m1Var;
+class r1 extends HookMethod {
+    final  int a;
+
+    public r1(int i) {
+        this.a = i;
+    }
+
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        v1.a(hookMethodParam, this.a);
     }
 }

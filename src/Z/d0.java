@@ -4,16 +4,12 @@ import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 public final class d0 {
     public final String a;
     public final String b;
-    public final String c;
-    public final String d;
-    public final boolean e;
+    public final Object c;
 
-    public d0(String str, String str2, String str3, String str4, boolean z) {
+    public d0(Object obj, String str, String str2) {
         this.a = str;
         this.b = str2;
-        this.c = str3;
-        this.d = str4;
-        this.e = z;
+        this.c = obj;
     }
 
     public final boolean equals(Object obj) {
@@ -24,24 +20,16 @@ public final class d0 {
             return false;
         }
         d0 d0Var = (d0) obj;
-        return Intrinsics.areEqual(this.a, d0Var.a) && Intrinsics.areEqual(this.b, d0Var.b) && Intrinsics.areEqual(this.c, d0Var.c) && Intrinsics.areEqual(this.d, d0Var.d) && this.e == d0Var.e;
+        return Intrinsics.areEqual(this.a, d0Var.a) && Intrinsics.areEqual(this.b, d0Var.b) && Intrinsics.areEqual(this.c, d0Var.c);
     }
 
     public final int hashCode() {
-        int iHashCode = this.a.hashCode() * 31;
-        String str = this.b;
-        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
-        String str2 = this.c;
-        int iHashCode3 = (iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
-        String str3 = this.d;
-        return Boolean.hashCode(this.e) + ((iHashCode3 + (str3 != null ? str3.hashCode() : 0)) * 31);
+        return this.c.hashCode() + ((this.b.hashCode() + (this.a.hashCode() * 31)) * 31);
     }
 
     public final String toString() {
         String str = this.a;
         String str2 = this.b;
-        String str3 = this.c;
-        String str4 = this.d;
-        return new StringBuilder().append("AutoStreakSticker(interactionName=").append(str).append(", stickerId=").append(str2).append(", stickerSetId=").append(str3).append(", url=").append(str4).append(", isDefault=").append(this.e).append(")").toString();
+        return ve.a("4Vt02IiDtdknD5jXc9B4nF5vw9J7+cBqSR5VKlXFGs4S9bqwIiWgm/QMVUHzoT0o", "MC5qh4rHXSdrERsy", "aes", ve.a("LwO60SM1B3GmKaQDNK0nH7ubfwhLokHonw0cfWMj8P0jaMZhtNXguUUxyFTZ7GFX", "wKYghwNH4nFfbBEP", "aes", new StringBuilder(), str), str2).append(", streakData=").append(this.c).append(")").toString();
     }
 }

@@ -1,14 +1,28 @@
 package Z;
 
-public abstract class m7 {
-    public static final w6 a;
-    public static final z7 b;
-    public static final p8 c;
+import com.ss.android.ugc.aweme.services.MandatoryLoginService;
+import com.windukk.hook.HookBridge;
+import com.windukk.hook.ReplaceMethod;
+import java.lang.reflect.Method;
 
-    static {
-        w6 w6Var = new w6("CONTACT_FEATURE", "com.ss.android.ugc.aweme.im.saas.host.api.feature.contact.ContactFeature");
-        a = w6Var;
-        b = new z7(w6Var, "CONTACT_FEATURE_HOLDER", new String[]{"LIZ"});
-        c = new p8(w6Var, "CONTACT_FEATURE_LOOKUP", new String[]{"LJIJI", "LJIIJJI", "LJIJ", "LJIIIZ"});
+public abstract class m7 {
+    public static void a() {
+        try {
+            String strDecrypt = "checkDynamicMandatoryLoginRegionSettings";
+            Class cls = Long.TYPE;
+            Method declaredMethod = MandatoryLoginService.class.getDeclaredMethod(strDecrypt, String.class, String.class, cls);
+            Boolean bool = Boolean.FALSE;
+            HookBridge.hookMethod(declaredMethod, ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("checkForceLoginForBR", String.class, cls), ReplaceMethod.returnConstant(bool));
+            String strDecrypt2 = "enableForcedLogin";
+            Class cls2 = Boolean.TYPE;
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod(strDecrypt2, cls2), ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowForcedLogin", cls2), ReplaceMethod.returnConstant(bool));
+            HookBridge.hookMethod(MandatoryLoginService.class.getDeclaredMethod("shouldShowLoginTabFirst", null), ReplaceMethod.returnConstant(bool));
+        } catch (Exception e) {
+            String strDecrypt3 = "MandatoryHooks init exception";
+            Object obj = g7.a;
+            g7.a(6, String.valueOf(strDecrypt3), e);
+        }
     }
 }

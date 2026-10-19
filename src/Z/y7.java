@@ -1,5 +1,5 @@
 package Z;
 
 public abstract class y7 {
-    public static final p8 a = new p8(new w6("FAV_STICKER_LIST_STATE", "X.0GLw"), "UNWRAP", new String[]{"LIZ"});
+    public static final v9 a = new v9(new w7("COMMENT_HOLDER_CLASS", "X.0FVG"), "COMMENT_HOLDER_COMMENT", new String[]{"LIZ"});
 }

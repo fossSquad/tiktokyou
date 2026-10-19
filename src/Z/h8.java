@@ -1,5 +1,12 @@
 package Z;
 
 public abstract class h8 {
-    public static final z7 a = new z7(new w6("IM_STICKER_API", "com.ss.android.ugc.aweme.im.sticker.api.IMStickerApi"), "COMPANION", new String[]{"LIZ"});
+    public static final w7 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("COMMENT_TRANSLATION_DIRECT_GATE", "X.08Xu");
+        a = w7Var;
+        b = new v9(w7Var, "ENABLED", new String[]{"LIZ", "LIZIZ"});
+    }
 }

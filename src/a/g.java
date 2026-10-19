@@ -31,9 +31,9 @@ public final class g {
     public static final Object e;
 
     public final Context f2a;
-    public final File bf;
-    public final String cf = "release";
-    public final int d = 1790876728;
+    public final File b;
+    public final String c = "release";
+    public final int d = 1792428213;
 
     static {
         e = new Object();
@@ -41,7 +41,7 @@ public final class g {
 
     public g(Context context) {
         this.f2a = context;
-        this.bf = new File(context.getNoBackupFilesDir(), "tty_dynamic");
+        this.b = new File(context.getNoBackupFilesDir(), "tty_dynamic");
     }
 
     public static List e(File file) throws IOException {
@@ -83,17 +83,17 @@ public final class g {
     }
 
     public final File a() {
-        return new File(this.bf, "active");
+        return new File(this.b, "active");
     }
 
     public final File b() {
-        return new File(this.bf, "startup_attempt");
+        return new File(this.b, "startup_attempt");
     }
 
-    public final synchronized File c() throws IOException {
+    public final synchronized File c() {
         File file;
         f();
-        file = new File(this.bf, "pending.tmp");
+        file = new File(this.b, "pending.tmp");
         c(file);
         if (!file.mkdirs()) {
             throw new IOException("Cannot create pending staging directory");
@@ -101,17 +101,16 @@ public final class g {
         return file;
     }
 
-    public final a.e d() throws java.io.IOException {
-        String strA;
-        Context context = this.f2a;
-        if (context == null) {
+    public final a.e d() throws IOException {
+        if (this.f2a == null) {
             throw new IOException("Bundled dex is unavailable without Android context");
         }
-        String[] list = context.getAssets().list("tty/bundled");
+        String[] list = this.f2a.getAssets().list("tty/bundled");
         ArrayList arrayList = new ArrayList();
         if (list != null) {
+            String strDecrypt = "classes(?:[2-9][0-9]*)?\\.dex";
             for (String str : list) {
-                if (str != null && str.matches("classes(?:[2-9][0-9]*)?\\.dex")) {
+                if (str != null && str.matches(strDecrypt)) {
                     arrayList.add(str);
                 }
             }
@@ -123,18 +122,14 @@ public final class g {
             }
         }));
         a(arrayList);
-        File file = new File(this.bf, "bundled");
-        File file2 = new File(this.bf, "bundled.tmp");
+        File file = new File(this.b, "bundled");
+        File file2 = new File(this.b, "bundled.tmp");
         c(file2);
         if (!file2.mkdirs()) {
             throw new IOException("Cannot create bundled staging directory");
         }
-        int size = arrayList.size();
-        int i = 0;
-        while (i < size) {
-            Object obj = arrayList.get(i);
-            i++;
-            String str2 = (String) obj;
+        for (int i = 0; i < arrayList.size(); i++) {
+            String str2 = (String) arrayList.get(i);
             File file3 = new File(file2, str2);
             InputStream inputStreamOpen = this.f2a.getAssets().open("tty/bundled/" + str2);
             try {
@@ -149,62 +144,42 @@ public final class g {
                         fileOutputStream.write(bArr, 0, i2);
                     }
                     fileOutputStream.getFD().sync();
+                } finally {
                     fileOutputStream.close();
-                    inputStreamOpen.close();
-                } catch (Throwable th) {
-                    try {
-                        fileOutputStream.close();
-                        throw th;
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                        throw th;
-                    }
                 }
-            } catch (Throwable th3) {
-                if (inputStreamOpen == null) {
-                    throw th3;
-                }
-                try {
-                    inputStreamOpen.close();
-                    throw th3;
-                } catch (Throwable th4) {
-                    th3.addSuppressed(th4);
-                    throw th3;
-                }
+            } finally {
+                inputStreamOpen.close();
             }
         }
-        List listD = d(file2);
-        util.PkgBridge.c(listD);
-        String strA2 = a(listD);
+        List list2 = d(file2);
+        c.a(list2);
+        String strA = a(list2);
+        String strA2 = null;
         if (file.isDirectory()) {
             List listE = e(file);
-            if (listE.isEmpty()) {
-                strA = null;
-            } else {
-                strA = a(listE);
+            if (!listE.isEmpty()) {
+                strA2 = a(listE);
             }
-        } else {
-            strA = null;
         }
-        if (strA2.equals(strA)) {
-            c(file2);
-        } else {
+        if (!strA.equals(strA2)) {
             c(file);
             b(file2, file);
             h(file);
+        } else {
+            c(file2);
         }
-        return new e("bundled", d(file), null, false, strA2);
+        return new e("bundled", d(file), null, false, strA);
     }
 
-    public final synchronized long g() throws IOException {
+    public final synchronized long g() {
         long jI;
         try {
             f();
             File fileA = a();
             jI = (e(fileA).isEmpty() || !b(fileA)) ? j(l()) ? i(l()) : e() : i(a());
-            if (new File(this.bf, "highest_accepted_version").isFile()) {
+            if (new File(this.b, "highest_accepted_version").isFile()) {
                 try {
-                    jI = Math.max(jI, Long.parseLong(new String(Files.readAllBytes(new File(this.bf, "highest_accepted_version").toPath()), StandardCharsets.US_ASCII).trim()));
+                    jI = Math.max(jI, Long.parseLong(new String(Files.readAllBytes(new File(this.b, "highest_accepted_version").toPath()), StandardCharsets.US_ASCII).trim()));
                 } catch (NumberFormatException e2) {
                     throw new IOException("Invalid highest accepted dynamic version", e2);
                 }
@@ -222,27 +197,27 @@ public final class g {
         return jI;
     }
 
-    public final  long h() throws IOException {
+    public final  long h() {
         return i(a());
     }
 
-    public final  long i() throws IOException {
+    public final  long i() {
         return i(l());
     }
 
-    public final  long j() throws IOException {
+    public final  long j() {
         return i(k());
     }
 
     public final File k() {
-        return new File(this.bf, "pending");
+        return new File(this.b, "pending");
     }
 
     public final File l() {
-        return new File(this.bf, "previous");
+        return new File(this.b, "previous");
     }
 
-    public final synchronized e m() throws IOException {
+    public final synchronized e m() {
         int i;
         f();
         int i2 = 0;
@@ -273,7 +248,7 @@ public final class g {
                 }
             }
         }
-        if (new File(this.bf, "force_bundled").exists()) {
+        if (new File(this.b, "force_bundled").exists()) {
             c(k());
             if (a().isDirectory()) {
                 File fileA2 = a();
@@ -281,7 +256,7 @@ public final class g {
                 c(fileL);
                 b(fileA2, fileL);
             }
-            new File(this.bf, "force_bundled").delete();
+            new File(this.b, "force_bundled").delete();
             return d();
         }
         if (k().isDirectory() && !b(k())) {
@@ -303,14 +278,14 @@ public final class g {
             String strDecrypt2 = "pending";
             File fileA4 = a();
             List listD = d(fileA4);
-            util.PkgBridge.c(listD);
+            c.a(listD);
             return new e(strDecrypt2, listD, fileA4, true, a(listD));
         }
         if (j(a())) {
             String strDecrypt3 = "active";
             File fileA5 = a();
             List listD2 = d(fileA5);
-            util.PkgBridge.c(listD2);
+            c.a(listD2);
             return new e(strDecrypt3, listD2, fileA5, false, a(listD2));
         }
         File fileN2 = n();
@@ -326,7 +301,7 @@ public final class g {
             String strDecrypt4 = "active";
             File fileA6 = a();
             List listD3 = d(fileA6);
-            util.PkgBridge.c(listD3);
+            c.a(listD3);
             return new e(strDecrypt4, listD3, fileA6, true, a(listD3));
         }
         if (a().exists()) {
@@ -341,15 +316,15 @@ public final class g {
         String strDecrypt5 = "previous";
         File fileL3 = l();
         List listD4 = d(fileL3);
-        util.PkgBridge.c(listD4);
+        c.a(listD4);
         return new e(strDecrypt5, listD4, fileL3, false, a(listD4));
     }
 
     public final File n() {
-        return new File(this.bf, "startup_crashes");
+        return new File(this.b, "startup_crashes");
     }
 
-    public final synchronized DynamicStatus o() throws IOException {
+    public final synchronized DynamicStatus o() {
         String str;
         String strA;
         String strA2;
@@ -373,56 +348,40 @@ public final class g {
             jA2 = new f() {
                 @Override
                 public final long a() {
-                    try {
-                        return g.this.e();
-                    } catch (IOException e6) {
-                        throw new RuntimeException(e6);
-                    }
+                    return this.f$0.e();
                 }
             }.a();
-        } catch (Exception e2) {
+        } catch (IOException e2) {
             jA2 = 0;
         }
         try {
             jA3 = new f() {
                 @Override
                 public final long a() {
-                    try {
-                        return g.this.h();
-                    } catch (IOException e7) {
-                        throw new RuntimeException(e7);
-                    }
+                    return this.f$0.h();
                 }
             }.a();
-        } catch (Exception e3) {
+        } catch (IOException e3) {
             jA3 = 0;
         }
         try {
             jA4 = new f() {
                 @Override
                 public final long a() {
-                    try {
-                        return g.this.i();
-                    } catch (IOException e8) {
-                        throw new RuntimeException(e8);
-                    }
+                    return this.f$0.i();
                 }
             }.a();
-        } catch (Exception e4) {
+        } catch (IOException e4) {
             jA4 = 0;
         }
         try {
             jA = new f() {
                 @Override
                 public final long a() {
-                    try {
-                        return g.this.j();
-                    } catch (IOException e9) {
-                        throw new RuntimeException(e9);
-                    }
+                    return this.f$0.j();
                 }
             }.a();
-        } catch (Exception e5) {
+        } catch (IOException e5) {
         }
         return new DynamicStatus(str, strA, strA2, strA3, zExists, jA2, jA3, jA4, jA);
     }
@@ -439,20 +398,20 @@ public final class g {
         }
     }
 
-    public static long i(File file) throws IOException {
+    public static long i(File file) {
         File file2 = new File(file, "manifest.json");
         if (file2.isFile()) {
-            return util.PkgBridge.a(Files.readAllBytes(file2.toPath())).b;
+            return c.b.a(Files.readAllBytes(file2.toPath())).b;
         }
         return 0L;
     }
 
     public final boolean a(long j) throws IOException {
-        if (j <= 0 || !new File(this.bf, "highest_accepted_version").isFile()) {
+        if (j <= 0 || !new File(this.b, "highest_accepted_version").isFile()) {
             return false;
         }
         try {
-            if (Long.parseLong(new String(Files.readAllBytes(new File(this.bf, "highest_accepted_version").toPath()), StandardCharsets.US_ASCII).trim()) != j) {
+            if (Long.parseLong(new String(Files.readAllBytes(new File(this.b, "highest_accepted_version").toPath()), StandardCharsets.US_ASCII).trim()) != j) {
                 return false;
             }
             File[] fileArr = {k(), a(), l()};
@@ -468,10 +427,10 @@ public final class g {
         }
     }
 
-    public final void b(long j) throws IOException {
+    public final void b(long j) {
         synchronized (e) {
             f();
-            RandomAccessFile randomAccessFile = new RandomAccessFile(new File(this.bf, "verified_install.lock"), "rw");
+            RandomAccessFile randomAccessFile = new RandomAccessFile(new File(this.b, "verified_install.lock"), "rw");
             try {
                 FileChannel channel = randomAccessFile.getChannel();
                 try {
@@ -514,12 +473,12 @@ public final class g {
         }
     }
 
-    public final boolean j(File file) throws IOException {
+    public final boolean j(File file) {
         return !e(file).isEmpty() && new File(file, "healthy").isFile() && b(file);
     }
 
     public final void f() throws IOException {
-        if (!this.bf.isDirectory() && !this.bf.mkdirs()) {
+        if (!this.b.isDirectory() && !this.b.mkdirs()) {
             throw new IOException("Cannot create dynamic store");
         }
     }
@@ -555,7 +514,7 @@ public final class g {
         }
     }
 
-    public final synchronized void a(e eVar) throws IOException {
+    public final synchronized void a(e eVar) {
         if (eVar.c != null) {
             b(new File(eVar.c, "healthy"), eVar.e);
         }
@@ -578,8 +537,8 @@ public final class g {
                 if (i2 == -1) {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     inputStreamOpen.close();
-                    var bVarA = util.PkgBridge.a(byteArray);
-                    if (this.cf.equals(bVarA.a) && this.d == bVarA.f1c) {
+                    c.b bVarA = c.b.a(byteArray);
+                    if (this.c.equals(bVarA.a) && this.d == bVarA.c) {
                         return bVarA.b;
                     }
                     throw new IOException("Bundled dex manifest is incompatible");
@@ -638,7 +597,7 @@ public final class g {
     }
 
     public final boolean b(File file) {
-        if (this.cf == null || !file.isDirectory()) {
+        if (this.c == null || !file.isDirectory()) {
             return true;
         }
         File file2 = new File(file, "manifest.json");
@@ -646,8 +605,8 @@ public final class g {
             return false;
         }
         try {
-            var bVarA = util.PkgBridge.a(Files.readAllBytes(file2.toPath()));
-            return this.cf.equals(bVarA.a) && this.d == bVarA.f1c;
+            c.b bVarA = c.b.a(Files.readAllBytes(file2.toPath()));
+            return this.c.equals(bVarA.a) && this.d == bVarA.c;
         } catch (IOException e2) {
             return false;
         }
@@ -687,27 +646,27 @@ public final class g {
         }
     }
 
-    public final void a(File file, long j, d dVar) throws IOException {
+    public final void a(File file, long j, d dVar) {
         synchronized (e) {
             f();
-            RandomAccessFile randomAccessFile = new RandomAccessFile(new File(this.bf, "verified_install.lock"), "rw");
+            RandomAccessFile randomAccessFile = new RandomAccessFile(new File(this.b, "verified_install.lock"), "rw");
             try {
                 FileChannel channel = randomAccessFile.getChannel();
                 try {
                     FileLock fileLockLock = channel.lock();
                     try {
-                        util.PkgBridge.c(d(file));
+                        c.a(d(file));
                         boolean zC = c(j);
                         if (dVar != null) {
                             dVar.run();
                         }
                         if (!zC) {
-                            c(new File(this.bf, "highest_accepted_version"), Long.toString(j));
+                            c(new File(this.b, "highest_accepted_version"), Long.toString(j));
                         }
                         c(k());
                         b(file, k());
                         h(k());
-                        if (new File(this.bf, "force_bundled").exists() && !new File(this.bf, "force_bundled").delete()) {
+                        if (new File(this.b, "force_bundled").exists() && !new File(this.b, "force_bundled").delete()) {
                             throw new IOException("Cannot cancel the bundled dex request");
                         }
                         if (fileLockLock != null) {
@@ -746,12 +705,12 @@ public final class g {
         }
     }
 
-    public final synchronized void a(File file) throws IOException {
-        util.PkgBridge.c(d(file));
+    public final synchronized void a(File file) {
+        c.a(d(file));
         c(k());
         b(file, k());
         h(k());
-        if (new File(this.bf, "force_bundled").exists() && !new File(this.bf, "force_bundled").delete()) {
+        if (new File(this.b, "force_bundled").exists() && !new File(this.b, "force_bundled").delete()) {
             throw new IOException("Cannot cancel the bundled dex request");
         }
     }
@@ -788,7 +747,7 @@ public final class g {
                     while (true) {
                         int i = fileInputStream.read(bArr);
                         if (i == -1) {
-                            String strA = util.PkgBridge.b(messageDigest.digest());
+                            String strA = b.a.a(messageDigest.digest());
                             fileInputStream.close();
                             return strA;
                         }
@@ -823,7 +782,7 @@ public final class g {
                             }
                             messageDigest2.update(bArr2, 0, i2);
                         }
-                        String strA2 = util.PkgBridge.b(messageDigest2.digest());
+                        String strA2 = b.a.a(messageDigest2.digest());
                         fileInputStream2.close();
                         sbAppend.append(strA2).append('\n');
                     } catch (Throwable th3) {
@@ -839,7 +798,7 @@ public final class g {
                 }
             }
             try {
-                return util.PkgBridge.b(MessageDigest.getInstance("SHA-256").digest(sb.toString().getBytes(StandardCharsets.UTF_8)));
+                return b.a.a(MessageDigest.getInstance("SHA-256").digest(sb.toString().getBytes(StandardCharsets.UTF_8)));
             } catch (NoSuchAlgorithmException e4) {
                 throw new AssertionError(e4);
             }
@@ -848,7 +807,7 @@ public final class g {
 
     public final void a(File file, String str) throws IOException {
         if (file.exists()) {
-            File file2 = new File(new File(this.bf, "quarantine"), System.currentTimeMillis() + "-" + str);
+            File file2 = new File(new File(this.b, "quarantine"), System.currentTimeMillis() + "-" + str);
             File parentFile = file2.getParentFile();
             if (!parentFile.isDirectory() && !parentFile.mkdirs()) {
                 throw new IOException("Cannot create quarantine");

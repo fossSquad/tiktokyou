@@ -1,28 +1,14 @@
 package Z;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
+import android.content.res.ColorStateList;
 import com.windukk.hook.HookMethod;
-import Z.FeedHooks;
 
 class yg extends HookMethod {
-
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Aweme aweme;
-        Object[] objArr = hookMethodParam.args;
-        int i = zg.a;
-        if (objArr.length >= 2) {
-            Object obj = objArr[1];
-            if (obj instanceof Aweme) {
-                aweme = (Aweme) obj;
-            } else {
-                aweme = null;
-            }
-        } else {
-            aweme = null;
+        ColorStateList colorStateList;
+        ColorStateList colorStateListA;
+        if (ac.a().g() && (colorStateListA = zh.a((colorStateList = (ColorStateList) hookMethodParam.args[0]))) != colorStateList) {
+            hookMethodParam.args[0] = colorStateListA;
         }
-        if (aweme == null || !FeedHooks.a(aweme)) {
-            return;
-        }
-        hookMethodParam.setResult((Object) null);
     }
 }

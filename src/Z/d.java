@@ -10,14 +10,12 @@ class d extends HookMethod {
             return;
         }
         Object obj = hookMethodParam.thisObject;
-        if ((obj instanceof View) && ((View) obj).getId() == n.j) {
-            if (ta.a() == null || ta.d().g) {
-                Object obj2 = hookMethodParam.args[0];
-                if (!(obj2 instanceof Integer) || ((Integer) obj2).intValue() == 0) {
-                    return;
-                }
-                hookMethodParam.args[0] = 0;
+        if ((obj instanceof View) && ((View) obj).getId() == n.j && y5.a().g) {
+            Object obj2 = hookMethodParam.args[0];
+            if (!(obj2 instanceof Integer) || ((Integer) obj2).intValue() == 0) {
+                return;
             }
+            hookMethodParam.args[0] = 0;
         }
     }
 }

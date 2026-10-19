@@ -1,10 +1,27 @@
 package Z;
 
-import android.app.Activity;
-import android.util.TypedValue;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.util.LinkedHashMap;
 
-public abstract  class r2 {
-    public static float a(Activity activity, int i, float f) {
-        return TypedValue.applyDimension(i, f, activity.getResources().getDisplayMetrics());
+public final class r2 implements InvocationHandler {
+    public final  LinkedHashMap a;
+    public final  Object b;
+
+    public r2(LinkedHashMap linkedHashMap, Object obj) {
+        this.a = linkedHashMap;
+        this.b = obj;
+    }
+
+    @Override
+    public final Object invoke(Object obj, Method method, Object[] objArr) {
+        if (this.a.containsKey(method.getName())) {
+            return this.a.get(method.getName());
+        }
+        Object obj2 = this.b;
+        if (objArr == null) {
+            objArr = new Object[0];
+        }
+        return method.invoke(obj2, objArr);
     }
 }

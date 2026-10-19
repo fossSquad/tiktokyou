@@ -1,26 +1,10 @@
 package Z;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.TextView;
+import com.windukk.hook.HookMethod;
+import java.util.List;
 
-public final class f5 implements TextWatcher {
-    public final  TextView a;
-
-    public f5(TextView textView) {
-        this.a = textView;
-    }
-
-    @Override
-    public final void afterTextChanged(Editable editable) {
-        this.a.setVisibility(editable.toString().trim().length() > 0 ? 0 : 8);
-    }
-
-    @Override
-    public final void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-    }
-
-    @Override
-    public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+class f5 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(a.a((List) hookMethodParam.getResult()));
     }
 }

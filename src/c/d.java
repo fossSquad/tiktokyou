@@ -1,6 +1,4 @@
 package c;
-
-import com.vapro.vae.stringfog.StringFogRuntime;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;

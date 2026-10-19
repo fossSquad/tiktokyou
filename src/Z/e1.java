@@ -1,18 +1,21 @@
 package Z;
-
 import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
 class e1 extends HookMethod {
+    final  i2 a;
+
+    public e1(i2 i2Var) {
+        this.a = i2Var;
+    }
+
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        lc lcVar = (lc) BadgeHooks.u.get();
-        if (lcVar != null) {
-            Object result = hookMethodParam.getResult();
-            if (result instanceof String) {
-                String str = (String) result;
-                if (BadgeHooks.a(lcVar, str)) {
-                    hookMethodParam.setResult(BadgeHooks.a(lcVar.a, str));
-                }
+        if (hookMethodParam.getResult() instanceof String) {
+            try {
+                hookMethodParam.setResult(v1.a(this.a.a(hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
+            } catch (Exception e) {
+                String strDecrypt = "Failed to resolve uid for ChatListNameModel#getName";
+                Object obj = g7.a;
+                g7.a(6, String.valueOf(strDecrypt), e);
             }
         }
     }

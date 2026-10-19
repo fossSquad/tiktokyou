@@ -1,14 +1,32 @@
 package Z;
 
-public abstract class e9 {
-    public static final p8 a;
-    public static final p8 b;
-    public static final p8 c;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 
-    static {
-        w6 w6Var = new w6("PROFILE_INFO_OTHER_NICKNAME_PROTOCOL_CLASS", "com.ss.android.ugc.profile.business.ur.nickname.ProfileInfoOtherNicknameProtocol");
-        a = new p8(w6Var, "PROFILE_INFO_OTHER_NICKNAME_CONTEXT", new String[]{"LJJLIIIIJ", "LJJLIIIJLLLLLLLZ", "LJJLIIIJLJLI", "LJJLIIIJJIZ", "LJJL", "LJJLIIIJ", "LJJJZ", "LJJLIIIJJI", "LJJLIIIJL"});
-        b = new p8(w6Var, "PROFILE_INFO_OTHER_NICKNAME_COMMON_INFO", new String[]{"LJIILIIL", "LJIIL", "LJIILL", "LJJLJLI"});
-        c = new p8(w6Var, "PROFILE_INFO_OTHER_NICKNAME_TEXT", new String[]{"TU0", "YQ0", "dP0", "eO0", "zN0"});
+public final class e9 {
+    public final w7 a;
+    public final String b;
+    public final String[] c;
+
+    public e9(w7 w7Var, String str, String[] strArr) {
+        this.a = w7Var;
+        this.b = str;
+        String[] strArr2 = (String[]) strArr.clone();
+        this.c = strArr2;
+        wb.a("field", str, strArr2);
+    }
+
+    public final Field a(Class cls) throws NoSuchFieldException {
+        for (String str : this.c) {
+            try {
+                return se.a(cls, str);
+            } catch (NoSuchFieldException e) {
+            }
+        }
+        throw new NoSuchFieldException(cls.getName() + "#" + this.b + " names=" + Arrays.toString(this.c));
+    }
+
+    public final String toString() {
+        return (this.a != null ? this.a.a + "." : "") + this.b + "=" + Arrays.toString(this.c);
     }
 }

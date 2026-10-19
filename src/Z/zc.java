@@ -1,28 +1,26 @@
 package Z;
 
-import android.text.Spanned;
-import android.widget.TextView;
+import ni.shikatu.kotlin.enums.EnumEntriesKt;
 
-public final class zc implements Runnable {
-    public final  TextView a;
+public final class zc {
+    a,
+    b,
+    c,
+    d;
 
-    public zc(TextView textView) {
-        this.a = textView;
+    static {
+        EnumEntriesKt.enumEntries(zcVarArr);
     }
 
-    @Override
-    public final void run() {
-        if (ta.a() != null && ta.d().s) {
-            CharSequence text = this.a.getText();
-            if (text instanceof Spanned) {
-                Spanned spanned = (Spanned) text;
-                if (((bd[]) spanned.getSpans(0, spanned.length(), bd.class)).length > 0) {
-                    this.a.invalidate();
-                    this.a.postDelayed(this, 40L);
-                    return;
-                }
-            }
-        }
-        cd.b.remove(this.a);
+    public zc() {
+        super(str, i);
+    }
+
+    public static zc valueOf(String str) {
+        return (zc) Enum.valueOf(zc.class, str);
+    }
+
+    public static zc[] values() {
+        return (zc[]) e.clone();
     }
 }

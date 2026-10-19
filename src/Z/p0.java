@@ -1,11 +1,17 @@
 package Z;
 
-import com.ss.android.ugc.aweme.im.contacts.api.model.IMUser;
-import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
+import android.graphics.Outline;
+import android.view.View;
+import android.view.ViewOutlineProvider;
+public final class p0 extends ViewOutlineProvider {
+    public final  float a;
 
-class p0 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(BadgeHooks.a(((IMUser) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
+    public p0(float f) {
+        this.a = f;
+    }
+
+    @Override
+    public final void getOutline(View view, Outline outline) {
+        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), this.a);
     }
 }

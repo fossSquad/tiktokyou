@@ -1,16 +1,18 @@
 package Z;
 
+import android.widget.TextView;
 import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
 class i1 extends HookMethod {
-    final  int a;
-
-    public i1(int i) {
-        this.a = i;
-    }
-
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        BadgeHooks.a(hookMethodParam, this.a);
+        CharSequence charSequence;
+        CharSequence charSequenceA;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if ((obj instanceof CharSequence) && (charSequenceA = v1.a((TextView) hookMethodParam.thisObject, (charSequence = (CharSequence) obj))) != charSequence) {
+                hookMethodParam.args[0] = charSequenceA;
+            }
+        }
     }
 }

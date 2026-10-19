@@ -1,5 +1,5 @@
 package Z;
 
 public abstract class v8 {
-    public static final p8 a = new p8(new w6("PHOTO_DOWNLOAD_LISTENER", "X.163i"), "ON_SUCCEEDED", new String[]{"onSuccessed"});
+    public static final v9 a = new v9(new w7("EDIT_SAVE_WATERMARK_GATE", "X.1Hu0"), "EDIT_SAVE_NO_WATERMARK", new String[]{"LJJIFFI"});
 }

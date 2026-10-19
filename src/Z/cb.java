@@ -1,26 +1,12 @@
 package Z;
-import com.windukk.hook.HookMethod;
-import Z.OfflineModeHooks;
 
-class cb extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        try {
-            Object objInvoke = OfflineModeHooks.b.invoke(null, null);
-            if (objInvoke == null) {
-                return;
-            }
-            if (OfflineModeHooks.c == null) {
-                OfflineModeHooks.c = dd.a(objInvoke.getClass(), "getInt", String.class, Integer.TYPE);
-            }
-            Integer num = (Integer) OfflineModeHooks.d.invoke(null, null);
-            num.intValue();
-            Integer num2 = (Integer) OfflineModeHooks.c.invoke(objInvoke, "keva_cache_count", num);
-            num2.intValue();
-            hookMethodParam.setResult(num2);
-        } catch (Throwable th) {
-            String strDecrypt = "Cache-count restore (runtime) error: ";
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(strDecrypt), th);
-        }
+public abstract class cb {
+    public static final w7 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("SHARE_DOWNLOAD_ACCOUNT_GATE", "X.02yK");
+        a = w7Var;
+        b = new v9(w7Var, "SHARE_DOWNLOAD_ACCOUNT_BLOCKED", new String[]{"LJIIIZ", "LJIIIIZZ"});
     }
 }

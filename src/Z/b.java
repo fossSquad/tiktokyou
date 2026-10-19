@@ -13,7 +13,7 @@ public final class b implements Runnable {
     public final void run() {
         if (n.b()) {
             m mVar = this.a;
-            if (mVar.e && mVar.i == this.b) {
+            if (mVar.e && mVar.k == this.b) {
                 mVar.e = false;
                 n.a(mVar, true);
             }

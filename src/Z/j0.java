@@ -1,20 +1,26 @@
 package Z;
+import java.util.ArrayList;
+import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.res.Resources;
+public final class j0 implements l0 {
+    public final ArrayList a;
 
-public final class j0 extends ContextWrapper {
-    public final i0 a;
-
-    public j0(Context context) {
-        super(context);
-        Resources resources = context.getResources();
-        this.a = new i0(resources);
+    public j0(ArrayList arrayList) {
+        this.a = arrayList;
     }
 
-    @Override
-    public final Resources getResources() {
-        return this.a;
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        return (obj instanceof j0) && Intrinsics.areEqual(this.a, ((j0) obj).a);
+    }
+
+    public final int hashCode() {
+        return this.a.hashCode();
+    }
+
+    public final String toString() {
+        return "Ready(partners=" + this.a + ")";
     }
 }

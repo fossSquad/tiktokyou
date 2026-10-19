@@ -1,15 +1,14 @@
 package Z;
 
 public abstract class x9 {
-    public static final z7 a;
-    public static final p8 b;
+    public static final w7 a;
+    public static final v9 b;
+    public static final v9 c;
 
     static {
-        w6 w6Var = new w6("SINGLE_PHOTO_VIDEO_WATERMARK_TASK", "X.1MIq");
-        oa.a("field", "AWEME", (String[]) new String[]{"LIZ"}.clone());
-        a = new z7(w6Var, "BUILDER", new String[]{"LJIIIZ"});
-        oa.a("method", "PREPARE", (String[]) new String[]{"LIZJ"}.clone());
-        b = new p8(w6Var, "APPLY_WATERMARK", new String[]{"LIZIZ"});
-        oa.a("method", "CONFIGURE_PATHS", (String[]) new String[]{"LJ"}.clone());
+        w7 w7Var = new w7("OFFLINE_MODE_CACHE_COUNT", "X.09y5");
+        a = w7Var;
+        b = new v9(w7Var, "GET", new String[]{"LIZ"});
+        c = new v9(w7Var, "STORE", new String[]{"LJIIIIZZ"});
     }
 }

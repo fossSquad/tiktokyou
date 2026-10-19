@@ -18,18 +18,13 @@ import java.io.InputStream;
 public final class DynamicUpdates {
     public static final long MAX_PACKAGE_BYTES = 201326592;
 
-    public static void a(final Context context, g gVar, File file) throws IOException, Throwable {
+    public static void a(final Context context, g gVar, File file) {
         File fileC = gVar.c();
         try {
             final e eVarA = f.a(file, fileC, "release", a(context));
             gVar.a(fileC, eVarA.a.b, new d() {
-                @Override
                 public final void run() {
-                    try {
-                        h.a(context, eVarA.a.f);
-                    } catch (IOException io) {
-                        throw new RuntimeException(io);
-                    }
+                    h.a(context, eVarA.a.f);
                 }
             });
         } catch (Throwable th) {
@@ -38,24 +33,15 @@ public final class DynamicUpdates {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static <T extends Throwable> RuntimeException sneakyThrow(Throwable th) throws T {
-        throw (T) th;
-    }
-
-    public static DynamicStatus getStatus(Context context) throws IOException {
+    public static DynamicStatus getStatus(Context context) {
         return new g(context).o();
     }
 
     public static long highestAcceptedVersion(Context context) {
-        try {
-            return new g(context).g();
-        } catch (IOException e) {
-            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
-        }
+        return new g(context).g();
     }
 
-    public static void importFile(Context context, Uri uri) throws IOException, Throwable {
+    public static void importFile(Context context, Uri uri) throws IOException {
         File fileCreateTempFile = File.createTempFile("tty-dynamic-import-", ".tmp", context.getCacheDir());
         try {
             InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(uri);
@@ -83,7 +69,7 @@ public final class DynamicUpdates {
         }
     }
 
-    public static void importPackage(Context context, File file) throws IOException, Throwable {
+    public static void importPackage(Context context, File file) throws IOException {
         if (file == null || !file.isFile()) {
             throw new IOException("Package does not exist");
         }
@@ -114,20 +100,16 @@ public final class DynamicUpdates {
     public static long otaVersionFloor(Context context) {
         long jG;
         g gVar = new g(context);
-        try {
-            synchronized (gVar) {
-                jG = gVar.g();
-                if (jG > 0 && gVar.a(jG)) {
-                    jG--;
-                }
+        synchronized (gVar) {
+            jG = gVar.g();
+            if (jG > 0 && gVar.a(jG)) {
+                jG--;
             }
-        } catch (IOException e) {
-            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
         }
         return jG;
     }
 
-    public static void preview(Context context, Uri uri) throws IOException, Throwable {
+    public static void preview(Context context, Uri uri) throws IOException {
         InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(uri);
         try {
             if (inputStreamOpenInputStream == null) {
@@ -149,16 +131,16 @@ public final class DynamicUpdates {
         }
     }
 
-    public static void scheduleBundled(Context context) throws IOException {
+    public static void scheduleBundled(Context context) {
         g gVar = new g(context);
         synchronized (gVar) {
             gVar.f();
             g.c(gVar.k());
-            g.b(new File(gVar.bf, "force_bundled"), "1");
+            g.b(new File(gVar.b, "force_bundled"), "1");
         }
     }
 
-    public static void scheduleRollback(Context context) throws IOException {
+    public static void scheduleRollback(Context context) {
         g gVar = new g(context);
         synchronized (gVar) {
             if (!gVar.j(gVar.l())) {
@@ -172,24 +154,20 @@ public final class DynamicUpdates {
     }
 
     public static int stableApiVersion() {
-        return 1790876728;
+        return 1792428213;
     }
 
     public static long workingDynamicVersion(Context context) {
         long jI;
         g gVar = new g(context);
-        try {
-            synchronized (gVar) {
-                gVar.f();
-                File fileA = gVar.a();
-                if (g.e(fileA).isEmpty() || !gVar.b(fileA)) {
-                    jI = gVar.j(gVar.l()) ? g.i(gVar.l()) : gVar.e();
-                } else {
-                    jI = g.i(gVar.a());
-                }
+        synchronized (gVar) {
+            gVar.f();
+            File fileA = gVar.a();
+            if (g.e(fileA).isEmpty() || !gVar.b(fileA)) {
+                jI = gVar.j(gVar.l()) ? g.i(gVar.l()) : gVar.e();
+            } else {
+                jI = g.i(gVar.a());
             }
-        } catch (IOException e) {
-            throw DynamicUpdates.<RuntimeException>sneakyThrow(e);
         }
         return jI;
     }

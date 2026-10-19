@@ -19,9 +19,9 @@ public final class l implements View.OnLongClickListener {
             if (n.b() && (viewGroup = (ViewGroup) mVar.a.get()) != null) {
                 long jUptimeMillis = SystemClock.uptimeMillis();
                 mVar.e = true;
-                mVar.i = jUptimeMillis + 2600;
+                mVar.k = jUptimeMillis + 2600;
                 n.a(mVar, true);
-                viewGroup.postDelayed(new b(mVar, mVar.i), 2640L);
+                viewGroup.postDelayed(new b(mVar, mVar.k), 2640L);
             }
         }
         return true;

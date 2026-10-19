@@ -4,7 +4,7 @@ import com.windukk.hook.HookMethod;
 
 class x4 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d5.a().d) {
+        if (y5.a().d) {
             hookMethodParam.setResult(Boolean.FALSE);
         }
     }

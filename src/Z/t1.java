@@ -1,44 +1,41 @@
 package Z;
 
-import android.graphics.Bitmap;
-import android.util.LruCache;
-import java.util.ArrayList;
+import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
+import com.windukk.hook.HookMethod;
 
-public final class t1 extends LruCache {
+class t1 extends HookMethod {
+    final  int a;
+
     public t1(int i) {
-        super(i);
+        this.a = i;
     }
 
-    public final void a(String str) {
-        if (str == null) {
-            return;
-        }
-        ArrayList arrayList = new ArrayList(snapshot().keySet());
-        int size = arrayList.size();
-        int i = 0;
-        while (i < size) {
-            Object obj = arrayList.get(i);
-            i++;
-            String str2 = (String) obj;
-            if (str2.startsWith(str)) {
-                remove(str2);
-            }
-        }
-    }
-
-    @Override
-    public final int sizeOf(Object obj, Object obj2) {
-        Bitmap bitmap = (Bitmap) obj2;
-        if (bitmap == null || bitmap.isRecycled()) {
-            return 0;
-        }
-        try {
-            return Math.max(1, bitmap.getAllocationByteCount());
-        } catch (Throwable th) {
-            try {
-                return Math.max(1, bitmap.getByteCount());
-            } catch (Throwable th2) {
-                return 1;
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        CharSequence charSequenceAppend;
+        ae aeVarA;
+        int i = this.a;
+        String[] strArr = v1.a;
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length > i) {
+            Object obj = objArr[i];
+            if (obj instanceof CharSequence) {
+                CharSequence charSequence = (CharSequence) obj;
+                Object obj2 = hookMethodParam.thisObject;
+                if (TextUtils.isEmpty(charSequence) || (aeVarA = v1.a(obj2)) == null) {
+                    charSequenceAppend = charSequence;
+                } else {
+                    String string = charSequence.toString();
+                    String strA = v1.a(aeVarA.a, string);
+                    if (TextUtils.equals(strA, string)) {
+                        charSequenceAppend = charSequence;
+                    } else {
+                        charSequenceAppend = new SpannableStringBuilder(charSequence).append((CharSequence) strA.substring(string.length()));
+                    }
+                }
+                if (charSequenceAppend != charSequence) {
+                    hookMethodParam.args[i] = charSequenceAppend;
+                }
             }
         }
     }

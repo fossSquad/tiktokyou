@@ -34,11 +34,7 @@ final class CallbackDispatcher {
         Object[] snapshot = hookInfo.getCallbacks().getSnapshot();
         int length2 = snapshot.length;
         if (length2 == 0) {
-            try {
-                return invokeOriginal(hookInfo, hookMethodParam.thisObject, hookMethodParam.args);
-            } catch (InvocationTargetException e) {
-                throw CallbackDispatcher.<RuntimeException>sneakyThrow(e);
-            }
+            return invokeOriginal(hookInfo, hookMethodParam.thisObject, hookMethodParam.args);
         }
         int i = 0;
         do {
@@ -83,16 +79,7 @@ final class CallbackDispatcher {
         return returnType != null ? returnType.cast(resultOrThrowable) : resultOrThrowable;
     }
 
-    private static Object invokeOriginal(HookBridge.HookInfo hookInfo, Object obj, Object[] objArr) throws InvocationTargetException {
-        try {
-            return hookInfo.getBackupMethod().invoke(obj, objArr);
-        } catch (IllegalAccessException e) {
-            throw CallbackDispatcher.<RuntimeException>sneakyThrow(e);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T extends Throwable> RuntimeException sneakyThrow(Throwable th) throws T {
-        throw (T) th;
+    private static Object invokeOriginal(HookBridge.HookInfo hookInfo, Object obj, Object[] objArr) {
+        return hookInfo.getBackupMethod().invoke(obj, objArr);
     }
 }

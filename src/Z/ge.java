@@ -1,39 +1,15 @@
 package Z;
+import ni.shikatu.kotlin.Unit;
+import ni.shikatu.kotlin.jvm.functions.Function1;
+import ni.shikatu.kotlin.jvm.internal.FunctionReferenceImpl;
 
-import android.graphics.drawable.GradientDrawable;
-import android.widget.EditText;
-import android.widget.TextView;
-
-public final class ge {
-    public EditText a;
-    public TextView b;
-    public TextView c;
-    public TextView d;
-    public Runnable e;
-    public Runnable f;
-    public int g;
-    public int h;
-    public float i;
-    public int j;
-    public int k;
-
-    public final void a(String str) {
-        if (str == null) {
-            this.b.setText("");
-            this.b.setVisibility(4);
-            this.a.setTextColor(this.j);
-        } else {
-            this.b.setText(str);
-            this.b.setVisibility(0);
-            this.a.setTextColor(this.k);
-        }
+public final  class ge extends FunctionReferenceImpl implements Function1 {
+    public ge(fg fgVar) {
+        super(1, fgVar, fg.class, "update", "update(I)V", 0);
     }
 
-    public final void a(boolean z) {
-        this.c.setEnabled(z);
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(z ? this.g : this.h);
-        gradientDrawable.setCornerRadius(this.i);
-        this.c.setBackground(gradientDrawable);
+    public final Object invoke(Object obj) {
+        ((fg) ((FunctionReferenceImpl) this).receiver).a(((Number) obj).intValue());
+        return Unit.INSTANCE;
     }
 }

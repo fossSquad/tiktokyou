@@ -1,15 +1,16 @@
 package Z;
 
-import android.content.res.ColorStateList;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
 import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
 
 class gf extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (ta.a().f() && (colorStateListA = ThemeHooks.a((colorStateList = (ColorStateList) hookMethodParam.args[0]))) != colorStateList) {
-            hookMethodParam.args[0] = colorStateListA;
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y5.a().d) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
+            if (searchMixFeed.preciseAd != null) {
+                searchMixFeed.preciseAd = null;
+                hookMethodParam.setResult((Object) null);
+            }
         }
     }
 }

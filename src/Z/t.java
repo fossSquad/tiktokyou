@@ -1,536 +1,312 @@
 package Z;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Debug;
-import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import com.windukk.mod.Main;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import ni.shikatu.kotlin.NoWhenBranchMatchedException;
-import ni.shikatu.kotlin.Result;
-import ni.shikatu.kotlin.ResultKt;
+import java.util.function.Supplier;
+import ni.shikatu.kotlin.ExceptionsKt;
+import ni.shikatu.kotlin.Lazy;
+import ni.shikatu.kotlin.LazyKt;
 import ni.shikatu.kotlin.Unit;
-import ni.shikatu.kotlin.collections.CollectionsKt;
-import ni.shikatu.kotlin.collections.SetsKt;
+import ni.shikatu.kotlin.io.CloseableKt;
+import ni.shikatu.kotlin.io.FilesKt;
+import ni.shikatu.kotlin.jvm.functions.Function0;
+import ni.shikatu.kotlin.jvm.functions.Function1;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;
+import ni.shikatu.kotlin.text.StringsKt;
+import ni.shikatu.okhttp3.Cache;
+import ni.shikatu.okhttp3.Dispatcher;
+import ni.shikatu.okhttp3.OkHttpClient;
+import ni.shikatu.okhttp3.Request;
+import ni.shikatu.okhttp3.Response;
+import ni.shikatu.okhttp3.ResponseBody;
 
-public final class t {
-    public static final t a;
-    public static final Handler b;
-    public static final AtomicBoolean c;
-    public static final AtomicBoolean d;
-    public static final AtomicBoolean e;
-    public static final ExecutorService f;
-    public static final s g;
+public abstract class t {
+    public static final AtomicBoolean a = new AtomicBoolean();
+    public static final ThreadLocal b = ThreadLocal.withInitial(new Supplier() {
+        @Override
+        public final Object get() {
+            return t.c();
+        }
+    });
+    public static final ThreadLocal c = new ThreadLocal();
+    public static final Lazy d = LazyKt.lazy(new Function0() {
+        public final Object invoke() {
+            return t.a();
+        }
+    });
+    public static final Lazy e = LazyKt.lazy(new Function0() {
+        public final Object invoke() {
+            return t.b();
+        }
+    });
 
-    static {
-        a = new t();
-        b = new Handler(Looper.getMainLooper());
-        c = new AtomicBoolean(false);
-        d = new AtomicBoolean(false);
-        e = new AtomicBoolean(false);
-        f = Executors.newSingleThreadExecutor(new ThreadFactory() {
-            @Override
-            public final Thread newThread(Runnable runnable) {
-                return t.a(runnable);
+    public static final OkHttpClient a() {
+        Dispatcher dispatcher = new Dispatcher();
+        dispatcher.setMaxRequests(16);
+        dispatcher.setMaxRequestsPerHost(4);
+        OkHttpClient.Builder builderDispatcher = new OkHttpClient.Builder().dispatcher(dispatcher);
+        File cacheDir = Main.getApplicationContext().getCacheDir();
+        OkHttpClient.Builder builderCache = builderDispatcher.cache(new Cache(FilesKt.resolve(cacheDir, "tty_http"), 8388608L));
+        TimeUnit timeUnit = TimeUnit.SECONDS;
+        return builderCache.connectTimeout(8L, timeUnit).readTimeout(8L, timeUnit).followRedirects(true).followSslRedirects(true).retryOnConnectionFailure(true).build();
+    }
+
+    public static final OkHttpClient b() {
+        OkHttpClient.Builder builderCache = ((OkHttpClient) d.getValue()).newBuilder().cache((Cache) null);
+        TimeUnit timeUnit = TimeUnit.SECONDS;
+        return builderCache.connectTimeout(15L, timeUnit).readTimeout(120L, timeUnit).writeTimeout(30L, timeUnit).build();
+    }
+
+    public static final Boolean c() {
+        return Boolean.FALSE;
+    }
+
+    public static final s b(String str, String str2, int i, Map map, String str3) {
+        Request.Builder builder = new Request.Builder().url(str3).get();
+        if (str != null && str.length() != 0) {
+            builder.header("User-Agent", str);
+        }
+        if (str2 != null && str2.length() != 0) {
+            builder.header("If-None-Match", str2);
+        }
+        for (Map.Entry entry : map.entrySet()) {
+            builder.header((String) entry.getKey(), (String) entry.getValue());
+        }
+        Response responseExecute = ((OkHttpClient) d.getValue()).newCall(builder.build()).execute();
+        try {
+            if (a.compareAndSet(false, true)) {
+                responseExecute.protocol();
+            }
+            int iCode = responseExecute.code();
+            String strHeader$default = Response.header$default(responseExecute, "ETag", (String) null, 2, (Object) null);
+            String string = responseExecute.request().url().toString();
+            if (iCode == 304) {
+                s sVar = new s(iCode, null, strHeader$default, string, responseExecute.headers());
+                CloseableKt.closeFinally(responseExecute, (Throwable) null);
+                return sVar;
+            }
+            if (responseExecute.isSuccessful()) {
+                ResponseBody responseBodyBody = responseExecute.body();
+                long jContentLength = responseBodyBody.contentLength();
+                long j = i;
+                if (jContentLength <= j) {
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream((1 > jContentLength || jContentLength > j) ? 8192 : (int) jContentLength);
+                    InputStream inputStreamByteStream = responseBodyBody.byteStream();
+                    try {
+                        byte[] bArr = new byte[8192];
+                        while (true) {
+                            int i2 = inputStreamByteStream.read(bArr);
+                            if (i2 >= 0) {
+                                if (byteArrayOutputStream.size() + i2 <= i) {
+                                    byteArrayOutputStream.write(bArr, 0, i2);
+                                } else {
+                                    throw new IOException("Response exceeds " + i + " bytes");
+                                }
+                            } else {
+                                Unit unit = Unit.INSTANCE;
+                                CloseableKt.closeFinally(inputStreamByteStream, (Throwable) null);
+                                s sVar2 = new s(iCode, byteArrayOutputStream.toByteArray(), strHeader$default, string, responseExecute.headers());
+                                CloseableKt.closeFinally(responseExecute, (Throwable) null);
+                                return sVar2;
+                            }
+                        }
+                    } catch (Throwable th) {
+                        try {
+                            throw th;
+                        } catch (Throwable th2) {
+                            CloseableKt.closeFinally(inputStreamByteStream, th);
+                            throw th2;
+                        }
+                    }
+                } else {
+                    throw new IOException("Response too large: " + jContentLength);
+                }
+            } else {
+                throw new r(iCode, str3);
+            }
+        } catch (Throwable th3) {
+            try {
+                throw th3;
+            } catch (Throwable th4) {
+                CloseableKt.closeFinally(responseExecute, th3);
+                throw th4;
+            }
+        }
+    }
+
+    public static final Object a(Callable callable) {
+        ThreadLocal threadLocal = b;
+        Boolean bool = (Boolean) threadLocal.get();
+        threadLocal.set(Boolean.TRUE);
+        try {
+            return callable.call();
+        } finally {
+            b.set(bool);
+        }
+    }
+
+    public static final s a(String str, final String str2, final int i, final Map map, final String str3) {
+        return (s) a(str, new Function1() {
+            public final Object invoke(Object obj) {
+                return t.b(str2, str3, i, map, (String) obj);
             }
         });
-        g = new s();
     }
 
-    public static final void a() {
-        Object obj;
-        try {
-            Result.Companion companion = Result.Companion;
-            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
-        } catch (Throwable th) {
-            Result.Companion companion2 = Result.Companion;
-            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
-        }
-        if (RCompat.m12isFailureimpl(obj)) {
-            obj = null;
-        }
-        Context context = (Context) obj;
-        if (context == null) {
-            h6.a(6, h6.a("Init skipped: context is null", new Object[0]), (Throwable) null);
-            return;
-        }
-        t tVar = a;
-        String strDecrypt = "init";
-        tVar.getClass();
-        a(context, strDecrypt, 20000L);
-    }
-
-    public static final void b() {
-        Object obj;
-        try {
-            Result.Companion companion = Result.Companion;
-            obj = RCompat.m6constructorimpl(Main.getApplicationContext());
-        } catch (Throwable th) {
-            Result.Companion companion2 = Result.Companion;
-            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th));
-        }
-        if (RCompat.m12isFailureimpl(obj)) {
-            obj = null;
-        }
-        Context context = (Context) obj;
-        if (context == null) {
-            return;
-        }
-        t tVar = a;
-        String strDecrypt = "settings";
-        tVar.getClass();
-        a(context, strDecrypt, 20000L);
-    }
-
-    public static final void b(Context context, String str) {
-        Object obj;
-        try {
-            try {
-                Result.Companion companion = Result.Companion;
-                obj = RCompat.m6constructorimpl(Main.getApplicationContext());
-            } catch (Throwable th) {
-                try {
-                    h6.a(6, h6.a("Deferred run failed (" + str + ")", new Object[0]), th);
-                    return;
-                } finally {
-                    d.set(false);
-                }
+    public static final void a(String str, final File file, final String str2, final Map map) throws IOException {
+        final long j = 201326592;
+        a(str, new Function1() {
+            public final Object invoke(Object obj) {
+                return t.a(file, str2, j, map, (String) obj);
             }
-        } catch (Throwable th2) {
-            Result.Companion companion2 = Result.Companion;
-            obj = RCompat.m6constructorimpl(ResultKt.createFailure(th2));
-        }
-        if (RCompat.m12isFailureimpl(obj)) {
-            obj = null;
-        }
-        Context context2 = (Context) obj;
-        if (context2 != null) {
-            context = context2;
-        }
-        a.getClass();
-        a(context, str);
-        d.set(false);
+        });
     }
 
-    public static final Thread a(Runnable runnable) {
-        Thread thread = new Thread(runnable, "auto-streak-nudge");
-        thread.setDaemon(true);
-        return thread;
-    }
-
-    public static final void a(Context context, String str, LocalDate localDate) {
-        try {
-            a.getClass();
-            b(context, str, localDate);
-        } finally {
-            e.set(false);
-        }
-    }
-
-    public static void a(long j, long j2) {
-        Math.max(1L, SystemClock.elapsedRealtimeNanos() - j);
-        Math.max(0L, Debug.threadCpuTimeNanos() - j2);
-        Debug.getPss();
-    }
-
-    public static void b(Context context, final String str, long j) {
-        if (d.compareAndSet(false, true)) {
-            Context applicationContext = context.getApplicationContext();
-            final Context ctxF = applicationContext != null ? applicationContext : context;
-            b.postDelayed(new Runnable() {
-                @Override
-                public final void run() {
-                    t.b(ctxF, str);
-                }
-            }, j);
-        }
-    }
-
-    public static Set a(Context context, LocalDate localDate) {
-        HashSet hashSet;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("ttmod_auto_streak_send", 0);
-        if (!Intrinsics.areEqual(sharedPreferences.getString("date", ""), localDate.toString())) {
-            return SetsKt.emptySet();
-        }
-        try {
-            Set<String> stringSet = sharedPreferences.getStringSet("convs", null);
-            return (stringSet == null || (hashSet = CollectionsKt.toHashSet(stringSet)) == null) ? SetsKt.emptySet() : hashSet;
-        } catch (Exception e2) {
-            return SetsKt.emptySet();
-        }
-    }
-
-    public static void b(Context context, String str, LocalDate localDate) {
-        Throwable th = null;
-        boolean z = false;
-        String str2 = null;
-        Object obj;
-        boolean z2 = false;
-        LocalDate localDate2;
-        SharedPreferences sharedPreferences;
-        boolean z3;
-        boolean z4;
-        long jElapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
-        long jThreadCpuTimeNanos = Debug.threadCpuTimeNanos();
-        Debug.getPss();
-        String r7 = null;
-        boolean z5 = false;
-        try {
-            c0 c0VarC = r.c();
-            if (c0VarC instanceof b0) {
-                try {
-                    h6.a(4, h6.a("Will retry later: failed to fetch streak data", new Object[0]), (Throwable) null);
-                    a(jElapsedRealtimeNanos, jThreadCpuTimeNanos);
-                    return;
-                } catch (Throwable th_2) {
-                    th = th_2;
-                    str2 = str;
-                    z = false;
-                }
-            } else {
-                if (!(c0VarC instanceof a0)) {
-                    try {
-                        throw new NoWhenBranchMatchedException();
-                    } catch (Throwable th2) {
-                        th = th2;
-                        z = false;
-                        str2 = str;
-                        h6.a(6, h6.a("Failed (%s)", new Object[]{str2}), th);
-                        if (!z) {
-                            String strA = h6.a("Will retry later: failed to fetch streak data", new Object[0]);
-                        }
-                    }
-                }
-                try {
-                    k0.a.getClass();
-                    synchronized (k0.c) {
-                        try {
+    public static final Unit a(File file, String str, long j, Map map, String str2) throws IOException {
+        if (j > 0) {
+            File parentFile = file.getParentFile();
+            if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs()) {
+                throw new IOException("Cannot create download directory");
+            }
+            Request.Builder builder = new Request.Builder().url(str2).get();
+            if (str != null && str.length() != 0) {
+                builder.header("User-Agent", str);
+            }
+            for (Map.Entry entry : map.entrySet()) {
+                builder.header((String) entry.getKey(), (String) entry.getValue());
+            }
+            Response responseExecute = ((OkHttpClient) e.getValue()).newCall(builder.build()).execute();
+            try {
+                if (responseExecute.isSuccessful()) {
+                    if (Intrinsics.areEqual(responseExecute.request().url().scheme(), "https")) {
+                        ResponseBody responseBodyBody = responseExecute.body();
+                        long jContentLength = responseBodyBody.contentLength();
+                        if (jContentLength <= j) {
+                            File file2 = new File(file.getParentFile(), file.getName() + ".part");
                             try {
-                                k0.d = false;
-                                k0.e = null;
-                                Unit unit = Unit.INSTANCE;
-                            } catch (Throwable th3) {
-                                th = th3;
-                            }
-                        } catch (Throwable th4) {
-                            throw th4;
-                        }
-                    }
-                    HashSet hashSet = CollectionsKt.toHashSet(a(context, localDate));
-                    ArrayList arrayList = ((a0) c0VarC).a;
-                    int size = arrayList.size();
-                    int i = 0;
-                    while (i < size) {
-                        try {
-                            Object obj2 = arrayList.get(i);
-                            i++;
-                            v vVar = (v) obj2;
-                            y.a.getClass();
-                            y.a(vVar.c, vVar.a, false);
-                        } catch (Throwable th5) {
-                            th = th5;
-                            str2 = str;
-                            z = true;
-                        }
-                    }
-                    ArrayList arrayList2 = ((a0) c0VarC).a;
-                    int size2 = arrayList2.size();
-                    int i2 = 0;
-                    int i3 = 0;
-                    int i4 = 0;
-                    while (true) {
-                        if (i2 >= size2) {
-                            c0VarC = c0VarC;
-                            break;
-                        }
-                        i2++;
-                        v vVar2 = (v) arrayList2.get(i2);
-                        ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
-                        ta taVar = ta.a;
-                        taVar.getClass();
-                        arrayList2 = arrayList2;
-                        ZonedDateTime zonedDateTimeWithNano = zonedDateTimeNow.withHour(ta.d().p).withMinute(ta.d().q).withSecond(0).withNano(0);
-                        size2 = size2;
-                        c0VarC = c0VarC;
-                        if (zonedDateTimeNow.isBefore(zonedDateTimeWithNano) || !zonedDateTimeNow.isBefore(zonedDateTimeWithNano.plusHours(12L))) {
-                            ZonedDateTime zonedDateTimeMinusDays = zonedDateTimeWithNano.minusDays(1L);
-                            if (zonedDateTimeNow.isBefore(zonedDateTimeMinusDays) || !zonedDateTimeNow.isBefore(zonedDateTimeMinusDays.plusHours(12L))) {
-                                localDate2 = null;
-                            } else {
-                                localDate2 = zonedDateTimeMinusDays.toLocalDate();
-                            }
-                            if (localDate2 != null) {
-                                break;
-                            }
-                            String str3 = vVar2.a;
-                            taVar.getClass();
-                            sharedPreferences = ta.b;
-                            if (sharedPreferences != null) {
-                                z3 = sharedPreferences.getBoolean("auto_streak_recipients_all", true);
-                            } else {
-                                z3 = true;
-                            }
-                            if (z3 && (str3 == null || ta.b().contains(str3))) {
-                                z4 = false;
-                            } else {
-                                z4 = true;
-                            }
-                            if (!z4 && hashSet.add(vVar2.b)) {
-                                i3++;
-                                k0 k0Var = k0.a;
-                                String str4 = vVar2.a;
-                                String str5 = vVar2.b;
-                                k0Var.getClass();
-                                if (k0.a(str4, str5)) {
-                                    a(context, localDate, hashSet);
-                                    i4++;
-                                    try {
-                                        Thread.sleep(3000L);
-                                    } catch (InterruptedException e2) {
-                                        Thread.currentThread().interrupt();
-                                    }
-                                } else {
-                                    hashSet.remove(vVar2.b);
-                                }
-                            }
-                        } else {
-                            localDate2 = zonedDateTimeWithNano.toLocalDate();
-                        }
-                        if (localDate2 != null) {
-                            break;
-                        }
-                        String str6 = vVar2.a;
-                        taVar.getClass();
-                        sharedPreferences = ta.b;
-                        if (sharedPreferences != null) {
-                            z3 = sharedPreferences.getBoolean("auto_streak_recipients_all", true);
-                        } else {
-                            z3 = true;
-                        }
-                        if (z3) {
-                            z4 = true;
-                        } else {
-                            z4 = true;
-                        }
-                        if (!z4) {
-                        }
-                    }
-                    ArrayList arrayList3 = ((a0) c0VarC).a;
-                    ArrayList arrayList4 = new ArrayList();
-                    int i5 = 0;
-                    for (int size3 = arrayList3.size(); i5 < size3; size3 = size3) {
-                        try {
-                            Object obj3 = arrayList3.get(i5);
-                            i5++;
-                            ta taVar2 = ta.a;
-                            String str7 = ((v) obj3).a;
-                            taVar2.getClass();
-                            SharedPreferences sharedPreferences2 = ta.b;
-                            if (sharedPreferences2 != null) {
-                                z5 = true;
+                                FileOutputStream fileOutputStream = new FileOutputStream(file2);
                                 try {
-                                    z2 = sharedPreferences2.getBoolean("auto_streak_recipients_all", true);
-                                } catch (Throwable th6) {
-                                    th = th6;
-                                    r7 = str;
-                                    z = z5;
-                                    str2 = r7;
-                                    h6.a(6, h6.a("Failed (%s)", new Object[]{str2}), th);
-                                    if (!z) {
-                                        String strA2 = h6.a("Will retry later: failed to fetch streak data", new Object[0]);
+                                    InputStream inputStreamByteStream = responseBodyBody.byteStream();
+                                    try {
+                                        byte[] bArr = new byte[65536];
+                                        long j2 = 0;
+                                        while (true) {
+                                            int i = inputStreamByteStream.read(bArr);
+                                            if (i < 0) {
+                                                if (j2 > 0) {
+                                                    fileOutputStream.flush();
+                                                    fileOutputStream.getFD().sync();
+                                                    Unit unit = Unit.INSTANCE;
+                                                    CloseableKt.closeFinally(inputStreamByteStream, (Throwable) null);
+                                                    CloseableKt.closeFinally(fileOutputStream, (Throwable) null);
+                                                    if (file.exists() && !file.delete()) {
+                                                        throw new IOException("Cannot replace " + file.getName());
+                                                    }
+                                                    if (!file2.renameTo(file)) {
+                                                        FilesKt.copyTo$default(file2, file, true, 0, 4, (Object) null);
+                                                        if (!file2.delete()) {
+                                                            g7.a(6, g7.a("Cannot delete OTA staging file %s", new Object[]{file2.getAbsolutePath()}), (Throwable) null);
+                                                        }
+                                                    }
+                                                    CloseableKt.closeFinally(responseExecute, (Throwable) null);
+                                                    return unit;
+                                                }
+                                                throw new IOException("Empty download");
+                                            }
+                                            j2 += (long) i;
+                                            if (j2 <= j) {
+                                                fileOutputStream.write(bArr, 0, i);
+                                            } else {
+                                                throw new IOException("Response exceeds " + j + " bytes");
+                                            }
+                                        }
+                                    } catch (Throwable th) {
+                                        try {
+                                            throw th;
+                                        } catch (Throwable th2) {
+                                            CloseableKt.closeFinally(inputStreamByteStream, th);
+                                            throw th2;
+                                        }
+                                    }
+                                } catch (Throwable th3) {
+                                    try {
+                                        throw th3;
+                                    } catch (Throwable th4) {
+                                        CloseableKt.closeFinally(fileOutputStream, th3);
+                                        throw th4;
                                     }
                                 }
-                            } else {
-                                z5 = true;
-                                z2 = true;
+                            } catch (Throwable th5) {
+                                file2.delete();
+                                file.delete();
+                                throw th5;
                             }
-                            if ((z2 || !(str7 == null || ta.b().contains(str7))) ? z5 : false) {
-                                arrayList4.add(obj3);
-                            }
-                            arrayList3 = arrayList3;
-                        } catch (Throwable th7) {
-                            th = th7;
-                            z5 = true;
-                            r7 = str;
-                            z = z5;
-                            str2 = r7;
-                            h6.a(6, h6.a("Failed (%s)", new Object[]{str2}), th);
-                            if (!z) {
-                                String strA3 = h6.a("Will retry later: failed to fetch streak data", new Object[0]);
-                            }
+                        } else {
+                            throw new IOException("Response too large: " + jContentLength);
+                        }
+                    } else {
+                        throw new IOException("Refusing non-HTTPS download");
+                    }
+                } else {
+                    throw new r(responseExecute.code(), str2);
+                }
+            } catch (Throwable th6) {
+                try {
+                    throw th6;
+                } catch (Throwable th7) {
+                    CloseableKt.closeFinally(responseExecute, th6);
+                    throw th7;
+                }
+            }
+        } else {
+            throw new IOException("Invalid download size limit");
+        }
+    }
+
+    public static Object a(String str, Function1 function1) throws IOException {
+        int i;
+        Looper mainLooper;
+        if (!Intrinsics.areEqual(b.get(), Boolean.TRUE)) {
+            int i2 = q.a;
+            if ((StringsKt.startsWith$default(str, "https://tiktokyou.yzewe.ru/", false, 2, (Object) null) || StringsKt.startsWith$default(str, "https://tiktokyou-fb.yzewe.ru/", false, 2, (Object) null)) && ((mainLooper = Looper.getMainLooper()) == null || mainLooper != Looper.myLooper())) {
+                Long l = (Long) c.get();
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                if (l == null || jElapsedRealtime - l.longValue() >= 30000) {
+                    long jA = q.a();
+                    if (jA > 0) {
+                        try {
+                            Thread.sleep(jA);
+                        } catch (InterruptedException e2) {
+                            Thread.currentThread().interrupt();
                         }
                     }
-                    z5 = true;
-                    Set setA = a(context, localDate);
-                    tBreak: {
-                    if (arrayList4.isEmpty() || arrayList4.isEmpty()) {
-                        ta taVar3 = ta.a;
-                        String string = localDate.toString();
-                        taVar3.getClass();
-                        ta.d().a(string);
-                        break tBreak;
-                    }
-                    }
-                    int size4 = arrayList4.size();
-                    int i6 = 0;
-                    do {
-                        if (i6 >= size4) {
-                            ta taVar4 = ta.a;
-                            String string2 = localDate.toString();
-                            taVar4.getClass();
-                            ta.d().a(string2);
-                            break;
-                        }
-                        obj = arrayList4.get(i6);
-                        i6++;
-                    } while (setA.contains(((v) obj).b));
-                    h6.a(4, h6.a("Finished (%s): eligible=%d sent=%d", new Object[]{str, Integer.valueOf(i3), Integer.valueOf(i4)}), (Throwable) null);
-                    a(jElapsedRealtimeNanos, jThreadCpuTimeNanos);
-                    return;
-                } catch (Throwable th8) {
-                    th = th8;
-                    r7 = str;
-                    z5 = true;
+                    c.set(Long.valueOf(SystemClock.elapsedRealtime()));
                 }
             }
-        } catch (Throwable th9) {
-            th = th9;
         }
         try {
-            h6.a(6, h6.a("Failed (%s)", new Object[]{str2}), th);
-            if (!z) {
-                String strA4 = h6.a("Will retry later: failed to fetch streak data", new Object[0]);
-            }
-        } finally {
-            if (!z) {
-                h6.a(4, h6.a("Will retry later: failed to fetch streak data", new Object[0]), (Throwable) null);
-            }
-            a(jElapsedRealtimeNanos, jThreadCpuTimeNanos);
-        }
-    }
-
-    public static void a(Context context, LocalDate localDate, HashSet hashSet) {
-        context.getSharedPreferences("ttmod_auto_streak_send", 0).edit().putString("date", localDate.toString()).putStringSet("convs", new HashSet(hashSet)).apply();
-    }
-
-    public static void a(Context context, String str, long j) {
-        if (ta.b == null) {
-            Context applicationContext = context.getApplicationContext();
-            ta.a(applicationContext);
-        }
-        ta.a.getClass();
-        if (!ta.d().o) {
-            a(context);
-            c.set(false);
-            b.removeCallbacks(g);
-            return;
-        }
-        b(context);
-        if (c.compareAndSet(false, true)) {
-            Handler handler = b;
-            s sVar = g;
-            handler.removeCallbacks(sVar);
-            handler.postDelayed(sVar, 300000L);
-        }
-        b(context, str, j);
-    }
-
-    public static void a(final Context context, final String str) {
-        LocalDate localDate;
-        if (ta.b == null) {
-            Context applicationContext = context.getApplicationContext();
-            ta.a(applicationContext);
-        }
-        ta taVar = ta.a;
-        taVar.getClass();
-        if (ta.d().o) {
-            ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
-            taVar.getClass();
-            ZonedDateTime zonedDateTimeWithNano = zonedDateTimeNow.withHour(ta.d().p).withMinute(ta.d().q).withSecond(0).withNano(0);
-            LocalDate localDate2 = null;
-            if (!zonedDateTimeNow.isBefore(zonedDateTimeWithNano) && zonedDateTimeNow.isBefore(zonedDateTimeWithNano.plusHours(12L))) {
-                localDate = zonedDateTimeWithNano.toLocalDate();
-            } else {
-                ZonedDateTime zonedDateTimeMinusDays = zonedDateTimeWithNano.minusDays(1L);
-                localDate = (zonedDateTimeNow.isBefore(zonedDateTimeMinusDays) || !zonedDateTimeNow.isBefore(zonedDateTimeMinusDays.plusHours(12L))) ? null : zonedDateTimeMinusDays.toLocalDate();
-            }
-            if (localDate != null) {
-                String string = localDate.toString();
-                taVar.getClass();
-                String str2 = ta.d().r;
-                if (str2 == null) {
-                    str2 = "";
-                }
-                if (!Intrinsics.areEqual(string, str2)) {
-                    localDate2 = localDate;
+            return function1.invoke(str);
+        } catch (IOException e3) {
+            String strDecrypt = "https://tiktokyou.yzewe.ru/";
+            if (StringsKt.startsWith$default(str, strDecrypt, false, 2, (Object) null) && (!(e3 instanceof r) || (i = ((r) e3).a) == 408 || i == 429 || (500 <= i && i < 600))) {
+                try {
+                    return function1.invoke("https://tiktokyou-fb.yzewe.ru/" + StringsKt.removePrefix(str, strDecrypt));
+                } catch (IOException e4) {
+                    ExceptionsKt.addSuppressed(e4, e3);
+                    throw e4;
                 }
             }
-            if (localDate2 != null && e.compareAndSet(false, true)) {
-                final LocalDate localDate2F = localDate2;
-            f.execute(new Runnable() {
-                    @Override
-                    public final void run() {
-                        t.a(context, str, localDate2F);
-                    }
-                });
-            }
-        }
-    }
-
-    public static void a(Context context) {
-        try {
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(AlarmManager.class);
-            if (alarmManager == null) {
-                return;
-            }
-            alarmManager.cancel(a(context, "com.windukk.mod.AUTO_STREAK_NUDGE", 44021));
-            alarmManager.cancel(a(context, "com.windukk.mod.AUTO_STREAK_NUDGE_BACKUP", 44022));
-        } catch (Throwable th) {
-            h6.a(6, h6.a("Cancel failed", new Object[0]), th);
-        }
-    }
-
-    public static PendingIntent a(Context context, String str, int i) {
-        Intent action = new Intent(context, (Class<?>) u.class).setAction(str);
-        PendingIntent broadcast = PendingIntent.getBroadcast(context, i, action, 201326592);
-        return broadcast;
-    }
-
-    public static void b(Context context) {
-        try {
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(AlarmManager.class);
-            if (alarmManager == null) {
-                return;
-            }
-            ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
-            ta.a.getClass();
-            int i = ta.d().p;
-            ZonedDateTime zonedDateTimeWithNano = zonedDateTimeNow.withHour(i).withMinute(ta.d().q).withSecond(0).withNano(0);
-            if (!zonedDateTimeNow.isBefore(zonedDateTimeWithNano)) {
-                zonedDateTimeWithNano = zonedDateTimeWithNano.plusDays(1L);
-            }
-            long epochMilli = zonedDateTimeWithNano.toInstant().toEpochMilli();
-            try {
-                alarmManager.setExactAndAllowWhileIdle(0, epochMilli, a(context, "com.windukk.mod.AUTO_STREAK_NUDGE", 44021));
-            } catch (SecurityException e2) {
-            }
-            alarmManager.setAndAllowWhileIdle(0, epochMilli, a(context, "com.windukk.mod.AUTO_STREAK_NUDGE_BACKUP", 44022));
-        } catch (Throwable th) {
-            h6.a(6, h6.a("Schedule failed", new Object[0]), th);
+            throw e3;
         }
     }
 }

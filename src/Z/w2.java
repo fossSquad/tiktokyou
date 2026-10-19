@@ -1,15 +1,21 @@
 package Z;
-import ni.shikatu.kotlin.Unit;
-import ni.shikatu.kotlin.jvm.functions.Function1;
-import ni.shikatu.kotlin.jvm.internal.FunctionReferenceImpl;
 
-public final  class w2 extends FunctionReferenceImpl implements Function1 {
-    public w2(se seVar) {
-        super(1, seVar, se.class, "update", "update(I)V", 0);
-    }
+import android.view.View;
+import com.windukk.hook.HookMethod;
 
-    public final Object invoke(Object obj) {
-        ((se) this.receiver).a(((Number) obj).intValue());
-        return Unit.INSTANCE;
+class w2 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        y2 y2Var = (y2) z2.a.get();
+        if (y2Var == null) {
+            return;
+        }
+        Object[] objArr = hookMethodParam.args;
+        try {
+            z2.a((View) hookMethodParam.thisObject, (objArr == null || objArr.length <= 0) ? null : objArr[0], y2Var);
+        } catch (Throwable th) {
+            String strDecrypt = "Exception during addButton";
+            Object obj = g7.a;
+            g7.a(6, String.valueOf(strDecrypt), th);
+        }
     }
 }

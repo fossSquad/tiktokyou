@@ -1,36 +1,35 @@
 package Z;
+import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 
-import android.graphics.PorterDuff;
-import android.widget.ImageView;
+public final class ad {
+    public final long a;
+    public final long b;
+    public final String c;
 
-public final class ad implements Runnable {
-    public final  ImageView a;
-
-    public ad(ImageView imageView) {
-        this.a = imageView;
+    public ad(long j, long j2, String str) {
+        this.a = j;
+        this.b = j2;
+        this.c = str;
     }
 
-    @Override
-    public final void run() {
-        if (ta.a() == null || !ta.d().s || !cd.a(this.a)) {
-            this.a.clearColorFilter();
-            cd.c.remove(this.a);
-            return;
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-        ImageView imageView = this.a;
-        float fCurrentTimeMillis = (System.currentTimeMillis() % 1800) / 1800.0f;
-        int[] iArr = cd.a;
-        float f = fCurrentTimeMillis * 5;
-        int iMin = Math.min(4, (int) f);
-        float f2 = f - iMin;
-        int i = iArr[iMin];
-        int i2 = iArr[iMin + 1];
-        int i3 = (i >>> 24) & 255;
-        int i4 = (i >>> 16) & 255;
-        int i5 = (i >>> 8) & 255;
-        int i6 = i & 255;
-        imageView.setColorFilter(Math.round((((i2 & 255) - i6) * f2) + i6) | (Math.round(((((i2 >>> 24) & 255) - i3) * f2) + i3) << 24) | (Math.round(((((i2 >>> 16) & 255) - i4) * f2) + i4) << 16) | (Math.round(((((i2 >>> 8) & 255) - i5) * f2) + i5) << 8), PorterDuff.Mode.SRC_IN);
-        this.a.invalidate();
-        this.a.postDelayed(this, 40L);
+        if (!(obj instanceof ad)) {
+            return false;
+        }
+        ad adVar = (ad) obj;
+        return this.a == adVar.a && this.b == adVar.b && Intrinsics.areEqual(this.c, adVar.c);
+    }
+
+    public final int hashCode() {
+        return this.c.hashCode() + ((Long.hashCode(this.b) + (Long.hashCode(this.a) * 31)) * 31);
+    }
+
+    public final String toString() {
+        long j = this.a;
+        long j2 = this.b;
+        return ve.a("qnQv29CIznhYHqCc7TT7oa1ZvM3dhgy6lx46Sa4tfnY=", "ZF8kD3Xyps5mUOMk", "aes", new StringBuilder().append("OtaCatalogEntry(stable=").append(j).append(", dynamic=").append(j2), this.c).append(")").toString();
     }
 }

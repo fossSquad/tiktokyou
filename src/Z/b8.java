@@ -1,13 +1,14 @@
 package Z;
 
 public abstract class b8 {
-    public static final p8 a;
+    public static final e9 a;
+    public static final e9 b;
+    public static final e9 c;
 
     static {
-        w6 w6Var = new w6("FRAGMENT_MANAGER_CLASS", "androidx.fragment.app.FragmentManager");
-        oa.a("method", "FRAGMENT_MANAGER_POP_BACK_STACK", (String[]) new String[]{"LJLLILLLL", "popBackStack", "LJLLJ"}.clone());
-        oa.a("method", "FRAGMENT_MANAGER_BEGIN_TRANSACTION", (String[]) new String[]{"LJIIJ", "beginTransaction"}.clone());
-        oa.a("method", "FRAGMENT_MANAGER_BACK_STACK_COUNT", (String[]) new String[]{"LJJLIIIIJ", "getBackStackEntryCount", "LJJLIIIJ"}.clone());
-        a = new p8(w6Var, "FRAGMENT_MANAGER_FIND_FRAGMENT", new String[]{"LJJJJLL", "findFragment", "LJJJJZ"});
+        w7 w7Var = new w7("COMMENT_STICKER_ACTION_CONFIG", "X.17Wd");
+        a = new e9(w7Var, "URL_MODEL", new String[]{"LIZ"});
+        b = new e9(w7Var, "ACTION_1", new String[]{"LJ"});
+        c = new e9(w7Var, "ACTION_2", new String[]{"LJFF"});
     }
 }

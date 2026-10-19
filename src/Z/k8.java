@@ -1,5 +1,5 @@
 package Z;
 
 public abstract class k8 {
-    public static final z7 a = new z7(new w6("KOTLIN_UNIT_CLASS", "kotlin.Unit"), "KOTLIN_UNIT_OBF_INSTANCE", new String[]{"LIZ"});
+    public static final v9 a = new v9(new w7("COMMENT_TRANSLATION_KEVA_SERVICE", "com.ss.android.ugc.aweme.translation.service.ITranslationKevaService"), "WRAPPED_IS_ENABLED", new String[]{"LIZ"});
 }

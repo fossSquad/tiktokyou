@@ -1,21 +1,16 @@
 package Z;
 
-import com.windukk.hook.HookMethod;
-import java.lang.reflect.Proxy;
-import java.util.LinkedHashMap;
+import android.app.Activity;
+public abstract class c2 {
+    public static int a(Activity activity) {
+        int identifier = activity.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (identifier > 0) {
+            return activity.getResources().getDimensionPixelSize(identifier);
+        }
+        return 0;
+    }
 
-class c2 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object result = hookMethodParam.getResult();
-        if (result == null) {
-            return;
-        }
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        linkedHashMap.put(k7.a.c[0], Boolean.TRUE);
-        Class<?>[] interfaces = result.getClass().getInterfaces();
-        if (interfaces.length != 0) {
-            result = Proxy.newProxyInstance(result.getClass().getClassLoader(), interfaces, new g2(linkedHashMap, result));
-        }
-        hookMethodParam.setResult(result);
+    public static boolean b(Activity activity) {
+        return (activity == null || activity.isFinishing() || activity.isDestroyed()) ? false : true;
     }
 }

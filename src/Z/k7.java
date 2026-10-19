@@ -1,5 +1,14 @@
 package Z;
-
 public abstract class k7 {
-    public static final p8 a = new p8(new w6("COMMENT_TRANSLATION_KEVA_SERVICE", "com.ss.android.ugc.aweme.translation.service.ITranslationKevaService"), "WRAPPED_IS_ENABLED", new String[]{"LIZ"});
+    public static final l7 a = new l7();
+
+    public static final String a(String str) {
+        String strA = a.a(str);
+        return strA;
+    }
+
+    public static final String a(String str, String str2) {
+        String strA = a.a(str, str2);
+        return strA;
+    }
 }

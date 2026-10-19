@@ -1,23 +1,25 @@
 package Z;
 
-public final class n1 {
-    public final String a;
-    public final String b;
-    public final boolean c;
-    public final boolean d;
-    public final String e;
-    public final String f;
+import com.windukk.hook.HookMethod;
 
-    public n1(String str, String str2, boolean z, boolean z2, String str3, String str4) {
-        this.a = str;
-        this.b = q1.b(str2);
-        this.c = z;
-        this.d = z2;
-        this.e = (str3 == null || str3.isEmpty()) ? null : str3;
-        this.f = (str4 == null || str4.isEmpty()) ? null : str4;
+class n1 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = v1.v;
+        int iMax = Math.max(0, ((Integer) threadLocal.get()).intValue() - 1);
+        if (iMax != 0) {
+            threadLocal.set(Integer.valueOf(iMax));
+        } else {
+            v1.u.remove();
+            threadLocal.remove();
+        }
     }
 
-    public static n1 a() {
-        return new n1("", "asset:supporter.png", true, false, null, null);
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        ThreadLocal threadLocal = v1.v;
+        threadLocal.set(Integer.valueOf(((Integer) threadLocal.get()).intValue() + 1));
+        ae aeVarA = v1.a(hookMethodParam.thisObject);
+        if (aeVarA != null) {
+            v1.u.set(aeVarA);
+        }
     }
 }

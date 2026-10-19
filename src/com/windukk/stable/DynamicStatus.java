@@ -1,5 +1,4 @@
 package com.windukk.stable;
-
 public final class DynamicStatus {
     public final String activeSha256;
     public final long activeVersion;

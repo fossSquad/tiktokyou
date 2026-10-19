@@ -1,19 +1,18 @@
 package Z;
-import java.util.concurrent.atomic.AtomicLong;
-import ni.shikatu.kotlin.Unit;
-import ni.shikatu.kotlin.jvm.functions.Function0;
-import ni.shikatu.kotlin.jvm.internal.FunctionReferenceImpl;
 
-public final  class sc extends FunctionReferenceImpl implements Function0 {
-    public sc(g3 g3Var) {
-        super(0, g3Var, g3.class, "onSuccess", "onSuccess()V", 0);
-    }
+import com.windukk.hook.HookMethod;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
-    public final Object invoke() {
-        g3 g3Var = (g3) this.receiver;
-        g3Var.getClass();
-        AtomicLong atomicLong = c4.a;
-        c4.a(g3Var.a);
-        return Unit.INSTANCE;
+class sc extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        LinkedHashMap linkedHashMap = yc.a;
+        ArrayList arrayList = new ArrayList(linkedHashMap.size());
+        Iterator it = linkedHashMap.values().iterator();
+        while (it.hasNext()) {
+            arrayList.add(Integer.valueOf(((xc) it.next()).a));
+        }
+        hookMethodParam.setResult(arrayList);
     }
 }

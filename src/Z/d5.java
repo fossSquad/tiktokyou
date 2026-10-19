@@ -1,8 +1,10 @@
 package Z;
 
-public abstract  class d5 {
-    public static ua a() {
-        ta.a().getClass();
-        return ta.d();
+import com.windukk.hook.HookMethod;
+import java.util.List;
+
+class d5 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(a.a((List) hookMethodParam.getResult()));
     }
 }

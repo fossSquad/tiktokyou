@@ -3,10 +3,8 @@ package com.windukk.hook;
 import a.j;
 import android.os.Build;
 import android.util.Log;
-import com.windukk.hook.HookMethod.Unhook;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -195,12 +193,12 @@ public final class HookBridge {
         private HiddenApiAccess() {
         }
 
-        public static void addExemptions(String... strArr) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
+        public static void addExemptions(String... strArr) throws NoSuchMethodException, ClassNotFoundException {
             Class<?> cls = Class.forName("dalvik.system.VMRuntime");
             invokeHiddenMethod(cls, invokeHiddenMethod(cls, null, "getRuntime", new Object[0]), "setHiddenApiExemptions", strArr);
         }
 
-        private static Object invokeHiddenMethod(Class<?> cls, Object obj, String str, Object... objArr) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        private static Object invokeHiddenMethod(Class<?> cls, Object obj, String str, Object... objArr) throws NoSuchMethodException {
             Method declaredMethod = InvokeStub.class.getDeclaredMethod("invoke", Object[].class);
             makeAccessible(declaredMethod);
             Unsafe unsafe = UNSAFE;
@@ -278,7 +276,7 @@ public final class HookBridge {
     }
 
     public static final class HookInfo {
-        private Member backup;
+        private Method backup;
         final CopyOnWriteSortedSet<HookMethod> callbacks = new CopyOnWriteSortedSet<>();
         private final boolean isStatic;
         private final Member method;
@@ -304,7 +302,7 @@ public final class HookBridge {
         }
 
         public Method getBackupMethod() {
-            return (Method) this.backup;
+            return this.backup;
         }
 
         public CopyOnWriteSortedSet<HookMethod> getCallbacks() {
@@ -324,13 +322,11 @@ public final class HookBridge {
         }
 
         public void setBackup(Member member) {
-            if (member instanceof AccessibleObject) {
-                AccessibleObject ao = (AccessibleObject) member;
-                if (!ao.isAccessible()) {
-                    ao.setAccessible(true);
-                }
+            Method method = (Method) member;
+            if (!method.isAccessible()) {
+                method.setAccessible(true);
             }
-            this.backup = member;
+            this.backup = method;
         }
     }
 
@@ -460,12 +456,12 @@ public final class HookBridge {
             }
             hookInfo.callbacks.add(hookMethod);
         }
-        return hookMethod.new Unhook(member);
+        return new HookMethod.Unhook(hookMethod, member);
     }
 
     private static native boolean initialize0(String str);
 
-    public static Object invokeMember(Member member, Object obj, Object[] objArr) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static Object invokeMember(Member member, Object obj, Object[] objArr) {
         if (objArr == null) {
             objArr = EMPTY_ARRAY;
         }
@@ -479,7 +475,7 @@ public final class HookBridge {
         return constructor.newInstance(objArr);
     }
 
-    public static Object invokeOriginalMethod(Member member, Object obj, Object[] objArr) throws IllegalAccessException, InvocationTargetException {
+    public static Object invokeOriginalMethod(Member member, Object obj, Object[] objArr) {
         HookInfo hookInfo;
         HashMap<Member, HookInfo> map = HOOKS;
         synchronized (map) {
@@ -489,11 +485,11 @@ public final class HookBridge {
             if (hookInfo == null) {
                 return invokeMember(member, obj, objArr);
             }
-            Member backup = hookInfo.getBackup();
-            if (backup == null) {
-                return invokeMember(member, obj, objArr);
+            Method backupMethod = hookInfo.getBackupMethod();
+            if (objArr == null) {
+                objArr = EMPTY_ARRAY;
             }
-            return invokeMember(backup, obj, objArr);
+            return backupMethod.invoke(obj, objArr);
         } catch (InstantiationException e) {
             throw new IllegalArgumentException("Constructor invocation failed", e);
         }

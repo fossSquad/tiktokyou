@@ -30,7 +30,7 @@ public final class h implements ViewTreeObserver.OnPreDrawListener {
                 n.b(mVar, true);
             }
             long jUptimeMillis = SystemClock.uptimeMillis();
-            if (!mVar.e || jUptimeMillis < mVar.i) {
+            if (!mVar.e || jUptimeMillis < mVar.k) {
                 n.a(mVar, false);
             } else {
                 mVar.e = false;

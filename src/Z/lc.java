@@ -1,11 +1,9 @@
 package Z;
 
-public final class lc {
-    public final String a;
-    public final String b;
+import com.windukk.hook.HookMethod;
 
-    public lc(String str, String str2) {
-        this.a = str;
-        this.b = str2;
+class lc extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        pc.a(true, hookMethodParam);
     }
 }

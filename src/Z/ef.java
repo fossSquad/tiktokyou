@@ -1,20 +1,20 @@
 package Z;
 
+import com.ss.android.ugc.aweme.search.common.model.ContinuousLoadingAwemeList;
 import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
+import java.util.List;
 
 class ef extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (ta.a().f()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = ThemeHooks.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y5.a().d) {
+            ContinuousLoadingAwemeList continuousLoadingAwemeList = (ContinuousLoadingAwemeList) hookMethodParam.thisObject;
+            continuousLoadingAwemeList.awemeList = a.a(continuousLoadingAwemeList.awemeList);
+            Object result = hookMethodParam.getResult();
+            if (result instanceof List) {
+                try {
+                    hookMethodParam.setResult(a.a((List) result));
+                } catch (Throwable th) {
                 }
-                hookMethodParam.args[0] = Integer.valueOf(iA);
             }
         }
     }

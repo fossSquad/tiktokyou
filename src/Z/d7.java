@@ -1,14 +1,16 @@
 package Z;
 
-public abstract class d7 {
-    public static final p8 a;
-    public static final z7 b;
-    public static final z7 c;
+import com.ss.android.ugc.aweme.inbox.skylight.InboxSkylightWidgetV2Injector;
+import com.windukk.hook.HookBridge;
 
-    static {
-        w6 w6Var = new w6("COMMENT_STICKER_SHEET_VIEW", "X.1JIQ");
-        a = new p8(w6Var, "BIND", new String[]{"LIZ"});
-        b = new z7(w6Var, "ACTION_BUTTON_1", new String[]{"LLJILJILJ", "LLILZ"});
-        c = new z7(w6Var, "ACTION_BUTTON_2", new String[]{"LLJILLL", "LLILZIL"});
+public abstract class d7 {
+    public static void a() {
+        try {
+            HookBridge.hookAllMethods(InboxSkylightWidgetV2Injector.class, "enable", new c7());
+        } catch (Exception e) {
+            String str = "InboxHooks error" + e;
+            Object obj = g7.a;
+            g7.a(6, String.valueOf(str), (Throwable) null);
+        }
     }
 }

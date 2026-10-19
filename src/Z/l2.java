@@ -1,22 +1,32 @@
 package Z;
 
-import android.view.View;
+import android.content.Context;
+import androidx.fragment.app.Fragment;
+import com.ss.android.ugc.aweme.comment.model.Comment;
 import com.windukk.hook.HookMethod;
-import Z.CommentStickerHooks;
+import java.lang.ref.WeakReference;
 
 class l2 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        n2 n2Var = (n2) CommentStickerHooks.a.get();
-        if (n2Var == null) {
-            return;
-        }
-        Object[] objArr = hookMethodParam.args;
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Context context;
+        Object obj;
+        String text;
         try {
-            CommentStickerHooks.a((View) hookMethodParam.thisObject, (objArr == null || objArr.length <= 0) ? null : objArr[0], n2Var);
+            Object obj2 = hookMethodParam.thisObject;
+            WeakReference weakReference = (WeakReference) x7.a.a(obj2.getClass()).get(obj2);
+            Fragment fragment = weakReference != null ? (Fragment) weakReference.get() : null;
+            if (fragment != null && (context = fragment.getContext()) != null && (obj = x7.b.a(obj2.getClass()).get(obj2)) != null) {
+                Object objInvoke = y7.a.a(obj.getClass(), new Class[0]).invoke(obj, null);
+                if ((objInvoke instanceof Comment) && (text = ((Comment) objInvoke).getText()) != null) {
+                    u2.a(context, text);
+                    u2.a(fragment, context);
+                    hookMethodParam.setResult((Object) null);
+                }
+            }
         } catch (Throwable th) {
-            String strDecrypt = "Exception during addButton";
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(strDecrypt), th);
+            String strDecrypt = "CommentHooks copy (mGv) error";
+            Object obj3 = g7.a;
+            g7.a(6, String.valueOf(strDecrypt), th);
         }
     }
 }

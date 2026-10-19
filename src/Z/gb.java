@@ -1,12 +1,5 @@
 package Z;
 
-class gb extends ib {
-    public gb() {
-        super();
-    }
-
-    @Override
-    public int a(jb jbVar) {
-        return jbVar.b;
-    }
+public abstract class gb {
+    public static final v9 a = new v9(new w7("SPARK_THIRD_ROUTER_CLASS", "X.044H"), "OPEN", new String[]{"LIZIZ"});
 }

@@ -1,12 +1,12 @@
 package Z;
 
 public abstract class t9 {
-    public static final p8 a;
-    public static final z7 b;
+    public static final v9 a;
+    public static final v9 b;
 
     static {
-        w6 w6Var = new w6("SETTINGS_PRIVACY_CELL_VM_CLASS", "com.ss.android.ugc.aweme.setting.ui.rvmpcompose.group.privacy.cell.PrivacyItemVM");
-        a = new p8(w6Var, "SETTINGS_PRIVACY_CELL_VM_DEFAULT_STATE", new String[]{"defaultState"});
-        b = new z7(w6Var, "SETTINGS_PRIVACY_CELL_VM_KEY", new String[]{"LL"});
+        w7 w7Var = new w7("MEDIA_STORE_HELPER", "X.01BZ");
+        a = new v9(w7Var, "INSERT_IMAGE", new String[]{"LIZJ"});
+        b = new v9(w7Var, "INSERT_VIDEO", new String[]{"LJ"});
     }
 }

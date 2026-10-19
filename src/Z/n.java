@@ -3,10 +3,13 @@ package Z;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import com.ss.android.ugc.aweme.feed.ui.FeedFragment;
@@ -32,7 +35,7 @@ public abstract class n {
     public static Bitmap l;
 
     static {
-        a = new String[]{"widget_container", "z38", "ok6", "gradual_bottom", "title_shadow", "video_sticker_container_area", "video_seek_bar", "cn3"};
+        a = new String[]{"widget_container", "zej", "onp", "gradual_bottom", "title_shadow", "video_sticker_container_area", "video_seek_bar", "cnj"};
         b = new WeakHashMap();
         c = new WeakHashMap();
         d = new WeakHashMap();
@@ -46,44 +49,42 @@ public abstract class n {
 
     public static void a() {
         try {
-            if (ta.a() != null && ta.d().g && ta.d().h) {
-                ta.d().c(true);
+            if (ac.a() != null && ac.e().g && ac.e().h) {
+                ac.e().c(true);
             }
             HookBridge.hookMethod(View.class.getDeclaredMethod("onAttachedToWindow", null), new f());
             HookBridge.hookMethod(FeedFragment.class.getMethod("onViewCreated", View.class, Bundle.class), new e());
             HookBridge.hookMethod(View.class.getDeclaredMethod("setVisibility", Integer.TYPE), new d());
         } catch (Throwable th) {
             String strDecrypt = "Initialization error";
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(strDecrypt), th);
+            Object obj = g7.a;
+            g7.a(6, String.valueOf(strDecrypt), th);
         }
     }
 
     public static void b(View view) {
-        if (j == -1 || view == null) {
+        if (j == -1 || view == null || !y5.a().g) {
             return;
         }
-        if (ta.a() == null || ta.d().g) {
-            WeakHashMap weakHashMap = c;
-            if (weakHashMap.containsKey(view)) {
-                e(view);
-                g(view);
-                f(view);
-                return;
-            }
-            weakHashMap.put(view, Boolean.TRUE);
+        WeakHashMap weakHashMap = c;
+        if (weakHashMap.containsKey(view)) {
             e(view);
-            view.setVisibility(0);
-            view.setAlpha(1.0f);
-            view.setClickable(true);
-            view.setLongClickable(true);
-            view.setContentDescription("Anti-burnout");
-            view.addOnAttachStateChangeListener(new j());
-            view.setOnClickListener(new k());
-            view.setOnLongClickListener(new l());
             g(view);
             f(view);
+            return;
         }
+        weakHashMap.put(view, Boolean.TRUE);
+        e(view);
+        view.setVisibility(0);
+        view.setAlpha(1.0f);
+        view.setClickable(true);
+        view.setLongClickable(true);
+        view.setContentDescription("Anti-burnout");
+        view.addOnAttachStateChangeListener(new j());
+        view.setOnClickListener(new k());
+        view.setOnLongClickListener(new l());
+        g(view);
+        f(view);
     }
 
     public static void c(View view, m mVar) {
@@ -199,12 +200,16 @@ public abstract class n {
                 bitmap = null;
             } else if (zB) {
                 if (k == null) {
-                    k = le.a(context, "ic_settings_burn-in-on");
+                    String strDecrypt = "ic_settings_burn-in-on";
+                    int i3 = sf.h;
+                    k = hi.a(context, strDecrypt);
                 }
                 bitmap = k;
             } else {
                 if (l == null) {
-                    l = le.a(context, "ic_settings_burn-in-off");
+                    String strDecrypt2 = "ic_settings_burn-in-off";
+                    int i4 = sf.h;
+                    l = hi.a(context, strDecrypt2);
                 }
                 bitmap = l;
             }
@@ -217,7 +222,7 @@ public abstract class n {
         }
         float fMax = 1.0f;
         if (zB) {
-            if (ta.a() == null || (i2 = ta.d().n) >= 100) {
+            if (ac.a() == null || (i2 = ac.e().s) >= 100) {
                 fMax = 0.0f;
             } else if (i2 > 0) {
                 fMax = (100 - i2) / 100.0f;
@@ -281,8 +286,8 @@ public abstract class n {
             }
         }
         h = context.getResources().getIdentifier("widget_container", "id", context.getPackageName());
-        i = context.getResources().getIdentifier("z38", "id", context.getPackageName());
-        j = context.getResources().getIdentifier("k8_", "id", context.getPackageName());
+        i = context.getResources().getIdentifier("zej", "id", context.getPackageName());
+        j = context.getResources().getIdentifier("k_d", "id", context.getPackageName());
         e = true;
     }
 
@@ -374,39 +379,44 @@ public abstract class n {
     }
 
     public static void b(m mVar, boolean z) {
-        ViewGroup viewGroup = (ViewGroup) mVar.a.get();
-        if (viewGroup == null || g == 0) {
+        ViewGroup viewGroup;
+        ViewGroup viewGroup2 = (ViewGroup) mVar.a.get();
+        if (viewGroup2 == null || g == 0) {
             return;
         }
         long jUptimeMillis = SystemClock.uptimeMillis();
-        if (z || jUptimeMillis - mVar.j >= 60) {
-            mVar.j = jUptimeMillis;
+        if (z || jUptimeMillis - mVar.l >= 60) {
+            mVar.l = jUptimeMillis;
             a(mVar);
-            c(viewGroup, mVar);
+            c(viewGroup2, mVar);
+            boolean z2 = false;
             if (mVar.h) {
                 a(mVar, false);
             }
-        }
-    }
-
-    public static void b(View view, m mVar) {
-        if (view == null) {
-            return;
-        }
-        int id = view.getId();
-        int i2 = j;
-        if (i2 != -1 && id == i2) {
-            b(view);
-            return;
-        }
-        if (!c(view)) {
-            a(view, mVar);
-            return;
-        }
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
-            for (int i3 = 0; i3 < viewGroup.getChildCount(); i3++) {
-                b(viewGroup.getChildAt(i3), mVar);
+            if (mVar.i && (viewGroup = (ViewGroup) mVar.a.get()) != null) {
+                ac acVarA = ac.a();
+                if (mVar.h && acVarA != null && ac.e().i) {
+                    z2 = true;
+                }
+                if (z2 || mVar.j) {
+                    mVar.j = z2;
+                    if (Build.VERSION.SDK_INT >= 30) {
+                        WindowInsetsController windowInsetsController = viewGroup.getWindowInsetsController();
+                        if (windowInsetsController == null) {
+                            return;
+                        }
+                        if (z2) {
+                            windowInsetsController.setSystemBarsBehavior(2);
+                            windowInsetsController.hide(WindowInsets.Type.systemBars());
+                            return;
+                        } else {
+                            windowInsetsController.show(WindowInsets.Type.systemBars());
+                            return;
+                        }
+                    }
+                    int systemUiVisibility = viewGroup.getSystemUiVisibility();
+                    viewGroup.setSystemUiVisibility(z2 ? systemUiVisibility | 4102 : systemUiVisibility & (-4103));
+                }
             }
         }
     }
@@ -428,11 +438,11 @@ public abstract class n {
 
     public static void a(View view, m mVar, boolean z) {
         float fFloatValue;
-        if (ta.a() != null && ta.d().f) {
+        if (ac.a() != null && ac.e().f) {
             if (mVar.e) {
                 fFloatValue = 1.0f;
             } else {
-                int i2 = ta.d().n;
+                int i2 = ac.e().s;
                 if (i2 >= 100) {
                     fFloatValue = 0.0f;
                 } else if (i2 <= 0) {
@@ -460,8 +470,50 @@ public abstract class n {
         }
     }
 
+    public static void a(View view) {
+        ObjectAnimator objectAnimator = (ObjectAnimator) d.remove(view);
+        if (objectAnimator != null) {
+            objectAnimator.cancel();
+        }
+    }
+
+    public static void a(m mVar) {
+        Iterator it = mVar.b.iterator();
+        while (it.hasNext()) {
+            View view = (View) ((WeakReference) it.next()).get();
+            if (view == null || (view.getParent() == null && !view.isAttachedToWindow())) {
+                it.remove();
+                if (view != null) {
+                    mVar.c.remove(view);
+                }
+            }
+        }
+    }
+
+    public static void b(View view, m mVar) {
+        if (view == null) {
+            return;
+        }
+        int id = view.getId();
+        int i2 = j;
+        if (i2 != -1 && id == i2) {
+            b(view);
+            return;
+        }
+        if (!c(view)) {
+            a(view, mVar);
+            return;
+        }
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i3 = 0; i3 < viewGroup.getChildCount(); i3++) {
+                b(viewGroup.getChildAt(i3), mVar);
+            }
+        }
+    }
+
     public static boolean b() {
-        return ta.a() != null && ta.d().f;
+        return ac.a() != null && ac.e().f;
     }
 
     public static void b(m mVar) {
@@ -480,26 +532,6 @@ public abstract class n {
                     alpha = 1.0f;
                 }
                 weakHashMap.put(view, Float.valueOf(alpha));
-            }
-        }
-    }
-
-    public static void a(View view) {
-        ObjectAnimator objectAnimator = (ObjectAnimator) d.remove(view);
-        if (objectAnimator != null) {
-            objectAnimator.cancel();
-        }
-    }
-
-    public static void a(m mVar) {
-        Iterator it = mVar.b.iterator();
-        while (it.hasNext()) {
-            View view = (View) ((WeakReference) it.next()).get();
-            if (view == null || (view.getParent() == null && !view.isAttachedToWindow())) {
-                it.remove();
-                if (view != null) {
-                    mVar.c.remove(view);
-                }
             }
         }
     }

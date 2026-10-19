@@ -1,5 +1,10 @@
 package Z;
 
-public abstract class c7 {
-    public static final p8 a = new p8(new w6("COMMENT_STICKER_HELPER", "X.0GXA"), "SHOW_SHEET", new String[]{"LJ"});
+import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
+
+class c7 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return y5.a().j ? Boolean.FALSE : Boolean.TRUE;
+    }
 }

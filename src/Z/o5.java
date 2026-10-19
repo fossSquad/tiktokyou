@@ -1,28 +1,36 @@
 package Z;
 
-import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
-import Z.FontHooks;
+import java.util.List;
+import java.util.Map;
 
 class o5 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ThreadLocal threadLocal = FontHooks.d;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
-            return;
-        }
-        ta.a().getClass();
-        String strE = ta.e();
-        if ("default".equals(strE)) {
-            return;
-        }
-        threadLocal.set(Boolean.TRUE);
-        try {
-            Typeface typefaceA = FontHooks.a(((Integer) hookMethodParam.args[1]).intValue(), strE);
-            if (typefaceA != null) {
-                hookMethodParam.setResult(typefaceA);
+    final  boolean a;
+
+    public o5(boolean z) {
+        this.a = z;
+    }
+
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        boolean zA;
+        if (hookMethodParam.args[0] instanceof List) {
+            if (this.a) {
+                s5.b(hookMethodParam.thisObject);
             }
-        } finally {
-            FontHooks.d.set(Boolean.FALSE);
+            if (this.a) {
+                zA = s5.a(hookMethodParam.thisObject);
+            } else {
+                Object obj = hookMethodParam.thisObject;
+                if (obj == null) {
+                    Map map = s5.a;
+                    zA = false;
+                } else {
+                    Boolean bool = (Boolean) s5.a.get(obj);
+                    zA = bool != null && bool.booleanValue();
+                }
+            }
+            Object[] objArr = hookMethodParam.args;
+            objArr[0] = m5.a((List) objArr[0], zA);
         }
     }
 }
