@@ -1,10 +1,11 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.FontHooks;
 import java.util.List;
 import java.util.Map;
 
-class o5 extends HookMethod {
+public class o5 extends HookMethod {
     final  boolean a;
 
     public o5(boolean z) {
@@ -15,17 +16,17 @@ class o5 extends HookMethod {
         boolean zA;
         if (hookMethodParam.args[0] instanceof List) {
             if (this.a) {
-                s5.b(hookMethodParam.thisObject);
+                FontHooks.b(hookMethodParam.thisObject);
             }
             if (this.a) {
-                zA = s5.a(hookMethodParam.thisObject);
+                zA = FontHooks.a(hookMethodParam.thisObject);
             } else {
                 Object obj = hookMethodParam.thisObject;
                 if (obj == null) {
-                    Map map = s5.a;
+                    Map map = FontHooks.a;
                     zA = false;
                 } else {
-                    Boolean bool = (Boolean) s5.a.get(obj);
+                    Boolean bool = (Boolean) FontHooks.a.get(obj);
                     zA = bool != null && bool.booleanValue();
                 }
             }

@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -7,7 +9,7 @@ import android.widget.TextView;
 import com.windukk.hook.HookMethod;
 import java.util.Map;
 
-class me extends HookMethod {
+public class SignatureFakerHooks extends HookMethod {
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object obj;

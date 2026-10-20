@@ -3,6 +3,7 @@ package Z;
 import android.net.Uri;
 import com.ss.android.ugc.aweme.base.model.UrlModel;
 import com.ss.android.ugc.aweme.feed.model.Video;
+import com.windukk.mod.hooks.download.DownloadMediaStoreHooks;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -349,7 +350,7 @@ public final class v4 {
         int r29 = 0;
         Throwable th;
         List listEmptyList;
-        m3 m3VarA;
+        DownloadMediaStoreHooks m3VarA;
         ArrayList arrayList3;
         Object obj3;
         Object next2;
@@ -421,7 +422,7 @@ public final class v4 {
                             r4.a(Integer.valueOf(jsonArray2.size()), Integer.valueOf(jsonArray3.size()));
                             ArrayList arrayList5 = new ArrayList();
                             for (JsonElement jsonElement3 : jsonArray3) {
-                                m3 m3VarA2 = a(jsonElement3 instanceof JsonObject ? (JsonObject) jsonElement3 : null, i != 0);
+                                DownloadMediaStoreHooks m3VarA2 = a(jsonElement3 instanceof JsonObject ? (JsonObject) jsonElement3 : null, i != 0);
                                 if (m3VarA2 != null) {
                                     arrayList5.add(m3VarA2);
                                 }
@@ -433,7 +434,7 @@ public final class v4 {
                             while (i2 < size) {
                                 try {
                                     int i3 = i2 + 1;
-                                    m3 m3Var = (m3) arrayList5.get(i2);
+                                    DownloadMediaStoreHooks m3Var = (DownloadMediaStoreHooks) arrayList5.get(i2);
                                     UrlModel urlModel2 = m3Var.a;
                                     String strDecrypt = "video.videoModel.audio";
                                     ArrayList arrayList7 = arrayList5;
@@ -536,22 +537,22 @@ public final class v4 {
                                             arrayList3 = arrayList9;
                                             obj3 = arrayList3.get(i6);
                                             i6++;
-                                            m3 m3Var2 = (m3) obj3;
+                                            DownloadMediaStoreHooks m3Var2 = (DownloadMediaStoreHooks) obj3;
                                             if (strC2 != null && Intrinsics.areEqual(m3Var2.b, strC2)) {
                                                 break;
                                             }
                                             arrayList9 = arrayList3;
                                         }
-                                        m3 m3Var3 = (m3) obj3;
+                                        DownloadMediaStoreHooks m3Var3 = (DownloadMediaStoreHooks) obj3;
                                         if (m3Var3 == null) {
                                             Iterator it = arrayList3.iterator();
                                             if (it.hasNext()) {
                                                 next2 = it.next();
                                                 if (it.hasNext()) {
-                                                    int i7 = ((m3) next2).e;
+                                                    int i7 = ((DownloadMediaStoreHooks) next2).e;
                                                     do {
                                                         Object next3 = it.next();
-                                                        int i8 = ((m3) next3).e;
+                                                        int i8 = ((DownloadMediaStoreHooks) next3).e;
                                                         if (i7 < i8) {
                                                             next2 = next3;
                                                             i7 = i8;
@@ -561,7 +562,7 @@ public final class v4 {
                                             } else {
                                                 next2 = null;
                                             }
-                                            m3Var3 = (m3) next2;
+                                            m3Var3 = (DownloadMediaStoreHooks) next2;
                                             if (m3Var3 == null) {
                                                 str8 = str;
                                                 arrayList9 = arrayList3;
@@ -682,7 +683,7 @@ public final class v4 {
             Iterator it3 = listA.iterator();
             while (it3.hasNext()) {
                 Object objB4 = se.b(it3.next(), "getAudioMeta");
-                m3 m3Var4 = (objB4 == null || (urlModelA = a(objB4)) == null) ? null : new m3(urlModelA, c(objB4, "getFileId"), c(objB4, "getCodecType"), c(objB4, "getFormat"), (int) RangesKt.coerceAtMost(b(objB4, "getBitrate"), 2147483647L));
+                DownloadMediaStoreHooks m3Var4 = (objB4 == null || (urlModelA = a(objB4)) == null) ? null : new DownloadMediaStoreHooks(urlModelA, c(objB4, "getFileId"), c(objB4, "getCodecType"), c(objB4, "getFormat"), (int) RangesKt.coerceAtMost(b(objB4, "getBitrate"), 2147483647L));
                 if (m3Var4 != null) {
                     arrayList15.add(m3Var4);
                 }
@@ -696,7 +697,7 @@ public final class v4 {
                 while (i9 < size3) {
                     Object obj8 = arrayList15.get(i9);
                     int i10 = i9 + 1;
-                    m3 m3Var5 = (m3) obj8;
+                    DownloadMediaStoreHooks m3Var5 = (DownloadMediaStoreHooks) obj8;
                     ArrayList arrayList16 = arrayList14;
                     UrlModel urlModel4 = urlModel3;
                     ArrayList arrayList17 = arrayList15;
@@ -737,7 +738,7 @@ public final class v4 {
                             } else {
                                 strC = strC4;
                             }
-                            m3 m3Var6 = new m3(urlModelD, str12, strC, c(obj9, "getFormat"), a(obj9, "getBitRate"));
+                            DownloadMediaStoreHooks m3Var6 = new DownloadMediaStoreHooks(urlModelD, str12, strC, c(obj9, "getFormat"), a(obj9, "getBitRate"));
                             String strC6 = c(obj9, "getAudioFileId");
                             int size4 = arrayList19.size();
                             int i12 = z4 ? 1 : 0;
@@ -750,22 +751,22 @@ public final class v4 {
                                 arrayList = arrayList19;
                                 obj = arrayList.get(i12);
                                 i12++;
-                                m3 m3Var7 = (m3) obj;
+                                DownloadMediaStoreHooks m3Var7 = (DownloadMediaStoreHooks) obj;
                                 if (strC6 != null && Intrinsics.areEqual(m3Var7.b, strC6)) {
                                     break;
                                 }
                                 arrayList19 = arrayList;
                             }
-                            m3 m3Var8 = (m3) obj;
+                            DownloadMediaStoreHooks m3Var8 = (DownloadMediaStoreHooks) obj;
                             if (m3Var8 == null) {
                                 Iterator it4 = arrayList.iterator();
                                 if (it4.hasNext()) {
                                     next = it4.next();
                                     if (it4.hasNext()) {
-                                        int i13 = ((m3) next).e;
+                                        int i13 = ((DownloadMediaStoreHooks) next).e;
                                         do {
                                             Object next4 = it4.next();
-                                            int i14 = ((m3) next4).e;
+                                            int i14 = ((DownloadMediaStoreHooks) next4).e;
                                             if (i13 < i14) {
                                                 next = next4;
                                                 i13 = i14;
@@ -775,7 +776,7 @@ public final class v4 {
                                 } else {
                                     next = null;
                                 }
-                                m3Var8 = (m3) next;
+                                m3Var8 = (DownloadMediaStoreHooks) next;
                                 if (m3Var8 == null) {
                                     arrayList19 = arrayList;
                                 }
@@ -931,7 +932,7 @@ public final class v4 {
         linkedHashSet.add(string);
     }
 
-    public final o3 a(Video video, m3 m3Var, m3 m3Var2, JsonObject jsonObject) {
+    public final o3 a(Video video, DownloadMediaStoreHooks m3Var, DownloadMediaStoreHooks m3Var2, JsonObject jsonObject) {
         String strC = c(jsonObject, "gear_name");
         if (strC == null || StringsKt.isBlank(strC)) {
             strC = null;
@@ -952,7 +953,7 @@ public final class v4 {
         return o3VarA;
     }
 
-    public static m3 a(JsonObject jsonObject, boolean z) {
+    public static DownloadMediaStoreHooks a(JsonObject jsonObject, boolean z) {
         UrlModel urlModelE;
         String str;
         String str2;
@@ -988,7 +989,7 @@ public final class v4 {
             }
         }
         String strC4 = c(jsonObject, "format");
-        return new m3(urlModelE, str4, str3, (strC4 == null || StringsKt.isBlank(strC4)) ? null : strC4, iA);
+        return new DownloadMediaStoreHooks(urlModelE, str4, str3, (strC4 == null || StringsKt.isBlank(strC4)) ? null : strC4, iA);
     }
 
     public static UrlModel a(Object obj) {
@@ -1036,7 +1037,7 @@ public final class v4 {
     public final List a(ArrayList arrayList) {
         String str;
         String str2;
-        m3 m3Var;
+        DownloadMediaStoreHooks m3Var;
         Set set = SequencesKt.toSet(SequencesKt.map(SequencesKt.filter(CollectionsKt.asSequence(arrayList), new Function1() {
             public final Object invoke(Object obj) {
                 return Boolean.valueOf(v4.b((o3) obj));

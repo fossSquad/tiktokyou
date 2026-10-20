@@ -1,10 +1,12 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.view.View;
 import com.windukk.hook.HookMethod;
 import java.util.Map;
 
-class ig extends HookMethod {
+public class ThemeHooks extends HookMethod {
 
     public static void a(Object obj, View view) {
         try {
@@ -38,7 +40,7 @@ class ig extends HookMethod {
             viewF.post(new Runnable() {
                 @Override
                 public final void run() {
-                    ig.a(obj2, viewF);
+                    ThemeHooks.a(obj2, viewF);
                 }
             });
         } catch (Throwable th) {

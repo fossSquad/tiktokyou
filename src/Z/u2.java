@@ -12,6 +12,7 @@ import com.ss.android.ugc.aweme.experiment.CommentTimeSortFeatExp;
 import com.ss.android.ugc.aweme.favorites.business.comment.CommentCollectViewHolder;
 import com.windukk.hook.HookBridge;
 import com.windukk.hook.ReplaceMethod;
+import com.windukk.mod.hooks.ConfigHooks;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
@@ -97,7 +98,7 @@ public abstract class u2 {
         }
         try {
             v9 v9Var = z7.a;
-            HookBridge.hookAllMethods(Class.forName("X.0FQV"), z7.a.c[i], new q2());
+            HookBridge.hookAllMethods(Class.forName("X.0FQV"), z7.a.c[i], new ConfigHooks());
         } catch (Throwable th4) {
             String strDecrypt2 = "CommentHooks inline sort placement hook error";
             Object obj2 = g7.a;

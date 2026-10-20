@@ -181,7 +181,7 @@ def classify(src: str, start: int, end: int, masked) -> str:
         while m < len(src) and src[m] in " \t\n":
             m += 1
         after = src[m] if m < len(src) else ""
-        if after in "=;,)[:}{":
+        if after in "=;,)[:}{(":
             return "type"
     return "skip_other"
 

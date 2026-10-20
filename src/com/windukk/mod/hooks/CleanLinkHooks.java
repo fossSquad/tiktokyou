@@ -1,9 +1,11 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.content.res.ColorStateList;
 import com.windukk.hook.HookMethod;
 
-class ch extends HookMethod {
+public class CleanLinkHooks extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         ColorStateList colorStateList;
         ColorStateList colorStateListA;

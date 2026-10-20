@@ -1,10 +1,12 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.windukk.hook.HookMethod;
 import java.lang.reflect.Proxy;
 import java.util.LinkedHashMap;
 
-class o2 extends HookMethod {
+public class CommentStickerHooks extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object result = hookMethodParam.getResult();
         if (result == null) {

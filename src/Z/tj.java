@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.PhotoHooks;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -40,7 +41,7 @@ public abstract class tj {
         fcVar.c.setTag("UiHideSheet");
         fc fcVarA = fcVar.b((CharSequence) k7.a("ui_hide_section")).a((CharSequence) k7.a("ui_hide_quick_hint"));
         LinearLayout linearLayoutA = fcVarA.a(4);
-        cc ccVarA = fcVarA.a(linearLayoutA, 0.5f);
+        PhotoHooks ccVarA = fcVarA.a(linearLayoutA, 0.5f);
         fcVarA.a().addView(ccVarA);
         fcVarA.d(k7.a("ui_hide_close"), null);
         a(ccVarA, linearLayoutA, fcVarA, activity);

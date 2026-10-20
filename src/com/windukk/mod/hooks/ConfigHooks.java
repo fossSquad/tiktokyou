@@ -1,7 +1,9 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 import com.windukk.hook.HookMethod;
 
-class q2 extends HookMethod {
+public class ConfigHooks extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         if (Boolean.TRUE.equals(hookMethodParam.getResult())) {
             return;

@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import com.windukk.mod.hooks.EdgeSpeedupHooks;
 import java.util.ArrayList;
 
 public final class jc extends Dialog {
@@ -69,7 +70,7 @@ public final class jc extends Dialog {
             a();
         } else {
             this.f = true;
-            kc.a(this, view.getHeight(), Math.max(120L, (long) ((1.0f - Math.max(0.0f, Math.min(1.0f, this.d / view.getHeight()))) * 240.0f)), new AccelerateInterpolator(1.4f), new Runnable() {
+            EdgeSpeedupHooks.a(this, view.getHeight(), Math.max(120L, (long) ((1.0f - Math.max(0.0f, Math.min(1.0f, this.d / view.getHeight()))) * 240.0f)), new AccelerateInterpolator(1.4f), new Runnable() {
                 @Override
                 public final void run() {
                     jc.this.a();

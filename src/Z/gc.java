@@ -2,6 +2,7 @@ package Z;
 
 import android.app.Dialog;
 import android.view.View;
+import com.windukk.mod.hooks.EdgeSpeedupHooks;
 
 public final class gc implements View.OnAttachStateChangeListener {
     public final  Dialog a;
@@ -16,7 +17,7 @@ public final class gc implements View.OnAttachStateChangeListener {
 
     @Override
     public final void onViewAttachedToWindow(View view) {
-        kc.a(this.a.getWindow(), this.b, this.c);
+        EdgeSpeedupHooks.a(this.a.getWindow(), this.b, this.c);
         view.requestApplyInsets();
     }
 

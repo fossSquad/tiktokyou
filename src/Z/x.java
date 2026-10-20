@@ -24,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.MandatoryLoginHooks;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -315,7 +316,7 @@ public final class x {
             this.f.setVisibility(8);
             return;
         }
-        Typeface typeface = n6.a;
+        Typeface typeface = MandatoryLoginHooks.a;
         if ("default".equals(strF) || "system".equals(strF)) {
             strReplaceAll = null;
         } else {
@@ -577,9 +578,9 @@ public final class x {
                         String strA = di.a("jxU2oKyjv1o85bEI9o3Za6cr9r8BMM8XlRRb4bnIbT8=", "LIjhGW26CftDS7hB", "aes", new StringBuilder(), strDecrypt);
                         acVarA.getClass();
                         ac.e().c(strA);
-                        n6.a = null;
-                        n6.b = null;
-                        n6.c.clear();
+                        MandatoryLoginHooks.a = null;
+                        MandatoryLoginHooks.b = null;
+                        MandatoryLoginHooks.c.clear();
                         k();
                         Runnable runnable = this.b.c;
                         if (runnable != null) {
@@ -850,9 +851,9 @@ public final class x {
         String str = ((String[]) list.get(i))[0];
         acVarA.getClass();
         ac.e().c(str);
-        n6.a = null;
-        n6.b = null;
-        n6.c.clear();
+        MandatoryLoginHooks.a = null;
+        MandatoryLoginHooks.b = null;
+        MandatoryLoginHooks.c.clear();
         k();
         Runnable runnable = this.b.c;
         if (runnable != null) {

@@ -52,6 +52,7 @@ import com.ss.android.ugc.profile.platform.base.data.UserProfileInfo;
 import com.windukk.hook.HookBridge;
 import com.windukk.hook.HookMethod;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.BadgeHooks;
 import com.windukk.stable.ResourceOverlay;
 import java.io.File;
 import java.io.IOException;
@@ -757,7 +758,7 @@ public abstract class v1 {
                     windowManager.addView(frameLayout2, layoutParams2);
                     map.put(activity, frameLayout2);
                     frameLayoutA.animate().translationY(0.0f).alpha(1.0f).setDuration(300L).start();
-                    a(frameLayoutA, new l1((int) TypedValue.applyDimension(1, 6.0f, frameLayoutA.getContext().getResources().getDisplayMetrics()), frameLayoutA, (int) TypedValue.applyDimension(1, 28.0f, frameLayoutA.getContext().getResources().getDisplayMetrics()), activity, frameLayout2));
+                    a(frameLayoutA, new BadgeHooks((int) TypedValue.applyDimension(1, 6.0f, frameLayoutA.getContext().getResources().getDisplayMetrics()), frameLayoutA, (int) TypedValue.applyDimension(1, 28.0f, frameLayoutA.getContext().getResources().getDisplayMetrics()), activity, frameLayout2));
                     frameLayoutA.postDelayed(new Runnable() {
                         @Override
                         public final void run() {
@@ -1570,7 +1571,7 @@ public abstract class v1 {
         }
     }
 
-    public static void a(View view, l1 l1Var) {
+    public static void a(View view, BadgeHooks l1Var) {
         view.setOnTouchListener(l1Var);
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;

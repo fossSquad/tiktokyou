@@ -14,6 +14,8 @@ import com.ss.android.ugc.aweme.story.feed.immersive.component.StoryShareCompone
 import com.ss.android.ugc.aweme.story.feed.immersive.digg.ImmersiveStoryDiggAssem;
 import com.windukk.hook.HookBridge;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.OfflineModeHooks;
+import com.windukk.mod.hooks.ThemeHooks;
 import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Locale;
@@ -33,8 +35,8 @@ public abstract class kg {
             v9 v9Var = jb.a;
             Class<?> cls = Class.forName("kotlin.jvm.internal.AFwS262S0000000_30_I1");
             HookBridge.hookMethod(jb.a.a(cls, cls, Object.class, Object.class), new hg());
-            HookBridge.hookMethod(StoryShareComponent.class.getDeclaredMethod("onViewCreated", View.class), new ig());
-            HookBridge.hookMethod(kb.a.a(StoryShareComponent.class, Object.class), new jg());
+            HookBridge.hookMethod(StoryShareComponent.class.getDeclaredMethod("onViewCreated", View.class), new ThemeHooks());
+            HookBridge.hookMethod(OfflineModeHooks.a.a(StoryShareComponent.class, Object.class), new jg());
             String strDecrypt = "Story viewer engagement counts initialized";
             Object obj = g7.a;
             g7.a(4, String.valueOf(strDecrypt), (Throwable) null);

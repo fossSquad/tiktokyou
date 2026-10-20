@@ -21,6 +21,9 @@ import androidx.core.widget.ImageViewCompat;
 import com.bytedance.tux.icon.TuxIconView;
 import com.windukk.hook.HookBridge;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.CleanLinkHooks;
+import com.windukk.mod.hooks.FrameMetricsLeakHooks;
+import com.windukk.mod.hooks.SimpleModeHooks;
 
 public abstract class zh {
     public static volatile int a;
@@ -71,13 +74,13 @@ public abstract class zh {
             HookBridge.hookAllConstructors(ForegroundColorSpan.class, new xg());
             HookBridge.hookAllMethods(ImageView.class, "setImageTintList", new yg());
             HookBridge.hookAllMethods(View.class, "setBackgroundTintList", new zg());
-            HookBridge.hookAllConstructors(PorterDuffColorFilter.class, new ah());
+            HookBridge.hookAllConstructors(PorterDuffColorFilter.class, new FrameMetricsLeakHooks());
             try {
                 HookBridge.hookMethod(Drawable.class.getMethod("setColorFilter", Integer.TYPE, PorterDuff.Mode.class), new bh());
             } catch (NoSuchMethodException e3) {
             }
             try {
-                HookBridge.hookAllMethods(ImageViewCompat.class, "setImageTintList", new ch());
+                HookBridge.hookAllMethods(ImageViewCompat.class, "setImageTintList", new CleanLinkHooks());
             } catch (NoClassDefFoundError e4) {
                 String strDecrypt2 = "ImageViewCompat not found";
                 Object obj2 = g7.a;
@@ -85,7 +88,7 @@ public abstract class zh {
             }
             try {
                 HookBridge.hookAllMethods(DrawableCompat.class, "setTint", new dh());
-                HookBridge.hookAllMethods(DrawableCompat.class, "setTintList", new fh());
+                HookBridge.hookAllMethods(DrawableCompat.class, "setTintList", new SimpleModeHooks());
             } catch (NoClassDefFoundError e5) {
                 String strDecrypt3 = "DrawableCompat not found";
                 Object obj3 = g7.a;

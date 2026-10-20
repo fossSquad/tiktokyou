@@ -1,11 +1,12 @@
 package Z;
+import com.windukk.mod.hooks.download.DownloadMediaStoreHooks;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 
 public final class l3 {
-    public final m3 a;
-    public final m3 b;
+    public final DownloadMediaStoreHooks a;
+    public final DownloadMediaStoreHooks b;
 
-    public l3(m3 m3Var, m3 m3Var2) {
+    public l3(DownloadMediaStoreHooks m3Var, DownloadMediaStoreHooks m3Var2) {
         this.a = m3Var;
         this.b = m3Var2;
     }

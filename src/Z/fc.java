@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.EdgeSpeedupHooks;
+import com.windukk.mod.hooks.PhotoHooks;
 import com.windukk.stable.ResourceOverlay;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -199,7 +201,7 @@ public final class fc {
 
     public final boolean g() {
         try {
-            this.b.setContentView(kc.a(this.a, this.c, new View.OnClickListener() {
+            this.b.setContentView(EdgeSpeedupHooks.a(this.a, this.c, new View.OnClickListener() {
                 @Override
                 public final void onClick(View view) {
                     fc.this.a(view);
@@ -214,7 +216,7 @@ public final class fc {
                     }
                 });
             }
-            kc.a(this.b, this.c, this.f, this.u);
+            EdgeSpeedupHooks.a(this.b, this.c, this.f, this.u);
             Window window = this.b.getWindow();
             if (window != null) {
                 window.setSoftInputMode((this.w ? 4 : 2) | 16);
@@ -559,8 +561,8 @@ public final class fc {
         }
     }
 
-    public final cc a(LinearLayout linearLayout, float f) {
-        cc ccVar = new cc(this.a, (int) (this.a.getResources().getDisplayMetrics().heightPixels * f));
+    public final PhotoHooks a(LinearLayout linearLayout, float f) {
+        PhotoHooks ccVar = new PhotoHooks(this.a, (int) (this.a.getResources().getDisplayMetrics().heightPixels * f));
         ccVar.setVerticalScrollBarEnabled(false);
         ccVar.setOverScrollMode(2);
         ccVar.setClipToPadding(false);

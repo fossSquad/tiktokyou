@@ -2,12 +2,13 @@ package Z;
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.SearchHooks;
 
-class td extends HookMethod {
+public class td extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object[] objArr;
         String aid;
-        if (Boolean.TRUE.equals(yd.l.get())) {
+        if (Boolean.TRUE.equals(SearchHooks.l.get())) {
             return;
         }
         Object result = hookMethodParam.getResult();
@@ -17,8 +18,8 @@ class td extends HookMethod {
         Object obj = objArr[0];
         if (obj instanceof Aweme) {
             Aweme aweme = (Aweme) obj;
-            yd.b(aweme);
-            String str = yd.h;
+            SearchHooks.b(aweme);
+            String str = SearchHooks.h;
             try {
                 aid = aweme.getAid();
             } catch (Throwable th) {
@@ -26,8 +27,8 @@ class td extends HookMethod {
             }
             if (str == null || !str.equals(aid)) {
                 float fFloatValue = ((Number) result).floatValue();
-                float f = yd.f;
-                if (!yd.a(f) && yd.a(fFloatValue) && yd.a(aweme)) {
+                float f = SearchHooks.f;
+                if (!SearchHooks.a(f) && SearchHooks.a(fFloatValue) && SearchHooks.a(aweme)) {
                     hookMethodParam.setResult(Float.valueOf(f));
                 }
             }

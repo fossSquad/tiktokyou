@@ -1,9 +1,10 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.FontHooks;
 
-class n5 extends HookMethod {
+public class n5 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        s5.b(hookMethodParam.thisObject);
+        FontHooks.b(hookMethodParam.thisObject);
     }
 }

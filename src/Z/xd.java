@@ -1,4 +1,6 @@
 package Z;
+import com.windukk.mod.hooks.SearchHooks;
+
 
 public final class xd implements Runnable {
     public final Object a;
@@ -11,12 +13,12 @@ public final class xd implements Runnable {
 
     @Override
     public final void run() {
-        if (Math.abs(yd.f - this.b) > 0.001f || yd.a(yd.f) || yd.h != null) {
+        if (Math.abs(SearchHooks.f - this.b) > 0.001f || SearchHooks.a(SearchHooks.f) || SearchHooks.h != null) {
             return;
         }
-        long j = yd.j;
+        long j = SearchHooks.j;
         if (j <= 0 || System.currentTimeMillis() - j >= 1200) {
-            yd.a(this.a, this.b);
+            SearchHooks.a(this.a, this.b);
         }
     }
 }

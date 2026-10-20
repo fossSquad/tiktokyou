@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.os.Handler;
 import android.os.Looper;
@@ -8,7 +10,7 @@ import com.windukk.hook.HookBridge;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public abstract class yd {
+public abstract class SearchHooks {
     public static Class a;
     public static Method b;
     public static Method c;
@@ -144,7 +146,7 @@ public abstract class yd {
         try {
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader == null) {
-                contextClassLoader = yd.class.getClassLoader();
+                contextClassLoader = SearchHooks.class.getClassLoader();
             }
             Class<?> cls = Class.forName(w7Var.b, false, contextClassLoader);
             for (String str : (String[]) v9Var.c.clone()) {

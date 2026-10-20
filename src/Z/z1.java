@@ -1,4 +1,5 @@
 package Z;
+import com.windukk.mod.hooks.BrowserHooks;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 import ni.shikatu.kotlinx.serialization.internal.PluginExceptionsKt;
 
@@ -13,7 +14,7 @@ public final class z1 {
 
     public z1(int i, String str, boolean z, String str2, String str3, Boolean bool, String str4, String str5) {
         if (1 != (i & 1)) {
-            PluginExceptionsKt.throwMissingFieldException(i, 1, y1.b);
+            PluginExceptionsKt.throwMissingFieldException(i, 1, BrowserHooks.b);
         }
         this.a = str;
         if ((i & 2) == 0) {

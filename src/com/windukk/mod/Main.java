@@ -25,19 +25,19 @@ import Z.m5;
 import Z.m7;
 import Z.mi;
 import Z.n;
-import Z.n6;
+import com.windukk.mod.hooks.MandatoryLoginHooks;
 import Z.o6;
 import Z.of;
 import Z.pj;
 import Z.qd;
-import Z.qg;
+import com.windukk.mod.hooks.UnlockLimitsHooks;
 import Z.rf;
 import Z.u2;
 import Z.v1;
 import Z.v3;
 import Z.y;
 import Z.yc;
-import Z.yd;
+import com.windukk.mod.hooks.SearchHooks;
 import Z.ye;
 import Z.z2;
 import Z.zh;
@@ -100,7 +100,7 @@ public final class Main {
         });
         ac.a(context);
         l7 l7Var = k7.a;
-        int i = qg.a;
+        int i = UnlockLimitsHooks.a;
         try {
             ArrayList arrayListA = j7.a(context);
             if (!arrayListA.isEmpty()) {
@@ -157,7 +157,7 @@ public final class Main {
             b3.a();
             ye.a();
             m5.b();
-            yd.a();
+            SearchHooks.a();
             kg.a();
             of.e();
             v3.d();
@@ -169,7 +169,7 @@ public final class Main {
             yc.a();
             y.a();
             d7.a();
-            n6.a();
+            MandatoryLoginHooks.a();
             b0.a();
             zh.b();
             g6.a();

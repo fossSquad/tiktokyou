@@ -1,13 +1,15 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ScrollView;
 
-public final class cc extends ScrollView {
+public final class PhotoHooks extends ScrollView {
     public final  int a;
 
-    public cc(Context context, int i) {
+    public PhotoHooks(Context context, int i) {
         super(context);
         this.a = i;
     }

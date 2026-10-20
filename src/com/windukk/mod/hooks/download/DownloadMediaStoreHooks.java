@@ -1,16 +1,18 @@
-package Z;
+package com.windukk.mod.hooks.download;
+import Z.*;
+
 
 import com.ss.android.ugc.aweme.base.model.UrlModel;
 import ni.shikatu.kotlin.jvm.internal.Intrinsics;
 
-public final class m3 {
+public final class DownloadMediaStoreHooks {
     public final UrlModel a;
     public final String b;
     public final String c;
     public final String d;
     public final int e;
 
-    public m3(UrlModel urlModel, String str, String str2, String str3, int i) {
+    public DownloadMediaStoreHooks(UrlModel urlModel, String str, String str2, String str3, int i) {
         this.a = urlModel;
         this.b = str;
         this.c = str2;
@@ -22,10 +24,10 @@ public final class m3 {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof m3)) {
+        if (!(obj instanceof DownloadMediaStoreHooks)) {
             return false;
         }
-        m3 m3Var = (m3) obj;
+        DownloadMediaStoreHooks m3Var = (DownloadMediaStoreHooks) obj;
         return Intrinsics.areEqual(this.a, m3Var.a) && Intrinsics.areEqual(this.b, m3Var.b) && Intrinsics.areEqual(this.c, m3Var.c) && Intrinsics.areEqual(this.d, m3Var.d) && this.e == m3Var.e;
     }
 

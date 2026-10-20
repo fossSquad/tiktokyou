@@ -12,6 +12,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.webkit.CookieManager;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.download.DownloadMediaStoreHooks;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -64,7 +65,7 @@ public abstract class k3 {
         return Unit.INSTANCE;
     }
 
-    public static void a(m3 m3Var, File file, long j, String str, final int i, final int i2, final Function1 function1) throws Throwable {
+    public static void a(DownloadMediaStoreHooks m3Var, File file, long j, String str, final int i, final int i2, final Function1 function1) throws Throwable {
         Throwable th;
         int i3;
         List listEmptyList = m3Var.a.urlList;

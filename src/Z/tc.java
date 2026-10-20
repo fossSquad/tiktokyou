@@ -1,6 +1,8 @@
 package Z;
+import com.windukk.mod.hooks.PublishTabHooks;
 
-class tc extends wc {
+
+class tc extends PublishTabHooks {
     public tc() {
         super();
     }

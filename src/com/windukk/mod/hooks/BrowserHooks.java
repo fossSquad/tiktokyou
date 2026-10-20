@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 import ni.shikatu.kotlinx.serialization.KSerializer;
 import ni.shikatu.kotlinx.serialization.UnknownFieldException;
 import ni.shikatu.kotlinx.serialization.builtins.BuiltinSerializersKt;
@@ -12,12 +14,12 @@ import ni.shikatu.kotlinx.serialization.internal.GeneratedSerializer;
 import ni.shikatu.kotlinx.serialization.internal.PluginGeneratedSerialDescriptor;
 import ni.shikatu.kotlinx.serialization.internal.StringSerializer;
 
-public final  class y1 implements GeneratedSerializer {
-    public static final y1 a;
+public final  class BrowserHooks implements GeneratedSerializer {
+    public static final BrowserHooks a;
     public static final PluginGeneratedSerialDescriptor b;
 
     static {
-        y1 y1Var = new y1();
+        BrowserHooks y1Var = new BrowserHooks();
         a = y1Var;
         PluginGeneratedSerialDescriptor pluginGeneratedSerialDescriptor = new PluginGeneratedSerialDescriptor("com.windukk.mod.hooks.badge.BadgePayload", y1Var, 7);
         pluginGeneratedSerialDescriptor.addElement("uid", false);

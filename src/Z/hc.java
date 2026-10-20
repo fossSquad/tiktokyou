@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
+import com.windukk.mod.hooks.EdgeSpeedupHooks;
 
 public final class hc implements ViewTreeObserver.OnPreDrawListener {
     public final  View a;
@@ -21,8 +22,8 @@ public final class hc implements ViewTreeObserver.OnPreDrawListener {
             this.b.b = new ColorDrawable(-16777216);
             ((View) this.a.getParent()).setBackground(this.b.b);
         }
-        kc.a(this.b, this.a.getHeight());
-        kc.a(this.b, 0.0f, 380L, new OvershootInterpolator(0.7f), null);
+        EdgeSpeedupHooks.a(this.b, this.a.getHeight());
+        EdgeSpeedupHooks.a(this.b, 0.0f, 380L, new OvershootInterpolator(0.7f), null);
         return true;
     }
 }

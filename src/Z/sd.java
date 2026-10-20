@@ -2,12 +2,13 @@ package Z;
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.SearchHooks;
 
-class sd extends HookMethod {
+public class sd extends HookMethod {
 
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         String str;
-        if (Boolean.TRUE.equals(yd.l.get())) {
+        if (Boolean.TRUE.equals(SearchHooks.l.get())) {
             return;
         }
         Object[] objArr = hookMethodParam.args;
@@ -21,21 +22,21 @@ class sd extends HookMethod {
                 str = null;
             }
         }
-        if (yd.a(str)) {
+        if (SearchHooks.a(str)) {
             return;
         }
         if ((!"long_press".equals(str) && !"click_share_button".equals(str) && !"swipe_up_lock_persist".equals(str)) || "long_press".equals(str) || "click_share_button".equals(str)) {
             return;
         }
-        float f = yd.f;
-        yd.b(f);
+        float f = SearchHooks.f;
+        SearchHooks.b(f);
     }
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object[] objArr;
         String str;
         Aweme aweme;
-        if (Boolean.TRUE.equals(yd.l.get()) || (objArr = hookMethodParam.args) == null || objArr.length < 4) {
+        if (Boolean.TRUE.equals(SearchHooks.l.get()) || (objArr = hookMethodParam.args) == null || objArr.length < 4) {
             return;
         }
         Object obj = objArr[0];
@@ -56,7 +57,7 @@ class sd extends HookMethod {
                     str = null;
                 }
             }
-            if (yd.a(str)) {
+            if (SearchHooks.a(str)) {
                 Object[] objArr3 = hookMethodParam.args;
                 if (objArr3 == null || objArr3.length <= 1) {
                     aweme = null;
@@ -74,19 +75,19 @@ class sd extends HookMethod {
                     } catch (Throwable th) {
                     }
                 }
-                yd.h = aid;
-                yd.i = fFloatValue;
-                yd.j = System.currentTimeMillis();
+                SearchHooks.h = aid;
+                SearchHooks.i = fFloatValue;
+                SearchHooks.j = System.currentTimeMillis();
                 return;
             }
             if ("long_press".equals(str) || "click_share_button".equals(str)) {
-                if (yd.h != null || yd.j != 0) {
-                    yd.h = null;
-                    yd.i = 1.0f;
-                    yd.j = 0L;
+                if (SearchHooks.h != null || SearchHooks.j != 0) {
+                    SearchHooks.h = null;
+                    SearchHooks.i = 1.0f;
+                    SearchHooks.j = 0L;
                 }
-                yd.f = fFloatValue;
-                yd.b(fFloatValue);
+                SearchHooks.f = fFloatValue;
+                SearchHooks.b(fFloatValue);
             }
         }
     }

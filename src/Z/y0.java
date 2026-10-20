@@ -1,4 +1,5 @@
 package Z;
+import com.windukk.mod.hooks.BrowserHooks;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -58,7 +59,7 @@ public abstract class y0 {
                         Result.Companion companion = Result.Companion;
                         Json json = e7.a;
                         json.getSerializersModule();
-                        obj = ResultCompat.constructor((z1) json.decodeFromJsonElement(y1.a, jsonElement));
+                        obj = ResultCompat.constructor((z1) json.decodeFromJsonElement(BrowserHooks.a, jsonElement));
                     } catch (Throwable th) {
                         Result.Companion companion2 = Result.Companion;
                         obj = ResultCompat.constructor(ResultKt.createFailure(th));

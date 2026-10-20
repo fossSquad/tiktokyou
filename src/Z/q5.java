@@ -3,7 +3,7 @@ package Z;
 import com.windukk.hook.HookMethod;
 import java.util.List;
 
-class q5 extends HookMethod {
+public class q5 extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object[] objArr = hookMethodParam.args;
         if (objArr.length >= 2) {

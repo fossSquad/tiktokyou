@@ -1,9 +1,11 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.windukk.hook.HookMethod;
 import com.windukk.hook.ReplaceMethod;
 
-class a5 extends ReplaceMethod {
+public class FeedHooks extends ReplaceMethod {
     public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         return 2;
     }

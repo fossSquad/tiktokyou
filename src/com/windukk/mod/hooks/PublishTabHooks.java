@@ -1,9 +1,11 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.windukk.hook.HookMethod;
 
-abstract class wc extends HookMethod {
-    protected wc() {
+public abstract class PublishTabHooks extends HookMethod {
+    protected PublishTabHooks() {
     }
 
     public abstract int a(xc xcVar);

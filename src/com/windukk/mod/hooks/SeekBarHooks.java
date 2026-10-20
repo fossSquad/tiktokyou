@@ -1,10 +1,12 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.view.View;
 import com.ss.android.ugc.profile.platform.business.header.assemble.ProfileHeaderBaseComponent;
 import com.windukk.hook.HookMethod;
 
-class be extends HookMethod {
+public class SeekBarHooks extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         Object[] objArr;
         try {

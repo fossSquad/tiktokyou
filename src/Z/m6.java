@@ -2,13 +2,14 @@ package Z;
 
 import android.graphics.Typeface;
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.MandatoryLoginHooks;
 
-class m6 extends HookMethod {
+public class m6 extends HookMethod {
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         int style;
         Typeface typefaceA;
-        ThreadLocal threadLocal = n6.d;
+        ThreadLocal threadLocal = MandatoryLoginHooks.d;
         if (((Boolean) threadLocal.get()).booleanValue()) {
             return;
         }
@@ -27,18 +28,18 @@ class m6 extends HookMethod {
                 } else {
                     style = 0;
                 }
-                typefaceA = n6.a(style, strF);
+                typefaceA = MandatoryLoginHooks.a(style, strF);
                 if (typefaceA != null) {
                     hookMethodParam.args[0] = typefaceA;
                 }
             }
             style = ((Integer) objArr[1]).intValue();
-            typefaceA = n6.a(style, strF);
+            typefaceA = MandatoryLoginHooks.a(style, strF);
             if (typefaceA != null) {
                 hookMethodParam.args[0] = typefaceA;
             }
         } finally {
-            n6.d.set(Boolean.FALSE);
+            MandatoryLoginHooks.d.set(Boolean.FALSE);
         }
     }
 }

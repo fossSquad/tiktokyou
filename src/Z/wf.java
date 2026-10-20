@@ -30,6 +30,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.bytedance.ies.foundation.activity.BaseActivity;
 import com.windukk.mod.Main;
+import com.windukk.mod.hooks.SettingsHooks;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Locale;
@@ -45,7 +46,7 @@ public final class wf {
     public final int d;
     public final int e;
     public final Consumer f;
-    public final og h;
+    public final SettingsHooks h;
     public LinearLayout i;
     public LinearLayout j;
     public vf k;
@@ -76,7 +77,7 @@ public final class wf {
         this.d = i2;
         this.e = i3;
         this.f = consumer;
-        this.h = new og(sfVar);
+        this.h = new SettingsHooks(sfVar);
     }
 
     public final FrameLayout a() {

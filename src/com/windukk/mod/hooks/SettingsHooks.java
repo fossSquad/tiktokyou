@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -9,12 +11,12 @@ import java.io.File;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public final class og {
+public final class SettingsHooks {
     public static final AtomicBoolean b = new AtomicBoolean(false);
     public static final AtomicBoolean c = new AtomicBoolean(false);
     public final sf a;
 
-    public og(sf sfVar) {
+    public SettingsHooks(sf sfVar) {
         this.a = sfVar;
     }
 
@@ -22,7 +24,7 @@ public final class og {
         fcVar.c(new Runnable() {
             @Override
             public final void run() {
-                og.this.e();
+                SettingsHooks.this.e();
             }
         });
     }
@@ -31,7 +33,7 @@ public final class og {
         fcVar.c(new Runnable() {
             @Override
             public final void run() {
-                og.this.f();
+                SettingsHooks.this.f();
             }
         });
     }
@@ -40,7 +42,7 @@ public final class og {
         fcVar.c(new Runnable() {
             @Override
             public final void run() {
-                og.this.b();
+                SettingsHooks.this.b();
             }
         });
     }
@@ -49,7 +51,7 @@ public final class og {
         fcVar.c(new Runnable() {
             @Override
             public final void run() {
-                og.this.a();
+                SettingsHooks.this.a();
             }
         });
     }
@@ -60,7 +62,7 @@ public final class og {
         boolean zA = v1.a(this.a.getApplicationContext(), true, new u1() {
             @Override
             public final void a(boolean z, int i, String str3) {
-                og.this.a(z, i, str3);
+                SettingsHooks.this.a(z, i, str3);
             }
         });
         BaseActivity baseActivity = this.a;
@@ -96,25 +98,25 @@ public final class og {
         linearLayoutA.addView(fcVarA.a("ic_refresh", "Force refresh support list", null, null, new Runnable() {
             @Override
             public final void run() {
-                og.this.a(fcVarA);
+                SettingsHooks.this.a(fcVarA);
             }
         }));
         linearLayoutA.addView(fcVarA.a("ic_refresh", "Clean support list cache", null, null, new Runnable() {
             @Override
             public final void run() {
-                og.this.b(fcVarA);
+                SettingsHooks.this.b(fcVarA);
             }
         }));
         linearLayoutA.addView(fcVarA.a("ic_document", "Export logs (.zip)", null, null, new Runnable() {
             @Override
             public final void run() {
-                og.this.c(fcVarA);
+                SettingsHooks.this.c(fcVarA);
             }
         }));
         linearLayoutA.addView(fcVarA.a("ic_document", "Export heap dump (.hprof)", null, null, new Runnable() {
             @Override
             public final void run() {
-                og.this.d(fcVarA);
+                SettingsHooks.this.d(fcVarA);
             }
         }));
         fcVarA.a().addView(linearLayoutA);
@@ -145,7 +147,7 @@ public final class og {
             new Thread(new Runnable() {
                 @Override
                 public final void run() {
-                    og.this.d();
+                    SettingsHooks.this.d();
                 }
             }, "TTModLogExporter").start();
         }
@@ -157,7 +159,7 @@ public final class og {
             this.a.runOnUiThread(new Runnable() {
                 @Override
                 public final void run() {
-                    og.this.a(p6VarA);
+                    SettingsHooks.this.a(p6VarA);
                 }
             });
             b.set(false);
@@ -169,7 +171,7 @@ public final class og {
                 this.a.runOnUiThread(new Runnable() {
                     @Override
                     public final void run() {
-                        og.this.a(th);
+                        SettingsHooks.this.a(th);
                     }
                 });
             } finally {
@@ -184,7 +186,7 @@ public final class og {
             this.a.runOnUiThread(new Runnable() {
                 @Override
                 public final void run() {
-                    og.this.a(f7VarA);
+                    SettingsHooks.this.a(f7VarA);
                 }
             });
             c.set(false);
@@ -196,7 +198,7 @@ public final class og {
                 this.a.runOnUiThread(new Runnable() {
                     @Override
                     public final void run() {
-                        og.this.b(th);
+                        SettingsHooks.this.b(th);
                     }
                 });
             } finally {
@@ -221,7 +223,7 @@ public final class og {
             new Thread(new Runnable() {
                 @Override
                 public final void run() {
-                    og.this.c();
+                    SettingsHooks.this.c();
                 }
             }, "TTModHeapDumpExporter").start();
         }

@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -10,7 +12,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-public abstract class n6 {
+public abstract class MandatoryLoginHooks {
     public static volatile Typeface a;
     public static volatile String b;
     public static final HashMap c;

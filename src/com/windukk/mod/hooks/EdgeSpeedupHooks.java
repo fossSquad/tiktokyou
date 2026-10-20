@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.R;
 import android.animation.TimeInterpolator;
@@ -19,7 +21,7 @@ import android.view.WindowManager;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-public abstract class kc {
+public abstract class EdgeSpeedupHooks {
     public static void a(jc jcVar, LinearLayout linearLayout, int i, float f) {
         if (jcVar == null || linearLayout == null) {
             return;
@@ -62,7 +64,7 @@ public abstract class kc {
         valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                kc.a(jcVar, ((Float) valueAnimator2.getAnimatedValue()).floatValue());
+                EdgeSpeedupHooks.a(jcVar, ((Float) valueAnimator2.getAnimatedValue()).floatValue());
             }
         });
         valueAnimatorOfFloat.addListener(new ic(jcVar, runnable));
@@ -106,7 +108,7 @@ public abstract class kc {
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public final boolean onTouch(View view2, MotionEvent motionEvent) {
-                return kc.a(jcVar, f, zArr, zArr2, fArr, fArr2, velocityTrackerArr, scaledTouchSlop, view, scaledMinimumFlingVelocity, view2, motionEvent);
+                return EdgeSpeedupHooks.a(jcVar, f, zArr, zArr2, fArr, fArr2, velocityTrackerArr, scaledTouchSlop, view, scaledMinimumFlingVelocity, view2, motionEvent);
             }
         });
     }
@@ -266,7 +268,7 @@ public abstract class kc {
         view.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
             @Override
             public final WindowInsets onApplyWindowInsets(View view2, WindowInsets windowInsets) {
-                return kc.a(paddingLeft, paddingTop, paddingRight, paddingBottom, view2, windowInsets);
+                return EdgeSpeedupHooks.a(paddingLeft, paddingTop, paddingRight, paddingBottom, view2, windowInsets);
             }
         });
         view.requestApplyInsets();

@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import android.app.Activity;
 import android.util.TypedValue;
@@ -7,7 +9,7 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 
-public final class l1 implements View.OnTouchListener {
+public final class BadgeHooks implements View.OnTouchListener {
     public float a;
     public final  int b;
     public final  FrameLayout c;
@@ -15,7 +17,7 @@ public final class l1 implements View.OnTouchListener {
     public final  Activity e;
     public final  FrameLayout f;
 
-    public l1(int i, FrameLayout frameLayout, int i2, Activity activity, FrameLayout frameLayout2) {
+    public BadgeHooks(int i, FrameLayout frameLayout, int i2, Activity activity, FrameLayout frameLayout2) {
         this.b = i;
         this.c = frameLayout;
         this.d = i2;

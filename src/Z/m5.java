@@ -13,6 +13,9 @@ import com.ss.android.ugc.aweme.feed.model.PlayListInfo;
 import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookBridge;
 import com.windukk.hook.ReplaceMethod;
+import com.windukk.mod.hooks.FeedHooks;
+import com.windukk.mod.hooks.FlagSecureHooks;
+import com.windukk.mod.hooks.FontHooks;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -66,7 +69,7 @@ public abstract class m5 {
             HookBridge.hookAllMethods(FeedItemList.class, "setHasAd", new i5());
             HookBridge.hookAllMethods(FeedItemList.class, "isHasAd", new j5());
             HookBridge.hookAllMethods(AwemeRawAd.class, "getRollType", new k5());
-            l5 l5Var = new l5();
+            FlagSecureHooks l5Var = new FlagSecureHooks();
             x4 x4Var = new x4();
             HookBridge.hookAllMethods(AwemeCommerceStruct.class, "getMidRollType", l5Var);
             HookBridge.hookAllMethods(AwemeCommerceStruct.class, "isEnableMidRoll", x4Var);
@@ -78,10 +81,10 @@ public abstract class m5 {
                 }
             }
             HookBridge.hookMethod(ACLCommonShare.class.getMethod("getCode", null), new z4());
-            HookBridge.hookMethod(ACLCommonShare.class.getMethod("getShowType", null), new a5());
+            HookBridge.hookMethod(ACLCommonShare.class.getMethod("getShowType", null), new FeedHooks());
             HookBridge.hookMethod(ACLCommonShare.class.getMethod("getTranscode", null), new b5());
             a();
-            s5.a();
+            FontHooks.a();
         } catch (Exception e) {
             String strDecrypt = "Exception during init";
             Object obj = g7.a;

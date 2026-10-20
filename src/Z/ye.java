@@ -2,6 +2,7 @@ package Z;
 
 import android.telephony.TelephonyManager;
 import com.windukk.hook.HookBridge;
+import com.windukk.mod.hooks.StoryEngagementHooks;
 import java.util.function.Supplier;
 
 public abstract class ye {
@@ -132,7 +133,7 @@ public abstract class ye {
 
     public static void a(String str, Supplier supplier) {
         try {
-            HookBridge.hookAllMethods(TelephonyManager.class, str, new xe(supplier));
+            HookBridge.hookAllMethods(TelephonyManager.class, str, new StoryEngagementHooks(supplier));
         } catch (Throwable th) {
             String strA = d3.a("7qFdb5Hc9DswTP2ETDgiwdgdJssZqtw3yOLKAO8RIB8=", "nNuaIGUoXnv7XZPB", "aes", ve.a("+Vw7Yp0hT3+awytR2pdRWZcDGQJPtYkQkksXvdISIV/M2r1lG1t+twdnbPH3PTgT", "bOZOdkOLzNuwuiD5", "aes", new StringBuilder(), str));
             Object obj = g7.a;

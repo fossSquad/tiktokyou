@@ -1,4 +1,6 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.ss.android.ugc.aweme.feed.model.BaseFeedPageParams;
@@ -9,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-public abstract class s5 {
+public abstract class FontHooks {
     public static final Map a;
     public static Field b;
     public static Field c;

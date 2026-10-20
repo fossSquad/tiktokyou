@@ -2,9 +2,10 @@ package Z;
 
 import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.hook.HookMethod;
+import com.windukk.mod.hooks.FontHooks;
 import java.util.Map;
 
-class r5 extends HookMethod {
+public class r5 extends HookMethod {
     final  boolean a;
 
     public r5(boolean z) {
@@ -16,7 +17,7 @@ class r5 extends HookMethod {
         Object obj;
         Boolean bool;
         Object[] objArr = hookMethodParam.args;
-        Map map = s5.a;
+        Map map = FontHooks.a;
         boolean z = true;
         if (objArr.length >= 2) {
             Object obj2 = objArr[1];
@@ -28,7 +29,7 @@ class r5 extends HookMethod {
         } else {
             aweme = null;
         }
-        if (!this.a && ((obj = hookMethodParam.thisObject) == null || (bool = (Boolean) s5.a.get(obj)) == null || !bool.booleanValue())) {
+        if (!this.a && ((obj = hookMethodParam.thisObject) == null || (bool = (Boolean) FontHooks.a.get(obj)) == null || !bool.booleanValue())) {
             z = false;
         }
         if (aweme == null || !m5.a(aweme, z)) {

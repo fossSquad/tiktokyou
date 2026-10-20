@@ -1,8 +1,10 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.windukk.hook.HookMethod;
 
-class ah extends HookMethod {
+public class FrameMetricsLeakHooks extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
         int iIntValue;
         int iA;

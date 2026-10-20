@@ -1,12 +1,14 @@
-package Z;
+package com.windukk.mod.hooks;
+import Z.*;
+
 
 import com.windukk.hook.HookMethod;
 import java.util.function.Supplier;
 
-class xe extends HookMethod {
+public class StoryEngagementHooks extends HookMethod {
     final  Supplier a;
 
-    public xe(Supplier supplier) {
+    public StoryEngagementHooks(Supplier supplier) {
         this.a = supplier;
     }
 
