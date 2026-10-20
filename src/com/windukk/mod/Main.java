@@ -1,46 +1,46 @@
 package com.windukk.mod;
 
-import Z.FeedHooks;
-import Z.FrameMetricsLeakHooks;
-import Z.SeekBarHooks;
-import Z.PhotoHooks;
-import Z.CleanLinkHooks;
-import Z.e6;
-import Z.SimpleModeHooks;
-import Z.h6;
-import Z.i3;
-import Z.ThemeHooks;
-import Z.j2;
-import Z.j6;
-import Z.RegionHooks;
-import Z.k6;
-import Z.OfflineModeHooks;
-import Z.EdgeSpeedupHooks;
-import Z.BadgeHooks;
-import Z.FlagSecureHooks;
-import Z.l6;
-import Z.m6;
-import Z.SignatureFakerHooks;
+import Z.ac;
+import Z.b0;
+import Z.b3;
+import Z.bd;
+import Z.bg;
+import Z.bk;
+import Z.d7;
+import Z.dd;
+import Z.df;
+import Z.dg;
+import Z.f3;
+import Z.g6;
+import Z.g7;
+import Z.h2;
+import Z.i7;
+import Z.j7;
+import Z.k2;
+import Z.k7;
+import Z.kg;
+import Z.l7;
+import Z.le;
+import Z.m5;
+import Z.m7;
+import Z.mi;
 import Z.n;
-import Z.MandatoryLoginHooks;
-import Z.nb;
-import Z.CommentStickerHooks;
-import Z.SavePhotoHooks;
-import Z.SettingsHooks;
-import Z.pb;
-import Z.q;
-import Z.ConfigHooks;
-import Z.qe;
-import Z.UnlockLimitsHooks;
-import Z.FontHooks;
-import Z.t;
-import Z.ta;
+import Z.n6;
+import Z.o6;
+import Z.of;
+import Z.pj;
+import Z.qd;
+import Z.qg;
+import Z.rf;
 import Z.u2;
-import Z.PublishTabHooks;
-import Z.StoryEngagementHooks;
-import Z.BrowserHooks;
-import Z.SearchHooks;
+import Z.v1;
+import Z.v3;
+import Z.y;
+import Z.yc;
+import Z.yd;
 import Z.ye;
+import Z.z2;
+import Z.zh;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
@@ -64,8 +64,8 @@ public final class Main {
 
     static {
         INSTANCE = new Main();
-        MOD_VERSION = "v4.4";
-        versionCode = 1790876728;
+        MOD_VERSION = "v5.0";
+        versionCode = 1792428213;
     }
 
     public static final Context getApplicationContext() {
@@ -84,27 +84,27 @@ public final class Main {
         mainApplication = application;
         appContext = context;
         File filesDir = context.getFilesDir();
-        h6.b(FilesKt.resolve(filesDir, "tiktokyoulogs"));
-        u2.a((ContextWrapper) application);
-        u2.a((Context) application);
-        // CommonUtils.init(context);
+        g7.b(FilesKt.resolve(filesDir, "tiktokyoulogs"));
+        f3.a((ContextWrapper) application);
+        f3.a((Context) application);
+        CommonUtils.init(context);
         try {
             HookBridge.disableHiddenApiRestrictions();
         } catch (Throwable th) {
         }
-        SignatureFakerHooks.a(new Runnable() {
+        bg.a(new Runnable() {
             @Override
             public final void run() {
                 Main.verifySignature(context);
             }
         });
-        ta.a(context);
-        m6 m6Var = l6.a;
-        int i = ye.a;
+        ac.a(context);
+        l7 l7Var = k7.a;
+        int i = qg.a;
         try {
-            ArrayList arrayListA = k6.a(context);
+            ArrayList arrayListA = j7.a(context);
             if (!arrayListA.isEmpty()) {
-                String strA = k6.a();
+                String strA = j7.a();
                 int size = arrayListA.size();
                 int i2 = 0;
                 while (true) {
@@ -114,9 +114,9 @@ public final class Main {
                     }
                     Object obj = arrayListA.get(i2);
                     i2++;
-                    j6 j6Var = (j6) obj;
-                    if (j6Var.a.equals(strA)) {
-                        componentName = j6Var.b;
+                    i7 i7Var = (i7) obj;
+                    if (i7Var.a.equals(strA)) {
+                        componentName = i7Var.b;
                         break;
                     }
                 }
@@ -127,64 +127,64 @@ public final class Main {
                     while (i3 < size2) {
                         Object obj2 = arrayListA.get(i3);
                         i3++;
-                        j6 j6Var2 = (j6) obj2;
-                        if (j6Var2.a.equals("default")) {
-                            componentName = j6Var2.b;
+                        i7 i7Var2 = (i7) obj2;
+                        if (i7Var2.a.equals("default")) {
+                            componentName = i7Var2.b;
                             break;
                         }
                     }
                 }
                 if (componentName != null && context.getPackageManager().getComponentEnabledSetting(componentName) != 1) {
-                    k6.a(context, strA);
+                    j7.a(context, strA);
                 }
             }
         } catch (Throwable th2) {
-            h6.a(6, "Reconcile failed", th2);
+            g7.a(6, "Reconcile failed", th2);
         }
         try {
-            FrameMetricsLeakHooks.a();
-            SettingsHooks.c();
-            PublishTabHooks.a();
-            CleanLinkHooks.a();
-            SimpleModeHooks.a();
+            o6.a();
+            mi.c();
+            le.a();
+            k2.a();
+            pj.g();
             Main main = INSTANCE;
             main.getClass();
-            SignatureFakerHooks.f();
+            bg.f();
             n.a();
-            MandatoryLoginHooks.a();
-            BadgeHooks.f();
-            CommentStickerHooks.a();
-            ConfigHooks.a();
-            RegionHooks.a();
-            FeedHooks.d();
-            EdgeSpeedupHooks.a();
-            StoryEngagementHooks.a();
-            SearchHooks.e();
-            i3.d();
-            PhotoHooks.i();
-            j2.a();
-            SavePhotoHooks.a();
-            SeekBarHooks.a();
-            UnlockLimitsHooks.d();
-            OfflineModeHooks.a();
-            q.a();
-            e6.a();
-            FontHooks.a();
-            t.a();
-            ThemeHooks.b();
-            FlagSecureHooks.a();
-            BrowserHooks.c();
+            m7.a();
+            v1.h();
+            z2.a();
+            b3.a();
+            ye.a();
+            m5.b();
+            yd.a();
+            kg.a();
+            of.e();
+            v3.d();
+            qd.i();
+            u2.a();
+            df.a();
+            rf.a();
+            bk.d();
+            yc.a();
+            y.a();
+            d7.a();
+            n6.a();
+            b0.a();
+            zh.b();
+            g6.a();
+            h2.c();
         } catch (Exception e2) {
-            h6.a(6, h6.a("Exception during hooks setup", new Object[0]), e2);
+            g7.a(6, g7.a("Exception during hooks setup", new Object[0]), e2);
         }
-        qe qeVar = qe.a;
-        ta.a.getClass();
-        if (!ta.d().B) {
-            qe.a.getClass();
-            qe.a(0);
+        dg dgVar = dg.a;
+        ac.a.getClass();
+        if (!ac.e().H) {
+            dg.a.getClass();
+            dg.a(0);
         }
-        pb.a.getClass();
-        pb.a(false, (nb) null);
+        dd.a.getClass();
+        dd.a(false, (bd) null);
     }
 
     public static final int dp(float f) {
@@ -192,6 +192,6 @@ public final class Main {
     }
 
     public static final void verifySignature(Context context) {
-        // Disabled: bypass native mod author signature check for repacked builds
+        CommonUtils.verifySignatureNative(context);
     }
 }

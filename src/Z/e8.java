@@ -1,5 +1,5 @@
 package Z;
 
 public abstract class e8 {
-    public static final p8 a = new p8(new w6("IM_CHAT_LIST_IMPL_CLASS", "com.ss.android.ugc.aweme.im.chatlist.impl.IMChatListImpl"), "IM_CHAT_LIST_PIN_GUARD", new String[]{"LJJIJIIJI", "LJJIJIIJIL"});
+    public static final v9 a = new v9(new w7("COMMENT_TIME_SORT_FEAT_EXP_CLASS", "com.ss.android.ugc.aweme.experiment.CommentTimeSortFeatExp"), "COMMENT_TIME_SORT_ENABLED", new String[]{"LIZ"});
 }

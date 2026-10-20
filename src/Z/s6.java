@@ -1,12 +1,23 @@
 package Z;
 
-public abstract class s6 {
-    public static final p8 a;
-    public static final z7 b;
+import com.windukk.hook.HookMethod;
+import ni.shikatu.kotlin.Metadata;
+import ni.shikatu.kotlin.Unit;
+import ni.shikatu.kotlin.jvm.functions.Function1;
 
-    static {
-        w6 w6Var = new w6("BIO_USER_WEBSITE_COMPONENT_CLASS", "com.ss.android.ugc.profile.business.ur.platform.business.BioUserWebSiteComponent");
-        a = new p8(w6Var, "BIO_USER_WEBSITE_OPEN", new String[]{"ls", "Pq", "zp", "hn"});
-        b = new z7(w6Var, "BIO_USER_WEBSITE_DATA", new String[]{"LLLI", "LLJJL"});
+@Metadata(d1 = {"\u0000\u0017\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000*\u0001\u0000\b\n\u0018\u00002\u00020\u0001J\u0010\u0010\u0002\u001a\u00020\u00032\u0006\u0010\u0004\u001a\u00020\u0005H\u0014¨\u0006\u0006"}, d2 = {"ni/shikatu/extensions/HookUtilsKt$after$1", "Lcom/windukk/hook/HookMethod;", "afterHookedMethod", "", "param", "Lcom/windukk/hook/HookMethod$HookMethodParam;", "ttmod:mod_release"}, k = 1, mv = {2, 4, 0}, xi = 176)
+public final class s6 extends HookMethod {
+    final  Function1<? super HookMethod.HookMethodParam, ?> a;
+
+    public s6(Function1<? super HookMethod.HookMethodParam, Unit> function1) {
+        this.a = function1;
+    }
+
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        try {
+            this.a.invoke(hookMethodParam);
+        } catch (Throwable th) {
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
+        }
     }
 }

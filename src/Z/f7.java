@@ -1,12 +1,13 @@
 package Z;
 
-public abstract class f7 {
-    public static final w6 a;
-    public static final p8 b;
+public final class f7 {
+    public final String a;
+    public final long b;
+    public final int c;
 
-    static {
-        w6 w6Var = new w6("COMMENT_TRANSLATION_CAN_SHOW", "X.08vu");
-        a = w6Var;
-        b = new p8(w6Var, "CAN_SHOW", new String[]{"LIZJ"});
+    public f7(String str, long j, int i) {
+        this.a = str;
+        this.b = j;
+        this.c = i;
     }
 }

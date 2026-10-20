@@ -83,6 +83,7 @@ sourceSets {
                 "Z/**",
                 "com/windukk/mod/**",
                 "androidx/**",
+                "com/ss/android/ugc/aweme/friendstab/repo/**",
                 "com/bytedance/ies/foundation/activity/BaseActivity.java",
             )
         }

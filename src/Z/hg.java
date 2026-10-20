@@ -1,18 +1,22 @@
 package Z;
 
+import com.ss.android.ugc.aweme.story.feed.immersive.digg.ImmersiveStoryDiggAssem;
 import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
 
 class hg extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (ta.a().f()) {
-            Object obj = hookMethodParam.args[0];
-            if (!(obj instanceof Integer) || (iA = ThemeHooks.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                return;
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        try {
+            Object[] objArr = hookMethodParam.args;
+            if (objArr != null && objArr.length >= 3) {
+                Object obj = objArr[1];
+                if (obj instanceof ImmersiveStoryDiggAssem) {
+                    kg.a((ImmersiveStoryDiggAssem) obj, objArr[2]);
+                }
             }
-            hookMethodParam.args[0] = Integer.valueOf(iA);
+        } catch (Throwable th) {
+            String strDecrypt = "Story digg count update failed";
+            Object obj2 = g7.a;
+            g7.a(6, String.valueOf(strDecrypt), th);
         }
     }
 }

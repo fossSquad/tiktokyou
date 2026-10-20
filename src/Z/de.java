@@ -1,18 +1,15 @@
 package Z;
 
-import android.graphics.Outline;
-import android.view.View;
-import android.view.ViewOutlineProvider;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
-public final class de extends ViewOutlineProvider {
-    public final  le a;
+public final class de extends LayerDrawable {
+    public final Drawable a;
+    public final ce b;
 
-    public de(le leVar) {
-        this.a = leVar;
-    }
-
-    @Override
-    public final void getOutline(View view, Outline outline) {
-        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), this.a.a(4.0f));
+    public de(Drawable drawable, ce ceVar) {
+        super(drawable != null ? new Drawable[]{drawable, ceVar} : new Drawable[]{ceVar});
+        this.a = drawable;
+        this.b = ceVar;
     }
 }

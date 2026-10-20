@@ -1,15 +1,19 @@
 package Z;
 
-import android.content.res.ColorStateList;
 import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
 
 class qf extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        ColorStateList colorStateList;
-        ColorStateList colorStateListA;
-        if (ta.a().f() && (colorStateListA = ThemeHooks.a((colorStateList = (ColorStateList) hookMethodParam.getResult()))) != colorStateList) {
-            hookMethodParam.setResult(colorStateListA);
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        Object[] objArr;
+        if (ac.a() == null || !ac.e().p || (objArr = hookMethodParam.args) == null || objArr.length == 0) {
+            return;
+        }
+        Object obj = objArr[0];
+        if (obj instanceof Number) {
+            int iIntValue = ((Number) obj).intValue();
+            if (iIntValue == 3 || iIntValue == 4) {
+                hookMethodParam.args[0] = 0;
+            }
         }
     }
 }

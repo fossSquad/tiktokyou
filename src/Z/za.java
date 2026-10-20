@@ -1,19 +1,14 @@
 package Z;
-import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
-class za extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object result = hookMethodParam.getResult();
-        if (result instanceof String) {
-            String str = (String) result;
-            CharSequence charSequenceB = BadgeHooks.b((CharSequence) str);
-            String string = charSequenceB != null ? charSequenceB.toString() : null;
-            if (string == null || string.equals(str)) {
-                return;
-            }
-            hookMethodParam.setResult(string);
-            hookMethodParam.method.getName();
-        }
+public abstract class za {
+    public static final w7 a;
+    public static final v9 b;
+    public static final v9 c;
+
+    static {
+        w7 w7Var = new w7("SETTINGS_ITEM_COMPARATOR_CLASS", "Y.AComparatorS42S0000000_39_I1");
+        a = w7Var;
+        b = new v9(w7Var, "SETTINGS_ITEM_COMPARATOR_COMPARE", new String[]{"compare"});
+        c = new v9(w7Var, "SETTINGS_ITEM_COMPARATOR_COMPARE_SETTINGS_ITEMS", new String[]{"compare$10"});
     }
 }

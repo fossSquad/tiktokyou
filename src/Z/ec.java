@@ -1,94 +1,113 @@
 package Z;
 
-import com.ss.android.ugc.aweme.feed.model.Aweme;
-import com.windukk.hook.HookMethod;
-import Z.EdgeSpeedupHooks;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.windukk.mod.Main;
 
-class ec extends HookMethod {
+public final class ec {
+    public final LinearLayout a;
+    public final EditText b;
+    public TextView c;
+    public ImageView d;
+    public TextView e;
+    public LinearLayout f;
+    public final  fc g;
 
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String str;
-        if (Boolean.TRUE.equals(EdgeSpeedupHooks.l.get())) {
-            return;
-        }
-        Object[] objArr = hookMethodParam.args;
-        if (objArr == null || objArr.length <= 3) {
-            str = null;
-        } else {
-            Object obj = objArr[3];
-            if (obj instanceof String) {
-                str = (String) obj;
-            } else {
-                str = null;
+    public ec(fc fcVar) {
+        this.g = fcVar;
+        LinearLayout linearLayout = new LinearLayout(fcVar.a);
+        this.a = linearLayout;
+        linearLayout.setOrientation(0);
+        linearLayout.setGravity(16);
+        int i = fcVar.g;
+        float fA = Main.dp(16.0f);
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColor(i);
+        gradientDrawable.setCornerRadius(fA);
+        linearLayout.setBackground(gradientDrawable);
+        linearLayout.setPadding(Main.dp(16.0f), 0, Main.dp(16.0f), 0);
+        linearLayout.setMinimumHeight(Main.dp(48.0f));
+        fc.a(linearLayout, 12);
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
+        EditText editText = new EditText(fcVar.a);
+        this.b = editText;
+        editText.setBackground(null);
+        editText.setPadding(0, Main.dp(14.0f), 0, Main.dp(14.0f));
+        editText.setTextSize(2, 16.0f);
+        editText.setTypeface(fc.f());
+        editText.setTextColor(fcVar.h);
+        editText.setHintTextColor(fcVar.j);
+        editText.setSingleLine(true);
+        editText.setIncludeFontPadding(false);
+        editText.setInputType(1);
+        fcVar.a(editText);
+        linearLayout.addView(editText, fc.h());
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                ec.this.a(view);
             }
-        }
-        if (EdgeSpeedupHooks.a(str)) {
-            return;
-        }
-        if ((!"long_press".equals(str) && !"click_share_button".equals(str) && !"swipe_up_lock_persist".equals(str)) || "long_press".equals(str) || "click_share_button".equals(str)) {
-            return;
-        }
-        float f = EdgeSpeedupHooks.f;
-        EdgeSpeedupHooks.b(f);
+        });
     }
 
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr;
-        String str;
-        Aweme aweme;
-        if (Boolean.TRUE.equals(EdgeSpeedupHooks.l.get()) || (objArr = hookMethodParam.args) == null || objArr.length < 4) {
-            return;
+    public final  void a(View view) {
+        a();
+    }
+
+    public final LinearLayout b() {
+        if (this.f == null) {
+            LinearLayout linearLayoutA = this.g.a(12);
+            this.f = linearLayoutA;
+            linearLayoutA.addView(this.a);
+            fc fcVar = this.g;
+            TextView textViewA = fcVar.a(14.0f, false, fcVar.e);
+            textViewA.setGravity(17);
+            textViewA.setText(" ");
+            this.e = textViewA;
+            textViewA.setVisibility(4);
+            LinearLayout linearLayout = this.f;
+            TextView textView = this.e;
+            this.g.getClass();
+            linearLayout.addView(textView, new LinearLayout.LayoutParams(-1, -2));
         }
-        Object obj = objArr[0];
-        if (obj instanceof Number) {
-            float fFloatValue = ((Number) obj).floatValue();
-            if (Float.isNaN(fFloatValue) || fFloatValue < 0.1f || fFloatValue > 8.0f) {
-                return;
+        return this.f;
+    }
+
+    public final void a(String str, final Runnable runnable) {
+        if (this.d == null) {
+            fc fcVar = this.g;
+            ImageView imageViewA = fcVar.a(fcVar.k, str);
+            this.d = imageViewA;
+            imageViewA.setPadding(0, 0, 0, 0);
+            this.a.addView(this.d, new LinearLayout.LayoutParams(Main.dp(20.0f), Main.dp(20.0f)));
+        }
+        BitmapDrawable bitmapDrawableA = this.g.a(str);
+        if (bitmapDrawableA != null) {
+            bitmapDrawableA.setColorFilter(this.g.k, PorterDuff.Mode.SRC_IN);
+        }
+        this.d.setImageDrawable(bitmapDrawableA);
+        this.d.setOnClickListener(runnable == null ? null : new View.OnClickListener() {
+            @Override
+            public final void onClick(View view) {
+                runnable.run();
             }
-            Object[] objArr2 = hookMethodParam.args;
-            String aid = null;
-            if (objArr2 == null || objArr2.length <= 3) {
-                str = null;
-            } else {
-                Object obj2 = objArr2[3];
-                if (obj2 instanceof String) {
-                    str = (String) obj2;
-                } else {
-                    str = null;
-                }
-            }
-            if (EdgeSpeedupHooks.a(str)) {
-                Object[] objArr3 = hookMethodParam.args;
-                if (objArr3 == null || objArr3.length <= 1) {
-                    aweme = null;
-                } else {
-                    Object obj3 = objArr3[1];
-                    if (obj3 instanceof Aweme) {
-                        aweme = (Aweme) obj3;
-                    } else {
-                        aweme = null;
-                    }
-                }
-                if (aweme != null) {
-                    try {
-                        aid = aweme.getAid();
-                    } catch (Throwable th) {
-                    }
-                }
-                EdgeSpeedupHooks.h = aid;
-                EdgeSpeedupHooks.i = fFloatValue;
-                EdgeSpeedupHooks.j = System.currentTimeMillis();
-                return;
-            }
-            if ("long_press".equals(str) || "click_share_button".equals(str)) {
-                if (EdgeSpeedupHooks.h != null || EdgeSpeedupHooks.j != 0) {
-                    EdgeSpeedupHooks.h = null;
-                    EdgeSpeedupHooks.i = 1.0f;
-                    EdgeSpeedupHooks.j = 0L;
-                }
-                EdgeSpeedupHooks.f = fFloatValue;
-                EdgeSpeedupHooks.b(fFloatValue);
-            }
+        });
+    }
+
+    public final void a() {
+        this.b.requestFocus();
+        EditText editText = this.b;
+        editText.setSelection(editText.getText().length());
+        InputMethodManager inputMethodManager = (InputMethodManager) this.g.a.getSystemService("input_method");
+        if (inputMethodManager != null) {
+            inputMethodManager.showSoftInput(this.b, 1);
         }
     }
 }

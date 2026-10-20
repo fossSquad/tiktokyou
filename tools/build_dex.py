@@ -88,23 +88,15 @@ def run_d8(args, name, inputs, libs, out_dir) -> pathlib.Path:
 
 
 def build_stable(args, lib_jar: pathlib.Path, ni_jar: pathlib.Path, hap_jar: pathlib.Path) -> pathlib.Path:
-    classes = args.out / "stable-classes"
-    if classes.exists():
-        shutil.rmtree(classes)
-    classes.mkdir(parents=True)
+    """Dex the support jar directly.
 
-    sources = []
-    for root in SUPPORT_ROOTS:
-        sources += sorted(str(p) for p in (PROJECT / root).rglob("*.java"))
-    cp = [str(args.android_jar), str(args.host_jar), str(lib_jar), str(ni_jar), str(hap_jar)]
-    print(f"stable javac: {len(sources)} files")
-    run([args.javac, "-nowarn", "-encoding", "UTF-8",
-         "-source", "21", "-target", "21",
-         "-cp", ":".join(cp), "-d", str(classes)] + sources)
-
-    inputs = [str(p) for p in classes.rglob("*.class")
-              if "/dalvik/system/" not in str(p)]
-    return run_d8(args, "stable", inputs,
+    build/lib/hook.jar is produced by the Gradle supportJar task and already
+    contains the stable layer compiled from src/ plus the vendored residue for
+    classes whose jadx sources do not compile. Recompiling those sources here
+    would fail, so the jar itself is the stable input.
+    """
+    print(f"stable jar: {lib_jar}")
+    return run_d8(args, "stable", [str(lib_jar)],
                   [str(args.android_jar), str(args.host_jar)], args.out)
 
 

@@ -1,34 +1,28 @@
 package Z;
 
-import android.app.Dialog;
+import android.text.Spanned;
 import android.widget.TextView;
-import ni.shikatu.kotlin.jvm.internal.Ref;
 
 public final class oe implements Runnable {
-    public final  Dialog a;
-    public final  Ref.IntRef b;
-    public final  TextView c;
-    public final  qe d;
-    public final  int e;
+    public final  TextView a;
 
-    public oe(Dialog dialog, Ref.IntRef intRef, TextView textView, qe qeVar, int i) {
-        this.a = dialog;
-        this.b = intRef;
-        this.c = textView;
-        this.d = qeVar;
-        this.e = i;
+    public oe(TextView textView) {
+        this.a = textView;
     }
 
     @Override
     public final void run() {
-        Ref.IntRef intRef;
-        int i;
-        if (this.a.isShowing() && (i = (intRef = this.b).element) > 0) {
-            intRef.element = i - 1;
-            qe.a(intRef, this.c, this.d, this.e);
-            if (this.b.element > 0) {
-                qe.b.postDelayed(this, 1000L);
+        if (ac.a() != null && ac.e().x) {
+            CharSequence text = this.a.getText();
+            if (text instanceof Spanned) {
+                Spanned spanned = (Spanned) text;
+                if (((qe[]) spanned.getSpans(0, spanned.length(), qe.class)).length > 0) {
+                    this.a.invalidate();
+                    this.a.postDelayed(this, 40L);
+                    return;
+                }
             }
         }
+        re.b.remove(this.a);
     }
 }

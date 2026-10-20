@@ -1,9 +1,14 @@
 package Z;
 
 public abstract class q8 {
-    public static final z7 a = new z7(new w6("MULTI_IMAGE_URL_INFO", "com.ss.android.ugc.aweme.feed.model.MultiImageUrlInfo"), "IMAGE", new String[]{"image"});
+    public static final e9 a;
+    public static final e9 b;
+    public static final e9 c;
 
     static {
-        oa.a("field", "NAME", (String[]) new String[]{"name"}.clone());
+        w7 w7Var = new w7("DOWNLOAD_BASE", "X.1IG0");
+        a = new e9(w7Var, "AWEME", new String[]{"LJFF"});
+        b = new e9(w7Var, "ENTER_FROM", new String[]{"LJI"});
+        c = new e9(w7Var, "DOWNLOAD_TYPE", new String[]{"LIZJ"});
     }
 }

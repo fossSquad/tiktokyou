@@ -14,7 +14,9 @@ public abstract class i {
 
     public static boolean f3a;
 
-    public static synchronized void a(Context context, ClassLoader classLoader, List list) throws Exception {
+    public static synchronized void a(Context context, ClassLoader classLoader, List list) {
+        Method declaredMethod;
+        Object[] objArr;
         if (f3a) {
             throw new IllegalStateException("Dynamic dex was already prepended");
         }
@@ -28,63 +30,54 @@ public abstract class i {
         if (!file.isDirectory() && !file.mkdirs()) {
             throw new IllegalStateException("Cannot create dynamic oat directory");
         }
-
-        Field pathListField = null;
-        for (Class<?> superclass = BaseDexClassLoader.class; superclass != null; superclass = superclass.getSuperclass()) {
+        String strDecrypt = "pathList";
+        for (Class superclass = BaseDexClassLoader.class; superclass != null; superclass = superclass.getSuperclass()) {
             try {
-                pathListField = superclass.getDeclaredField("pathList");
-                break;
-            } catch (NoSuchFieldException ignored) {
+                Field declaredField = superclass.getDeclaredField(strDecrypt);
+                declaredField.setAccessible(true);
+                Object obj = declaredField.get(classLoader);
+                Class<?> cls = obj.getClass();
+                String strDecrypt2 = "dexElements";
+                for (Class<?> superclass2 = cls; superclass2 != null; superclass2 = superclass2.getSuperclass()) {
+                    try {
+                        Field declaredField2 = superclass2.getDeclaredField(strDecrypt2);
+                        declaredField2.setAccessible(true);
+                        ArrayList arrayList = new ArrayList();
+                        int i = 0;
+                        try {
+                            declaredMethod = obj.getClass().getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class, Boolean.TYPE);
+                            objArr = new Object[]{new ArrayList(list), file, arrayList, classLoader, Boolean.FALSE};
+                        } catch (NoSuchMethodException e) {
+                            declaredMethod = obj.getClass().getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class);
+                            objArr = new Object[]{new ArrayList(list), file, arrayList, classLoader};
+                        }
+                        declaredMethod.setAccessible(true);
+                        Object[] objArr2 = (Object[]) declaredMethod.invoke(null, objArr);
+                        if (!arrayList.isEmpty()) {
+                            IllegalStateException illegalStateException = new IllegalStateException("Cannot create dynamic dex elements");
+                            int size = arrayList.size();
+                            while (i < size) {
+                                Object obj2 = arrayList.get(i);
+                                i++;
+                                illegalStateException.addSuppressed((IOException) obj2);
+                            }
+                            throw illegalStateException;
+                        }
+                        Object[] objArr3 = (Object[]) declaredField2.get(obj);
+                        if (objArr2.length != list.size()) {
+                            throw new IllegalStateException("Expected " + list.size() + " dynamic dex elements, got " + objArr2.length);
+                        }
+                        Object[] objArrCopyOf = Arrays.copyOf(objArr2, objArr2.length + objArr3.length);
+                        System.arraycopy(objArr3, 0, objArrCopyOf, objArr2.length, objArr3.length);
+                        declaredField2.set(obj, objArrCopyOf);
+                        f3a = true;
+                    } catch (NoSuchFieldException e2) {
+                    }
+                }
+                throw new NoSuchFieldException(cls.getName() + "." + strDecrypt2);
+            } catch (NoSuchFieldException e3) {
             }
         }
-        if (pathListField == null) {
-            throw new NoSuchFieldException(BaseDexClassLoader.class.getName() + ".pathList");
-        }
-        pathListField.setAccessible(true);
-        Object obj = pathListField.get(classLoader);
-        Class<?> cls = obj.getClass();
-
-        Field dexElementsField = null;
-        for (Class<?> superclass2 = cls; superclass2 != null; superclass2 = superclass2.getSuperclass()) {
-            try {
-                dexElementsField = superclass2.getDeclaredField("dexElements");
-                break;
-            } catch (NoSuchFieldException ignored) {
-            }
-        }
-        if (dexElementsField == null) {
-            throw new NoSuchFieldException(cls.getName() + ".dexElements");
-        }
-        dexElementsField.setAccessible(true);
-
-        ArrayList<IOException> arrayList = new ArrayList<>();
-        Method declaredMethod;
-        Object[] objArr;
-        try {
-            declaredMethod = obj.getClass().getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class, Boolean.TYPE);
-            objArr = new Object[]{new ArrayList(list), file, arrayList, classLoader, Boolean.FALSE};
-        } catch (NoSuchMethodException e) {
-            declaredMethod = obj.getClass().getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class);
-            objArr = new Object[]{new ArrayList(list), file, arrayList, classLoader};
-        }
-        declaredMethod.setAccessible(true);
-        Object[] objArr2 = (Object[]) declaredMethod.invoke(null, objArr);
-        if (!arrayList.isEmpty()) {
-            IllegalStateException illegalStateException = new IllegalStateException("Cannot create dynamic dex elements");
-            for (IOException ioe : arrayList) {
-                illegalStateException.addSuppressed(ioe);
-            }
-            throw illegalStateException;
-        }
-
-        Object[] objArr3 = (Object[]) dexElementsField.get(obj);
-        if (objArr2.length != list.size()) {
-            throw new IllegalStateException("Expected " + list.size() + " dynamic dex elements, got " + objArr2.length);
-        }
-        Object[] objArrCopyOf = Arrays.copyOf(objArr2, objArr2.length + objArr3.length);
-        System.arraycopy(objArr3, 0, objArrCopyOf, objArr2.length, objArr3.length);
-        dexElementsField.set(obj, objArrCopyOf);
-        f3a = true;
+        throw new NoSuchFieldException(BaseDexClassLoader.class.getName() + "." + strDecrypt);
     }
 }
-

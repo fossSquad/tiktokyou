@@ -1,16 +1,9 @@
 package Z;
 
-import com.ss.android.ugc.aweme.inbox.skylight.InboxSkylightWidgetV2Injector;
-import com.windukk.hook.HookBridge;
+import com.windukk.hook.HookMethod;
 
-public abstract class e6 {
-    public static void a() {
-        try {
-            HookBridge.hookAllMethods(InboxSkylightWidgetV2Injector.class, "enable", new d6());
-        } catch (Exception e) {
-            String str = "InboxHooks error" + e;
-            Object obj = h6.a;
-            h6.a(6, String.valueOf(str), (Throwable) null);
-        }
+class e6 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.args[0] = Integer.valueOf(((Integer) hookMethodParam.args[0]).intValue() & (-8193));
     }
 }

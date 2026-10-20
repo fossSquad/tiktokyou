@@ -23,12 +23,7 @@ public abstract class HookMethod extends HookCallback {
             if (th == null) {
                 return this.result;
             }
-            return HookMethodParam.<RuntimeException>sneakyThrow(th);
-        }
-
-        @SuppressWarnings("unchecked")
-        private static <T extends Throwable> Object sneakyThrow(Throwable th) throws T {
-            throw (T) th;
+            throw th;
         }
 
         public Throwable getThrowable() {

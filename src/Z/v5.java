@@ -1,32 +1,25 @@
 package Z;
 
-import java.security.MessageDigest;
-import java.util.Arrays;
+import android.text.Editable;
+import android.text.TextWatcher;
 
-public abstract class v5 {
-    public static final char[] a = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    public static final char[] b = {'S', 'H', 'A', '-', '2', '5', '6'};
+public final class v5 implements TextWatcher {
+    public final Runnable a;
 
-    public static String a(byte[] bArr) {
-        if (bArr == null) {
-            bArr = new byte[0];
-        }
-        try {
-            byte[] bArrDigest = MessageDigest.getInstance(new String(b)).digest(bArr);
-            if (bArrDigest != null && bArrDigest.length != 0) {
-                char[] cArr = new char[bArrDigest.length * 2];
-                for (int i = 0; i < bArrDigest.length; i++) {
-                    byte b2 = bArrDigest[i];
-                    int i2 = i * 2;
-                    char[] cArr2 = a;
-                    cArr[i2] = cArr2[(b2 & 255) >>> 4];
-                    cArr[i2 + 1] = cArr2[b2 & 15];
-                }
-                return new String(cArr);
-            }
-            return "";
-        } catch (Throwable th) {
-            return Integer.toHexString(Arrays.hashCode(bArr));
-        }
+    public v5(Runnable runnable) {
+        this.a = runnable;
+    }
+
+    @Override
+    public final void afterTextChanged(Editable editable) {
+        this.a.run();
+    }
+
+    @Override
+    public final void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+    }
+
+    @Override
+    public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
     }
 }

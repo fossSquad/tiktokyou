@@ -1,15 +1,20 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
-import Z.FeedHooks;
-import java.util.List;
 
 class xg extends HookMethod {
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        Object obj = objArr[0];
-        if (obj instanceof List) {
-            objArr[0] = FeedHooks.a((List) obj);
+        int iIntValue;
+        int iA;
+        if (ac.a().g()) {
+            Object[] objArr = hookMethodParam.args;
+            if (objArr.length > 0) {
+                Object obj = objArr[0];
+                if (!(obj instanceof Integer) || (iA = zh.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
+                    return;
+                }
+                hookMethodParam.args[0] = Integer.valueOf(iA);
+            }
         }
     }
 }

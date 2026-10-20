@@ -62,17 +62,20 @@ def run(cmd):
     return subprocess.run([str(c) for c in cmd], check=True, text=True)
 
 
-def pick_dexes(apk: pathlib.Path):
+def pick_dexes(apk: pathlib.Path, explicit: str | None = None):
     picked = []
     with zipfile.ZipFile(apk) as z:
-        names = [n for n in z.namelist()
-                 if n.startswith("classes") and n.endswith(".dex")]
-        names.sort()
+        if explicit:
+            names = [n.strip() for n in explicit.split(",") if n.strip()]
+        else:
+            names = [n for n in z.namelist()
+                     if n.startswith("classes") and n.endswith(".dex")]
+        names.sort(key=lambda s: (len(s), s))
         for n in names:
             data = z.read(n)
             hits = [m.decode(errors="replace") for m in MARKERS if m in data]
-            if hits:
-                picked.append((n, hits))
+            if explicit or hits:
+                picked.append((n, hits or ["explicit"]))
     return picked
 
 
@@ -84,6 +87,8 @@ def main() -> int:
     ap.add_argument("--raw-dir", type=pathlib.Path,
                     default=PROJECT / "build" / "support-jar")
     ap.add_argument("--dex2jar", default=None)
+    ap.add_argument("--dexes", default=None,
+                    help="Comma-separated classes*.dex list (skips marker scan)")
     args = ap.parse_args()
 
     if not args.apk.is_file():
@@ -99,7 +104,7 @@ def main() -> int:
         shutil.rmtree(raw)
     raw.mkdir(parents=True)
 
-    picked = pick_dexes(args.apk)
+    picked = pick_dexes(args.apk, args.dexes)
     if not picked:
         print("ERROR: no mod dexes found in the APK")
         return 1

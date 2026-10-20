@@ -1,12 +1,5 @@
 package Z;
 
-class hb extends ib {
-    public hb() {
-        super();
-    }
-
-    @Override
-    public int a(jb jbVar) {
-        return jbVar.c;
-    }
+public abstract class hb {
+    public static final v9 a = new v9(new w7("STICKER_API_FACTORY", "X.0BmR"), "GET", new String[]{"LIZIZ"});
 }

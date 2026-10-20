@@ -1,45 +1,39 @@
 package Z;
 
-import android.graphics.Typeface;
+import com.ss.android.ugc.aweme.feed.model.Aweme;
 import com.windukk.hook.HookMethod;
-import Z.FontHooks;
+import java.util.Map;
 
 class r5 extends HookMethod {
+    final  boolean a;
+
+    public r5(boolean z) {
+        this.a = z;
+    }
 
     public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int style;
-        Typeface typefaceA;
-        ThreadLocal threadLocal = FontHooks.d;
-        if (((Boolean) threadLocal.get()).booleanValue()) {
+        Aweme aweme;
+        Object obj;
+        Boolean bool;
+        Object[] objArr = hookMethodParam.args;
+        Map map = s5.a;
+        boolean z = true;
+        if (objArr.length >= 2) {
+            Object obj2 = objArr[1];
+            if (obj2 instanceof Aweme) {
+                aweme = (Aweme) obj2;
+            } else {
+                aweme = null;
+            }
+        } else {
+            aweme = null;
+        }
+        if (!this.a && ((obj = hookMethodParam.thisObject) == null || (bool = (Boolean) s5.a.get(obj)) == null || !bool.booleanValue())) {
+            z = false;
+        }
+        if (aweme == null || !m5.a(aweme, z)) {
             return;
         }
-        ta.a().getClass();
-        String strE = ta.e();
-        if ("default".equals(strE)) {
-            return;
-        }
-        threadLocal.set(Boolean.TRUE);
-        try {
-            Object[] objArr = hookMethodParam.args;
-            Typeface typeface = (Typeface) objArr[0];
-            if (objArr.length < 2) {
-                if (typeface != null) {
-                    style = typeface.getStyle();
-                } else {
-                    style = 0;
-                }
-                typefaceA = FontHooks.a(style, strE);
-                if (typefaceA != null) {
-                    hookMethodParam.args[0] = typefaceA;
-                }
-            }
-            style = ((Integer) objArr[1]).intValue();
-            typefaceA = FontHooks.a(style, strE);
-            if (typefaceA != null) {
-                hookMethodParam.args[0] = typefaceA;
-            }
-        } finally {
-            FontHooks.d.set(Boolean.FALSE);
-        }
+        hookMethodParam.setResult((Object) null);
     }
 }

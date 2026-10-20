@@ -11,8 +11,10 @@ public final class m {
     public boolean e;
     public boolean f;
     public boolean g;
-    public long i;
-    public long j;
+    public boolean i;
+    public boolean j;
+    public long k;
+    public long l;
     public final ArrayList b = new ArrayList(12);
     public final WeakHashMap c = new WeakHashMap();
     public boolean h = n.b();

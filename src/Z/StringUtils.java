@@ -5,6 +5,9 @@ public final class StringUtils {
     }
 
     public static boolean isBlank(String str) {
+        if (str == null) {
+            return true;
+        }
         int length = str.length();
         int iCharCount = 0;
         while (iCharCount < length) {

@@ -11,6 +11,7 @@ class e extends HookMethod {
         if (n.g == 0 || (mVarD = n.d(view)) == null) {
             return;
         }
+        mVarD.i = true;
         n.b(mVarD, true);
         n.a(mVarD, 300L, false);
         n.a(mVarD, 1000L, false);

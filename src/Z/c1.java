@@ -1,11 +1,19 @@
 package Z;
 
-import com.ss.android.ugc.profile.platform.base.data.UserProfileInfo;
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.profile.model.User;
 import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
 class c1 extends HookMethod {
     public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        hookMethodParam.setResult(BadgeHooks.a(((UserProfileInfo) hookMethodParam.thisObject).getUid(), (String) hookMethodParam.getResult()));
+        Object[] objArr = hookMethodParam.args;
+        if (objArr.length != 0) {
+            Object obj = objArr[0];
+            if (obj instanceof Aweme) {
+                Aweme aweme = (Aweme) obj;
+                User author = aweme != null ? aweme.getAuthor() : null;
+                hookMethodParam.setResult(v1.a(author != null ? author.getUid() : null, (String) hookMethodParam.getResult()));
+            }
+        }
     }
 }

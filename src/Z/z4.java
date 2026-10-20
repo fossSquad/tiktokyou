@@ -1,11 +1,10 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
+import com.windukk.hook.ReplaceMethod;
 
-class z4 extends HookMethod {
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (d5.a().d) {
-            hookMethodParam.setResult(0);
-        }
+class z4 extends ReplaceMethod {
+    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        return 0;
     }
 }

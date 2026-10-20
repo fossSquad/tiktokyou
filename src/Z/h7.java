@@ -1,12 +1,15 @@
 package Z;
 
-public abstract class h7 {
-    public static final w6 a;
-    public static final p8 b;
+import java.util.Comparator;
 
-    static {
-        w6 w6Var = new w6("COMMENT_TRANSLATION_DIRECT_GATE", "X.08Ut");
-        a = w6Var;
-        b = new p8(w6Var, "ENABLED", new String[]{"LIZ", "LIZIZ"});
+public final class h7 implements Comparator {
+    @Override
+    public final int compare(Object obj, Object obj2) {
+        i7 i7Var = (i7) obj;
+        i7 i7Var2 = (i7) obj2;
+        if ("default".equals(i7Var.a) != "default".equals(i7Var2.a)) {
+            return "default".equals(i7Var.a) ? -1 : 1;
+        }
+        return i7Var.a().compareToIgnoreCase(i7Var2.a());
     }
 }

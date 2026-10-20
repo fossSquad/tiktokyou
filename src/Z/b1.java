@@ -1,29 +1,10 @@
 package Z;
 
-import android.app.Activity;
-import android.content.Context;
-import android.text.TextPaint;
-import android.text.style.ClickableSpan;
-import android.view.View;
-import Z.BadgeHooks;
+import com.ss.android.ugc.aweme.im.contacts.api.model.IMConversation;
+import com.windukk.hook.HookMethod;
 
-public final class b1 extends ClickableSpan {
-    public final  Context a;
-    public final  int b;
-
-    public b1(Activity activity, int i) {
-        this.a = activity;
-        this.b = i;
-    }
-
-    @Override
-    public final void onClick(View view) {
-        BadgeHooks.d(this.a);
-    }
-
-    @Override
-    public final void updateDrawState(TextPaint textPaint) {
-        textPaint.setColor(this.b);
-        textPaint.setUnderlineText(false);
+class b1 extends HookMethod {
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        hookMethodParam.setResult(v1.a(v1.a((IMConversation) hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
     }
 }

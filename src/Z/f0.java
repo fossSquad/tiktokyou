@@ -1,15 +1,17 @@
 package Z;
+import java.util.Comparator;
+import java.util.Locale;
+import ni.shikatu.kotlin.comparisons.ComparisonsKt;
 
-import android.app.Activity;
-import android.widget.FrameLayout;
-
-public final class f0 extends FrameLayout {
-    public f0(Activity activity) {
-        super(activity);
-    }
-
+public final class f0 implements Comparator {
     @Override
-    public final void onMeasure(int i, int i2) {
-        super.onMeasure(i, i);
+    public final int compare(Object obj, Object obj2) {
+        String strA = ((e0) obj).a();
+        Locale locale = Locale.getDefault();
+        String lowerCase = strA.toLowerCase(locale);
+        String strA2 = ((e0) obj2).a();
+        Locale locale2 = Locale.getDefault();
+        String lowerCase2 = strA2.toLowerCase(locale2);
+        return ComparisonsKt.compareValues(lowerCase, lowerCase2);
     }
 }

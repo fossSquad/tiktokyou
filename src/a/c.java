@@ -34,21 +34,21 @@ public abstract class c {
                     }
                 }
                 fileInputStream.close();
-                for (String str : (Iterable<String>) (Iterable) a.b.a(file)) {
+                for (String str : b.a(file)) {
                     for (String str2 : b) {
                         if (str.startsWith(str2)) {
                             throw new IOException(new StringBuilder().append("Dynamic dex contains stable/runtime class: ").append(str).toString());
                         }
                     }
                 }
-                for (String str3 : (Iterable<String>) (Iterable) a.b.b(file)) {
+                for (String str3 : b.b(file)) {
                     for (String str4 : c) {
                         if (str3.startsWith(str4)) {
                             throw new IOException(new StringBuilder().append("Dynamic dex contains unrelocated reference: ").append(str3).toString());
                         }
                     }
                 }
-                for (String str5 : (Iterable<String>) (Iterable) a.b.a(file)) {
+                for (String str5 : b.a(file)) {
                     if (!linkedHashSet.add(str5)) {
                         throw new IOException(new StringBuilder().append("Dynamic dex set contains duplicate class: ").append(str5).toString());
                     }

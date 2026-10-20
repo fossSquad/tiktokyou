@@ -1,6 +1,4 @@
 package c;
-
-import com.vapro.vae.stringfog.StringFogRuntime;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,8 +29,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public abstract class f {
-    public static b a(InputStream inputStream) throws IOException, Throwable {
-        Throwable th = null;
+    public static b a(InputStream inputStream) throws IOException {
         ZipEntry nextEntry;
         ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(inputStream));
         do {
@@ -42,8 +39,7 @@ public abstract class f {
                     zipInputStream.close();
                     throw new IOException("Missing manifest.json");
                 }
-            } catch (Throwable th_c) {
-                th = th_c;
+            } catch (Throwable th) {
                 try {
                     zipInputStream.close();
                 } catch (Throwable th2) {
@@ -72,16 +68,15 @@ public abstract class f {
 
     public static void a(b bVar, String str) throws IOException {
         if (str.equals(bVar.a)) {
-            if (1790876728 != bVar.f1c) {
-                throw new IOException("Stable API mismatch: expected " + 1790876728 + ", package is " + bVar.f1c);
+            if (1792428213 != bVar.f1c) {
+                throw new IOException("Stable API mismatch: expected " + 1792428213 + ", package is " + bVar.f1c);
             }
             return;
         }
         throw new IOException("Variant mismatch: expected " + str + ", package is " + bVar.a);
     }
 
-    public static e a(File file, File file2, String str, byte[] bArr) throws IOException, Throwable {
-        Throwable th = null;
+    public static e a(File file, File file2, String str, byte[] bArr) throws IOException {
         FileInputStream fileInputStream;
         if (file.isFile()) {
             if (!file2.isDirectory() && !file2.mkdirs()) {
@@ -101,7 +96,7 @@ public abstract class f {
                         linkedHashSet.add(((a) it.next()).b);
                     }
                     LinkedHashSet linkedHashSet2 = new LinkedHashSet();
-                    for (String str2 : (java.util.Set<String>) linkedHashMapA.keySet()) {
+                    for (String str2 : linkedHashMapA.keySet()) {
                         if (str2.matches("classes(?:[2-9][0-9]*)?\\.dex")) {
                             linkedHashSet2.add(str2);
                         }
@@ -113,7 +108,7 @@ public abstract class f {
                         if (zipEntry2 != null) {
                             a(bArrA, a(zipFile, zipEntry2, 4096), bArr);
                             LinkedHashSet<String> linkedHashSet3 = new LinkedHashSet();
-                            for (String str3 : (java.util.Set<String>) linkedHashMapA.keySet()) {
+                            for (String str3 : linkedHashMapA.keySet()) {
                                 if (!str3.equals("manifest.json") && !str3.equals("signature.der")) {
                                     linkedHashSet3.add(str3);
                                 }
@@ -135,7 +130,7 @@ public abstract class f {
                                                 messageDigest.update(bArr2, 0, i);
                                                 linkedHashSet3 = linkedHashSet3;
                                             }
-                                            if (!util.PkgBridge.a((String) bVarA.e.get(str4), util.PkgBridge.b(messageDigest.digest()))) {
+                                            if (!b.a.a((String) bVarA.e.get(str4), b.a.a(messageDigest.digest()))) {
                                                 throw new IOException("Hash mismatch for " + str4);
                                             }
                                             if (inputStream != null) {
@@ -144,8 +139,7 @@ public abstract class f {
                                         } catch (NoSuchAlgorithmException e) {
                                             throw new AssertionError(e);
                                         }
-                                    } catch (Throwable th_c) {
-                                        th = th_c;
+                                    } catch (Throwable th) {
                                         if (inputStream == null) {
                                             throw th;
                                         }
@@ -199,7 +193,7 @@ public abstract class f {
                                                             }
                                                         }
                                                     }
-                                                    if (util.PkgBridge.a(str6, util.PkgBridge.b(messageDigest2.digest()))) {
+                                                    if (b.a.a(str6, b.a.a(messageDigest2.digest()))) {
                                                         fileInputStream.close();
                                                         arrayList.add(file3);
                                                         it2 = it3;
@@ -224,7 +218,7 @@ public abstract class f {
                                 }
                                 byte[] bArr5 = bArrA;
                                 b bVar2 = bVarA;
-                                util.PkgBridge.c(arrayList);
+                                a.c.a(arrayList);
                                 File file4 = new File(file2, "resources");
                                 for (String str7 : linkedHashSet4) {
                                     if (str7.startsWith("resources/")) {
@@ -281,21 +275,21 @@ public abstract class f {
                 if (!strReplace.isEmpty() && !strReplace.startsWith("/") && !strReplace.contains("\u0000")) {
                     for (String str : strReplace.split("/", -1)) {
                         if (str.isEmpty() || str.equals(".") || str.equals("..")) {
-                            throw new IOException("Unsafe ZIP entry: " + strReplace);
+                            throw new IOException(a.a.a("D92eqNOz+ZI/+6zgKhiIxNmGICx7DVolXHnr669J7WCl+cP4Dvby5YeyeRu0PEKh", "0QnmdQie62wPXLqB", "aes", new StringBuilder(), strReplace));
                         }
                     }
                     if (!strReplace.equals("manifest.json") && !strReplace.equals("signature.der") && !strReplace.matches("classes(?:[2-9][0-9]*)?\\.dex") && !strReplace.startsWith("resources/")) {
-                        throw new IOException("Unsupported package entry: " + strReplace);
+                        throw new IOException(a.a.a("x04MtO+8pCBtuxvvvKMnDNUPVTSVv6YwIKCX3PLicKSZrZFxZ8E6rme6IMMFe6LZ", "i6wNMRXFKlhoxFvp", "aes", new StringBuilder(), strReplace));
                     }
                     if (zipEntryNextElement.getSize() <= 134217728) {
                         if (linkedHashMap.put(strReplace, zipEntryNextElement) != null) {
-                            throw new IOException("Duplicate package entry: " + strReplace);
+                            throw new IOException(a.a.a("D2KQEwZKcreSgvfiCdXOxt+gF0+e6gUHvLE2KvAWO1kHtwnwmPZZ+EQHiJGD50g4", "tl8Htd6MYKBt2UD9", "aes", new StringBuilder(), strReplace));
                         }
                     } else {
-                        throw new IOException("Entry is too large: " + strReplace);
+                        throw new IOException(a.a.a("J9SIhsbrvjYZO678pR3sEc+iPZLlMn7fEQoUH6ltn0MjyU9E4pPLVMQFPJW+HMD+", "Vn5ipMPoiBGLsLyO", "aes", new StringBuilder(), strReplace));
                     }
                 } else {
-                    throw new IOException("Unsafe ZIP entry: " + strReplace);
+                    throw new IOException(a.a.a("WkFArlWujuwQuZhNN7UcacPYuk/SwoirlOROT3PUgzawqStAO/OKvVaPtNvykeQL", "1h6YszzwFfkm4IHC", "aes", new StringBuilder(), strReplace));
                 }
             }
         }
@@ -314,8 +308,7 @@ public abstract class f {
         throw new IOException("Resource path escapes root");
     }
 
-    public static byte[] a(ZipFile zipFile, ZipEntry zipEntry, int i) throws IOException, Throwable {
-        Throwable th = null;
+    public static byte[] a(ZipFile zipFile, ZipEntry zipEntry, int i) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[8192];
         InputStream inputStream = zipFile.getInputStream(zipEntry);
@@ -333,8 +326,7 @@ public abstract class f {
                 } else {
                     throw new IOException(zipEntry.getName() + " is too large");
                 }
-            } catch (Throwable th_c) {
-                th = th_c;
+            } catch (Throwable th) {
                 if (inputStream != null) {
                     try {
                         inputStream.close();
@@ -347,8 +339,7 @@ public abstract class f {
         }
     }
 
-    public static void a(InputStream inputStream, File file) throws IOException, Throwable {
-        Throwable th = null;
+    public static void a(InputStream inputStream, File file) throws IOException {
         File parentFile = file.getParentFile();
         if (!parentFile.isDirectory() && !parentFile.mkdirs()) {
             throw new IOException("Cannot create output directory");
@@ -375,8 +366,7 @@ public abstract class f {
                     if (inputStream != null) {
                         try {
                             inputStream.close();
-                        } catch (Throwable th_c) {
-                            th = th_c;
+                        } catch (Throwable th) {
                             th.addSuppressed(th);
                         }
                     }

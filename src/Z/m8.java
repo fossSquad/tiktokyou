@@ -1,12 +1,12 @@
 package Z;
 
 public abstract class m8 {
-    public static final p8 a;
-    public static final p8 b;
+    public static final w7 a;
+    public static final v9 b;
 
     static {
-        w6 w6Var = new w6("LOTTIE_ANIMATION_VIEW", "X.01gi");
-        a = new p8(w6Var, "PLAY_ANIMATION", new String[]{"playAnimation"});
-        b = new p8(w6Var, "SET_COMPOSITION", new String[]{"setComposition"});
+        w7 w7Var = new w7("CONTACT_LOOKUP", "X.0dFV");
+        a = w7Var;
+        b = new v9(w7Var, "CONTACT_LOOKUP_BY_UID", new String[]{"LIZ"});
     }
 }

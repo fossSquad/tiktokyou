@@ -1,22 +1,12 @@
 package Z;
-import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
-class ab extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length != 0) {
-            Object obj = objArr[0];
-            if (obj instanceof String) {
-                String str = (String) obj;
-                CharSequence charSequenceB = BadgeHooks.b((CharSequence) str);
-                String string = charSequenceB != null ? charSequenceB.toString() : null;
-                if (string == null || string.equals(str)) {
-                    return;
-                }
-                hookMethodParam.args[0] = string;
-                hookMethodParam.method.getName();
-            }
-        }
+public abstract class ab {
+    public static final v9 a;
+    public static final e9 b;
+
+    static {
+        w7 w7Var = new w7("SETTINGS_PRIVACY_CELL_VM_CLASS", "com.ss.android.ugc.aweme.setting.ui.rvmpcompose.group.privacy.cell.PrivacyItemVM");
+        a = new v9(w7Var, "SETTINGS_PRIVACY_CELL_VM_DEFAULT_STATE", new String[]{"defaultState"});
+        b = new e9(w7Var, "SETTINGS_PRIVACY_CELL_VM_KEY", new String[]{"LL"});
     }
 }

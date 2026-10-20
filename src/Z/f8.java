@@ -1,5 +1,12 @@
 package Z;
 
 public abstract class f8 {
-    public static final p8 a = new p8(new w6("IM_FRIENDS_SERVICE_IMPL_CLASS", "com.ss.android.ugc.aweme.im.saas.host.impl.friends.IMFriendsServiceImpl"), "IM_FRIENDS_DISPLAY_NAME", new String[]{"LIZIZ"});
+    public static final w7 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("COMMENT_TRANSLATION_CAN_SHOW", "X.08zp");
+        a = w7Var;
+        b = new v9(w7Var, "CAN_SHOW", new String[]{"LIZIZ"});
+    }
 }

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public final class k implements View.OnClickListener {
     @Override
     public final void onClick(View view) {
-        if (ta.a() == null) {
+        if (ac.a() == null) {
             return;
         }
-        boolean z = ta.d().f;
+        boolean z = ac.e().f;
         boolean z2 = !z;
         if (!z) {
             ArrayList arrayList = new ArrayList(n.b.values());
@@ -21,7 +21,7 @@ public final class k implements View.OnClickListener {
                 n.b((m) obj);
             }
         }
-        ta.d().c(z2);
+        ac.e().c(z2);
         ArrayList arrayList2 = new ArrayList(n.b.values());
         int size2 = arrayList2.size();
         int i2 = 0;

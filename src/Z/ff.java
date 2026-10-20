@@ -1,20 +1,17 @@
 package Z;
 
+import com.ss.android.ugc.aweme.feed.model.Aweme;
+import com.ss.android.ugc.aweme.search.pages.result.topsearch.core.model.SearchMixFeed;
 import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
 
 class ff extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (ta.a().f()) {
-            Object[] objArr = hookMethodParam.args;
-            if (objArr.length > 0) {
-                Object obj = objArr[0];
-                if (!(obj instanceof Integer) || (iA = ThemeHooks.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                    return;
-                }
-                hookMethodParam.args[0] = Integer.valueOf(iA);
+    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        if (y5.a().d) {
+            SearchMixFeed searchMixFeed = (SearchMixFeed) hookMethodParam.thisObject;
+            Aweme aweme = (Aweme) hookMethodParam.getResult();
+            a.a(searchMixFeed);
+            if (a.a(aweme)) {
+                hookMethodParam.setResult((Object) null);
             }
         }
     }

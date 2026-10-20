@@ -1,5 +1,14 @@
 package Z;
 
 public abstract class z9 {
-    public static final p8 a = new p8(new w6("SPARK_THIRD_ROUTER_CLASS", "X.0449"), "OPEN", new String[]{"LIZIZ"});
+    public static final w7 a;
+    public static final v9 b;
+    public static final v9 c;
+
+    static {
+        w7 w7Var = new w7("OFFLINE_MODE_COUNT_OPTIONS", "X.09y8");
+        a = w7Var;
+        b = new v9(w7Var, "OPTIONS", new String[]{"LJFF", "LJ"});
+        c = new v9(w7Var, "DEFAULT", new String[]{"LIZ"});
+    }
 }

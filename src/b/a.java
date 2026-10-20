@@ -1,7 +1,4 @@
 package b;
-
-import com.vapro.vae.stringfog.StringFogRuntime;
-
 public abstract class a {
     public static boolean a(String str, String str2) {
         if (str != null && str.length() == str2.length()) {

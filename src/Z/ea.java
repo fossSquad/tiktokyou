@@ -1,5 +1,12 @@
 package Z;
 
 public abstract class ea {
-    public static final z7 a = new z7(new w6("STREAK_PROVIDER_SINGLETON_CLASS", "X.0BjO"), "PROVIDER", new String[]{"LIZIZ"});
+    public static final v9 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("PHOTO_MODE_IMAGE_INFO", "com.ss.android.ugc.aweme.feed.model.PhotoModeImageInfo");
+        a = new v9(w7Var, "GET_IMAGE_LIST", new String[]{"getImageList"});
+        b = new v9(w7Var, "GET_IMAGE_POST_COVER", new String[]{"getImagePostCover"});
+    }
 }

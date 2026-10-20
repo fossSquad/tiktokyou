@@ -1,11 +1,12 @@
 package Z;
 
 public abstract class j8 {
-    public static final p8 a;
+    public static final w7 a;
+    public static final v9 b;
 
     static {
-        w6 w6Var = new w6("IM_STICKER_MESSAGE_SERVICE", "X.10jv");
-        oa.a("method", "SEND", (String[]) new String[]{"LJII", "LIZJ"}.clone());
-        a = new p8(w6Var, "SEND_ITEM", new String[]{"LJIILL", "LJIILJJIL"});
+        w7 w7Var = new w7("COMMENT_TRANSLATION_GATE_SECONDARY", "X.0Iyf");
+        a = w7Var;
+        b = new v9(w7Var, "ENABLED", new String[]{"LIZ", "LIZIZ", "LIZJ"});
     }
 }

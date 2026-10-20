@@ -1,18 +1,29 @@
 package Z;
 
-import com.windukk.hook.HookMethod;
-import Z.ThemeHooks;
+import android.widget.TextView;
+import ni.shikatu.kotlin.jvm.internal.Ref;
 
-class cg extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        int iIntValue;
-        int iA;
-        if (ta.a().f()) {
-            Object obj = hookMethodParam.args[0];
-            if (!(obj instanceof Integer) || (iA = ThemeHooks.a((iIntValue = ((Integer) obj).intValue()))) == iIntValue) {
-                return;
+public final class cg implements Runnable {
+    public final  fc a;
+    public final  Ref.IntRef b;
+    public final  TextView c;
+
+    public cg(fc fcVar, Ref.IntRef intRef, TextView textView) {
+        this.a = fcVar;
+        this.b = intRef;
+        this.c = textView;
+    }
+
+    @Override
+    public final void run() {
+        Ref.IntRef intRef;
+        int i;
+        if (this.a.b.isShowing() && (i = (intRef = this.b).element) > 0) {
+            intRef.element = i - 1;
+            dg.a(intRef, this.c);
+            if (this.b.element > 0) {
+                dg.b.postDelayed(this, 1000L);
             }
-            hookMethodParam.args[0] = Integer.valueOf(iA);
         }
     }
 }

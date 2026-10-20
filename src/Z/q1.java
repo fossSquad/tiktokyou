@@ -1,24 +1,9 @@
 package Z;
 
-public abstract class q1 {
-    static {
-    }
+import com.windukk.hook.HookMethod;
 
-    public static boolean a(String str) {
-        if (str != null) {
-            return str.startsWith("https://") || str.startsWith("http://");
-        }
-        return false;
-    }
-
-    public static String b(String str) {
-        if (str == null || str.isEmpty()) {
-            return "asset:supporter.png";
-        }
-        String strTrim = str.trim();
-        if (strTrim.isEmpty()) {
-            return "asset:supporter.png";
-        }
-        return (a(strTrim) || strTrim.startsWith("asset:")) ? strTrim : new StringBuilder().append("asset:").append(strTrim).toString();
+class q1 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        v1.a(hookMethodParam, 0);
     }
 }

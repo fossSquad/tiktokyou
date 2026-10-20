@@ -1,10 +1,12 @@
 package Z;
 
 import com.windukk.hook.HookMethod;
-import com.windukk.hook.ReplaceMethod;
 
-class d6 extends ReplaceMethod {
-    public Object replaceHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        return d5.a().i ? Boolean.FALSE : Boolean.TRUE;
+class d6 extends HookMethod {
+    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
+        int iIntValue = ((Integer) hookMethodParam.args[0]).intValue();
+        int iIntValue2 = ((Integer) hookMethodParam.args[1]).intValue() & (-8193);
+        hookMethodParam.args[0] = Integer.valueOf(iIntValue & (-8193));
+        hookMethodParam.args[1] = Integer.valueOf(iIntValue2);
     }
 }

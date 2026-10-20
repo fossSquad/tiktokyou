@@ -1,5 +1,12 @@
 package Z;
 
 public abstract class ja {
-    public static final p8 a = new p8(new w6("VIDEO_AUTHOR_INFO_VM_CLASS", "com.ss.android.ugc.aweme.feed.assem.videoauthorinfo.VideoAuthorInfoVM"), "VIDEO_AUTHOR_INFO_AUTHOR_NAME", new String[]{"K33", "MU2", "SP2", "ez2"});
+    public static final v9 a;
+    public static final v9 b;
+
+    static {
+        w7 w7Var = new w7("PROFILE_EDIT_NICKNAME_FRAGMENT_CLASS", "com.ss.android.ugc.profile.business.ur.ui.ProfileEditNicknameFragment");
+        a = new v9(w7Var, "PROFILE_EDIT_NICKNAME_SANITIZE_RESULT", new String[]{"pY"});
+        b = new v9(w7Var, "PROFILE_EDIT_NICKNAME_SANITIZE_ARG", new String[]{"BT", "pS", "sS", "zS", "iR"});
+    }
 }

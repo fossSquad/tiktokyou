@@ -1,20 +1,59 @@
 package Z;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import java.util.Objects;
+import java.util.function.Consumer;
 
-public class u extends BroadcastReceiver {
+public final class u extends sf {
+    public x i;
+
     @Override
-    public void onReceive(Context context, Intent intent) {
-        Context applicationContext;
-        t tVar = t.a;
-        if (context == null || (applicationContext = context.getApplicationContext()) == null) {
-            return;
+    public final boolean a() {
+        hi hiVar = this.d;
+        this.i = new x(this, hiVar);
+        ag agVar = new ag(this, hiVar, this.b, this.c, new Consumer() {
+            @Override
+            public final void accept(Object obj) {
+                u.this.a((FrameLayout) obj);
+            }
+        });
+        String strA = k7.a("section_appearance");
+        final x xVar = this.i;
+        Objects.requireNonNull(xVar);
+        setContentView(agVar.a(strA, new Consumer() {
+            @Override
+            public final void accept(Object obj) {
+                try {
+                    xVar.a((LinearLayout) obj);
+                } catch (Throwable th) {
+                    g7.a(6, "Failed to build appearance section", th);
+                }
+            }
+        }));
+        return true;
+    }
+
+    @Override
+    public final void onActivityResult(int i, int i2, Intent intent) {
+        super.onActivityResult(i, i2, intent);
+        x xVar = this.i;
+        if (xVar != null) {
+            try {
+                xVar.a(i, i2, intent);
+            } catch (Throwable th) {
+                g7.a(6, "Failed to handle activity result", th);
+            }
         }
-        t tVar2 = t.a;
-        String strDecrypt = "alarm";
-        tVar2.getClass();
-        t.a(applicationContext, strDecrypt, 20000L);
+    }
+
+    public final void onResume() {
+        super.onResume();
+        x xVar = this.i;
+        if (xVar != null) {
+            xVar.l();
+            xVar.j();
+        }
     }
 }

@@ -1,12 +1,12 @@
 package Z;
 
 public abstract class r9 {
-    public static final p8 a = new p8(new w6("SETTINGS_ITEM_INTERFACE", "X.0aFk"), "SETTINGS_ITEM_GET_KEY", new String[]{"getKey"});
+    public static final v9 a;
+    public static final v9 b;
 
     static {
-        oa.a("method", "SETTINGS_ITEM_GET_IDENTIFIER", (String[]) new String[]{"getIdentifier"}.clone());
-        oa.a("method", "SETTINGS_ITEM_GET_CONTENT_TYPE", (String[]) new String[]{"getContentType"}.clone());
-        oa.a("method", "SETTINGS_ITEM_GET_HEADING_ITEM", (String[]) new String[]{"getHeadingItem"}.clone());
-        oa.a("method", "SETTINGS_ITEM_GET_TAG", (String[]) new String[]{"getTag"}.clone());
+        w7 w7Var = new w7("LOTTIE_ANIMATION_VIEW", "X.01ea");
+        a = new v9(w7Var, "PLAY_ANIMATION", new String[]{"playAnimation"});
+        b = new v9(w7Var, "SET_COMPOSITION", new String[]{"setComposition"});
     }
 }

@@ -1,5 +1,19 @@
 package Z;
 
-public abstract class w7 {
-    public static final p8 a = new p8(new w6("EDIT_SAVE_WATERMARK_GATE", "X.1Ggn"), "EDIT_SAVE_NO_WATERMARK", new String[]{"LJJIFFI"});
+public final class w7 {
+    public final String a;
+    public final String b;
+
+    public w7(String str, String str2) {
+        this.a = str;
+        this.b = str2;
+    }
+
+    public final Class a() throws ClassNotFoundException {
+        return Class.forName(this.b, false, w7.class.getClassLoader());
+    }
+
+    public final String toString() {
+        return this.a + "=" + this.b;
+    }
 }

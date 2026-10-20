@@ -1,6 +1,4 @@
 package c;
-
-import com.vapro.vae.stringfog.StringFogRuntime;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public final class c {
         }
     }
 
-    public final String b() throws IOException {
+    public final String b() {
         b('\"');
         StringBuilder sb = new StringBuilder();
         while (this.b < this.a.length()) {
@@ -87,6 +85,7 @@ public final class c {
                             throw null;
                         }
                         break;
+                        break;
                     default:
                         a("Invalid escape");
                         throw null;
@@ -97,7 +96,7 @@ public final class c {
         throw null;
     }
 
-    public final Serializable c() throws IOException {
+    public final Serializable c() {
         boolean z;
         a();
         if (this.b >= this.a.length()) {
@@ -119,7 +118,7 @@ public final class c {
                     }
                     String strB = b();
                     if (linkedHashMap.containsKey(strB)) {
-                        a("Duplicate key: " + strB);
+                        a(a.a.a("j+BsAdMytIHpMpn8jS4SN+b5pUC+2GWfFgvxRpavqG8=", "PfcdAE0IDe4PLMVb", "aes", new StringBuilder(), strB));
                         throw null;
                     }
                     a();
@@ -236,11 +235,11 @@ public final class c {
         return true;
     }
 
-    public final void a(String str) throws IOException {
+    public final void a(String str) {
         throw new IOException(str + " at JSON offset " + this.b);
     }
 
-    public final void b(char c2) throws IOException {
+    public final void b(char c2) {
         if (a(c2)) {
             return;
         }

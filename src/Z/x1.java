@@ -1,49 +1,22 @@
 package Z;
+public final class x1 {
+    public final String a;
+    public final String b;
+    public final boolean c;
+    public final boolean d;
+    public final String e;
+    public final String f;
 
-import android.content.Context;
-import android.text.TextUtils;
-import com.windukk.hook.HookMethod;
-import Z.BrowserHooks;
-import java.util.concurrent.ConcurrentHashMap;
+    public x1(String str, String str2, boolean z, boolean z2, String str3, String str4) {
+        this.a = str;
+        this.b = a2.b(str2);
+        this.c = z;
+        this.d = z2;
+        this.e = (str3 == null || str3.isEmpty()) ? null : str3;
+        this.f = (str4 == null || str4.isEmpty()) ? null : str4;
+    }
 
-class x1 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        String str = null;
-        String str2 = null;
-        Object[] objArr = hookMethodParam.args;
-        if (objArr.length >= 2) {
-            boolean zEquals = false;
-            Object obj = objArr[0];
-            if (obj instanceof Context) {
-                Context context = (Context) obj;
-                Object obj2 = objArr[1];
-                ConcurrentHashMap concurrentHashMap = BrowserHooks.a;
-                if (obj2 == null || !TextUtils.equals(obj2.getClass().getName(), "com.bytedance.hybrid.spark.third.router.SparkThirdContext")) {
-                    return;
-                }
-                Object obj3 = hookMethodParam.args[1];
-                try {
-                    Object obj4 = dd.a((Class) obj3.getClass(), "url").get(obj3);
-                    str = obj4 instanceof String ? (String) obj4 : null;
-                } catch (Throwable th) {
-                }
-                Object obj5 = hookMethodParam.args[1];
-                try {
-                    Object obj6 = dd.a((Class) obj5.getClass(), "seclinkConfig").get(obj5);
-                    if (obj6 != null) {
-                        try {
-                            Object obj7 = dd.a((Class) obj6.getClass(), "scene").get(obj6);
-                            str2 = obj7 instanceof String ? (String) obj7 : null;
-                        } catch (Throwable th2) {
-                        }
-                        zEquals = TextUtils.equals(str2, "bio_url");
-                    }
-                } catch (Throwable th3) {
-                }
-                if (zEquals && BrowserHooks.a(context, str, true)) {
-                    hookMethodParam.setResult((Object) null);
-                }
-            }
-        }
+    public static x1 a() {
+        return new x1("", "asset:supporter.png", true, false, null, null);
     }
 }

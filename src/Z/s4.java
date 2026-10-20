@@ -1,12 +1,14 @@
 package Z;
 
-import com.windukk.hook.HookMethod;
-import Z.FeedHooks;
-import java.util.List;
-
-class s4 extends HookMethod {
-    public void beforeHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        Object[] objArr = hookMethodParam.args;
-        objArr[0] = FeedHooks.a((List) objArr[0]);
-    }
+public enum s4 {
+    OFFICIAL_SELECTED,
+    NO_WATERMARK_ADDRESS,
+    DOWNLOAD_ADDRESS,
+    NEW_DOWNLOAD_ADDRESS,
+    MISC_SCENE,
+    PROGRESSIVE_BITRATE,
+    WEB_PROGRESSIVE,
+    PLAYBACK,
+    DASH,
+    AUDIO
 }

@@ -1,23 +1,19 @@
 package Z;
-import com.windukk.hook.HookMethod;
-import Z.BadgeHooks;
 
-class t0 extends HookMethod {
-    final  z1 a;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.res.Resources;
+public final class t0 extends ContextWrapper {
+    public final s0 a;
 
-    public t0(z1 z1Var) {
-        this.a = z1Var;
+    public t0(Context context) {
+        super(context);
+        Resources resources = context.getResources();
+        this.a = new s0(resources);
     }
 
-    public void afterHookedMethod(HookMethod.HookMethodParam hookMethodParam) {
-        if (hookMethodParam.getResult() instanceof String) {
-            try {
-                hookMethodParam.setResult(BadgeHooks.a(this.a.b(hookMethodParam.thisObject), (String) hookMethodParam.getResult()));
-            } catch (Exception e) {
-                String strDecrypt = "Failed to resolve uid for ChatListNameModel#getName";
-                Object obj = h6.a;
-                h6.a(6, String.valueOf(strDecrypt), e);
-            }
-        }
+    @Override
+    public final Resources getResources() {
+        return this.a;
     }
 }
