@@ -51,6 +51,6 @@ public final class e0 {
         String str = this.a;
         String str2 = this.b;
         String str3 = this.c;
-        return ve.a("KJcwPkxUYj4dDDb2mDt7QY+ENERRC6DT+Cc0h0qFPXg=", "QNRQkmMf0ZouXjSS", "aes", ve.a("A+UMoD+pYNKCK52gw6hoTpTMarwyhKZquv3UBNcHIb4=", "khdbyDdTy1KcoEGB", "aes", ve.a("O7efznhuuFW81AkPzVCCndximfP/28rPH9VJePkpr3h+9AB6I92wPrXvjAtQCsra", "XRsBne5FRtuU84Z1", "aes", new StringBuilder(), str), str2), str3).append(", streakDays=").append(this.d).append(")").toString();
+        return (((new StringBuilder()).append("AutoStreakRecipient(uid=").append(str)).append(", displayName=").append(str2)).append(", avatarUrl=").append(str3).append(", streakDays=").append(this.d).append(")").toString();
     }
 }

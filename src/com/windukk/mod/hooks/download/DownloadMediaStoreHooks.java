@@ -46,6 +46,6 @@ public final class DownloadMediaStoreHooks {
         String str = this.b;
         String str2 = this.c;
         String str3 = this.d;
-        return ve.a("flbcmplxXkVpcXjEOsa4OZ8JUBi3Yf76yazzXlBZ4JA=", "XhXnrJOr5hy8avjI", "aes", ve.a("weo7CAViA8MyytIBPB9UAKGDg6EqiBaLOi/Un0UGwE8=", "aymS05obJXCHKD2w", "aes", ve.a("wqj3Xh/Bp42HegUCd4UNzxQf+zBUXQa7gEfjl0t+vLU=", "g3pm1nBBBpUHgYrv", "aes", new StringBuilder().append("DashTrack(urlModel=").append(urlModel), str), str2), str3).append(", bitRate=").append(this.e).append(")").toString();
+        return (((new StringBuilder().append("DashTrack(urlModel=").append(urlModel)).append(", fileId=").append(str)).append(", codec=").append(str2)).append(", format=").append(str3).append(", bitRate=").append(this.e).append(")").toString();
     }
 }

@@ -26,7 +26,7 @@ public final class w3 {
     }
 
     public static String b(String str) {
-        return d3.a("KDKOLJ5vc+p5XjRJrK/1LRBFtHWNlggHoT+Az+JPgJk=", "lE2b4I3t3vhzP3eP", "aes", new StringBuilder().append(Environment.DIRECTORY_DOWNLOADS)) + "/" + str + "/";
+        return (new StringBuilder().append(Environment.DIRECTORY_DOWNLOADS)).append("/TikTokYou").toString() + "/" + str + "/";
     }
 
     public static final String a(String str, boolean z, Uri uri, String str2) {

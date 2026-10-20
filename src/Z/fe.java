@@ -483,7 +483,7 @@ public abstract class fe {
                 if (byteArrayOutputStream.size() <= 25165824 - i2) {
                     byteArrayOutputStream.write(bArr, 0, i2);
                 } else {
-                    throw new IOException(d3.a("E63XsV9KFnH3HbIazMfs/sFW3dga7iczy6BNFnFdkSU=", "vph2bYzTBJrlRMug", "aes", new StringBuilder().append("Banner image exceeds ").append(25165824)));
+                    throw new IOException((new StringBuilder().append("Banner image exceeds ").append(25165824)).append(" bytes").toString());
                 }
             } else {
                 return byteArrayOutputStream.toByteArray();

@@ -46,7 +46,7 @@ public final class qd$before$2 extends HookMethod {
                 }
             }
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("oWKx8E6L0FnzrvYx5/KsDi5ysYgG12H/33hCXcQ3AVeAAg9/UVxsfV+p4h6SafG2", "KtZHPP4QYLUR2HR8", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
         }
     }
 }

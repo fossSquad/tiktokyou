@@ -45,7 +45,7 @@ public final class tf {
         textView.setText(strA);
         textView.setTextColor(-1);
         textView.setTextSize(2, 14.0f);
-        x5.a("8M1U8KtD+t2LqruxLKriZcLjRWSw2b0Pb/jsFHpxbeb841qNS5g4R24NHyoBeumt", "tz1oMaYvXPdgeZS4", "aes", 0, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         textView.setGravity(17);
         textView.setPadding(this.b.a(20.0f), 0, this.b.a(20.0f), 0);
         GradientDrawable gradientDrawable2 = new GradientDrawable();
@@ -61,7 +61,7 @@ public final class tf {
         textView2.setText(k7.a("bulletin_title"));
         textView2.setTextSize(2, 14.0f);
         textView2.setTextColor(z ? -16777216 : -1);
-        x5.a("vMuoHcfEepIc1wPA/QLONEHuu7NeZlG5DmB0u2Grhj2Bi88BVmVLOzml0iTHPuvO", "qie21Lqblglkh2gD", "aes", 1, textView2);
+        (textView2).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         linearLayout.addView(textView2);
         TextView textView3 = new TextView(this.a);
         textView3.setText(k7.a("bulletin_subtitle"));

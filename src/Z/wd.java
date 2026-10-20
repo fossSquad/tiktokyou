@@ -22,9 +22,9 @@ public class wd extends HookMethod {
         if ((j <= 0 || System.currentTimeMillis() - j >= 1200) && !Boolean.TRUE.equals(SearchHooks.l.get())) {
             SearchHooks.a(obj, f);
             Handler handler = SearchHooks.k;
-            handler.postDelayed(new xd(obj, f, d3.a("W2DGcy/fPQikwgakeI9ZdoWdtrnyV6sd2ZkDToA8+BU=", "XSgFIzfXX9Lp5OCb", "aes", new StringBuilder().append(str))), 80L);
-            handler.postDelayed(new xd(obj, f, d3.a("z3f7btJgcYnofnbh05IQH8s8bHlas+gMYxrqQIVVJEo=", "oFUm08Tnayyi12LN", "aes", new StringBuilder().append(str))), 250L);
-            handler.postDelayed(new xd(obj, f, d3.a("9sTTd/AtcV2jO+JiKqshGnNYH0hSLwSeSTPpG5QqZNo=", "5bQ3FN9k8LrsT2yQ", "aes", new StringBuilder().append(str))), 600L);
+            handler.postDelayed(new xd(obj, f, (new StringBuilder().append(str)).append("+80ms").toString()), 80L);
+            handler.postDelayed(new xd(obj, f, (new StringBuilder().append(str)).append("+250ms").toString()), 250L);
+            handler.postDelayed(new xd(obj, f, (new StringBuilder().append(str)).append("+600ms").toString()), 600L);
         }
     }
 }

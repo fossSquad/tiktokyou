@@ -87,7 +87,7 @@ public abstract class k3 {
             }
         }
         if (arrayList.isEmpty()) {
-            throw new IllegalStateException(d3.a("Rw/BCkGsTDPgWyIX6oMnqmF0CWaOu9cYwieXd28dNdLDj6/UuPk9hVTxfMOM3H3y", "SB38GHBNQQGfHonW", "aes", new StringBuilder().append(str)).toString());
+            throw new IllegalStateException((new StringBuilder().append(str)).append(" track has no URL").toString().toString());
         }
         for (String str3 : arrayList) {
             i3++;
@@ -119,7 +119,7 @@ public abstract class k3 {
         if (th != null) {
             throw th;
         }
-        throw new IllegalStateException(d3.a("xp0HTc8XUsSsiqsgocahQJmDpVg9PCLZfBdb/MQjv3zO3u1b+OK6N1UqeDqf9eOb", "wg6iPgkUU4feZA1V", "aes", new StringBuilder().append(str)));
+        throw new IllegalStateException((new StringBuilder().append(str)).append(" download failed").toString());
     }
 
     public static final void a(Context context, p4 p4Var, l3 l3Var, fg fgVar, final u3 u3Var, boolean z) {
@@ -392,10 +392,10 @@ public abstract class k3 {
         String string2 = mediaFormat2.getString("mime");
         String str = string2 != null ? string2 : "";
         if (!SetsKt.setOf(new String[]{"video/avc", "video/hevc", "video/mp4v-es", "video/av01"}).contains(string)) {
-            throw new IllegalStateException(di.a("ym0ZQjPUiXh45HY12kgi65leC/pOT6LIXyOO5ztfqh1A35S1CvRJuiYhC4mT24Eq", "jgazuzkOwNKS8NnT", "aes", new StringBuilder(), string).toString());
+            throw new IllegalStateException("Unsupported DASH video codec: " + string.toString());
         }
         if (!SetsKt.setOf(new String[]{"audio/mp4a-latm", "audio/mpeg", "audio/opus", "audio/vorbis"}).contains(str)) {
-            throw new IllegalStateException(di.a("dwEO8x7bRYRex/UXwPFWeNEuoCTEPNvLX+5/T+r+LtMMAJG+9evW7aJJMEIIQeYp", "bhb3Z7j6T2LOkvWl", "aes", new StringBuilder(), str).toString());
+            throw new IllegalStateException("Unsupported DASH audio codec: " + str.toString());
         }
     }
 
@@ -444,7 +444,7 @@ public abstract class k3 {
         if (objValueOf == null) {
             objValueOf = Long.valueOf(p4Var.a);
         }
-        String strA = d3.a("5vW475l+P1lvy9/61vLZk/XSspTdQwxcjuJxSW+YAG4=", "tqKpq6wZTPXqXeSr", "aes", new StringBuilder().append("TikTok_").append(objValueOf));
+        String strA = (new StringBuilder().append("TikTok_").append(objValueOf)).append(".mp4").toString();
         ContentValues contentValues = new ContentValues();
         contentValues.put("_display_name", strA);
         contentValues.put("mime_type", "video/mp4");

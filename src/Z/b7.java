@@ -59,7 +59,7 @@ public class b7 extends BaseActivity {
         TextView textView = new TextView(this);
         textView.setText(i7Var.a());
         textView.setTextSize(2, 16.0f);
-        x5.a("ZrQATtMmsqbYli9S+pExwdXFYB5Pyzk1XX8PjzvjuJYkOHM+xO3gtZK4QHlCCvbA", "VjYjGICezv58WEVv", "aes", 0, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         textView.setTextColor(this.a ? -1 : -16777216);
         LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, -2, 1.0f);
         layoutParams2.leftMargin = a(14.0f);
@@ -132,7 +132,7 @@ public class b7 extends BaseActivity {
         TextView textView2 = new TextView(this);
         textView2.setText(k7.a("icon_picker_title"));
         textView2.setTextSize(2, 16.0f);
-        x5.a("mhhZZ4Dx1rjCharxgDhdqelq9hh/cis9JNz4n77Z4O0=", "R4ui89olIVkPaijX", "aes", 1, textView2);
+        (textView2).setTypeface(android.graphics.Typeface.create("sans-serif", 1));
         textView2.setTextColor(this.a ? -1 : -16777216);
         FrameLayout.LayoutParams layoutParams3 = new FrameLayout.LayoutParams(-2, -2);
         layoutParams3.gravity = 49;

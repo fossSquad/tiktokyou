@@ -18,6 +18,6 @@ public abstract class a2 {
         if (strTrim.isEmpty()) {
             return "asset:supporter.png";
         }
-        return (a(strTrim) || strTrim.startsWith("asset:")) ? strTrim : di.a("5HsXevdclInr3Q1ZiQO7DElmzrlwpfOI3ziXg7BnSy4=", "TQcIjw04DJXvMJSe", "aes", new StringBuilder(), strTrim);
+        return (a(strTrim) || strTrim.startsWith("asset:")) ? strTrim : "asset:" + strTrim;
     }
 }

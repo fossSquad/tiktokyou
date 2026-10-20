@@ -185,7 +185,7 @@ public final class o4 {
                 throw new IllegalArgumentException("Unexpected aweme id".toString());
             }
         }
-        String strA = di.a("gyH6Iss8V7/tDTHYk5p7fL7qEWpwXh60aZZF6zjU6/Bk0jhi42F/fiyOsa/SseLXDR5TAX751/uGMWJ5QlKxEw==", "lPShMyGDpbUKoPkU", "aes", new StringBuilder(), str);
+        String strA = "https://www.tiktok.com/@_/video/" + str;
         String strDecrypt = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36";
         AtomicBoolean atomicBoolean = t.a;
         String strA2 = t.a(strA, strDecrypt, 2097152, MapsKt.emptyMap(), (String) null).a();
@@ -363,7 +363,7 @@ public final class o4 {
                                                                 strArr7[2] = strC12;
                                                                 strB = v4.b(strArr7);
                                                             }
-                                                            String string2 = ve.a("AlRWE9rgWoS8To1BXpfSGumREmHWb8wcbmI48RXwWEr/hIEl8WR0TQ5nbvI9QQQ2", "U4HCAQeMkeWiRNMz", "aes", new StringBuilder(), strB3).append("]").toString();
+                                                            String string2 = (new StringBuilder()).append("web.bitrateInfo[").append(strB3).append("]").toString();
                                                             s4 s4Var = s4.WEB_PROGRESSIVE;
                                                             dk dkVar = dk.CONFIRMED_CLEAN;
                                                             zc zcVar = zc.TRANSCODED_PLAYBACK;

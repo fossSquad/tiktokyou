@@ -8,7 +8,7 @@ public final class d4$before$2 extends HookMethod {
         try {
             d4.a(hookMethodParam);
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("tYDuzt4/0Dv9xnsu2ZUAdONHjsUjNzGI1CxNgmZbvITP/Q4uWH/xTMBFE6XPYb6T", "HGd4lyp6iyeqtrVS", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
         }
     }
 }

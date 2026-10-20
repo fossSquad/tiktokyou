@@ -135,7 +135,7 @@ public abstract class ye {
         try {
             HookBridge.hookAllMethods(TelephonyManager.class, str, new StoryEngagementHooks(supplier));
         } catch (Throwable th) {
-            String strA = d3.a("7qFdb5Hc9DswTP2ETDgiwdgdJssZqtw3yOLKAO8RIB8=", "nNuaIGUoXnv7XZPB", "aes", ve.a("+Vw7Yp0hT3+awytR2pdRWZcDGQJPtYkQkksXvdISIV/M2r1lG1t+twdnbPH3PTgT", "bOZOdkOLzNuwuiD5", "aes", new StringBuilder(), str));
+            String strA = ((new StringBuilder()).append("TelephonyManager.").append(str)).append(" hook failed: ").toString();
             Object obj = g7.a;
             g7.a(6, String.valueOf(strA), th);
         }

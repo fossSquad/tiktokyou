@@ -142,7 +142,7 @@ public final class f3 implements Thread.UncaughtExceptionHandler {
             try {
                 fileOutputStream.write(bytes);
                 fileOutputStream.close();
-                FileOutputStream fileOutputStream2 = new FileOutputStream(new File(file, d3.a("fBJnhxLoMaVjbQHHIcvt+s29oud/S2qYSaUrE9dKP5I=", "MOL1nY6JF6cDT98k", "aes", new StringBuilder().append("java_crash_").append(System.currentTimeMillis()))), false);
+                FileOutputStream fileOutputStream2 = new FileOutputStream(new File(file, (new StringBuilder().append("java_crash_").append(System.currentTimeMillis())).append(".txt").toString()), false);
                 try {
                     fileOutputStream2.write(bytes);
                     fileOutputStream2.close();

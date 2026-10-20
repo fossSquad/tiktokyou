@@ -67,7 +67,7 @@ public final class g0 {
     public static void c() throws NoWhenBranchMatchedException {
         l0 l0VarC = z.c();
         if (l0VarC instanceof k0) {
-            g7.a(4, g7.a(di.a("pIRKb+GjNre/1iXnMXhEtcm+Y0/1Q3M84H25fkEkxNVEGEM6deGa7e1bLUr7/zOP", "HBxnYZ4OJY0O6XVc", "aes", new StringBuilder(), ((k0) l0VarC).a), new Object[0]), (Throwable) null);
+            g7.a(4, g7.a("Recipient refresh skipped: " + ((k0) l0VarC).a, new Object[0]), (Throwable) null);
             return;
         }
         if (!(l0VarC instanceof j0)) {
@@ -85,7 +85,7 @@ public final class g0 {
             a(d0Var.c, d0Var.a, true);
         }
         a((List) j0Var.a);
-        g7.a(4, g7.a(d3.a("LYJutLFNWOuPZdku8q9vxYuRZ7GLwNGm5HTgzTSbPi7ZPtRd4+hP8TohQg0LJaFr", "VaWZdTpgXwZKc1bA", "aes", new StringBuilder().append("Recipient refresh: ").append(j0Var.a.size())), new Object[0]), (Throwable) null);
+        g7.a(4, g7.a((new StringBuilder().append("Recipient refresh: ").append(j0Var.a.size())).append(" streak partner(s)").toString(), new Object[0]), (Throwable) null);
     }
 
     public static void a(Object obj, String str, boolean z) {

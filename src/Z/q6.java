@@ -39,7 +39,7 @@ public final class q6 {
         if (!fileResolve.exists() && !fileResolve.mkdirs()) {
             throw new IOException("Cannot create heap dump directory");
         }
-        String strA2 = d3.a("SZmmJ7L9eLqe7HtF1mKQAoi9KK/7/nKsKSZnBZZwN/4=", "bNbfKYVPefcpiv0c", "aes", ve.a("vMxeV1nzAaAdlaTF5W1sulj5vZSoeqAC/JQOJiOF4O4=", "tHgYiLNHWeK23dCo", "aes", new StringBuilder(), new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", Locale.US).format(new Date())));
+        String strA2 = ((new StringBuilder()).append("ttmod_heap_").append(new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", Locale.US).format(new Date()))).append(".hprof").toString();
         File fileResolve2 = FilesKt.resolve(fileResolve, strA2);
         try {
             Debug.dumpHprofData(fileResolve2.getAbsolutePath());
@@ -72,7 +72,7 @@ public final class q6 {
         ContentValues contentValues = new ContentValues();
         contentValues.put("_display_name", str);
         contentValues.put("mime_type", "application/octet-stream");
-        contentValues.put("relative_path", d3.a("fWTZL6wl3c5Z+seEQkmezEfZtTa+PutKbywv5e4pv/s=", "Ub9LG8BmOQp358Vn", "aes", new StringBuilder().append(Environment.DIRECTORY_DOWNLOADS)));
+        contentValues.put("relative_path", (new StringBuilder().append(Environment.DIRECTORY_DOWNLOADS)).append("/TikTokYou").toString());
         boolean z = true;
         contentValues.put("is_pending", (Integer) 1);
         Uri uriInsert = contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
@@ -132,7 +132,7 @@ public final class q6 {
         }
         File fileResolve = FilesKt.resolve(externalFilesDir, "TikTokYou");
         if (!fileResolve.exists() && !fileResolve.mkdirs()) {
-            throw new IOException(di.a("aMRWxeBd3sfr2X6SmWk3yOrRDabNUEcqLcYVOZsCo1Y=", "CKajoXDKZIv6MENN", "aes", new StringBuilder(), fileResolve.getAbsolutePath()));
+            throw new IOException("Cannot create " + fileResolve.getAbsolutePath());
         }
         File fileResolve2 = FilesKt.resolve(fileResolve, str);
         FileOutputStream fileOutputStream = new FileOutputStream(fileResolve2);

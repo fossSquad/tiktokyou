@@ -54,6 +54,6 @@ public final class p4 {
         String str = this.e;
         AtomicBoolean atomicBoolean = this.f;
         o3 o3Var = this.g;
-        return ve.a("41GqW43L7/x55e2zFsQ5old83dxHUaWCpZgfFsDiZ1g=", "iAt47i14Ie5A27ds", "aes", ve.a("kAB2tdRpXVPrJRNlI5WrcgOaf4Fy7fl0s6phbA4JCmo=", "cnGXtNqkQ606rW2c", "aes", new StringBuilder().append("DownloadSession(id=").append(j).append(", downloadData=").append(obj).append(", aweme=").append(aweme).append(", originalUrl=").append(urlModel), str).append(", handled=").append(atomicBoolean).append(", selected=").append(o3Var), this.h).append(")").toString();
+        return ((new StringBuilder().append("DownloadSession(id=").append(j).append(", downloadData=").append(obj).append(", aweme=").append(aweme).append(", originalUrl=").append(urlModel)).append(", miscScene=").append(str).append(", handled=").append(atomicBoolean).append(", selected=").append(o3Var)).append(", fileBase=").append(this.h).append(")").toString();
     }
 }

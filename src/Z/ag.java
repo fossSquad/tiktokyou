@@ -63,7 +63,7 @@ public final class ag {
         final TextView textView2 = new TextView(this.a);
         textView2.setText(str);
         textView2.setTextSize(2, 16.0f);
-        x5.a("sZFNY/puBCu4sSBZZJc1wNVgDuSMfdF7Dzb271LQDYU=", "3sYbfU8YNLUj9mFF", "aes", 1, textView2);
+        (textView2).setTypeface(android.graphics.Typeface.create("sans-serif", 1));
         textView2.setTextColor(this.b.e());
         textView2.setVisibility(4);
         FrameLayout.LayoutParams layoutParams2 = new FrameLayout.LayoutParams(-2, -2);

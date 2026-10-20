@@ -31,7 +31,7 @@ public final class le$after$2 extends HookMethod {
                 le.a(this.c, textView);
             }
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("0tvvgu256JrUGyFMG0HGLEKrZjiLpMLxnZKXOWpBaamuS3H/95DgyBOU890Y9a9Z", "Jg9dqGu8yx4xc5n7", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
         }
     }
 }

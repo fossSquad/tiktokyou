@@ -30,6 +30,6 @@ public final class ad {
     public final String toString() {
         long j = this.a;
         long j2 = this.b;
-        return ve.a("qnQv29CIznhYHqCc7TT7oa1ZvM3dhgy6lx46Sa4tfnY=", "ZF8kD3Xyps5mUOMk", "aes", new StringBuilder().append("OtaCatalogEntry(stable=").append(j).append(", dynamic=").append(j2), this.c).append(")").toString();
+        return (new StringBuilder().append("OtaCatalogEntry(stable=").append(j).append(", dynamic=").append(j2)).append(", url=").append(this.c).append(")").toString();
     }
 }

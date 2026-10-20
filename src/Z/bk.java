@@ -38,7 +38,7 @@ public final class bk {
             throw new IllegalStateException(("Unexpected pinned-chat guard return type: " + methodA).toString());
         }
         HookBridge.hookMethod(methodA, ReplaceMethod.returnConstant(Boolean.FALSE));
-        g7.a(4, g7.a(ve.a("jQphj+M7NjknQZxWCoxNqp8o10I1STJKzFO/HdaUq/a3v+lAjT518TbUahvzWEat", "2ZgL0JJAWEBEkDdr", "aes", new StringBuilder(), cls.getName()).append("#").append(methodA.getName()).toString(), new Object[0]), (Throwable) null);
+        g7.a(4, g7.a((new StringBuilder()).append("Unlocked pinned chats via ").append(cls.getName()).append("#").append(methodA.getName()).toString(), new Object[0]), (Throwable) null);
     }
 
     public static void c() throws NoSuchMethodException {

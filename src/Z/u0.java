@@ -770,7 +770,7 @@ public final class u0 {
             f = obj2;
             return obj2;
         }
-        throw new IllegalStateException(d3.a("2msDCoI6htRn/fBdZJwQw78zPortHZcKN1n1x06GkCA7q1jNlwP1ul0tQdscaQZw", "qxyqjU1marzxHnSR", "aes", new StringBuilder().append(cls2.getName())));
+        throw new IllegalStateException((new StringBuilder().append(cls2.getName())).append(".INSTANCE is null").toString());
     }
 
     public static List a() {

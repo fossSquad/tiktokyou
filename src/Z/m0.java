@@ -42,6 +42,6 @@ public final class m0 {
         String str2 = this.b;
         String str3 = this.c;
         String str4 = this.d;
-        return ve.a("BmF3+mQAdWdediqC0wgkKF1FgE34XVNCCKKegfYcMl0=", "BMHIOCSSz7yhVCZo", "aes", ve.a("sBTtmqeJZ2db+dBkkeKgHufOoUD3ZKEfRMMUXrA87IQ=", "UPoovHYVOmtm1EGI", "aes", ve.a("T1BJlO8UJ8mLZ0bwq4wFNoUtrWtTMyj3IE2cjnHBN1Q=", "lXCUngpgvR53wpTU", "aes", ve.a("kLJRA5h0lUYuda11RPHV2x72rgkFwB/Z+oW4kXH4TUjMMHvHyE1XsHK2wltseZued92VZ/ALtynMh2WfUnBsTA==", "Wu2iW3rx8DrU0myU", "aes", new StringBuilder(), str), str2), str3), str4).append(", isDefault=").append(this.e).append(")").toString();
+        return ((((new StringBuilder()).append("AutoStreakSticker(interactionName=").append(str)).append(", stickerId=").append(str2)).append(", stickerSetId=").append(str3)).append(", url=").append(str4).append(", isDefault=").append(this.e).append(")").toString();
     }
 }

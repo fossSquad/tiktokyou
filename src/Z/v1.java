@@ -1778,13 +1778,13 @@ public abstract class v1 {
         textView.setTextSize(2, 14.0f);
         textView.setLineSpacing(0.0f, 1.0f);
         textView.setTextColor(color2);
-        x5.a("o7PbV/KpOYK2cDA6H5IAWw322y1LSKFLaHehOtvbT4qGQhVJTWd4UJnH0QNz9Lzx", "c59bmeUnGKmWfVTm", "aes", 0, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         linearLayout2.addView(textView);
         TextView textView2 = new TextView(activity);
         textView2.setText(k7.a("badge_bulletin_button", "Подробнее"));
         textView2.setTextColor(-1);
         textView2.setTextSize(2, 13.0f);
-        x5.a("DhfR5td8Kn0amzgT+yF/a2K+vm1S8xyVU+1iDe+DX2x5UQXzeJku5UYV3H7BPDoG", "LJ4gvxwFntoU78P3", "aes", 0, textView2);
+        (textView2).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         textView2.setGravity(17);
         textView2.setPadding((int) TypedValue.applyDimension(1, 16.0f, activity.getResources().getDisplayMetrics()), 0, (int) c3.a(activity, 1, 16.0f), 0);
         GradientDrawable gradientDrawable2 = new GradientDrawable();

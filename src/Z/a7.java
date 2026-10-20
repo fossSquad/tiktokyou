@@ -220,7 +220,7 @@ public final class a7 {
         textView.setGravity(17);
         textView.setTextSize(2, 18.0f);
         textView.setTextColor(this.b.b ? -1 : Color.parseColor("#161823"));
-        x5.a("+UMAsam1bzJJ0O0kV2HjEQmUOqhNpPMXfOPIfQaknxAE7SGaMUysV4sKN4BeHnen", "72YBafCi9pJ9cJhm", "aes", 1, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         linearLayout.addView(textView);
         TextView textView2 = new TextView(this.a);
         textView2.setText(k7.a("reset_settings_desc"));
@@ -240,7 +240,7 @@ public final class a7 {
         textView3.setGravity(17);
         textView3.setTextColor(this.b.e());
         textView3.setTextSize(2, 15.0f);
-        x5.a("wg9W1rWNwklpO/49j+aY9wxkoRecEyNQNHZx0o5veNTFD9r8HEITVqDjw2aVvOBp", "wfvXh0XqQ8slLES8", "aes", 1, textView3);
+        (textView3).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         int color = this.b.b ? -13882322 : Color.parseColor("#F1F1F2");
         float fA2 = this.b.a(26.0f);
         GradientDrawable gradientDrawable2 = new GradientDrawable();
@@ -261,7 +261,7 @@ public final class a7 {
         textView4.setGravity(17);
         textView4.setTextColor(-1);
         textView4.setTextSize(2, 15.0f);
-        x5.a("RJsUwIDIX85uL9a1gkPeejJlWHGl+sqivXgfpibSb8n6nciIdkoy4knTlT/b1jUk", "uKbwmFxgalSZWQGq", "aes", 1, textView4);
+        (textView4).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         this.b.getClass();
         int iA = hi.a();
         float fA3 = this.b.a(26.0f);

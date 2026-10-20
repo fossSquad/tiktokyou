@@ -55,7 +55,7 @@ public final class v4 {
                 StringCompanionObject stringCompanionObject = StringCompanionObject.INSTANCE;
                 strA = String.format(Locale.US, "%.1f Mbps", Arrays.copyOf(new Object[]{Float.valueOf(i3 / 1000000.0f)}, 1));
             } else {
-                strA = d3.a("XBFxp1oR5beDtlD37HrLGhsuWO+himR2ko1vPPhQcFE=", "oaBzrEI7oNd9m176", "aes", new StringBuilder().append(Math.max(1, i3 / 1000)));
+                strA = (new StringBuilder().append(Math.max(1, i3 / 1000))).append(" Kbps").toString();
             }
             arrayList.add(strA);
         }
@@ -90,7 +90,7 @@ public final class v4 {
         }
         List list = (List) obj;
         String str = urlModel.urlKey;
-        return ve.a("2BZaPWGdAFOm5Q48PMtYQtWUs++03z++cSo2syPCxjg=", "75BWEQFbvyOnbLgl", "aes", ve.a("v9qteJQZFmC9ELqJHv7jqkBYPmwxq1w+4q5umadeRFU=", "ly8RIFBTgi697T6D", "aes", new StringBuilder(), str), urlModel.uri).append(",urls=").append(list != null ? list.size() : 0).toString();
+        return ((new StringBuilder()).append("key=").append(str)).append(",uri=").append(urlModel.uri).append(",urls=").append(list != null ? list.size() : 0).toString();
     }
 
     public static final String c(o3 o3Var) {
@@ -246,7 +246,7 @@ public final class v4 {
         } else {
             dkVarA = a(new String[]{str, urlModelE.urlKey, urlModelE.uri});
         }
-        return a(video, urlModelE, ve.a("0elPgJrzKnouvZVJHJIxKAZUoY8Us36slf3mwZwreqMydYKvCt+fBskY86e39TEm", "m1FLSXFrw5CvC7qo", "aes", new StringBuilder(), str).append("]").toString(), s4.MISC_SCENE, dkVarA, zc.SERVER_DOWNLOAD, 860, str);
+        return a(video, urlModelE, (new StringBuilder()).append("video.miscDownloadAddrs[").append(str).append("]").toString(), s4.MISC_SCENE, dkVarA, zc.SERVER_DOWNLOAD, 860, str);
     }
 
     public final ArrayList b(Video video) {
@@ -369,8 +369,8 @@ public final class v4 {
         for (Pair pair : CollectionsKt.listOf(new Pair[]{TuplesKt.to("playAddr", d(video, "getPlayAddr")), TuplesKt.to("playAddrH264", d(video, "getPlayAddrH264")), TuplesKt.to("playAddrBytevc1", d(video, "getPlayAddrBytevc1")), TuplesKt.to("properPlayAddr", d(video, "getProperPlayAddr")), TuplesKt.to("playAddr3DFallback", d(video, "getPlayAddr3DFallback"))})) {
             String str4 = (String) pair.component1();
             UrlModel urlModel = (UrlModel) pair.component2();
-            a(linkedHashSet, se.b(urlModel, "getDashVideoModelStr"), d3.a("QUZX2ypvbHsAwbqqc9JNF6KBek2ZLPK0kPY7WDve955/YHjTADEZF9JpSBwTwnk8", "c9aAoj3F0To419CE", "aes", new StringBuilder().append(str4)));
-            a(linkedHashSet, se.b(urlModel, "getDashVideoModelMap"), d3.a("KTLdZT9trx5RT4jG8v2J39jF0xxmgiSsaR2YcfVEOq4Zf8umWNAi39ahZ4wClizz", "K1RFxpJpz0WwEeN0", "aes", new StringBuilder().append(str4)));
+            a(linkedHashSet, se.b(urlModel, "getDashVideoModelStr"), (new StringBuilder().append(str4)).append(".dashVideoModelStr").toString());
+            a(linkedHashSet, se.b(urlModel, "getDashVideoModelMap"), (new StringBuilder().append(str4)).append(".dashVideoModelMap").toString());
         }
         AtomicLong atomicLong = r4.a;
         Integer numValueOf = Integer.valueOf(linkedHashSet.size());
@@ -784,7 +784,7 @@ public final class v4 {
                             int iA = a(a(obj9, "getVideoWidth"), f(urlModelD));
                             int iA2 = a(a(obj9, "getVideoHeight"), e(urlModelD));
                             String strC7 = c(obj9, "getGearName");
-                            String string = ve.a("YUiaT8OLo8UaLP3OaOt2xLpd2swMeEyzAlEOPfiT4XhmbyUFCZE3agU2BZSiIKgE", "vur69VgqkY8ixoZV", str11, new StringBuilder(), strC7).append("]").toString();
+                            String string = "video.dashBitrate[" + strC7 + "]";
                             s4 s4Var2 = s4.DASH;
                             String str13 = urlModelD.urlKey;
                             String str14 = urlModelD.uri;
@@ -946,7 +946,7 @@ public final class v4 {
             strC3 = null;
         }
         String strC4 = c(jsonObject, "logo_type");
-        o3 o3VarA = a(this, video, m3Var.a, ve.a("Yh/UIEj5Uu6SRcK4ekcvOM8ZNOCSD7tEMRM52STZD86QQ7IJay0QcapW+i+pX0jN", "2Ct83G24t5bPUec7", "aes", new StringBuilder(), strC).append("]").toString(), s4.DASH, a(new String[]{strC4, strC, strC2}), a(strC, strC2, strC3) ? zc.VERIFIED_ORIGINAL : zc.UNKNOWN, ci.DASH_VIDEO_AUDIO, m3Var.e, a(jsonObject, "quality"), a(a(jsonObject, "vwidth"), a(jsonObject, "width"), f(m3Var.a)), a(a(jsonObject, "vheight"), a(jsonObject, "height"), e(m3Var.a)), strC, m3Var.c, m3Var.d, 820, null, strC4, new l3(m3Var, m3Var2), 294912);
+        o3 o3VarA = a(this, video, m3Var.a, (new StringBuilder()).append("video.videoModel[").append(strC).append("]").toString(), s4.DASH, a(new String[]{strC4, strC, strC2}), a(strC, strC2, strC3) ? zc.VERIFIED_ORIGINAL : zc.UNKNOWN, ci.DASH_VIDEO_AUDIO, m3Var.e, a(jsonObject, "quality"), a(a(jsonObject, "vwidth"), a(jsonObject, "width"), f(m3Var.a)), a(a(jsonObject, "vheight"), a(jsonObject, "height"), e(m3Var.a)), strC, m3Var.c, m3Var.d, 820, null, strC4, new l3(m3Var, m3Var2), 294912);
         if (o3VarA == null || o3VarA.d()) {
             return null;
         }

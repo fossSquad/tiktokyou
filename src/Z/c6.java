@@ -97,7 +97,7 @@ public class c6 extends BaseActivity {
         textView3.setText(k7.a("filter_words_add"));
         textView3.setTextSize(2, 14.0f);
         textView3.setTextColor(iA);
-        x5.a("iSwBcu5zVtrIKGoPm7jf/zk59Lk9SGiAaw+Tg2YCwVVOjReSGN5OtaCr0B65yR+L", "ruxR3F5uFUhoSrjr", "aes", 0, textView3);
+        (textView3).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         textView3.setPadding(a(12.0f), a(8.0f), 0, a(8.0f));
         textView3.setVisibility(8);
         textView3.setOnClickListener(new View.OnClickListener() {

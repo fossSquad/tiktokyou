@@ -43,7 +43,7 @@ public final class mi$before$3 extends HookMethod {
                 g7.a(6, g7.a("Error setting small icon", new Object[0]), th3);
             }
         } catch (Throwable th4) {
-            g7.a(6, g7.a(di.a("TNVVjZuw1f9O9cKdZEVurv6b5jj5SrZlPWcbDTpTfh8rTv/S+HsAVoQThoFOImhJ", "OnnJqpBHSs3LCT8b", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th4);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th4);
         }
     }
 }

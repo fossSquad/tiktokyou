@@ -481,7 +481,7 @@ public final class wf {
         textView.setText("TikTok You");
         textView.setTextColor(-1);
         textView.setTextSize(2, 22.0f);
-        x5.a("nCSXC8ENS2jtEmUVGVCfYUigfC0MTjD090bw00NsWrkt1cL4KMdasV7x/1eW623C", "Pk2Y8fPVKGH6zU2t", "aes", 1, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         textView.setGravity(17);
         LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(-2, -2);
         layoutParams2.topMargin = this.b.a(12.0f);
@@ -529,7 +529,7 @@ public final class wf {
         textView3.setText(k7.a("settings_check_updates"));
         this.y.setTextColor(-1);
         this.y.setTextSize(2, 14.0f);
-        x5.a("qBGQVu+uG6Ca2MG4yiqZRIdKHYUasJ1+NtRzFyEV+wlBvjpVhExaHpDApWEAwITM", "6DWBpnYCUUwogD8q", "aes", 0, this.y);
+        (this.y).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         this.y.setGravity(17);
         TextView textView4 = this.y;
         textView4.setMinWidth(Math.max((int) Math.ceil(textView4.getPaint().measureText(k7.a("settings_check_updates"))), (int) Math.ceil(this.y.getPaint().measureText(k7.a("settings_check_updates_progress")))));
@@ -603,7 +603,7 @@ public final class wf {
         TextView textView = new TextView(this.a);
         textView.setText(str);
         textView.setTextSize(2, 16.0f);
-        x5.a("RZ4kCVkaYutQGQXdcJDQ+R/B99Bys8si5F07x6hKH8kP6QATjNb8xSa2XYe9hk4D", "G8C7AiT7rfZNh19h", "aes", 1, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 1));
         textView.setTextColor(this.b.e());
         textView.setMaxLines(1);
         textView.setEllipsize(TextUtils.TruncateAt.END);
@@ -674,7 +674,7 @@ public final class wf {
         this.m = textView;
         textView.setText("TikTok You");
         textView.setTextSize(2, 16.0f);
-        x5.a("RiAVZtjKPeygRSnq+xybEeur7CZN+1DVU3ss6erlEFw=", "eFMjJLcygWM9jEBQ", "aes", 1, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif", 1));
         textView.setTextColor(this.b.e());
         textView.setGravity(17);
         textView.setIncludeFontPadding(false);

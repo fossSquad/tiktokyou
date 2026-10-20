@@ -87,7 +87,7 @@ public abstract class we {
                         break;
                 }
                 if (strDecrypt != null) {
-                    bitmapA = a(baseActivity, ve.a("KYN1XIYl/WgozEawRBdGi6yn9HlSa+IfJUOBwbPuS9E=", "CsJ8X1kZNCm4Jfag", "aes", new StringBuilder(), strDecrypt).append(".png").toString());
+                    bitmapA = a(baseActivity, (new StringBuilder()).append("mod_icons/").append(strDecrypt).append(".png").toString());
                 }
             }
         }

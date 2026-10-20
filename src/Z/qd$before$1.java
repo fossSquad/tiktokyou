@@ -19,7 +19,7 @@ public final class qd$before$1 extends HookMethod {
                 new File(strA).getName();
             }
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("F3fFFG2MdhwFeAXZulaLF75R0JVwljcfSV97GxihFnV71jCMbJH5AMBVRtGg9gCD", "Q5KwiRd5pVkr4W8o", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
         }
     }
 }

@@ -81,6 +81,6 @@ public final class z1 {
         String str3 = this.d;
         Boolean bool = this.e;
         String str4 = this.f;
-        return ve.a("gekKutQZl+NcUqzvS+c1AO6VmwLK+vXKc2wGBCfsyn0=", "bLc6OiNr3ruCq1vy", "aes", ve.a("q3Pvii5FfCOQ8Yv+DX97cW4YALCjvw+BJ1UvP3O8pwM=", "8Nr7OwrlnYxUnh7C", "aes", ve.a("VsJ8Q08Na7KE60hBBbzUZq5itBbKbiGtshfaKJjQLTI=", "fQICMLlAPxTOx74i", "aes", ve.a("UvOYVJLn0Puo2rNQ6XwPzS3ycJqD7p13e0Bj8bjm/6E=", "xiqdx6Kd6gNoF7CC", "aes", ve.a("r3Gf901f7QKaoYnMi2+OIFUnBISK+5Y55Gt8u7Ic5JgOmf2mRTnJjLU5UMCruhxQ", "Xy2o7u6lTLu8OTEp", "aes", new StringBuilder(), str).append(", isDeveloper=").append(z), str2), str3).append(", tinted=").append(bool), str4), this.g).append(")").toString();
+        return (((((new StringBuilder()).append("BadgePayload(uid=").append(str).append(", isDeveloper=").append(z)).append(", status=").append(str2)).append(", badgeUrl=").append(str3).append(", tinted=").append(bool)).append(", text=").append(str4)).append(", bannerUrl=").append(this.g).append(")").toString();
     }
 }

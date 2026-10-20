@@ -75,10 +75,10 @@ public final class b {
                         String strDecrypt = i2 == i ? "classes.dex" : "classes" + i2 + ".dex";
                         String strB2 = b(map2, "name");
                         if (!strB2.equals(strDecrypt)) {
-                            throw new IOException(a.a.a("g26CR6VsuvHWitpRMGBGuSDGqXkSZSoJM+NDPodwdzlHFfmjIsjdi7tUXBTwkygYVTxRWNMtAi/b6QewSA8J9g==", "zCYbqGeNGZU6cfd0", "aes", new StringBuilder(), strDecrypt));
+                            throw new IOException(a.(new StringBuilder()).append("dexFiles must be sequential; expected ").append(strDecrypt).toString());
                         }
                         if (!strB2.equals(b(map2, "payload"))) {
-                            throw new IOException(a.a.a("0kAdb87DJtkhuipl23FETLakJcW8xW6pguY8OoQfrizHbAVr9k0cM5X/OujO92yU", "Eb90Vq1usVZ358WW", "aes", new StringBuilder(), strB2));
+                            throw new IOException(a.(new StringBuilder()).append("Full payload name must match ").append(strB2).toString());
                         }
                         Iterator it2 = it;
                         String str3 = strB;
@@ -87,7 +87,7 @@ public final class b {
                         long j2 = jA;
                         String str4 = strB2 + ".targetSize";
                         if (jA3 <= 0) {
-                            throw new IOException(a.a.a("OcU67yg+apqqIrcZKvPdALLrdkaHSDNLAk9vJPcl+68=", "HsDylIlQXOSnKWVd", "aes", new StringBuilder(), str4));
+                            throw new IOException(a.(new StringBuilder()).append("Invalid ").append(str4).toString());
                         }
                         arrayList.add(new a(strB2, strA, jA3));
                         i2++;
@@ -106,7 +106,7 @@ public final class b {
         long jA4 = a(map, "targetSize");
         String strDecrypt2 = "targetSize";
         if (jA4 <= 0) {
-            throw new IOException(a.a.a("OcU67yg+apqqIrcZKvPdALLrdkaHSDNLAk9vJPcl+68=", "HsDylIlQXOSnKWVd", "aes", new StringBuilder(), strDecrypt2));
+            throw new IOException(a.(new StringBuilder()).append("Invalid ").append(strDecrypt2).toString());
         }
         arrayList.add(new a("classes.dex", strA2, jA4));
         str = strB;
@@ -153,7 +153,7 @@ public final class b {
                 return str2;
             }
         }
-        throw new IOException(a.a.a("L24x2nxfCfcpTYS+BnKrpMaWz2mvZHanOMeuf6GJNS9XczFc8U9JCAEcGGILRI5E", "iPMerlIhzlONTNpp", "aes", new StringBuilder(), str));
+        throw new IOException(a.(new StringBuilder()).append("Missing/invalid ").append(str).toString());
     }
 
     public static long a(Map map, String str) throws IOException {
@@ -161,13 +161,13 @@ public final class b {
         if (obj instanceof Long) {
             return ((Long) obj).longValue();
         }
-        throw new IOException(a.a.a("+qoQlu/Zi68IdvlEdWU4iY7Qz02tOn0/TChWFYcqytgdyPsnzQ2S9q99PwbvFUJh", "q3R81G4JShKhYFpX", "aes", new StringBuilder(), str));
+        throw new IOException(a.(new StringBuilder()).append("Missing/invalid ").append(str).toString());
     }
 
     public static String a(String str, String str2) throws IOException {
         if (str.length() == 64 && str.matches("[0-9a-fA-F]{64}")) {
             return str.toLowerCase(Locale.ROOT);
         }
-        throw new IOException(a.a.a("/Qo5E/0BMOb/22zos10zfiZO5WLJ225dHZmluisVUxF2qaTNgAqm/kBDZnudfqq0", "hDHK8RJbQhj3MM1B", "aes", new StringBuilder(), str2));
+        throw new IOException(a.(new StringBuilder()).append("Invalid SHA-256 in ").append(str2).toString());
     }
 }

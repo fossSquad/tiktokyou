@@ -611,7 +611,7 @@ public final class qd {
             if (bitmap == null) {
                 return false;
             }
-            File file2 = new File(file.getParentFile(), d3.a("XG8C/8X4J6nxP3t6AG9NoZqAg/xcjVgaZnQfdOxk5hs=", "mG6EAuQm5Hb7Z69q", "aes", new StringBuilder().append(file.getName())));
+            File file2 = new File(file.getParentFile(), (new StringBuilder().append(file.getName())).append(".conv.tmp").toString());
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file2);
                 try {
@@ -756,7 +756,7 @@ public final class qd {
             FilesKt.copyTo$default(file, file2, true, 0, 4, (Object) null);
             return true;
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("rOMWWGw1d7OlFSa0XLGmX2exRza6rJYZVpBW8x/MrLo=", "RlPBmBBgM4RLlEj7", "aes", ve.a("7GBCQt1fFjcp5aBoDeTN27N+3Q6IzXUg8YXyx3VHEeM=", "Epd4uCYsCr2EZag0", "aes", new StringBuilder(), str), str2), new Object[0]), th);
+            g7.a(6, g7.a("Failed to copy " + str + " -> " + str2, new Object[0]), th);
             return false;
         }
     }

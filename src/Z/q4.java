@@ -46,6 +46,6 @@ public final class q4 {
         boolean z = this.c;
         String str2 = this.d;
         String str3 = this.e;
-        return ve.a("e9MTElDHssgnE1jWqwiXgGctNcp/nlJcw5SnXO9PVd0=", "Ri15VF5Hmu9I2Ig8", "aes", ve.a("3QWDxalAk9j8W5jAvXwFAFSSqoIVxEjFQj0ZU/zCrg9pQTyBiJwoJvNLivNHuFSB", "GVSacn5OHNooRtHg", "aes", ve.a("LGPf47PUBugVJ7qZN+43wD1+nEbE0lv3HoMdh12zp6g=", "2IYQc903hShR6AeL", "aes", new StringBuilder().append("MediaTarget(sessionId=").append(j), str).append(", audioOnly=").append(z), str2), str3).append(", createdAtMs=").append(this.f).append(")").toString();
+        return (((new StringBuilder().append("MediaTarget(sessionId=").append(j)).append(", fileBase=").append(str).append(", audioOnly=").append(z)).append(", fileExtension=").append(str2)).append(", mimeType=").append(str3).append(", createdAtMs=").append(this.f).append(")").toString();
     }
 }

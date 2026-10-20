@@ -739,7 +739,7 @@ public final class ei extends Activity {
         if (j2 <= 0 || strSubstring.isEmpty()) {
             return j2 > 0 ? "v" + j2 : strSubstring;
         }
-        return di.a("wQ9CV0J55ZaK2Bu/YUPUrgECnFh1xP7kFdKRO4VBzt8=", "a5tZNnxf3cumBYiv", "aes", new StringBuilder("v").append(j2), strSubstring);
+        return "v" + (j2) + " \u00b7 " + strSubstring;
     }
 
     public final void a(LinearLayout linearLayout, String str, String str2, boolean z) {

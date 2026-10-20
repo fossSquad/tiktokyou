@@ -149,7 +149,7 @@ public class af extends BaseActivity {
             textView.setText(strA2);
             textView.setTextSize(2, 14.0f);
             textView.setTextColor(t);
-            x5.a("yAeV9YZmFhjfINhThgEJMMS40IVwO0O8BtRfWr2bkjfd1Ryb2u4YqY4WQswsfspw", "lWIUhXyZN45rS8Nz", "aes", 0, textView);
+            (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
             textView.setPadding(a(20.0f), a(10.0f), 0, a(10.0f));
             linearLayout2.addView(textView);
             this.e.addView(a(Collections.singletonList(Integer.valueOf(i)), i));
@@ -227,7 +227,7 @@ public class af extends BaseActivity {
             textView3.setText(str3);
             textView3.setTextSize(2, 14.0f);
             textView3.setTextColor(t);
-            x5.a("yAeV9YZmFhjfINhThgEJMMS40IVwO0O8BtRfWr2bkjfd1Ryb2u4YqY4WQswsfspw", "lWIUhXyZN45rS8Nz", "aes", 0, textView3);
+            (textView3).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
             textView3.setPadding(a(20.0f), a(10.0f), 0, a(10.0f));
             linearLayout4.addView(textView3);
             this.e.addView(a((List) entry.getValue(), i));
@@ -277,7 +277,7 @@ public class af extends BaseActivity {
         TextView textView2 = new TextView(this);
         textView2.setText(k7.a("region_picker_title"));
         textView2.setTextSize(2, 16.0f);
-        x5.a("AGS6Z0u03M+oD7+MYUwNBY6aSPj0nkAbkudwS6rI3oE=", "4A0Xv91sALNJIu8B", "aes", 1, textView2);
+        (textView2).setTypeface(android.graphics.Typeface.create("sans-serif", 1));
         textView2.setTextColor(this.b ? -1 : -16777216);
         textView2.setVisibility(4);
         FrameLayout.LayoutParams layoutParams3 = new FrameLayout.LayoutParams(-2, -2);
@@ -443,7 +443,7 @@ public class af extends BaseActivity {
         TextView textView = new TextView(this);
         textView.setText(k7.a(teVar.b, teVar.c));
         textView.setTextSize(2, 16.0f);
-        x5.a("4TfCsknNEEAvVoabcpKNDvwcrXhhjt6OtXIgt2vyM4TwVhmltVNL7IuztmHswARr", "V7DgYtZN6zg8uEJT", "aes", 0, textView);
+        (textView).setTypeface(android.graphics.Typeface.create("sans-serif-medium", 0));
         textView.setTextColor(this.b ? -1 : -16777216);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -2, 1.0f);
         layoutParams.leftMargin = a(12.0f);

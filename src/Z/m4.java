@@ -349,7 +349,7 @@ public final class m4 {
                 StringCompanionObject stringCompanionObject = StringCompanionObject.INSTANCE;
                 strA = String.format(Locale.US, "%.1f Mbps", Arrays.copyOf(new Object[]{Float.valueOf(i / 1000000.0f)}, 1));
             } else {
-                strA = d3.a("vvRK+ZOnGrQyu/zPydDGf/Ymo6ngorzLqTeQ5idsaTE=", "iXpTGYrkvfnJqPN4", "aes", new StringBuilder().append(Math.max(1, i / 1000)));
+                strA = (new StringBuilder().append(Math.max(1, i / 1000))).append(" Kbps").toString();
             }
             arrayList.add(strA);
         }

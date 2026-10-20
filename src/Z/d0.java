@@ -30,6 +30,6 @@ public final class d0 {
     public final String toString() {
         String str = this.a;
         String str2 = this.b;
-        return ve.a("4Vt02IiDtdknD5jXc9B4nF5vw9J7+cBqSR5VKlXFGs4S9bqwIiWgm/QMVUHzoT0o", "MC5qh4rHXSdrERsy", "aes", ve.a("LwO60SM1B3GmKaQDNK0nH7ubfwhLokHonw0cfWMj8P0jaMZhtNXguUUxyFTZ7GFX", "wKYghwNH4nFfbBEP", "aes", new StringBuilder(), str), str2).append(", streakData=").append(this.c).append(")").toString();
+        return ((new StringBuilder()).append("AutoStreakPartner(uid=").append(str)).append(", conversationId=").append(str2).append(", streakData=").append(this.c).append(")").toString();
     }
 }

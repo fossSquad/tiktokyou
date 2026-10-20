@@ -382,7 +382,7 @@ public abstract class ie {
         if (objValueOf == null) {
             objValueOf = Long.valueOf(p4Var.a);
         }
-        String strA = d3.a("sRkwx1pMwvoiawlKe6a9by4v8SNfBbJ7DE7fZ0RD/kk=", "TO1aFLI3JdpKl6Ng", "aes", new StringBuilder().append("TikTok_").append(objValueOf));
+        String strA = (new StringBuilder().append("TikTok_").append(objValueOf)).append(".mp4").toString();
         ContentValues contentValues = new ContentValues();
         contentValues.put("_display_name", strA);
         contentValues.put("mime_type", "video/mp4");

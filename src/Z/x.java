@@ -575,7 +575,7 @@ public final class x {
                         fileOutputStream.close();
                         inputStreamOpenInputStream.close();
                         ac acVarA = ac.a();
-                        String strA = di.a("jxU2oKyjv1o85bEI9o3Za6cr9r8BMM8XlRRb4bnIbT8=", "LIjhGW26CftDS7hB", "aes", new StringBuilder(), strDecrypt);
+                        String strA = "file:" + strDecrypt;
                         acVarA.getClass();
                         ac.e().c(strA);
                         MandatoryLoginHooks.a = null;

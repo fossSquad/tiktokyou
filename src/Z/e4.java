@@ -28,6 +28,6 @@ public final class e4 {
 
     public final String toString() {
         String str = this.a;
-        return ve.a("KjfZfRXhjQuycV7x4FaTNy7rbg3H1zlTlrI6N7V/5un+InFuQcTWbGksUEeP3GD5", "qtySwkcBCcDQdceW", "aes", new StringBuilder(), str).append(", choices=").append(this.b).append(")").toString();
+        return (new StringBuilder()).append("ChoiceGroup(title=").append(str).append(", choices=").append(this.b).append(")").toString();
     }
 }

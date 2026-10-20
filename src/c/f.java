@@ -275,21 +275,21 @@ public abstract class f {
                 if (!strReplace.isEmpty() && !strReplace.startsWith("/") && !strReplace.contains("\u0000")) {
                     for (String str : strReplace.split("/", -1)) {
                         if (str.isEmpty() || str.equals(".") || str.equals("..")) {
-                            throw new IOException(a.a.a("D92eqNOz+ZI/+6zgKhiIxNmGICx7DVolXHnr669J7WCl+cP4Dvby5YeyeRu0PEKh", "0QnmdQie62wPXLqB", "aes", new StringBuilder(), strReplace));
+                            throw new IOException(a.(new StringBuilder()).append("Unsafe ZIP entry: ").append(strReplace).toString());
                         }
                     }
                     if (!strReplace.equals("manifest.json") && !strReplace.equals("signature.der") && !strReplace.matches("classes(?:[2-9][0-9]*)?\\.dex") && !strReplace.startsWith("resources/")) {
-                        throw new IOException(a.a.a("x04MtO+8pCBtuxvvvKMnDNUPVTSVv6YwIKCX3PLicKSZrZFxZ8E6rme6IMMFe6LZ", "i6wNMRXFKlhoxFvp", "aes", new StringBuilder(), strReplace));
+                        throw new IOException(a.(new StringBuilder()).append("Unsupported package entry: ").append(strReplace).toString());
                     }
                     if (zipEntryNextElement.getSize() <= 134217728) {
                         if (linkedHashMap.put(strReplace, zipEntryNextElement) != null) {
-                            throw new IOException(a.a.a("D2KQEwZKcreSgvfiCdXOxt+gF0+e6gUHvLE2KvAWO1kHtwnwmPZZ+EQHiJGD50g4", "tl8Htd6MYKBt2UD9", "aes", new StringBuilder(), strReplace));
+                            throw new IOException(a.(new StringBuilder()).append("Duplicate package entry: ").append(strReplace).toString());
                         }
                     } else {
-                        throw new IOException(a.a.a("J9SIhsbrvjYZO678pR3sEc+iPZLlMn7fEQoUH6ltn0MjyU9E4pPLVMQFPJW+HMD+", "Vn5ipMPoiBGLsLyO", "aes", new StringBuilder(), strReplace));
+                        throw new IOException(a.(new StringBuilder()).append("Entry is too large: ").append(strReplace).toString());
                     }
                 } else {
-                    throw new IOException(a.a.a("WkFArlWujuwQuZhNN7UcacPYuk/SwoirlOROT3PUgzawqStAO/OKvVaPtNvykeQL", "1h6YszzwFfkm4IHC", "aes", new StringBuilder(), strReplace));
+                    throw new IOException(a.(new StringBuilder()).append("Unsafe ZIP entry: ").append(strReplace).toString());
                 }
             }
         }

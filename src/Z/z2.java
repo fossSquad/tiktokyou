@@ -357,13 +357,13 @@ public abstract class z2 {
             w3 w3Var2 = w3.a;
             String strDecrypt3 = "Videos";
             w3Var2.getClass();
-            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), di.a("cW8AWvT96EZHP8js0XiTUhgcrF+rsKQtRcPohWwMJGM=", "KpOJse9RT6gpTJld", "aes", new StringBuilder(), strDecrypt3));
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "TikTokYou/" + strDecrypt3);
             file.mkdirs();
         } else {
             w3 w3Var3 = w3.a;
             String strDecrypt4 = "Photos";
             w3Var3.getClass();
-            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), di.a("cW8AWvT96EZHP8js0XiTUhgcrF+rsKQtRcPohWwMJGM=", "KpOJse9RT6gpTJld", "aes", new StringBuilder(), strDecrypt4));
+            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "TikTokYou/" + strDecrypt4);
             file.mkdirs();
         }
         file.mkdirs();

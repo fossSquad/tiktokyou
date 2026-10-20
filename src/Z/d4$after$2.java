@@ -20,7 +20,7 @@ public final class d4$after$2 extends HookMethod {
             AtomicLong atomicLong = r4.a;
             r4.a(Long.valueOf(q4Var.a), uri);
         } catch (Throwable th) {
-            g7.a(6, g7.a(di.a("SSr/qu5lLyUmTXWuN83037GFOtReH6pU3pYxtgZnv96nzC94oHNfmnyNqAh+jJqT", "2T4NNZLHqsihgcET", "aes", new StringBuilder(), hookMethodParam.method.getName()), new Object[0]), th);
+            g7.a(6, g7.a("Unhandled hook exception on " + hookMethodParam.method.getName(), new Object[0]), th);
         }
     }
 }

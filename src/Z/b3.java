@@ -275,7 +275,7 @@ public abstract class b3 {
                                 }
                             } catch (Exception e5) {
                                 eU = e5;
-                                String strA2 = di.a("ATXUNGbwaJq5sYhqYC4/YVdFjZzR1a8sVh1DlDls1Zc=", "GAhK6eUqodoqMWua", "aes", new StringBuilder(), str4);
+                                String strA2 = "Failed to hook " + str4;
                                 Object obj6 = g7.a;
                                 g7.a(6, String.valueOf(strA2), eU);
                                 i5 += i2;
@@ -312,7 +312,7 @@ public abstract class b3 {
             z2 = z;
             i3 = 0;
         }
-        String strA3 = d3.a("GInpNplmoYYeacPAyvNBrN6M/wt6Wbu9L2ZYPczsSw8=", "4S0E0JOLjIauxCN9", "aes", new StringBuilder().append("Initialized: ").append(i5).append(" methods hooked, ").append(a.size()));
+        String strA3 = (new StringBuilder().append("Initialized: ").append(i5).append(" methods hooked, ").append(a.size())).append(" overrides").toString();
         Object obj8 = g7.a;
         g7.a(4, String.valueOf(strA3), (Throwable) null);
     }

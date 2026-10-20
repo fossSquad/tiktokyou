@@ -123,7 +123,7 @@ class a3 extends HookMethod {
                                     }
                                     obj = objA3;
                                 } catch (Throwable th) {
-                                    String strA = di.a("u0Fku/o88drSZqV/wsn7OG6OK62KMmvAlTs33YdjkOhw1k8FURdaT/+f/ZtHiWC3yPWlQKg6ndghe1epA62ciw==", "NWmCofNcjUTEjM8b", "aes", new StringBuilder(), str);
+                                    String strA = "Failed to parse JSON override for " + str;
                                     Object obj3 = g7.a;
                                     g7.a(6, String.valueOf(strA), th);
                                     obj = null;
@@ -251,7 +251,7 @@ class a3 extends HookMethod {
                                 if (objA != null) {
                                 }
                             } catch (Throwable th4) {
-                                String strA2 = di.a("Fo6cBQJV+ADr2wjDPFC0VkBRlYt7XiEvQuSM0sHIZhk=", "77uyIRiBRvWG482D", "aes", new StringBuilder().append("Failed to create ").append(clsA2.getName()), str);
+                                String strA2 = "Failed to create " + clsA2.getName() + " for " + str;
                                 Object obj7 = g7.a;
                                 g7.a(6, String.valueOf(strA2), th4);
                             }
@@ -263,7 +263,7 @@ class a3 extends HookMethod {
                                     try {
                                         objA2 = vj.a(vj.a(objA), objA.getClass());
                                     } catch (Throwable th5) {
-                                        String strA3 = di.a("YVsCfqushNZo+Re65GFrFNO0RztW9w81KFvuQTJND13vHcYpJRm2H1hfTZ+PHvlkKNyLjujTcqsq//4Lw+z5aQ==", "pdFFXhfl3oSoml6K", "aes", new StringBuilder(), str);
+                                        String strA3 = "Failed to copy auto override for " + str;
                                         Object obj8 = g7.a;
                                         g7.a(6, String.valueOf(strA3), th5);
                                     }
@@ -275,7 +275,7 @@ class a3 extends HookMethod {
                                         Field fieldA = se.a((Class) objA2.getClass(), (String) entry.getKey());
                                         fieldA.set(objA2, vj.a((String) entry.getValue(), fieldA.getGenericType()));
                                     } catch (Throwable th6) {
-                                        String string = ve.a("H6ec9aq8leg+wx2GRWYeuB2m4OwfMC0uVOgo9uA+LWqPA+ffzrs1YHQBMQ5rC1b2", "poqVwsySUMX9tJTJ", "aes", new StringBuilder(), str).append(".").append((String) entry.getKey()).toString();
+                                        String string = (new StringBuilder()).append("Failed to patch ").append(str).append(".").append((String) entry.getKey()).toString();
                                         Object obj9 = g7.a;
                                         g7.a(6, String.valueOf(string), th6);
                                     }
