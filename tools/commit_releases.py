@@ -25,9 +25,27 @@ TOOLS = pathlib.Path(__file__).resolve().parent
 PROJECT = TOOLS.parent
 
 RELEASES = ["1.0.0", "1.0.1", "1.1.0", "1.2.2", "1.2.3", "1.2.4", "1.3",
-            "1.4", "1.5", "1.5.1", "2.1.1", "3.0", "3.4", "4.2", "4.4"]
+            "1.4", "1.5", "1.5.1", "2.1.1", "3.0", "3.4", "4.2", "4.4", "5.0"]
 
 OVERRIDES = {"4.4": PROJECT / "src"}
+
+# Releases published after the Telegram export was taken (no export entry).
+LOCAL_META = {
+    "5.0": ("2026-10-20T12:00:00+00:00", """\
+➕ Добавлен редактор интерфейса: скрывайте любой элемент TikTok одним нажатием
+➕ Добавлена скорость 3× в выборе скорости видео
+➕ Добавлен режим «картинка в картинке»
+➕ Добавлена кнопка «Прочитать все» при выборе чатов
+➕ В комментарии теперь можно отправить до 9 изображений
+➕ Убран лимит хештегов при публикации
+➕ В съёмку видео добавлены телесуфлёр, гринскрин, цветная вспышка для селфи, ИИ-мем и другое
+➕ В антивыгорании теперь можно скрыть системные панели
+ℹ️ Полностью обновлён дизайн настроек мода
+❗ Исправлен выбор качества при скачивании
+❗ Исправлены чёрные сторис и открытие не того видео из поиска и входящих
+❗ Улучшена стабильность хуков, исправлен краш на Android <10
+✅ Исправлены проблемы с запуском на большинстве устройств"""),
+}
 
 
 def run(cmd, cwd=None, env=None, check=True):
@@ -73,6 +91,8 @@ def main() -> int:
         print(f"ERROR: {args.repo} is not a git repo")
         return 1
     meta = load_export(args.export)
+    for ver, entry in LOCAL_META.items():
+        meta.setdefault(ver, entry)
     wanted = [v for v in RELEASES if not args.only or v in args.only.split(",")]
     missing = [v for v in wanted
                if not OVERRIDES.get(v, args.releases / v / "src").is_dir()]

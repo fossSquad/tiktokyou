@@ -302,8 +302,13 @@ def main() -> int:
     found = {}
     if args.dexes:
         found = {"explicit": [apkdir / n for n in args.dexes.split(",")]}
+        payload = apkdir / PAYLOAD
+        if payload.is_file():
+            found["payload"] = payload
         for p in found["explicit"]:
             print(f"using {p}")
+        if "payload" in found:
+            print(f"using payload {found['payload']}")
     elif "locate" in stages:
         found = stage_locate(apkdir)
         if not found:
