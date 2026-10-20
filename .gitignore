@@ -23,3 +23,6 @@ __pycache__/
 # Local binaries / logs
 *.apk
 *.log
+
+# Generated support jar (built from sources, not tracked)
+src/proprietary/hook.jar
