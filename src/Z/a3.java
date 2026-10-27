@@ -111,7 +111,7 @@ class a3 extends HookMethod {
                                 }
                             }
                         } else {
-                            ConcurrentHashMap concurrentHashMap = b3.g;
+                            ConcurrentHashMap concurrentHashMap = b3.f;
                             com.windukk.mod.hooks.a aVar = (com.windukk.mod.hooks.a) concurrentHashMap.get(str);
                             if (aVar != null && aVar.a.equals(str2) && aVar.b == clsA) {
                                 obj = aVar.c;
@@ -237,11 +237,11 @@ class a3 extends HookMethod {
                 if (vj.a((Class) returnType)) {
                     return;
                 }
-                Map map2 = (Map) b3.d.get(str);
+                Map map2 = (Map) b3.b.get(str);
                 if (map2 != null && !map2.isEmpty()) {
                     Object result2 = hookMethodParam.getResult();
                     Class clsA2 = b3.a(str, hookMethodParam.args, hookMethodParam.getResult(), returnType);
-                    com.windukk.mod.hooks.b bVar = (com.windukk.mod.hooks.b) b3.h.get(str);
+                    com.windukk.mod.hooks.b bVar = (com.windukk.mod.hooks.b) b3.g.get(str);
                     if (bVar == null || !(bVar.a == result2 || bVar.b == result2)) {
                         if (result2 != null) {
                             objA = result2;
@@ -259,7 +259,7 @@ class a3 extends HookMethod {
                         if (!(objA instanceof Class)) {
                             Class<?> cls5 = objA.getClass();
                             if (!vj.a((Class) cls5) && !cls5.isArray() && !(objA instanceof Iterable) && !(objA instanceof Map)) {
-                                if (objA == b3.i.get(str)) {
+                                if (objA == b3.h.get(str)) {
                                     try {
                                         objA2 = vj.a(vj.a(objA), objA.getClass());
                                     } catch (Throwable th5) {
@@ -280,7 +280,7 @@ class a3 extends HookMethod {
                                         g7.a(6, String.valueOf(string), th6);
                                     }
                                 }
-                                b3.h.put(str, new com.windukk.mod.hooks.b(result2, objA2));
+                                b3.g.put(str, new com.windukk.mod.hooks.b(result2, objA2));
                                 Objects.toString(map2.keySet());
                             }
                         }
@@ -296,7 +296,7 @@ class a3 extends HookMethod {
                 if (objArr2 != null) {
                     for (Object obj10 : objArr2) {
                         if (obj10 instanceof Class) {
-                            b3.f.put(str, (Class) obj10);
+                            b3.e.put(str, (Class) obj10);
                             break;
                         }
                     }
@@ -304,7 +304,7 @@ class a3 extends HookMethod {
                 if (result3 == null || vj.a((Class) result3.getClass())) {
                     return;
                 }
-                b3.e.put(str, result3);
+                b3.d.put(str, result3);
             }
         }
     }

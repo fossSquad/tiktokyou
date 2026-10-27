@@ -25,7 +25,6 @@ import ni.shikatu.kotlinx.serialization.json.JsonElementKt;
 import ni.shikatu.kotlinx.serialization.json.JsonKt;
 import ni.shikatu.kotlinx.serialization.json.JsonNull;
 import ni.shikatu.kotlinx.serialization.json.JsonObject;
-import ni.shikatu.kotlinx.serialization.json.JsonPrimitive;
 
 public abstract class e7 {
     public static final Json a = JsonKt.Json$default((Json) null, new Function1() {
@@ -134,41 +133,5 @@ public abstract class e7 {
             return b(string2);
         }
         return null;
-    }
-
-    public static final LinkedHashMap a(String str) {
-        Object doubleOrNull;
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        JsonElement jsonElementB = str != null ? b(str) : null;
-        JsonObject jsonObject = jsonElementB instanceof JsonObject ? (JsonObject) jsonElementB : null;
-        if (jsonObject != null) {
-            for (Map.Entry entry : jsonObject.entrySet()) {
-                String str2 = (String) entry.getKey();
-                JsonElement jsonPrimitive = (JsonElement) entry.getValue();
-                JsonPrimitive jsonPrimitive2 = jsonPrimitive instanceof JsonPrimitive ? (JsonPrimitive) jsonPrimitive : null;
-                if (jsonPrimitive2 == null || jsonPrimitive2 == JsonNull.INSTANCE) {
-                    doubleOrNull = null;
-                } else if (jsonPrimitive2.isString()) {
-                    doubleOrNull = jsonPrimitive2.getContent();
-                } else {
-                    Object booleanOrNull = JsonElementKt.getBooleanOrNull(jsonPrimitive2);
-                    if (booleanOrNull != null) {
-                        doubleOrNull = booleanOrNull;
-                    } else {
-                        Long longOrNull = JsonElementKt.getLongOrNull(jsonPrimitive2);
-                        if (longOrNull != null) {
-                            long jLongValue = longOrNull.longValue();
-                            doubleOrNull = (-2147483648L > jLongValue || jLongValue > 2147483647L) ? Long.valueOf(jLongValue) : Integer.valueOf((int) jLongValue);
-                        } else {
-                            doubleOrNull = JsonElementKt.getDoubleOrNull(jsonPrimitive2);
-                        }
-                    }
-                }
-                if (doubleOrNull != null) {
-                    linkedHashMap.put(str2, doubleOrNull);
-                }
-            }
-        }
-        return linkedHashMap;
     }
 }

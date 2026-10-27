@@ -124,6 +124,10 @@ public final class l7 {
         map.put("ota_ready_title", "Обновление установлено");
         map.put("ota_ready_subtitle", "Перезапустите приложение, чтобы применить его");
         map.put("ota_ready_button", "Закрыть");
+        map.put("ota_available_subtitle", "Обновление можно установить прямо сейчас");
+        map.put("ota_install_button", "Установить");
+        map.put("ota_skip_button", "Не устанавливать");
+        map.put("ota_install_failed", "Не удалось установить обновление");
         map.put("auto_streak_nudge", "Автопродление серии");
         map.put("auto_streak_toggle", "Автоматически продлевать");
         map.put("auto_streak_settings_section", "Настройки автопродления");
@@ -401,6 +405,10 @@ public final class l7 {
         map2.put("ota_ready_title", "Update installed");
         map2.put("ota_ready_subtitle", "Restart the app to apply it");
         map2.put("ota_ready_button", "Close");
+        map2.put("ota_available_subtitle", "The update can be installed right now");
+        map2.put("ota_install_button", "Install");
+        map2.put("ota_skip_button", "Don't install");
+        map2.put("ota_install_failed", "Could not install the update");
         map2.put("auto_streak_nudge", "Auto streak renew");
         map2.put("auto_streak_toggle", "Renew automatically");
         map2.put("auto_streak_settings_section", "Auto-renew settings");

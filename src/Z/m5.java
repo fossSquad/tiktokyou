@@ -19,6 +19,7 @@ import com.windukk.mod.hooks.FontHooks;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -28,10 +29,12 @@ import java.util.regex.PatternSyntaxException;
 
 public abstract class m5 {
     public static volatile String a;
-    public static volatile HashSet b;
+    public static final List b;
     public static volatile List c;
+    public static volatile HashSet d;
 
     static {
+        b = Arrays.asList("save", "save_photo");
         c = Collections.EMPTY_LIST;
     }
 
@@ -56,6 +59,16 @@ public abstract class m5 {
             String strDecrypt3 = "isSharedStoryVisible hook failed";
             Object obj3 = g7.a;
             g7.a(6, String.valueOf(strDecrypt3), th3);
+        }
+        try {
+            Class clsA = com.windukk.mod.b.a.a();
+            Method methodA = com.windukk.mod.b.b.a(clsA, new Class[0]);
+            v9 v9Var = com.windukk.mod.c.a;
+            HookBridge.hookMethod(v9Var.a(Class.forName(v9Var.a.b), List.class), new com.windukk.mod.hooks.c(clsA, methodA));
+        } catch (Throwable th4) {
+            String strDecrypt4 = "Share-panel download order hook failed";
+            Object obj4 = g7.a;
+            g7.a(6, String.valueOf(strDecrypt4), th4);
         }
     }
 
@@ -249,7 +262,7 @@ public abstract class m5 {
             }
             if ((statistics == null || ((j2 == j || j2 <= statistics.getDiggCount()) && (j3 == j || j3 <= statistics.getPlayCount()))) && (j4 == j || j4 <= aweme.getCreateTime())) {
                 if (linkedHashSet != null && !linkedHashSet.isEmpty()) {
-                    HashSet hashSet = b;
+                    HashSet hashSet = d;
                     if (hashSet != null && hashSet.equals(linkedHashSet)) {
                         list = c;
                         title = null;
@@ -265,13 +278,13 @@ public abstract class m5 {
                             }
                         }
                         c = arrayList;
-                        b = new HashSet(linkedHashSet);
+                        d = new HashSet(linkedHashSet);
                         title = null;
                         list = arrayList;
                     }
                 } else {
                     title = null;
-                    b = null;
+                    d = null;
                     c = Collections.EMPTY_LIST;
                     list = c;
                 }
@@ -292,7 +305,8 @@ public abstract class m5 {
                 }
                 for (int i = 0; i < list.size(); i++) {
                     Pattern pattern = (Pattern) list.get(i);
-                    if ((desc == null || desc.isEmpty() || !pattern.matcher(desc).find()) && (title == null || title.isEmpty() || !pattern.matcher(title).find())) {
+                    if ((desc != null && !desc.isEmpty() && pattern.matcher(desc).find()) || (title != null && !title.isEmpty() && pattern.matcher(title).find())) {
+                        return true;
                     }
                 }
                 return false;

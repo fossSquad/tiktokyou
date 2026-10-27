@@ -1,42 +1,33 @@
 package Z;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import com.ss.android.ugc.gamora.recorder.frontflash.config.StudioSelfieFillLightConfig;
 import com.windukk.hook.HookBridge;
-import com.windukk.mod.Main;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public abstract class b3 {
     public static final HashMap a;
-    public static boolean b;
+    public static final ConcurrentHashMap b;
     public static final String[] c;
     public static final ConcurrentHashMap d;
     public static final ConcurrentHashMap e;
     public static final ConcurrentHashMap f;
     public static final ConcurrentHashMap g;
-    public static final ConcurrentHashMap h;
-    public static final HashMap i;
+    public static final HashMap h;
 
     static {
         a = new HashMap();
+        b = new ConcurrentHashMap();
         d = new ConcurrentHashMap();
         e = new ConcurrentHashMap();
         f = new ConcurrentHashMap();
         g = new ConcurrentHashMap();
-        h = new ConcurrentHashMap();
-        b = false;
         c = wb.a;
         HashMap map = new HashMap();
-        i = map;
+        h = map;
         String strDecrypt = "enable_normal_splash_ad";
         Boolean bool = Boolean.FALSE;
         map.put(strDecrypt, bool);
@@ -174,7 +165,7 @@ public abstract class b3 {
         map.put("studio_change_shoot_btn_icon", bool2);
         map.put("studio_editor_pro_add_anim_sub_menu_in_effect", bool2);
         map.put("nearby_tab_rename_enable", bool2);
-        map.put("video_capture_green_screen_standalone", bool2);
+        map.put("video_capture_green_screen_standalone", bool);
         map.put("ct_ai_caption", 1);
         map.put("show_filter_anchor", 1);
         map.put("tiktok_live_inbox_2_following_guide_type", 1);
@@ -189,131 +180,76 @@ public abstract class b3 {
     }
 
     public static void a() {
-        Exception eU = null;
-        boolean z;
-        int i2;
-        int i3 = 0;
-        boolean z2 = true;
-        if (!b) {
-            b = true;
-            try {
-                Context contextA = Main.getApplicationContext();
-                if (contextA == null) {
-                    String strDecrypt = "Context is null!";
-                    Object obj = g7.a;
-                    g7.a(4, String.valueOf(strDecrypt), (Throwable) null);
-                } else {
-                    SharedPreferences sharedPreferences = contextA.getSharedPreferences("ttmod_remote_configs", 0);
-                    String string = sharedPreferences.getString("config_overrides", "{}");
-                    HashMap map = a;
-                    map.clear();
-                    map.putAll(e7.a(string));
-                    ConcurrentHashMap concurrentHashMap = d;
-                    concurrentHashMap.clear();
-                    concurrentHashMap.putAll(a(sharedPreferences.getString("config_field_overrides", "{}")));
-                    String str = "Loaded " + map.size() + " config overrides, " + concurrentHashMap.size() + " field overrides";
-                    Object obj2 = g7.a;
-                    g7.a(4, String.valueOf(str), (Throwable) null);
-                }
-            } catch (Exception e2) {
-                String str2 = "Failed to load overrides: " + e2;
-                Object obj3 = g7.a;
-                g7.a(6, String.valueOf(str2), (Throwable) null);
-            }
-        }
+        int i;
+        char c2;
         try {
-            for (Map.Entry entry : ((Map<?, ?>) i).entrySet()) {
-                HashMap map2 = a;
-                if (!map2.containsKey(entry.getKey())) {
-                    map2.put((String) entry.getKey(), entry.getValue());
+            for (Map.Entry entry : ((Map<?, ?>) h).entrySet()) {
+                HashMap map = a;
+                if (!map.containsKey(entry.getKey())) {
+                    map.put((String) entry.getKey(), entry.getValue());
                     Objects.toString(entry.getValue());
                 }
             }
-        } catch (Exception e3) {
-            String str3 = "Failed to add auto overrides: " + e3;
-            Object obj4 = g7.a;
-            g7.a(6, String.valueOf(str3), (Throwable) null);
+        } catch (Exception e2) {
+            String str = "Failed to add auto overrides: " + e2;
+            Object obj = g7.a;
+            g7.a(6, String.valueOf(str), (Throwable) null);
         }
-        HashMap map3 = a;
-        if (map3.isEmpty() && d.isEmpty()) {
+        HashMap map2 = a;
+        if (map2.isEmpty() && b.isEmpty()) {
             return;
         }
-        for (Map.Entry entry2 : ((Map<?, ?>) map3).entrySet()) {
+        for (Map.Entry entry2 : ((Map<?, ?>) map2).entrySet()) {
             Objects.toString(entry2.getValue());
             if (entry2.getValue() != null) {
                 entry2.getValue().getClass();
             } else {
             }
         }
-        String[] strArr = c;
-        int length = strArr.length;
-        int i4 = 0;
-        int i5 = 0;
-        while (i4 < length) {
-            String str4 = strArr[i4];
+        int i2 = 0;
+        for (String str2 : c) {
             try {
-                Class<?> cls = Class.forName(str4);
-                Method[] declaredMethods = cls.getDeclaredMethods();
-                int length2 = declaredMethods.length;
-                int i6 = i3;
-                i2 = i6;
-                while (i6 < length2) {
+                Class<?> cls = Class.forName(str2);
+                i = 0;
+                for (Method method : cls.getDeclaredMethods()) {
                     try {
-                        Method method = declaredMethods[i6];
                         Class<?>[] parameterTypes = method.getParameterTypes();
-                        z = z2;
-                        int i7 = 0;
+                        int i3 = 0;
                         while (true) {
-                            try {
-                                if (i7 >= parameterTypes.length) {
-                                    i7 = -1;
-                                    break;
-                                } else if (parameterTypes[i7] == String.class) {
-                                    break;
-                                } else {
-                                    i7++;
-                                }
-                            } catch (Exception e5) {
-                                eU = e5;
-                                String strA2 = "Failed to hook " + str4;
-                                Object obj6 = g7.a;
-                                g7.a(6, String.valueOf(strA2), eU);
-                                i5 += i2;
-                                i4++;
-                                z2 = z;
-                                i3 = 0;
+                            if (i3 >= parameterTypes.length) {
+                                i3 = -1;
+                                break;
+                            } else if (parameterTypes[i3] == String.class) {
+                                break;
+                            } else {
+                                i3++;
                             }
                         }
-                        if (i7 >= 0) {
-                            HookBridge.hookMethod(method, new a3(i7, method, str4.substring(str4.lastIndexOf(46) + 1)));
-                            i2++;
+                        if (i3 >= 0) {
+                            HookBridge.hookMethod(method, new a3(i3, method, str2.substring(str2.lastIndexOf(46) + 1)));
+                            i++;
                         }
-                        i6++;
-                        z2 = z;
-                    } catch (Exception e7) {
-                        eU = e7;
-                        z = z2;
+                    } catch (Exception e4) {
+                        String strA2 = "Failed to hook " + str2;
+                        Object obj3 = g7.a;
+                        c2 = 6;
+                        g7.a(6, String.valueOf(strA2), e4);
+                        i2 += i;
                     }
                 }
-                z = z2;
-                String str5 = "Hooked " + i2 + " methods in " + str4;
-                Object obj7 = g7.a;
-                g7.a(4, String.valueOf(str5), (Throwable) null);
-            } catch (ClassNotFoundException e8) {
-                z = z2;
-                i2 = 0;
-            } catch (Exception e9) {
-                eU = e9;
-                z = z2;
-                i2 = 0;
+                String str3 = "Hooked " + i + " methods in " + str2;
+                Object obj4 = g7.a;
+                g7.a(4, String.valueOf(str3), (Throwable) null);
+                c2 = 6;
+            } catch (ClassNotFoundException e5) {
+                i = 0;
+            } catch (Exception e6) {
+                i = 0;
             }
-            i5 += i2;
-            i4++;
-            z2 = z;
-            i3 = 0;
+            i2 += i;
         }
-        String strA3 = (new StringBuilder().append("Initialized: ").append(i5).append(" methods hooked, ").append(a.size())).append(" overrides").toString();
-        Object obj8 = g7.a;
+        String strA3 = "Initialized: " + i2 + " methods hooked, " + a.size() + " overrides";
+        Object obj5 = g7.a;
         g7.a(4, String.valueOf(strA3), (Throwable) null);
     }
 
@@ -332,7 +268,7 @@ public abstract class b3 {
         if (objA != null) {
             return objA.getClass();
         }
-        return (cls == null || cls == Object.class) ? (Class) f.get(str) : cls;
+        return (cls == null || cls == Object.class) ? (Class) e.get(str) : cls;
     }
 
     public static Object a(Object[] objArr, Class cls) {
@@ -346,34 +282,5 @@ public abstract class b3 {
             }
         }
         return null;
-    }
-
-    public static LinkedHashMap a(String str) {
-        LinkedHashMap linkedHashMap = new LinkedHashMap();
-        try {
-            JSONObject jSONObject = new JSONObject(str);
-            Iterator<String> itKeys = jSONObject.keys();
-            while (itKeys.hasNext()) {
-                String next = itKeys.next();
-                JSONObject jSONObjectOptJSONObject = jSONObject.optJSONObject(next);
-                if (jSONObjectOptJSONObject != null) {
-                    LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-                    Iterator<String> itKeys2 = jSONObjectOptJSONObject.keys();
-                    while (itKeys2.hasNext()) {
-                        String next2 = itKeys2.next();
-                        linkedHashMap2.put(next2, jSONObjectOptJSONObject.optString(next2));
-                    }
-                    if (!linkedHashMap2.isEmpty()) {
-                        linkedHashMap.put(next, linkedHashMap2);
-                    }
-                }
-            }
-            return linkedHashMap;
-        } catch (JSONException e2) {
-            String strDecrypt = "Failed to decode field overrides";
-            Object obj = g7.a;
-            g7.a(6, String.valueOf(strDecrypt), e2);
-            return linkedHashMap;
-        }
     }
 }

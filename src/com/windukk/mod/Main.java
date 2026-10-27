@@ -3,7 +3,6 @@ package com.windukk.mod;
 import Z.ac;
 import Z.b0;
 import Z.b3;
-import Z.bd;
 import Z.bg;
 import Z.bk;
 import Z.d7;
@@ -27,6 +26,7 @@ import Z.mi;
 import Z.n;
 import com.windukk.mod.hooks.MandatoryLoginHooks;
 import Z.o6;
+import Z.o7;
 import Z.of;
 import Z.pj;
 import Z.qd;
@@ -65,7 +65,7 @@ public final class Main {
     static {
         INSTANCE = new Main();
         MOD_VERSION = "v5.0";
-        versionCode = 1792428213;
+        versionCode = 1793047881;
     }
 
     public static final Context getApplicationContext() {
@@ -147,6 +147,7 @@ public final class Main {
             le.a();
             k2.a();
             pj.g();
+            o7.a();
             Main main = INSTANCE;
             main.getClass();
             bg.f();
@@ -183,8 +184,7 @@ public final class Main {
             dg.a.getClass();
             dg.a(0);
         }
-        dd.a.getClass();
-        dd.a(false, (bd) null);
+        dd.a();
     }
 
     public static final int dp(float f) {

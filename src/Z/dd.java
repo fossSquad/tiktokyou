@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.widget.Toast;
 import com.windukk.mod.Main;
 import com.windukk.stable.DynamicStatus;
 import com.windukk.stable.DynamicUpdates;
@@ -13,10 +14,13 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 import ni.shikatu.kotlin.TuplesKt;
+import ni.shikatu.kotlin.Unit;
 import ni.shikatu.kotlin.collections.MapsKt;
 import ni.shikatu.kotlin.text.StringsKt;
 import ni.shikatu.kotlinx.serialization.json.JsonArray;
@@ -27,12 +31,13 @@ import ni.shikatu.kotlinx.serialization.json.JsonPrimitive;
 
 public final class dd {
     public static final dd a;
-    public static final ExecutorService b;
+    public static final ScheduledExecutorService b;
     public static final Handler c;
+    public static ScheduledFuture d;
 
     static {
         a = new dd();
-        b = Executors.newSingleThreadExecutor(new ThreadFactory() {
+        b = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
             @Override
             public final Thread newThread(Runnable runnable) {
                 return dd.a(runnable);
@@ -47,47 +52,103 @@ public final class dd {
         return thread;
     }
 
-    public static final void b(boolean z, final bd bdVar) {
-        cd cdVarA;
+    public static final void b() {
+        a.getClass();
+        a(false, (bd) null);
+    }
+
+    public static void c(final Context context, final ad adVar) {
         try {
-            if (z) {
-                cdVarA = (cd) t.a(new Callable() {
-                    @Override
-                    public final Object call() {
-                        return dd.a();
-                    }
-                });
-            } else {
-                a.getClass();
-                cdVarA = a(false);
-            }
+            t.a(new Callable() {
+                @Override
+                public final Object call() throws Exception {
+                    return dd.d(context, adVar);
+                }
+            });
         } catch (Throwable th) {
-            g7.a(6, g7.a("OTA check failed", new Object[0]), th);
-            cdVarA = cd.FAILED;
-        }
-        final cd cdVarB = cdVarA;
-        if (bdVar != null) {
+            g7.a(6, g7.a("OTA install failed dynamic=%d", new Object[]{Long.valueOf(adVar.b)}), th);
             c.post(new Runnable() {
                 @Override
                 public final void run() {
-                    dd.a(bdVar, cdVarB);
+                    dd.b(context);
                 }
             });
         }
     }
 
-    public static void a(final boolean z, final bd bdVar) {
+    public static final Unit d(Context context, ad adVar) throws IOException {
+        a.getClass();
+        a(context, adVar, true);
+        return Unit.INSTANCE;
+    }
+
+    public static final synchronized void a() {
+        ScheduledFuture scheduledFuture = d;
+        if (scheduledFuture == null || scheduledFuture.isDone()) {
+            d = b.schedule(new Runnable() {
+                @Override
+                public final void run() {
+                    dd.b();
+                }
+            }, q.a(), TimeUnit.MILLISECONDS);
+        }
+    }
+
+    public static final void b(bd bdVar) {
+        a.getClass();
+        a(true, bdVar);
+    }
+
+    public static final cd b(boolean z) {
+        a.getClass();
+        return a(z);
+    }
+
+    public static final void b(Context context, ad adVar) {
+        a.getClass();
+        c(context, adVar);
+    }
+
+    public static final void b(Context context) {
+        Toast.makeText(context, k7.a("ota_install_failed"), 0).show();
+    }
+
+    public static final synchronized void a(final bd bdVar) {
+        ScheduledFuture scheduledFuture = d;
+        if (scheduledFuture != null) {
+            scheduledFuture.cancel(false);
+        }
+        d = null;
         b.execute(new Runnable() {
             @Override
             public final void run() {
-                dd.b(z, bdVar);
+                dd.b(bdVar);
             }
         });
     }
 
-    public static final cd a() {
-        a.getClass();
-        return a(true);
+    public static void a(final boolean z, final bd bdVar) {
+        cd cdVar;
+        try {
+            cdVar = (cd) t.a(new Callable() {
+                @Override
+                public final Object call() {
+                    return dd.b(z);
+                }
+            });
+        } catch (Throwable th) {
+            g7.a(6, g7.a("OTA check failed", new Object[0]), th);
+            cdVar = cd.FAILED;
+        }
+        final cd result = cdVar;
+        if (bdVar != null) {
+            c.post(new Runnable() {
+                @Override
+                public final void run() {
+                    dd.a(bdVar, result);
+                }
+            });
+        }
     }
 
     public static final void a(bd bdVar, cd cdVar) {
@@ -98,12 +159,11 @@ public final class dd {
         boolean z2;
         boolean z3;
         boolean z4;
-        long j;
         String host;
         Long longOrNull;
         Long longOrNull2;
         String contentOrNull;
-        Context contextA = Main.getApplicationContext();
+        final Context contextA = Main.getApplicationContext();
         String strA = t.a("https://tiktokyou.yzewe.ru/api/v1/updates", "TTMod-Updates/5.0", 65536, MapsKt.plus(a(contextA), MapsKt.mapOf(TuplesKt.to("Cache-Control", "no-cache"))), (String) null).a();
         if (strA != null) {
             String string = StringsKt.trim(strA).toString();
@@ -112,8 +172,8 @@ public final class dd {
                 JsonArray jsonArray = jsonArrayB instanceof JsonArray ? (JsonArray) jsonArrayB : null;
                 if (jsonArray != null) {
                     ArrayList arrayList = new ArrayList(jsonArray.size());
-                    for (JsonElement jsonElement : jsonArray) {
-                        JsonObject jsonObject2 = jsonElement instanceof JsonObject ? (JsonObject) jsonElement : null;
+                    for (Object element : jsonArray) {
+                        JsonObject jsonObject2 = element instanceof JsonObject ? (JsonObject) element : null;
                         if (jsonObject2 != null) {
                             Object obj = jsonObject2.get("stable");
                             JsonPrimitive jsonPrimitive = obj instanceof JsonPrimitive ? (JsonPrimitive) obj : null;
@@ -184,80 +244,70 @@ public final class dd {
                         g7.a(4, g7.a("OTA entry stable=%d dynamic=%d url=%s", new Object[]{Long.valueOf(adVar.a), Long.valueOf(adVar.b), adVar.c}), (Throwable) null);
                     }
                     int size2 = arrayList.size();
-                    int i2 = 0;
                     ad adVar2 = null;
-                    while (true) {
-                        z2 = true;
-                        if (i2 >= size2) {
-                            break;
-                        }
-                        i2++;
+                    for (int i2 = 0; i2 < size2; i2++) {
                         ad adVar3 = (ad) arrayList.get(i2);
-                        if (adVar3.a != jStableApiVersion) {
-                            j = jStableApiVersion;
-                        } else if (adVar3.b <= jOtaVersionFloor) {
-                            j = jStableApiVersion;
-                        } else {
-                            String str2 = adVar3.c;
-                            try {
-                                URI uri = new URI(str2);
-                                if (!StringsKt.equals("https", uri.getScheme(), true) || (host = uri.getHost()) == null) {
-                                    j = jStableApiVersion;
-                                } else if (StringsKt.isBlank(host)) {
-                                    j = jStableApiVersion;
-                                } else {
-                                    if (adVar2 != null) {
-                                        j = jStableApiVersion;
-                                        if (adVar3.b > adVar2.b) {
-                                        }
-                                    } else {
-                                        j = jStableApiVersion;
-                                    }
-                                    adVar2 = adVar3;
-                                    jStableApiVersion = j;
-                                }
-                            } catch (Throwable th) {
-                                j = jStableApiVersion;
-                            }
+                        if (adVar3.a != jStableApiVersion || adVar3.b <= jOtaVersionFloor) {
+                            continue;
                         }
-                        jStableApiVersion = j;
+                        try {
+                            URI uri = new URI(adVar3.c);
+                            host = uri.getHost();
+                            if (StringsKt.equals("https", uri.getScheme(), true) && host != null && !StringsKt.isBlank(host)) {
+                                if (adVar2 == null || adVar3.b > adVar2.b) {
+                                    adVar2 = adVar3;
+                                }
+                            }
+                        } catch (Throwable ignored) {
+                        }
                     }
                     long j2 = jStableApiVersion;
                     int size3 = arrayList.size();
                     int i3 = 0;
                     while (true) {
                         if (i3 >= size3) {
-                            z3 = false;
+                            z2 = false;
                             break;
                         }
                         Object obj4 = arrayList.get(i3);
                         i3++;
                         if (((ad) obj4).a > j2) {
-                            z3 = true;
+                            z2 = true;
                             break;
                         }
                     }
+                    if (adVar2 != null && z) {
+                        final ad pending = adVar2;
+                        ck.a(new Runnable() {
+                            @Override
+                            public final void run() {
+                                dd.a(contextA, pending);
+                            }
+                        });
+                        return cd.OTA_AVAILABLE;
+                    }
                     ac.a.getClass();
-                    boolean z5 = ac.e().H && (z || ac.e().F);
+                    boolean z5 = ac.e().H && ac.e().F;
                     if (adVar2 == null || !z5) {
                         if (adVar2 != null) {
                             g7.a(4, g7.a("OTA: skip download dynamic=%d (consent/auto-update)", new Object[]{Long.valueOf(adVar2.b)}), (Throwable) null);
-                            z4 = false;
+                            z3 = false;
                         } else {
-                            z4 = false;
+                            z3 = false;
                             g7.a(4, g7.a("OTA: no matching dynamic package", new Object[0]), (Throwable) null);
                         }
-                        z2 = z4;
+                        z4 = z3;
                     } else {
                         try {
-                            a(contextA, adVar2, z);
+                            a(contextA, adVar2, false);
                             return cd.OTA_INSTALLED;
                         } catch (Throwable th2) {
                             g7.a(6, g7.a("OTA install failed dynamic=%d", new Object[]{Long.valueOf(adVar2.b)}), th2);
+                            z4 = true;
                         }
                     }
-                    if (!z3) {
-                        return z2 ? cd.FAILED : cd.UP_TO_DATE;
+                    if (!z2) {
+                        return z4 ? cd.FAILED : cd.UP_TO_DATE;
                     }
                     int i4 = sf.h;
                     ck.b(z);
@@ -268,6 +318,15 @@ public final class dd {
             throw new IllegalArgumentException("updates catalog is not JSON");
         }
         throw new IllegalStateException("Required value was null.".toString());
+    }
+
+    public static final void a(final Context context, final ad adVar) {
+        b.execute(new Runnable() {
+            @Override
+            public final void run() {
+                dd.b(context, adVar);
+            }
+        });
     }
 
     public static void a(Context context, ad adVar, boolean z) throws IOException {

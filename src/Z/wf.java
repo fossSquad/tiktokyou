@@ -387,15 +387,12 @@ public final class wf {
     public final void b() {
         if (this.g.compareAndSet(false, true)) {
             a(true);
-            bd bdVar = new bd() {
+            dd.a(new bd() {
                 @Override
                 public final void a(cd cdVar) {
                     wf.this.a(cdVar);
                 }
-            };
-            dd ddVar = dd.a;
-            dd.a.getClass();
-            dd.a(true, bdVar);
+            });
         }
     }
 

@@ -43,7 +43,7 @@ public abstract class g7 {
         if (c == null) {
             return;
         }
-        a("========== begin of log ==========\nTime: " + d.format(new Date()) + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL + "\nAndroid OS: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")\nDisplay: " + Build.DISPLAY + "\nBoard: " + Build.BOARD + "\nHardware: " + Build.HARDWARE + "\nABIs: " + Arrays.toString(Build.SUPPORTED_ABIS) + "\nVersion: " + Main.MOD_VERSION + "\nVersion code: 1792428213\n");
+        a("========== begin of log ==========\nTime: " + d.format(new Date()) + "\nDevice: " + Build.MANUFACTURER + " " + Build.MODEL + "\nAndroid OS: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")\nDisplay: " + Build.DISPLAY + "\nBoard: " + Build.BOARD + "\nHardware: " + Build.HARDWARE + "\nABIs: " + Arrays.toString(Build.SUPPORTED_ABIS) + "\nVersion: " + Main.MOD_VERSION + "\nVersion code: 1793047881\n");
     }
 
     public static void b(final File file) {
